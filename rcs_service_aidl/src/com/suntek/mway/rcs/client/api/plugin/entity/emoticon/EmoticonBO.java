@@ -113,8 +113,8 @@ public class EmoticonBO implements Parcelable
         emoticonStatic = source.readString();
         emoticonDynamic = source.readString();
         packageId = source.readString();
-        source.readByteArray( emoticonStaticByte );
-        source.readByteArray( emoticonDynamicByte );
+        emoticonStaticByte = source.createByteArray();
+        emoticonDynamicByte = source.createByteArray();
         userPhone = source.readString();
         boolean[] val = new boolean[ 1 ];
         source.readBooleanArray( val );

@@ -135,6 +135,9 @@ public class SuntekMessageData {
     /** Message type about paid emo. */
     public static final int MSG_TYPE_PAID_EMO = 11;
 
+    /** Message type about cloud file. */
+    public static final int MSG_TYPE_CLOUD_FILE = 12;
+
     /** Message type for MMS. */
     public static final int MSG_TYPE_MMS_SEND_REQ = 128;
 

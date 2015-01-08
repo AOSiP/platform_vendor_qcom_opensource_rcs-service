@@ -120,55 +120,49 @@ public class McloudFileApi extends ClientApi {
     }
 
     public void shareFileAndSend(String fullPathInID, String shareDesc,
-            String contact, long threadId, String beforeText, String afterText)
+            String contact, long threadId, String smsContentTemp)
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
-                        "enter method:shareFileAndSend. [fullPathInID,shareDesc,contact,threadId,beforeText,afterText]=%s,%s,%s,%d,%s,%s",
-                        fullPathInID, shareDesc, contact, threadId, beforeText,
-                        afterText));
+                        "enter method:shareFileAndSend. [fullPathInID,shareDesc,contact,threadId,smsContentTemp]=%s,%s,%s,%d,%s",
+                        fullPathInID, shareDesc, contact, threadId, smsContentTemp));
         try {
-            myApi.shareFileAndSend(fullPathInID, shareDesc, contact, threadId,
-                    beforeText, afterText);
+            myApi.shareFileAndSend(fullPathInID, shareDesc, contact, threadId, smsContentTemp);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
     public void shareFileAndSendGroup(String fullPathInID, String shareDesc,
-            long threadId, String conversationId, String groupId,
-            String beforeText, String afterText)
+            long threadId, String conversationId, String groupId)
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
-                        "enter method:shareFileAndSendGroup. [fullPathInID,shareDesc,threadId,conversationId,groupId,beforeText,afterText]=%s,%s,%d,%s,%s,%s,%s",
-                        fullPathInID, shareDesc, threadId, conversationId,
-                        groupId, beforeText, afterText));
+                        "enter method:shareFileAndSendGroup. [fullPathInID,shareDesc,threadId,conversationId,groupId]=%s,%s,%d,%s,%s",
+                        fullPathInID, shareDesc, threadId, conversationId, groupId));
         try {
             myApi.shareFileAndSendGroup(fullPathInID, shareDesc, threadId,
-                    conversationId, groupId, beforeText, afterText);
+                    conversationId, groupId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
     public void shareFileAndSendOne2Many(String fullPathInID, String shareDesc,
-            List<String> contacts, long threadId, String beforeText,
-            String afterText) throws ServiceDisconnectedException {
+            List<String> contacts, long threadId, String smsContentTemp) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
-                        "enter method:shareFileAndSendOne2Many. [fullPathInID,shareDesc,contacts,threadId,beforeText,afterText]=%s,%s,%s,%d,%s,%s",
-                        fullPathInID, shareDesc, contacts.toString(), threadId,
-                        beforeText, afterText));
+                        "enter method:shareFileAndSendOne2Many. [fullPathInID,shareDesc,contacts,threadId,smsContentTemp]=%s,%s,%s,%d,%s",
+                        fullPathInID, shareDesc, contacts.toString(), threadId, smsContentTemp));
         try {
             myApi.shareFileAndSendOne2Many(fullPathInID, shareDesc, contacts,
-                    threadId, beforeText, afterText);
+                    threadId, smsContentTemp);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }

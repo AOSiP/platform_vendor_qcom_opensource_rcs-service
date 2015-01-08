@@ -248,21 +248,21 @@ public class MessageApi extends ClientApi {
     }
 
     public void sendPaidEmo(long thread_id, long sms_id, String number,
-            String emoid, String emoImgFileName)
+            String emoid, String emoName)
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
-                        "enter method sendPaidEmo. [thread_id,sms_id,number,emoid,emoImgFileName]=%d,%d,%s,%s,%s",
-                        thread_id, sms_id, number, emoid, emoImgFileName));
+                        "enter method sendPaidEmo. [thread_id,sms_id,number,emoid,emoName]=%d,%d,%s,%s,%s",
+                        thread_id, sms_id, number, emoid, emoName));
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return;
         }
         try {
             myApi.sendPaidEmo(thread_id, sms_id, number, emoid,
-                    emoImgFileName);
+                    emoName);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
@@ -1014,40 +1014,40 @@ public class MessageApi extends ClientApi {
     }
 
     public void sendGroupPaidEmo(long thread_id, String conversationId,
-            long sms_id, String emoid, String emoImgFileName, String groupId)
+            long sms_id, String emoid, String emoName, String groupId)
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
-                        "enter method:sendGroupPaidEmo. [thread_id,conversationId,sms_id,emoid,emoImgFileName,groupId]=%d,%s,%d,%s,%s,%s",
+                        "enter method:sendGroupPaidEmo. [thread_id,conversationId,sms_id,emoid,emoName,groupId]=%d,%s,%d,%s,%s,%s",
                         thread_id, conversationId, sms_id, emoid,
-                        emoImgFileName, groupId));
+                        emoName, groupId));
         try {
             myApi.sendGroupPaidEmo(thread_id, conversationId, sms_id, emoid,
-                    emoImgFileName, groupId);
+                    emoName, groupId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
     public void sendOne2ManyPaidEmoMessage(long thread_id, long sms_id,
-            List<String> numbers, String emoid, String emoImgFileName)
+            List<String> numbers, String emoid, String emoName)
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
-                        "enter method:sendOne2ManyPaidEmoMessage. [thread_id,sms_id,numbers,emoid,emoImgFileName]=%d,%d,%s,%s,%s",
+                        "enter method:sendOne2ManyPaidEmoMessage. [thread_id,sms_id,numbers,emoid,emoName]=%d,%d,%s,%s,%s",
                         thread_id, sms_id, numbers.toString(), emoid,
-                        emoImgFileName));
+                        emoName));
         if (!VerificationUtil.isAllNumber(numbers)) {
             LogHelper.i("number field value error");
             return;
         }
         try {
             myApi.sendOne2ManyPaidEmoMessage(thread_id, sms_id, VerificationUtil.formatNumbers(numbers), emoid,
-                    emoImgFileName);
+                    emoName);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
@@ -1634,6 +1634,18 @@ public class MessageApi extends ClientApi {
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.removeMsgWithNotificationByThread(threadId);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+    }
+
+    public void backupMessageList(List<SimpleMsg> simpleMsgList)
+            throws ServiceDisconnectedException {
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter  method:backupMessageList. [simpleMsgList]=%s", simpleMsgList.toString()));
+        VerificationUtil.ApiIsNull(myApi);
+        try {
+            myApi.backupMessageList(simpleMsgList);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }

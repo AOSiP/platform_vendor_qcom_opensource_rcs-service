@@ -45,7 +45,7 @@ interface IInstantMessageApi {
     void sendLocation(long thread_id,long sms_id,String number, double lat,
             double lng,String text);
     void sendPaidEmo(long thread_id,long sms_id,String number, String emoid,
-            String emoImgFileName);
+            String emoName);
     void sendVCard(long thread_id,long sms_id,String number, in RCSContact rcsContact);
     void sendVCardByPath(long thread_id,long sms_id,String number, String vcardFilePath);
 
@@ -119,9 +119,9 @@ interface IInstantMessageApi {
     List<MessageSessionModel> qryNonFriendMsgSessionList();
     
     void sendOne2ManyPaidEmoMessage(long thread_id, long sms_id, in List<String> numbers,
-            String emoid, String emoImgFileName);
+            String emoid, String emoName);
     void sendGroupPaidEmo(long thread_id, String conversationId, long sms_id, 
-            String emoid, String emoImgFileName, String groupId);
+            String emoid, String emoName, String groupId);
             
     List<ChatMessage> getMsgListGreatOrLessThanSpecifiedForBlack(long threadId, boolean less, int specifiedId, int number);
     MessageSessionModel getMessageSessionByThreadIdForBlack(String threadId);
@@ -195,4 +195,6 @@ interface IInstantMessageApi {
     long getVideoFtMaxSize();
 
     void removeMsgWithNotificationByThread(long threadId);
+
+    void backupMessageList(in List<SimpleMsg> simpleMsgList);
 }

@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.constant;
 
 /**
@@ -55,6 +54,11 @@ public class BroadcastConstants {
     public static final String UI_GROUP_MANAGE_NOTIFY = "com.suntek.mway.rcs.ACTION_UI_GROUP_MANAGE_NOTIFY";
 
     /**
+     * Notify UI that group operation failed
+     */
+    public static final String UI_GROUP_ERROR = "com.suntek.mway.rcs.ACTION_UI_GROUP_ERROR";
+
+    /**
      * Notify UI that group state is invalid
      * contains parameter groupId, state
      */
@@ -65,6 +69,9 @@ public class BroadcastConstants {
 
     /** Notify UI that message has added to database */
     public static final String UI_MESSAGE_ADD_DATABASE = "com.suntek.mway.rcs.ACTION_UI_MESSAGE_ADD_TO_DATABASE";
+
+    /** Notify Native UI that message has been transfered to SMS */
+    public static final String UI_MESSAGE_TRANSFER_SMS = "com.suntek.mway.rcs.ACTION_UI_MESSAGE_TRANSFER_SMS";
 
     /** UI_MESSAGE_ADD_DATABASE broadcast passed parameter name chatMessage long. */
     public static final String BC_VAR_CHAT_MESSAGE = "chatMessage";
@@ -258,6 +265,12 @@ public class BroadcastConstants {
     /** UI_INVITE_TO_JOIN_GROUP broadcast passed parameter name alias String. */
     public static final String BC_VAR_ALIAS = "alias";
 
+    /** Error code of group operation */
+    public static final String BC_VAR_ERROR_CODE = "errorCode";
+
+    /** Description of code */
+    public static final String BC_VAR_ERROR_DESC = "errorDesc";
+
     /**
      * UI_GROUP_CHAT_MAXCOUNT_CHANGE broadcast passed parameter name maxCount String.
      */
@@ -378,6 +391,12 @@ public class BroadcastConstants {
      * parameter contains chaturi, subject, contributionId, conversationId
      */
     public static final String UI_SHOW_GROUP_TRANSFER_CHAIRMAN_CONFIRM = "com.suntek.mway.rcs.ACTION_UI_SHOW_GROUP_TRANSFER_CHAIRMAN_CONFIRM";
+
+    /**
+     * The broadcast of group chairman transfer confirm
+     * parameter contains chaturi, subject, contributionId, conversationId
+     */
+    public static final String UI_SHOW_GROUP_TRANSFER_CHAIRMAN_TIMEOUT = "com.suntek.mway.rcs.ACTION_UI_SHOW_GROUP_TRANSFER_CHAIRMAN_TIMEOUT";
 
     /** ************************************** send group transfer chairman confirm broadcast end ******************************************************. */
 
