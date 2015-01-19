@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.voip.impl;
 
 import java.util.ArrayList;
@@ -33,11 +32,11 @@ import android.os.IBinder;
 
 import com.suntek.mway.rcs.client.api.ClientApi;
 import com.suntek.mway.rcs.client.api.RCSServiceListener;
-import com.suntek.mway.rcs.client.api.plugin.IRichScreenApi;
-import com.suntek.mway.rcs.client.api.plugin.entity.richscrn.PhoneList;
-import com.suntek.mway.rcs.client.api.plugin.entity.richscrn.ResultInfo;
-import com.suntek.mway.rcs.client.api.plugin.entity.richscrn.ResultUtil;
-import com.suntek.mway.rcs.client.api.plugin.entity.richscrn.RichScrnShowing;
+import com.suntek.mway.rcs.client.aidl.plugin.IRichScreenApi;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.richscrn.PhoneList;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.richscrn.ResultInfo;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.richscrn.ResultUtil;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.richscrn.RichScrnShowing;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.suntek.mway.rcs.client.api.util.VerificationUtil;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;

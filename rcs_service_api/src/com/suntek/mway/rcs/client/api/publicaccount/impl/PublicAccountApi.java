@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.publicaccount.impl;
 
 import java.util.List;
@@ -32,9 +31,9 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import com.suntek.mway.rcs.client.api.ClientApi;
-import com.suntek.mway.rcs.client.api.plugin.IPublicAccountAPI;
-import com.suntek.mway.rcs.client.api.plugin.entity.pubacct.PublicAccounts;
-import com.suntek.mway.rcs.client.api.plugin.entity.pubacct.PublicAccountsDetail;
+import com.suntek.mway.rcs.client.aidl.plugin.IPublicAccountAPI;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.PublicAccounts;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.PublicAccountsDetail;
 import com.suntek.mway.rcs.client.api.publicaccount.callback.PublicAccountCallback;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.suntek.mway.rcs.client.api.util.VerificationUtil;
@@ -224,7 +223,7 @@ public class PublicAccountApi extends ClientApi {
         }
     }
 
-    public boolean getRecommendPublic(int type, int pageSize, int pageNum)
+    public boolean getRecommendPublic(int type, int pageSize, int pageNum, PublicAccountCallback callback)
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         if (pageSize <= 0 || pageNum <= 0) {
@@ -234,6 +233,7 @@ public class PublicAccountApi extends ClientApi {
 
         boolean flag = false;
         try {
+            myApi.registerCallback(callback);
             flag = myApi.getRecommendPublic(type, pageSize, pageNum);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(),ex);
@@ -241,14 +241,16 @@ public class PublicAccountApi extends ClientApi {
         return flag;
     }
 
-    public boolean setAcceptStatus(String uuid, int acceptStatus)
+    public boolean setAcceptStatus(String uuid, int acceptStatus, PublicAccountCallback callback)
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
+        boolean flag = false;
         try {
-            return myApi.setAcceptStatus(uuid, acceptStatus);
+            myApi.registerCallback(callback);
+            flag = myApi.setAcceptStatus(uuid, acceptStatus);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
-        return isNormallyClosed;
+        return flag;
     }
 }

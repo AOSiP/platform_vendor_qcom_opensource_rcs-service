@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.plugincenter;
 
 import java.util.Locale;
@@ -34,6 +33,7 @@ import com.suntek.mway.rcs.client.api.support.RcsSupportApi;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.suntek.mway.rcs.client.api.util.VerificationUtil;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;
+import com.suntek.mway.rcs.client.aidl.plugincenter.IPluginCenterApi;
 
 public class PluginCenterApi extends ClientApi {
     private static String serviceName = "com.suntek.mway.rcs.app.service.api.impl.plugincenter.PluginCenterApiService";

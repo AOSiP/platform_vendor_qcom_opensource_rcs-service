@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.profile.impl;
 
 import java.util.Locale;
@@ -31,10 +30,10 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import com.suntek.mway.rcs.client.api.ClientApi;
-import com.suntek.mway.rcs.client.api.plugin.IProfileApi;
-import com.suntek.mway.rcs.client.api.plugin.callback.IProfileListener;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.Avatar;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.Profile;
+import com.suntek.mway.rcs.client.aidl.plugin.IProfileApi;
+import com.suntek.mway.rcs.client.aidl.plugin.callback.IProfileListener;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Avatar;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Profile;
 import com.suntek.mway.rcs.client.api.profile.callback.ProfileListener;
 import com.suntek.mway.rcs.client.api.profile.callback.QRImgListener;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;

@@ -20,12 +20,11 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.profile.callback;
 
-import com.suntek.mway.rcs.client.api.plugin.callback.IProfileListener;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.Avatar;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.Profile;
+import com.suntek.mway.rcs.client.aidl.plugin.callback.IProfileListener;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Avatar;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Profile;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 
 public abstract class QRImgListener extends IProfileListener.Stub {

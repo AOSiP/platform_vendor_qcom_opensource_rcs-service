@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.util;
 
 import java.io.File;
@@ -29,10 +28,11 @@ import java.util.List;
 
 import android.content.Context;
 
-import com.suntek.mway.rcs.client.api.constant.MediaConstants;
-import com.suntek.mway.rcs.client.api.provider.SuntekMessageData;
-import com.suntek.mway.rcs.client.api.utils.MediaUtils;
-import com.suntek.mway.rcs.client.api.utils.SettingUtils;
+import com.suntek.mway.rcs.client.aidl.constant.MediaConstants;
+import com.suntek.mway.rcs.client.aidl.provider.SuntekMessageData;
+import com.suntek.mway.rcs.client.aidl.utils.MediaUtils;
+import com.suntek.mway.rcs.client.aidl.utils.SettingUtils;
+import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 
 public class VerificationUtil {
     private static final String SIP_PREFIX = "sip:";
@@ -103,6 +103,14 @@ public class VerificationUtil {
                             + MediaConstants.VIDEO_SUFFIX + "'");
         }
     }
+    
+    public static void isCloudFile(String filename) throws FileSuffixException {
+        if (!MediaUtils.isCloudFileAllowedFile(filename)) {
+            throw new FileSuffixException(
+                    "File extension is incorrect, the incorrect extension is '"
+                            + MediaConstants.CLOUD_FILE_EXCLUDE_SUFFIX + "'");
+        }
+    }
 
     public static void isFileSizeToLarge(String filename, long maxSize)
             throws FileTransferException {
@@ -120,7 +128,8 @@ public class VerificationUtil {
         File file = new File(filename);
         if (file.exists() && file.isFile()){
             int duration = MediaUtils.getAmrFileDuration(context, file);
-            if(duration > maxDuration * 1000 || recordTime > maxDuration){
+            if(duration >= (maxDuration + 1) * 1000 || recordTime > maxDuration){
+                LogHelper.i("throw FileDurationException, duration=" + duration);
                 throw new FileDurationException("File duration too long "
                         + duration
                         + " s. Max duration is " + maxDuration
@@ -134,7 +143,8 @@ public class VerificationUtil {
         File file = new File(filename);
         if (file.exists() && file.isFile()){
             int duration = MediaUtils.getVideoFileDuration(context, file);
-            if(duration > maxDuration * 1000 || recordTime > maxDuration){
+            if(duration >= (maxDuration + 1) * 1000 || recordTime > maxDuration){
+                LogHelper.i("throw FileDurationException, duration=" + duration);
                 throw new FileDurationException("File duration too long "
                         + duration
                         + " s. Max duration is " + maxDuration

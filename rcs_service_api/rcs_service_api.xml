@@ -6,7 +6,6 @@
     -->
 
 <permissions>
-
     <library name="com.suntek.mway.rcs.client.api"
             file="/system/framework/rcs_service_api.jar" />
 </permissions>
