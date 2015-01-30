@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.emoticon;
 
 import java.util.List;
@@ -32,14 +31,15 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.suntek.mway.rcs.client.api.ClientApi;
-import com.suntek.mway.rcs.client.api.plugin.callback.IEmoticonCallbackApi;
-import com.suntek.mway.rcs.client.api.plugin.callback.IEmoticonCanSendCallback;
-import com.suntek.mway.rcs.client.api.plugin.callback.IEmoticonPackagesNetCallbackApi;
-import com.suntek.mway.rcs.client.api.plugin.callback.IEmoticonSetSuccessDownListener;
-import com.suntek.mway.rcs.client.api.plugin.entity.emoticon.EmojiPackageBO;
-import com.suntek.mway.rcs.client.api.plugin.entity.emoticon.EmoticonBO;
-import com.suntek.mway.rcs.client.api.plugin.entity.emoticon.ResultBO;
-import com.suntek.mway.rcs.client.api.plugin.entity.emoticon.UserBO;
+import com.suntek.mway.rcs.client.aidl.plugin.callback.IEmoticonCallbackApi;
+import com.suntek.mway.rcs.client.aidl.plugin.callback.IEmoticonCanSendCallback;
+import com.suntek.mway.rcs.client.aidl.plugin.callback.IEmoticonPackagesNetCallbackApi;
+import com.suntek.mway.rcs.client.aidl.plugin.callback.IEmoticonSetSuccessDownListener;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.emoticon.EmojiPackageBO;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.emoticon.EmoticonBO;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.emoticon.ResultBO;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.emoticon.UserBO;
+import com.suntek.mway.rcs.client.aidl.emoticon.IEmoticonApi;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.suntek.mway.rcs.client.api.util.VerificationUtil;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;

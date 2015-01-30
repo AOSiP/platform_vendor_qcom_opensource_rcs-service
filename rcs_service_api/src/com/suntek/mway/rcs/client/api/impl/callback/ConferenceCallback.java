@@ -20,13 +20,12 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.impl.callback;
 
 import android.os.RemoteException;
 
-import com.suntek.mway.rcs.client.api.plugin.callback.IConferenceCallback;
-import com.suntek.mway.rcs.client.api.plugin.entity.profile.Avatar;
+import com.suntek.mway.rcs.client.aidl.plugin.callback.IConferenceCallback;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Avatar;
 
 public abstract class ConferenceCallback extends IConferenceCallback.Stub {
     public ConferenceCallback() {

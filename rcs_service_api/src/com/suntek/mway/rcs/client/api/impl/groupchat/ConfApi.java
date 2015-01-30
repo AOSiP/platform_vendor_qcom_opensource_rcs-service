@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.impl.groupchat;
 
 import java.util.List;
@@ -33,10 +32,10 @@ import android.os.RemoteException;
 
 import com.suntek.mway.rcs.client.api.ClientApi;
 import com.suntek.mway.rcs.client.api.exception.MemberFullException;
-import com.suntek.mway.rcs.client.api.im.IGroupManagerApi;
+import com.suntek.mway.rcs.client.aidl.im.IGroupManagerApi;
 import com.suntek.mway.rcs.client.api.impl.callback.ConferenceCallback;
-import com.suntek.mway.rcs.client.api.provider.model.GroupChatModel;
-import com.suntek.mway.rcs.client.api.provider.model.GroupChatUser;
+import com.suntek.mway.rcs.client.aidl.provider.model.GroupChatModel;
+import com.suntek.mway.rcs.client.aidl.provider.model.GroupChatUser;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.suntek.mway.rcs.client.api.util.VerificationUtil;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;

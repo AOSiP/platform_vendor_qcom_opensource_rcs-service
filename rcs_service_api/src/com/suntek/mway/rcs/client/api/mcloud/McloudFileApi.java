@@ -20,22 +20,23 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.mcloud;
 
-import java.util.List;
-import java.util.Locale;
+import com.suntek.mway.rcs.client.aidl.mcloud.IMcloudFileApi;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.mcloudfile.FileNode;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.mcloudfile.TransNode;
+import com.suntek.mway.rcs.client.api.ClientApi;
+import com.suntek.mway.rcs.client.api.util.FileSuffixException;
+import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
+import com.suntek.mway.rcs.client.api.util.VerificationUtil;
+import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
-import com.suntek.mway.rcs.client.api.ClientApi;
-import com.suntek.mway.rcs.client.api.plugin.entity.mcloudfile.FileNode;
-import com.suntek.mway.rcs.client.api.plugin.entity.mcloudfile.TransNode;
-import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
-import com.suntek.mway.rcs.client.api.util.VerificationUtil;
-import com.suntek.mway.rcs.client.api.util.log.LogHelper;
+import java.util.List;
+import java.util.Locale;
 
 public class McloudFileApi extends ClientApi {
     private static String serviceName = "com.suntek.mway.rcs.app.service.api.impl.mcloud.McloudApiService";
@@ -95,11 +96,12 @@ public class McloudFileApi extends ClientApi {
         }
     }
 
-    public void putFile(String localPath, String remotePath, TransNode.TransOper transOper) throws ServiceDisconnectedException {
+    public void putFile(String localPath, String remotePath, TransNode.TransOper transOper) throws ServiceDisconnectedException, FileSuffixException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
                 "enter method:putFile. [localPath,remotePath,transOper]=%s,%s,%d",
                 localPath, remotePath, transOper.ordinal()));
+        VerificationUtil.isCloudFile(localPath);
         try {
             myApi.putFile(localPath, remotePath, transOper.ordinal());
         } catch (Exception ex) {

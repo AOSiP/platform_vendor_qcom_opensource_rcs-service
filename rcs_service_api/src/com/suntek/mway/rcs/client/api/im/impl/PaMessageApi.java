@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.im.impl;
 
 import java.util.List;
@@ -32,8 +31,8 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import com.suntek.mway.rcs.client.api.ClientApi;
-import com.suntek.mway.rcs.client.api.contacts.RCSContact;
-import com.suntek.mway.rcs.client.api.im.IPaMessageApi;
+import com.suntek.mway.rcs.client.aidl.contacts.RCSContact;
+import com.suntek.mway.rcs.client.aidl.im.IPaMessageApi;
 import com.suntek.mway.rcs.client.api.util.FileDurationException;
 import com.suntek.mway.rcs.client.api.util.FileSuffixException;
 import com.suntek.mway.rcs.client.api.util.FileTransferException;

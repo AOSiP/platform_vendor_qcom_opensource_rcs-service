@@ -20,17 +20,16 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.publicaccount.callback;
 
 import java.util.List;
 
 import android.os.RemoteException;
 
-import com.suntek.mway.rcs.client.api.plugin.entity.pubacct.MenuInfo;
-import com.suntek.mway.rcs.client.api.plugin.entity.pubacct.MsgContent;
-import com.suntek.mway.rcs.client.api.plugin.entity.pubacct.PublicAccounts;
-import com.suntek.mway.rcs.client.api.plugin.entity.pubacct.PublicAccountsDetail;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.MenuInfo;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.MsgContent;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.PublicAccounts;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.PublicAccountsDetail;
 
 public class PublicAccountCallbackImpl extends PublicAccountCallback {
 

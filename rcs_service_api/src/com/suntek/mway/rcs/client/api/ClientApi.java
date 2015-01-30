@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api;
 
 import java.util.List;
@@ -33,7 +32,7 @@ import android.content.ServiceConnection;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.suntek.mway.rcs.client.api.constant.APIConstant;
+import com.suntek.mway.rcs.client.aidl.constant.APIConstant;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 
 public abstract class ClientApi implements ClientApiInterface {

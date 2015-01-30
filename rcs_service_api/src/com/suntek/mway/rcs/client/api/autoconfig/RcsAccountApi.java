@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.autoconfig;
 
 import java.util.Locale;
@@ -33,10 +32,10 @@ import android.os.RemoteException;
 
 import com.suntek.mway.rcs.client.api.ClientApi;
 import com.suntek.mway.rcs.client.api.autoconfig.callback.AccountEventListener;
-import com.suntek.mway.rcs.client.api.setting.IRcsSettingApi;
-import com.suntek.mway.rcs.client.api.setting.LoginUser;
-import com.suntek.mway.rcs.client.api.setting.RcsUserProfileInfo;
-import com.suntek.mway.rcs.client.api.setting.SystemInfo;
+import com.suntek.mway.rcs.client.aidl.setting.IRcsSettingApi;
+import com.suntek.mway.rcs.client.aidl.setting.LoginUser;
+import com.suntek.mway.rcs.client.aidl.setting.RcsUserProfileInfo;
+import com.suntek.mway.rcs.client.aidl.setting.SystemInfo;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.suntek.mway.rcs.client.api.util.VerificationUtil;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;

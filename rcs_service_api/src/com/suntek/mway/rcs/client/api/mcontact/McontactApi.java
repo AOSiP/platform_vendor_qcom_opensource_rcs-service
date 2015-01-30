@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.mcontact;
 
 import java.util.Locale;
@@ -30,12 +29,13 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.suntek.mway.rcs.client.api.ClientApi;
-import com.suntek.mway.rcs.client.api.plugin.callback.IMContactSyncListener;
-import com.suntek.mway.rcs.client.api.plugin.entity.mcontact.IntervalAction;
-import com.suntek.mway.rcs.client.api.plugin.entity.mcontact.SyncAction;
+import com.suntek.mway.rcs.client.aidl.plugin.callback.IMContactSyncListener;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.mcontact.IntervalAction;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.mcontact.SyncAction;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.suntek.mway.rcs.client.api.util.VerificationUtil;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;
+import com.suntek.mway.rcs.client.aidl.mcontact.IMcontactApi;
 
 public class McontactApi extends ClientApi {
     private static String serviceName = "com.suntek.mway.rcs.app.service.api.impl.mcontact.McontactApiService";

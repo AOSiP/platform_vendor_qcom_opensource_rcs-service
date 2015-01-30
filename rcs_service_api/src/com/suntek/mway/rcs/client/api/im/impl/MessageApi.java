@@ -20,7 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
+
 package com.suntek.mway.rcs.client.api.im.impl;
 
 import java.util.List;
@@ -31,16 +31,16 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.suntek.mway.rcs.client.api.ClientApi;
-import com.suntek.mway.rcs.client.api.constant.APIConstant;
-import com.suntek.mway.rcs.client.api.contacts.RCSContact;
+import com.suntek.mway.rcs.client.aidl.constant.APIConstant;
+import com.suntek.mway.rcs.client.aidl.contacts.RCSContact;
 import com.suntek.mway.rcs.client.api.exception.OperatorException;
-import com.suntek.mway.rcs.client.api.im.IInstantMessageApi;
-import com.suntek.mway.rcs.client.api.provider.model.ChatMessage;
-import com.suntek.mway.rcs.client.api.provider.model.FavoriteMessage;
-import com.suntek.mway.rcs.client.api.provider.model.GroupChatModel;
-import com.suntek.mway.rcs.client.api.provider.model.MessageSessionModel;
-import com.suntek.mway.rcs.client.api.provider.model.SimpleMsg;
-import com.suntek.mway.rcs.client.api.provider.model.TopMessageData;
+import com.suntek.mway.rcs.client.aidl.im.IInstantMessageApi;
+import com.suntek.mway.rcs.client.aidl.provider.model.ChatMessage;
+import com.suntek.mway.rcs.client.aidl.provider.model.FavoriteMessage;
+import com.suntek.mway.rcs.client.aidl.provider.model.GroupChatModel;
+import com.suntek.mway.rcs.client.aidl.provider.model.MessageSessionModel;
+import com.suntek.mway.rcs.client.aidl.provider.model.SimpleMsg;
+import com.suntek.mway.rcs.client.aidl.provider.model.TopMessageData;
 import com.suntek.mway.rcs.client.api.util.FileDurationException;
 import com.suntek.mway.rcs.client.api.util.FileSuffixException;
 import com.suntek.mway.rcs.client.api.util.FileTransferException;
@@ -53,6 +53,7 @@ public class MessageApi extends ClientApi {
     private static String serviceName = "com.suntek.mway.rcs.app.service.api.impl.im.MessageApiService";
 
     IInstantMessageApi myApi;
+
     private ServiceConnection mConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className, IBinder service) {
             LogHelper.d("client api connect service");
@@ -61,13 +62,12 @@ public class MessageApi extends ClientApi {
         }
 
         public void onServiceDisconnected(ComponentName className) {
-            if(isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
+            if (isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
                 LogHelper.d("client api disconnect service");
                 myApi = null;
                 notifyServiceDisconnected();
             } else {
-                LogHelper.d("illegal call client api disconnect service :"
-                        + reconnectionTimes);
+                LogHelper.d("illegal call client api disconnect service :" + reconnectionTimes);
                 init(context, rcsListener);
                 if (!isBinded()) {
                     // app is uninstalled
@@ -85,8 +85,8 @@ public class MessageApi extends ClientApi {
         super.initServiceConnect(mConnection);
     }
 
-    public void sendTextMessage(long thread_id, String number, String text,
-            int burnFlag, int barCycle) throws ServiceDisconnectedException {
+    public void sendTextMessage(long thread_id, String number, String text, int burnFlag,
+            int barCycle) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
@@ -110,22 +110,22 @@ public class MessageApi extends ClientApi {
             return;
         }
         try {
-            myApi.sendTextMessage(thread_id, VerificationUtil.formatNumber(number), text, burnFlag, barCycle);
+            myApi.sendTextMessage(thread_id, VerificationUtil.formatNumber(number), text, burnFlag,
+                    barCycle);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendImageFile(long thread_id, long sms_id, String number,
-            String filePath, int burnFlag, int barCycle, int quality)
-            throws ServiceDisconnectedException, FileSuffixException, FileTransferException {
+    public void sendImageFile(long thread_id, long sms_id, String number, String filePath,
+            int burnFlag, int barCycle, int quality) throws ServiceDisconnectedException,
+            FileSuffixException, FileTransferException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method sendImageFile. [thread_id,sms_id,number,filePath,burnFlag,barCycle,quality]=%d,%d,%s,%s,%d,%d,%d",
-                        thread_id, sms_id, number, filePath, burnFlag,
-                        barCycle, quality));
+                        thread_id, sms_id, number, filePath, burnFlag, barCycle, quality));
         VerificationUtil.isImageFile(filePath);
 
         if (!VerificationUtil.isNumber(number)) {
@@ -145,33 +145,35 @@ public class MessageApi extends ClientApi {
             return;
         }
 
-        if( quality == 100 ) {
+        if (quality == 100) {
             VerificationUtil.isFileSizeToLarge(filePath, this.getImageFtMaxSize());
         }
 
         try {
-            myApi.sendImageFile(thread_id, sms_id, VerificationUtil.formatNumber(number), filePath, burnFlag,
-                    barCycle, quality);
+            myApi.sendImageFile(thread_id, sms_id, VerificationUtil.formatNumber(number), filePath,
+                    burnFlag, barCycle, quality);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendAudioFile(long thread_id, long sms_id, String number,
-            String filePath, int recordTime, int burnFlag, int barCycle, boolean isRecord)
-            throws ServiceDisconnectedException, FileSuffixException, FileTransferException, FileDurationException {
+    public void sendAudioFile(long thread_id, long sms_id, String number, String filePath,
+            int recordTime, int burnFlag, int barCycle, boolean isRecord)
+            throws ServiceDisconnectedException, FileSuffixException, FileTransferException,
+            FileDurationException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method sendAudioFile. [thread_id,sms_id,number,filePath,recordTime,burnFlag,barCycle,isRecord]=%d,%d,%s,%s,%d,%d,%d,%b",
-                        thread_id, sms_id, number, filePath, recordTime,
-                        burnFlag, barCycle, isRecord));
+                        thread_id, sms_id, number, filePath, recordTime, burnFlag, barCycle,
+                        isRecord));
         VerificationUtil.isAudioFile(filePath);
-        if(isRecord){
-            VerificationUtil.isAudioDurationToLong(context, filePath, this.getAudioMaxTime(), recordTime);//VerificationUtil.getAudioMaxTime(context)
+        if (isRecord) {
+            VerificationUtil.isAudioDurationToLong(context, filePath, this.getAudioMaxTime(),
+                    recordTime);// VerificationUtil.getAudioMaxTime(context)
         }
-        VerificationUtil.isFileSizeToLarge(filePath, this.getVideoFtMaxSize());//VerificationUtil.getVideoFtMaxSize(context)
+        VerificationUtil.isFileSizeToLarge(filePath, this.getVideoFtMaxSize());// VerificationUtil.getVideoFtMaxSize(context)
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return;
@@ -192,21 +194,22 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public void sendVideoFile(long thread_id, long sms_id, String number,
-            String filePath, int length, int burnFlag, int barCycle, boolean isRecord)
-            throws ServiceDisconnectedException, FileSuffixException, FileTransferException, FileDurationException {
+    public void sendVideoFile(long thread_id, long sms_id, String number, String filePath,
+            int length, int burnFlag, int barCycle, boolean isRecord)
+            throws ServiceDisconnectedException, FileSuffixException, FileTransferException,
+            FileDurationException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method sendVideoFile. [thread_id,sms_id,number,filePath,length,burnFlag,barCycle,isRecord]=%d,%d,%s,%s,%d,%d,%d,%b",
-                        thread_id, sms_id, number, filePath, length, burnFlag,
-                        barCycle, isRecord));
+                        thread_id, sms_id, number, filePath, length, burnFlag, barCycle, isRecord));
         VerificationUtil.isVideoFile(filePath);
-        if(isRecord){
-            VerificationUtil.isVedioDurationToLong(context, filePath, this.getVideoMaxTime(), length);//VerificationUtil.getVideoMaxTime(context)
+        if (isRecord) {
+            VerificationUtil.isVedioDurationToLong(context, filePath, this.getVideoMaxTime(),
+                    length);// VerificationUtil.getVideoMaxTime(context)
         }
-        VerificationUtil.isFileSizeToLarge(filePath, this.getVideoFtMaxSize());//VerificationUtil.getVideoFtMaxSize(context)
+        VerificationUtil.isFileSizeToLarge(filePath, this.getVideoFtMaxSize());// VerificationUtil.getVideoFtMaxSize(context)
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return;
@@ -220,16 +223,15 @@ public class MessageApi extends ClientApi {
             return;
         }
         try {
-            myApi.sendVideoFile(thread_id, sms_id, VerificationUtil.formatNumber(number), filePath, length,
-                    burnFlag, barCycle);
+            myApi.sendVideoFile(thread_id, sms_id, VerificationUtil.formatNumber(number), filePath,
+                    length, burnFlag, barCycle);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendLocation(long thread_id, long sms_id, String number,
-            double lat, double lng, String text)
-            throws ServiceDisconnectedException {
+    public void sendLocation(long thread_id, long sms_id, String number, double lat, double lng,
+            String text) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
@@ -241,41 +243,36 @@ public class MessageApi extends ClientApi {
             return;
         }
         try {
-            myApi.sendLocation(thread_id, sms_id, VerificationUtil.formatNumber(number), lat, lng, text);
+            myApi.sendLocation(thread_id, sms_id, VerificationUtil.formatNumber(number), lat, lng,
+                    text);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendPaidEmo(long thread_id, long sms_id, String number,
-            String emoid, String emoName)
+    public void sendPaidEmo(long thread_id, long sms_id, String number, String emoid, String emoName)
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper
-                .i(String.format(
-                        Locale.getDefault(),
-                        "enter method sendPaidEmo. [thread_id,sms_id,number,emoid,emoName]=%d,%d,%s,%s,%s",
-                        thread_id, sms_id, number, emoid, emoName));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method sendPaidEmo. [thread_id,sms_id,number,emoid,emoName]=%d,%d,%s,%s,%s",
+                thread_id, sms_id, number, emoid, emoName));
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return;
         }
         try {
-            myApi.sendPaidEmo(thread_id, sms_id, number, emoid,
-                    emoName);
+            myApi.sendPaidEmo(thread_id, sms_id, number, emoid, emoName);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendVCard(long thread_id, long sms_id, String number,
-            RCSContact rcsContact) throws ServiceDisconnectedException {
+    public void sendVCard(long thread_id, long sms_id, String number, RCSContact rcsContact)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper
-                .i(String.format(
-                        Locale.getDefault(),
-                        "enter method sendVCard. [thread_id,sms_id,number,rcsContact]=%d,%d,%s,%s",
-                        thread_id, sms_id, number, rcsContact.toString()));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method sendVCard. [thread_id,sms_id,number,rcsContact]=%d,%d,%s,%s",
+                thread_id, sms_id, number, rcsContact.toString()));
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return;
@@ -287,28 +284,26 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public void sendVCard(long thread_id, long sms_id, String number,
-            String vcardFilePath) throws ServiceDisconnectedException {
+    public void sendVCard(long thread_id, long sms_id, String number, String vcardFilePath)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper
-                .i(String.format(
-                        Locale.getDefault(),
-                        "enter method sendVCard. [thread_id,sms_id,number,vcardFilePath]=%d,%d,%s,%s",
-                        thread_id, sms_id, number, vcardFilePath));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method sendVCard. [thread_id,sms_id,number,vcardFilePath]=%d,%d,%s,%s",
+                thread_id, sms_id, number, vcardFilePath));
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return;
         }
         try {
-            myApi.sendVCardByPath(thread_id, sms_id, VerificationUtil.formatNumber(number), vcardFilePath);
+            myApi.sendVCardByPath(thread_id, sms_id, VerificationUtil.formatNumber(number),
+                    vcardFilePath);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendOne2ManyTextMessage(long thread_id, List<String> numbers,
-            String text, int burnFlag, int barCycle)
-            throws ServiceDisconnectedException {
+    public void sendOne2ManyTextMessage(long thread_id, List<String> numbers, String text,
+            int burnFlag, int barCycle) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         if ("".equals(text.trim())) {
             LogHelper.i("text value is null/Space");
@@ -332,23 +327,23 @@ public class MessageApi extends ClientApi {
             return;
         }
         try {
-            myApi.sendOne2ManyTextMessage(thread_id, VerificationUtil.formatNumbers(numbers), text, burnFlag,
-                    barCycle);
+            myApi.sendOne2ManyTextMessage(thread_id, VerificationUtil.formatNumbers(numbers), text,
+                    burnFlag, barCycle);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendOne2ManyImageFile(long thread_id, long sms_id,
-            List<String> numbers, String filePath, int burnFlag, int barCycle,
-            int quality) throws ServiceDisconnectedException, FileSuffixException, FileTransferException {
+    public void sendOne2ManyImageFile(long thread_id, long sms_id, List<String> numbers,
+            String filePath, int burnFlag, int barCycle, int quality)
+            throws ServiceDisconnectedException, FileSuffixException, FileTransferException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method sendOne2ManyImageFile. [thread_id,sms_id,numbers,filePath,burnFlag,barCycle,quality]=%d,%d,%s,%s,%d,%d,%d",
-                        thread_id, sms_id, numbers.toString(), filePath,
-                        burnFlag, barCycle, quality));
+                        thread_id, sms_id, numbers.toString(), filePath, burnFlag, barCycle,
+                        quality));
         VerificationUtil.isImageFile(filePath);
         if (!VerificationUtil.isAllNumber(numbers)) {
             LogHelper.i("number field value error");
@@ -367,35 +362,35 @@ public class MessageApi extends ClientApi {
             return;
         }
 
-        if( quality == 100 ) {
-            VerificationUtil.isFileSizeToLarge(filePath,
-                    VerificationUtil.getImageFtMaxSize(context));
+        if (quality == 100) {
+            VerificationUtil.isFileSizeToLarge(filePath, this.getImageFtMaxSize());
         }
 
         try {
-            myApi.sendOne2ManyImageFile(thread_id, sms_id, VerificationUtil.formatNumbers(numbers), filePath,
-                    burnFlag, barCycle, quality);
+            myApi.sendOne2ManyImageFile(thread_id, sms_id, VerificationUtil.formatNumbers(numbers),
+                    filePath, burnFlag, barCycle, quality);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendOne2ManyAudioFile(long thread_id, long sms_id,
-            List<String> numbers, String filePath, int recordTime,
-            int burnFlag, int barCycle, boolean isRecord) throws ServiceDisconnectedException, FileSuffixException, FileTransferException, FileDurationException {
+    public void sendOne2ManyAudioFile(long thread_id, long sms_id, List<String> numbers,
+            String filePath, int recordTime, int burnFlag, int barCycle, boolean isRecord)
+            throws ServiceDisconnectedException, FileSuffixException, FileTransferException,
+            FileDurationException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method sendOne2ManyAudioFile. [thread_id,sms_id,numbers,filePath,recordTime,burnFlag,barCycle,isRecord]=%d,%d,%s,%s,%d,%d,%d,%b",
-                        thread_id, sms_id, numbers.toString(), filePath,
-                        recordTime, burnFlag, barCycle, isRecord));
+                        thread_id, sms_id, numbers.toString(), filePath, recordTime, burnFlag,
+                        barCycle, isRecord));
         VerificationUtil.isAudioFile(filePath);
-        if(isRecord){
-            VerificationUtil.isAudioDurationToLong(context, filePath, VerificationUtil.getAudioMaxTime(context), recordTime);
+        if (isRecord) {
+            VerificationUtil.isAudioDurationToLong(context, filePath, this.getAudioMaxTime(),
+                    recordTime);
         }
-        VerificationUtil.isFileSizeToLarge(filePath,
-                VerificationUtil.getVideoFtMaxSize(context));
+        VerificationUtil.isFileSizeToLarge(filePath, this.getVideoFtMaxSize());
         if (!VerificationUtil.isAllNumber(numbers)) {
             LogHelper.i("number field value error");
             return;
@@ -409,29 +404,30 @@ public class MessageApi extends ClientApi {
             return;
         }
         try {
-            myApi.sendOne2ManyAudioFile(thread_id, sms_id, VerificationUtil.formatNumbers(numbers), filePath,
-                    recordTime, burnFlag, barCycle);
+            myApi.sendOne2ManyAudioFile(thread_id, sms_id, VerificationUtil.formatNumbers(numbers),
+                    filePath, recordTime, burnFlag, barCycle);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendOne2ManyVideoFile(long thread_id, long sms_id,
-            List<String> numbers, String filePath, int length, int burnFlag,
-            int barCycle, boolean isRecord) throws ServiceDisconnectedException, FileSuffixException, FileTransferException, FileDurationException {
+    public void sendOne2ManyVideoFile(long thread_id, long sms_id, List<String> numbers,
+            String filePath, int length, int burnFlag, int barCycle, boolean isRecord)
+            throws ServiceDisconnectedException, FileSuffixException, FileTransferException,
+            FileDurationException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method sendOne2ManyVideoFile. [thread_id,sms_id,numbers,filePath,length,burnFlag,barCycle,isRecord]=%d,%d,%s,%s,%d,%d,%d,%b",
-                        thread_id, sms_id, numbers.toString(), filePath,
-                        length, burnFlag, barCycle, isRecord));
+                        thread_id, sms_id, numbers.toString(), filePath, length, burnFlag,
+                        barCycle, isRecord));
         VerificationUtil.isVideoFile(filePath);
-        if(isRecord){
-            VerificationUtil.isVedioDurationToLong(context, filePath, VerificationUtil.getVideoMaxTime(context), length);
+        if (isRecord) {
+            VerificationUtil.isVedioDurationToLong(context, filePath, this.getVideoMaxTime(),
+                    length);
         }
-        VerificationUtil.isFileSizeToLarge(filePath,
-                VerificationUtil.getVideoFtMaxSize(context));
+        VerificationUtil.isFileSizeToLarge(filePath, this.getVideoFtMaxSize());
         if (!VerificationUtil.isAllNumber(numbers)) {
             LogHelper.i("number field value error");
             return;
@@ -445,16 +441,15 @@ public class MessageApi extends ClientApi {
             return;
         }
         try {
-            myApi.sendOne2ManyVideoFile(thread_id, sms_id, VerificationUtil.formatNumbers(numbers), filePath,
-                    length, burnFlag, barCycle);
+            myApi.sendOne2ManyVideoFile(thread_id, sms_id, VerificationUtil.formatNumbers(numbers),
+                    filePath, length, burnFlag, barCycle);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendOne2ManyLocation(long thread_id, long sms_id,
-            List<String> numbers, double lat, double lng, String text)
-            throws ServiceDisconnectedException {
+    public void sendOne2ManyLocation(long thread_id, long sms_id, List<String> numbers, double lat,
+            double lng, String text) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
@@ -466,16 +461,15 @@ public class MessageApi extends ClientApi {
             return;
         }
         try {
-            myApi.sendOne2ManyLocation(thread_id, sms_id, VerificationUtil.formatNumbers(numbers), lat, lng,
-                    text);
+            myApi.sendOne2ManyLocation(thread_id, sms_id, VerificationUtil.formatNumbers(numbers),
+                    lat, lng, text);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendGroupMessage(long thread_id, String conversationId,
-            long sms_id, String msg, String groupId)
-            throws ServiceDisconnectedException {
+    public void sendGroupMessage(long thread_id, String conversationId, long sms_id, String msg,
+            String groupId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         if ("".equals(msg.trim())) {
             LogHelper.i("msg value is null/Space");
@@ -487,139 +481,125 @@ public class MessageApi extends ClientApi {
                         "enter method sendGroupMessage. [thread_id,conversationId,sms_id,msg,groupId]=%d,%s,%d,%s,%s",
                         thread_id, conversationId, sms_id, msg, groupId));
         try {
-            myApi.sendGroupMessage(thread_id, conversationId, sms_id, msg,
-                    groupId);
+            myApi.sendGroupMessage(thread_id, conversationId, sms_id, msg, groupId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendGroupImageFile(long thread_id, String conversationId,
-            long sms_id, String filepath, String groupId, int quality)
-            throws ServiceDisconnectedException, FileSuffixException, FileTransferException {
+    public void sendGroupImageFile(long thread_id, String conversationId, long sms_id,
+            String filepath, String groupId, int quality) throws ServiceDisconnectedException,
+            FileSuffixException, FileTransferException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method sendGroupImageFile. [thread_id,conversationId,sms_id,filepath,groupId,quality]=%d,%s,%d,%s,%s,%d",
-                        thread_id, conversationId, sms_id, filepath, groupId,
-                        quality));
+                        thread_id, conversationId, sms_id, filepath, groupId, quality));
         VerificationUtil.isImageFile(filepath);
         if (quality < 0 || quality > 100) {
             LogHelper.i("quality field value must be between 0 to 100");
             return;
         }
 
-        if( quality == 100 ) {
-            VerificationUtil.isFileSizeToLarge(filepath,
-                    VerificationUtil.getImageFtMaxSize(context));
+        if (quality == 100) {
+            VerificationUtil.isFileSizeToLarge(filepath, this.getImageFtMaxSize());
         }
 
         try {
-            myApi.sendGroupImageFile(thread_id, conversationId, sms_id,
-                    filepath, groupId, quality);
+            myApi.sendGroupImageFile(thread_id, conversationId, sms_id, filepath, groupId, quality);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendGroupAudioFile(long thread_id, String conversationId,
-            long sms_id, String filepath, int recordTime, String groupId, boolean isRecord)
-            throws ServiceDisconnectedException, FileSuffixException, FileTransferException, FileDurationException {
+    public void sendGroupAudioFile(long thread_id, String conversationId, long sms_id,
+            String filepath, int recordTime, String groupId, boolean isRecord)
+            throws ServiceDisconnectedException, FileSuffixException, FileTransferException,
+            FileDurationException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method sendGroupAudioFile. [thread_id,conversationId,sms_id,filepath,recordTime,groupId,isRecord]=%d,%s,%d,%s,%d,%s,%b",
-                        thread_id, conversationId, sms_id, filepath,
-                        recordTime, groupId, isRecord));
+                        thread_id, conversationId, sms_id, filepath, recordTime, groupId, isRecord));
         VerificationUtil.isAudioFile(filepath);
-        if(isRecord){
-            VerificationUtil.isAudioDurationToLong(context, filepath, VerificationUtil.getAudioMaxTime(context), recordTime);
+        if (isRecord) {
+            VerificationUtil.isAudioDurationToLong(context, filepath, this.getAudioMaxTime(),
+                    recordTime);
         }
-        VerificationUtil.isFileSizeToLarge(filepath,
-                VerificationUtil.getVideoFtMaxSize(context));
+        VerificationUtil.isFileSizeToLarge(filepath, this.getVideoFtMaxSize());
         try {
-            myApi.sendGroupAudioFile(thread_id, conversationId, sms_id,
-                    filepath, recordTime, groupId);
+            myApi.sendGroupAudioFile(thread_id, conversationId, sms_id, filepath, recordTime,
+                    groupId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendGroupVideoFile(long thread_id, String conversationId,
-            long sms_id, String filepath, int length, String groupId, boolean isRecord)
-            throws ServiceDisconnectedException, FileSuffixException, FileTransferException, FileDurationException {
+    public void sendGroupVideoFile(long thread_id, String conversationId, long sms_id,
+            String filepath, int length, String groupId, boolean isRecord)
+            throws ServiceDisconnectedException, FileSuffixException, FileTransferException,
+            FileDurationException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method sendGroupVideoFile. [thread_id,conversationId,sms_id,filepath,length,groupId,isRecord]=%d,%s,%d,%s,%d,%s,%b",
-                        thread_id, conversationId, sms_id, filepath, length,
-                        groupId, isRecord));
+                        thread_id, conversationId, sms_id, filepath, length, groupId, isRecord));
         VerificationUtil.isVideoFile(filepath);
-        if(isRecord){
-            VerificationUtil.isVedioDurationToLong(context, filepath, VerificationUtil.getVideoMaxTime(context), length);
+        if (isRecord) {
+            VerificationUtil.isVedioDurationToLong(context, filepath, this.getVideoMaxTime(),
+                    length);
         }
-        VerificationUtil.isFileSizeToLarge(filepath,
-                VerificationUtil.getVideoFtMaxSize(context));
+        VerificationUtil.isFileSizeToLarge(filepath, this.getVideoFtMaxSize());
         try {
-            myApi.sendGroupVideoFile(thread_id, conversationId, sms_id,
-                    filepath, length, groupId);
+            myApi.sendGroupVideoFile(thread_id, conversationId, sms_id, filepath, length, groupId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendGroupLocation(long thread_id, String conversationId,
-            long sms_id, double lat, double lng, String text, String groupId)
-            throws ServiceDisconnectedException {
+    public void sendGroupLocation(long thread_id, String conversationId, long sms_id, double lat,
+            double lng, String text, String groupId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method sendGroupLocation. [thread_id,conversationId,sms_id,lat,lng,text,groupId]=%d,%s,%d,%f,%f,%s,%s",
-                        thread_id, conversationId, sms_id, lat, lng, text,
-                        groupId));
+                        thread_id, conversationId, sms_id, lat, lng, text, groupId));
         try {
-            myApi.sendGroupLocation(thread_id, conversationId, sms_id, lat,
-                    lng, text, groupId);
+            myApi.sendGroupLocation(thread_id, conversationId, sms_id, lat, lng, text, groupId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendGroupVCard(long thread_id, String conversationId,
-            long sms_id, RCSContact rcsContact, String groupId)
-            throws ServiceDisconnectedException {
+    public void sendGroupVCard(long thread_id, String conversationId, long sms_id,
+            RCSContact rcsContact, String groupId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method sendGroupVCard. [thread_id,conversationId,sms_id,rcsContact,groupId]=%d,%s,%d,%s,%s",
-                        thread_id, conversationId, sms_id,
-                        rcsContact.toString(), groupId));
+                        thread_id, conversationId, sms_id, rcsContact.toString(), groupId));
         try {
-            myApi.sendGroupVCard(thread_id, conversationId, sms_id, rcsContact,
-                    groupId);
+            myApi.sendGroupVCard(thread_id, conversationId, sms_id, rcsContact, groupId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendGroupVCard(long thread_id, String conversationId,
-            long sms_id, String vcardFilePath, String groupId)
-            throws ServiceDisconnectedException {
+    public void sendGroupVCard(long thread_id, String conversationId, long sms_id,
+            String vcardFilePath, String groupId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method sendGroupVCard. [thread_id,conversationId,sms_id,vcardFilePath,groupId]=%d,%s,%d,%s,%s",
-                        thread_id, conversationId, sms_id,
-                        vcardFilePath, groupId));
+                        thread_id, conversationId, sms_id, vcardFilePath, groupId));
         try {
-            myApi.sendGroupVCardByPath(thread_id, conversationId, sms_id, vcardFilePath,
-                    groupId);
+            myApi.sendGroupVCardByPath(thread_id, conversationId, sms_id, vcardFilePath, groupId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
@@ -628,8 +608,7 @@ public class MessageApi extends ClientApi {
     public void acceptFile(ChatMessage chatMessage) throws OperatorException,
             ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method acceptFile. [chatMessage]=%s",
+        LogHelper.i(String.format(Locale.getDefault(), "enter method acceptFile. [chatMessage]=%s",
                 chatMessage.toString()));
         try {
             myApi.acceptFile(chatMessage);
@@ -639,12 +618,10 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public boolean interruptFile(ChatMessage chatMessage)
-            throws ServiceDisconnectedException {
+    public boolean interruptFile(ChatMessage chatMessage) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method interruptFile. [chatMessage]=%s",
-                chatMessage.toString()));
+                "enter method interruptFile. [chatMessage]=%s", chatMessage.toString()));
         boolean flag = false;
         try {
             return myApi.interruptFile(chatMessage);
@@ -658,8 +635,7 @@ public class MessageApi extends ClientApi {
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method getMessageSessionByThreadId. [threadId]=%d",
-                threadId));
+                "enter method getMessageSessionByThreadId. [threadId]=%d", threadId));
         try {
             return myApi.getMessageSessionByThreadId(threadId);
         } catch (Exception ex) {
@@ -668,12 +644,11 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public List<MessageSessionModel> getMessageSessionList(int offset,
-            int number) throws ServiceDisconnectedException {
+    public List<MessageSessionModel> getMessageSessionList(int offset, int number)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method getMessageSessionList. [offset,number]=%d,%d",
-                offset, number));
+                "enter method getMessageSessionList. [offset,number]=%d,%d", offset, number));
         try {
             return myApi.getMessageSessionList(offset, number);
         } catch (Exception ex) {
@@ -682,14 +657,12 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public List<ChatMessage> getChatMessageList(long threadId, boolean less,
-            int specifiedMsgId, int count) throws ServiceDisconnectedException {
+    public List<ChatMessage> getChatMessageList(long threadId, boolean less, int specifiedMsgId,
+            int count) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper
-                .i(String.format(
-                        Locale.getDefault(),
-                        "enter method getChatMessageList. [threadId,specifiedMsgId,count]=%d,%d,%d",
-                        threadId, specifiedMsgId, count));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method getChatMessageList. [threadId,specifiedMsgId,count]=%d,%d,%d",
+                threadId, specifiedMsgId, count));
         try {
             return myApi.getChatMessageList(threadId, less, specifiedMsgId, count);
         } catch (Exception ex) {
@@ -698,13 +671,10 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public boolean removeMessageByThreadId(long threadId)
-            throws ServiceDisconnectedException {
+    public boolean removeMessageByThreadId(long threadId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper
-                .i(String.format(Locale.getDefault(),
-                        "enter method removeMessageByThreadId. [threadId]=%d",
-                        threadId));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method removeMessageByThreadId. [threadId]=%d", threadId));
         try {
             myApi.removeMessageByThreadId(threadId);
             return true;
@@ -714,8 +684,7 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public void removeOneMessage(String messageId)
-            throws ServiceDisconnectedException {
+    public void removeOneMessage(String messageId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
                 "enter method removeOneMessage. [messageId]=%s", messageId));
@@ -728,8 +697,7 @@ public class MessageApi extends ClientApi {
 
     public void removeAllMessage() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method removeAllMessage. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method removeAllMessage. "));
         try {
             myApi.removeAllMessage();
         } catch (Exception ex) {
@@ -737,8 +705,8 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public List<ChatMessage> searchMessageByText(String text, int offset,
-            int number, boolean timaAsc) throws ServiceDisconnectedException {
+    public List<ChatMessage> searchMessageByText(String text, int offset, int number,
+            boolean timaAsc) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         try {
             return myApi.searchMessageByText(text, offset, number, timaAsc);
@@ -748,8 +716,7 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public ChatMessage getTheLastMessage(long threadId)
-            throws ServiceDisconnectedException {
+    public ChatMessage getTheLastMessage(long threadId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
                 "enter method getTheLastMessage. [threadId]=%d", threadId));
@@ -761,12 +728,10 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public String getThreadIdByNumber(List<String> numbers)
-            throws ServiceDisconnectedException {
+    public String getThreadIdByNumber(List<String> numbers) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method getThreadIdByNumber. [numbers]=%s",
-                numbers.toString()));
+                "enter method getThreadIdByNumber. [numbers]=%s", numbers.toString()));
         if (!VerificationUtil.isAllNumber(numbers)) {
             LogHelper.i("number field value error");
             return null;
@@ -781,8 +746,7 @@ public class MessageApi extends ClientApi {
 
     public long getNewThreadId() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method getNewThreadId. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method getNewThreadId. "));
         try {
             return myApi.getNewThreadId();
         } catch (Exception ex) {
@@ -791,11 +755,10 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public ChatMessage getMessageById(String rowId)
-            throws ServiceDisconnectedException {
+    public ChatMessage getMessageById(String rowId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method getMessageById. [rowId]=%s", rowId));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method getMessageById. [rowId]=%s",
+                rowId));
         try {
             return myApi.getMessageById(rowId);
         } catch (Exception ex) {
@@ -804,13 +767,10 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public ChatMessage getMessageByMessageId(String messageId)
-            throws ServiceDisconnectedException {
+    public ChatMessage getMessageByMessageId(String messageId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper
-                .i(String.format(Locale.getDefault(),
-                        "enter method getMessageByMessageId. [messageId]=%s",
-                        messageId));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method getMessageByMessageId. [messageId]=%s", messageId));
         try {
             return myApi.getMessageByMessageId(messageId);
         } catch (Exception ex) {
@@ -819,8 +779,7 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public GroupChatModel getGroupChatById(String groupId)
-            throws ServiceDisconnectedException {
+    public GroupChatModel getGroupChatById(String groupId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         try {
             return myApi.getGroupChatById(groupId);
@@ -830,13 +789,10 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public GroupChatModel getGroupChatByThreadId(long threadId)
-            throws ServiceDisconnectedException {
+    public GroupChatModel getGroupChatByThreadId(long threadId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper
-                .i(String.format(Locale.getDefault(),
-                        "enter method getGroupChatByThreadId. [threadId]=%d",
-                        threadId));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method getGroupChatByThreadId. [threadId]=%d", threadId));
         try {
             return myApi.getGroupChatByThreadId(threadId);
         } catch (Exception ex) {
@@ -845,16 +801,17 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public String getFilepath(ChatMessage message)
-            throws ServiceDisconnectedException {
+    public String getFilepath(ChatMessage message) throws ServiceDisconnectedException {
 
-        //LogHelper.e("error log, enter method getFilepath. [message]=" + message.toString());
+        // LogHelper.e("error log, enter method getFilepath. [message]=" +
+        // message.toString());
 
-        //System.out.println("========enter method getFilepath. [message]=" + message);
+        // System.out.println("========enter method getFilepath. [message]=" +
+        // message);
 
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method getFilepath. [message]=%s", message.toString()));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method getFilepath. [message]=%s",
+                message.toString()));
         try {
             return myApi.getFilepath(message);
         } catch (Exception ex) {
@@ -863,12 +820,10 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public String getThumbFilepath(ChatMessage message)
-            throws ServiceDisconnectedException {
+    public String getThumbFilepath(ChatMessage message) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method getThumbFilepath. [message]=%s",
-                message.toString()));
+                "enter method getThumbFilepath. [message]=%s", message.toString()));
         try {
             return myApi.getThumbFilepath(message);
         } catch (Exception ex) {
@@ -879,8 +834,8 @@ public class MessageApi extends ClientApi {
 
     public void topMessage(long threadId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method topMessage. [threadId]=%d", threadId));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method topMessage. [threadId]=%d",
+                threadId));
         try {
             myApi.topMessage(threadId);
         } catch (Exception ex) {
@@ -888,8 +843,7 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public void cancelTopMessage(long threadId)
-            throws ServiceDisconnectedException {
+    public void cancelTopMessage(long threadId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
                 "enter method cancelTopMessage. [threadId]=%d", threadId));
@@ -902,8 +856,7 @@ public class MessageApi extends ClientApi {
 
     public void backupAllMessage() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method backupAllMessage. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method backupAllMessage. "));
         try {
             myApi.backupAllMessage();
         } catch (Exception ex) {
@@ -913,8 +866,7 @@ public class MessageApi extends ClientApi {
 
     public void restoreAllMessage() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method restoreAllMessage. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method restoreAllMessage. "));
         try {
             myApi.restoreAllMessage();
         } catch (Exception ex) {
@@ -922,12 +874,10 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public void collectMessage(List<SimpleMsg> simpleMsgList)
-            throws ServiceDisconnectedException {
+    public void collectMessage(List<SimpleMsg> simpleMsgList) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method collectMessage. [simpleMsgList]=%s",
-                simpleMsgList.toString()));
+                "enter method collectMessage. [simpleMsgList]=%s", simpleMsgList.toString()));
         try {
             myApi.collectMessage(simpleMsgList);
         } catch (Exception ex) {
@@ -935,8 +885,7 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public List<TopMessageData> getTopMsgsInOrder(boolean asc)
-            throws ServiceDisconnectedException {
+    public List<TopMessageData> getTopMsgsInOrder(boolean asc) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
                 "enter method getTopMsgsInOrder. [threadId]=%b", asc));
@@ -948,12 +897,10 @@ public class MessageApi extends ClientApi {
         return null;
     }
 
-    public void accuseMessage(final long thread_id, String id)
-            throws ServiceDisconnectedException {
+    public void accuseMessage(final long thread_id, String id) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method accuseMessage. [thread_id,id]=%d,%s", thread_id,
-                id));
+                "enter method accuseMessage. [thread_id,id]=%d,%s", thread_id, id));
         try {
             myApi.accuseMessage(thread_id, id);
         } catch (Exception ex) {
@@ -961,11 +908,10 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public List<ChatMessage> qryNotifyArchiveMsgList()
-            throws ServiceDisconnectedException {
+    public List<ChatMessage> qryNotifyArchiveMsgList() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method getMessageOfSpecialService. "));
+        LogHelper
+                .i(String.format(Locale.getDefault(), "enter method getMessageOfSpecialService. "));
         try {
             return myApi.getMessageOfSpecialService();
         } catch (Exception ex) {
@@ -974,11 +920,9 @@ public class MessageApi extends ClientApi {
         return null;
     }
 
-    public List<ChatMessage> qryNonFriendMsgList()
-            throws ServiceDisconnectedException {
+    public List<ChatMessage> qryNonFriendMsgList() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method getMessageOfStrangeNumber. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method getMessageOfStrangeNumber. "));
         try {
             return myApi.getMessageOfStrangeNumber();
         } catch (Exception ex) {
@@ -990,8 +934,8 @@ public class MessageApi extends ClientApi {
     public List<MessageSessionModel> qryNonFriendMsgSessionList()
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method qryNonFriendMsgSessionList. "));
+        LogHelper
+                .i(String.format(Locale.getDefault(), "enter method qryNonFriendMsgSessionList. "));
         try {
             return myApi.qryNonFriendMsgSessionList();
         } catch (Exception ex) {
@@ -1013,71 +957,63 @@ public class MessageApi extends ClientApi {
         return null;
     }
 
-    public void sendGroupPaidEmo(long thread_id, String conversationId,
-            long sms_id, String emoid, String emoName, String groupId)
-            throws ServiceDisconnectedException {
+    public void sendGroupPaidEmo(long thread_id, String conversationId, long sms_id, String emoid,
+            String emoName, String groupId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method:sendGroupPaidEmo. [thread_id,conversationId,sms_id,emoid,emoName,groupId]=%d,%s,%d,%s,%s,%s",
-                        thread_id, conversationId, sms_id, emoid,
-                        emoName, groupId));
+                        thread_id, conversationId, sms_id, emoid, emoName, groupId));
         try {
-            myApi.sendGroupPaidEmo(thread_id, conversationId, sms_id, emoid,
-                    emoName, groupId);
+            myApi.sendGroupPaidEmo(thread_id, conversationId, sms_id, emoid, emoName, groupId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendOne2ManyPaidEmoMessage(long thread_id, long sms_id,
-            List<String> numbers, String emoid, String emoName)
-            throws ServiceDisconnectedException {
+    public void sendOne2ManyPaidEmoMessage(long thread_id, long sms_id, List<String> numbers,
+            String emoid, String emoName) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method:sendOne2ManyPaidEmoMessage. [thread_id,sms_id,numbers,emoid,emoName]=%d,%d,%s,%s,%s",
-                        thread_id, sms_id, numbers.toString(), emoid,
-                        emoName));
+                        thread_id, sms_id, numbers.toString(), emoid, emoName));
         if (!VerificationUtil.isAllNumber(numbers)) {
             LogHelper.i("number field value error");
             return;
         }
         try {
-            myApi.sendOne2ManyPaidEmoMessage(thread_id, sms_id, VerificationUtil.formatNumbers(numbers), emoid,
-                    emoName);
+            myApi.sendOne2ManyPaidEmoMessage(thread_id, sms_id,
+                    VerificationUtil.formatNumbers(numbers), emoid, emoName);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public List<ChatMessage> getMsgListGreatOrLessThanSpecifiedForBlack(
-            long threadId, boolean less, int specifiedId, int number) throws ServiceDisconnectedException {
+    public List<ChatMessage> getMsgListGreatOrLessThanSpecifiedForBlack(long threadId,
+            boolean less, int specifiedId, int number) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method:getMsgListGreatThanSpecifiedForBlack. [threadId,less,specifiedId,number]=%d,%b,%d,%d",
-                        threadId, less, specifiedId,number));
+                        threadId, less, specifiedId, number));
         try {
-            return myApi.getMsgListGreatOrLessThanSpecifiedForBlack(threadId, less,
-                    specifiedId, number);
+            return myApi.getMsgListGreatOrLessThanSpecifiedForBlack(threadId, less, specifiedId,
+                    number);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
         return null;
     }
 
-    public MessageSessionModel getMessageSessionByThreadIdForBlack(
-            String threadId) throws ServiceDisconnectedException {
+    public MessageSessionModel getMessageSessionByThreadIdForBlack(String threadId)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper
-                .i(String.format(
-                        Locale.getDefault(),
-                        "enter method:getMessageSessionByThreadIdForBlack. [threadId]=%s",
-                        threadId));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method:getMessageSessionByThreadIdForBlack. [threadId]=%s", threadId));
         try {
             return myApi.getMessageSessionByThreadIdForBlack(threadId);
         } catch (Exception ex) {
@@ -1086,14 +1022,12 @@ public class MessageApi extends ClientApi {
         return null;
     }
 
-    public List<MessageSessionModel> getMessageSessionListForBlack(int offset,
-            int number) throws ServiceDisconnectedException {
+    public List<MessageSessionModel> getMessageSessionListForBlack(int offset, int number)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper
-                .i(String.format(
-                        Locale.getDefault(),
-                        "enter method:getMessageSessionListForBlack. [thread_id,number]=%d,%d",
-                        offset, number));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method:getMessageSessionListForBlack. [thread_id,number]=%d,%d", offset,
+                number));
         try {
             return myApi.getMessageSessionListForBlack(offset, number);
         } catch (Exception ex) {
@@ -1106,8 +1040,7 @@ public class MessageApi extends ClientApi {
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getTheLastMsgOfThreadForBlack. [threadId]=%d",
-                threadId));
+                "enter method:getTheLastMsgOfThreadForBlack. [threadId]=%d", threadId));
         try {
             return myApi.getTheLastMsgOfThreadForBlack(threadId);
         } catch (Exception ex) {
@@ -1116,54 +1049,50 @@ public class MessageApi extends ClientApi {
         return null;
     }
 
-    public void sendOne2ManyVCard(long thread_id, long sms_id,
-            List<String> numbers, RCSContact rcsContact)
-            throws ServiceDisconnectedException {
+    public void sendOne2ManyVCard(long thread_id, long sms_id, List<String> numbers,
+            RCSContact rcsContact) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method:sendOne2ManyVCard. [thread_id,sms_id,numbers,rcsContact]=%d,%d,%s,%s",
-                        thread_id, sms_id, numbers.toString(),
-                        rcsContact.toString()));
+                        thread_id, sms_id, numbers.toString(), rcsContact.toString()));
         if (!VerificationUtil.isAllNumber(numbers)) {
             LogHelper.i("number field value error");
             return;
         }
         try {
-            myApi.sendOne2ManyVCard(thread_id, sms_id, VerificationUtil.formatNumbers(numbers), rcsContact);
+            myApi.sendOne2ManyVCard(thread_id, sms_id, VerificationUtil.formatNumbers(numbers),
+                    rcsContact);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendOne2ManyVCard(long thread_id, long sms_id,
-            List<String> numbers, String vcardFilePath)
-            throws ServiceDisconnectedException {
+    public void sendOne2ManyVCard(long thread_id, long sms_id, List<String> numbers,
+            String vcardFilePath) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method:sendOne2ManyVCard. [thread_id,sms_id,numbers,vcardFilePath]=%d,%d,%s,%s",
-                        thread_id, sms_id, numbers.toString(),
-                        vcardFilePath));
+                        thread_id, sms_id, numbers.toString(), vcardFilePath));
         if (!VerificationUtil.isAllNumber(numbers)) {
             LogHelper.i("number field value error");
             return;
         }
         try {
-            myApi.sendOne2ManyVCardByPath(thread_id, sms_id, VerificationUtil.formatNumbers(numbers), vcardFilePath);
+            myApi.sendOne2ManyVCardByPath(thread_id, sms_id,
+                    VerificationUtil.formatNumbers(numbers), vcardFilePath);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public int recoveBlackMsgByMessageId(String messageId)
-            throws ServiceDisconnectedException {
+    public int recoveBlackMsgByMessageId(String messageId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:recoveBlackMsgByMessageId. [messageId]=%s",
-                messageId));
+                "enter method:recoveBlackMsgByMessageId. [messageId]=%s", messageId));
         try {
             return myApi.recoveBlackMsgByMessageId(messageId);
         } catch (Exception ex) {
@@ -1172,12 +1101,10 @@ public class MessageApi extends ClientApi {
         return 0;
     }
 
-    public int recoveBlackMsgByThreadId(long threadId)
-            throws ServiceDisconnectedException {
+    public int recoveBlackMsgByThreadId(long threadId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:recoveBlackMsgByThreadId. [threadId]=%d",
-                threadId));
+                "enter method:recoveBlackMsgByThreadId. [threadId]=%d", threadId));
         try {
             return myApi.recoveBlackMsgByThreadId(threadId);
         } catch (Exception ex) {
@@ -1188,8 +1115,7 @@ public class MessageApi extends ClientApi {
 
     public int recoveBlackMsgAll() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:recoveBlackMsgAll. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:recoveBlackMsgAll. "));
         try {
             return myApi.recoveBlackMsgAll();
         } catch (Exception ex) {
@@ -1198,14 +1124,10 @@ public class MessageApi extends ClientApi {
         return 0;
     }
 
-    public void retransmitMessageById(String id)
-            throws ServiceDisconnectedException {
+    public void retransmitMessageById(String id) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper
-                .i(String.format(
-                        Locale.getDefault(),
-                        "enter method:retransmitMessageById. [id]=%s",
-                        id));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method:retransmitMessageById. [id]=%s", id));
         try {
             myApi.retransmitMessageById(id);
         } catch (Exception ex) {
@@ -1213,9 +1135,8 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public void sendDisplayNotification(final String conversationId,
-            final String number, final String messageId)
-            throws ServiceDisconnectedException {
+    public void sendDisplayNotification(final String conversationId, final String number,
+            final String messageId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
@@ -1227,17 +1148,16 @@ public class MessageApi extends ClientApi {
             return;
         }
         try {
-            myApi.sendDisplayNotification(conversationId, VerificationUtil.formatNumber(number), messageId);
+            myApi.sendDisplayNotification(conversationId, VerificationUtil.formatNumber(number),
+                    messageId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public List<GroupChatModel> getAllGroupChat()
-            throws ServiceDisconnectedException {
+    public List<GroupChatModel> getAllGroupChat() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getAllGroupChat. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getAllGroupChat. "));
         try {
             return myApi.getAllGroupChat();
         } catch (Exception ex) {
@@ -1248,8 +1168,7 @@ public class MessageApi extends ClientApi {
 
     public void burnMessage(String id) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:burnMessage. [id]=%s", id));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:burnMessage. [id]=%s", id));
         try {
             myApi.burnMessage(id);
         } catch (Exception ex) {
@@ -1261,8 +1180,7 @@ public class MessageApi extends ClientApi {
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:cancelCollectSimpleMsg. [simpleMsgList]=%s",
-                simpleMsgList));
+                "enter method:cancelCollectSimpleMsg. [simpleMsgList]=%s", simpleMsgList));
         try {
             myApi.cancelCollectSimpleMsg(simpleMsgList);
         } catch (Exception ex) {
@@ -1270,11 +1188,9 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public List<FavoriteMessage> getFavouriteMessageList()
-            throws ServiceDisconnectedException {
+    public List<FavoriteMessage> getFavouriteMessageList() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getFavouriteMessageList. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getFavouriteMessageList. "));
         try {
             return myApi.getFavouriteMessageList();
         } catch (Exception ex) {
@@ -1283,11 +1199,10 @@ public class MessageApi extends ClientApi {
         return null;
     }
 
-    public void burnMessageAtOnce(String id)
-            throws ServiceDisconnectedException {
+    public void burnMessageAtOnce(String id) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:burnMessageAtOnce. [id]=%s", id));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:burnMessageAtOnce. [id]=%s",
+                id));
         try {
             myApi.burnMessageAtOnce(id);
         } catch (Exception ex) {
@@ -1297,8 +1212,7 @@ public class MessageApi extends ClientApi {
 
     public String getAccuseNumber() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getAccuseNumber. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getAccuseNumber. "));
         try {
             return myApi.getAccuseNumber();
         } catch (Exception ex) {
@@ -1307,16 +1221,16 @@ public class MessageApi extends ClientApi {
         return null;
     }
 
-    public byte[] getImageThumbnails(String filepath)
-            throws ServiceDisconnectedException {
+    public byte[] getImageThumbnails(String filepath) throws ServiceDisconnectedException {
 
-        //LogHelper.e("error log, enter method getImageThumbnails. [filepath]=" + filepath);
+        // LogHelper.e("error log, enter method getImageThumbnails. [filepath]="
+        // + filepath);
 
-        //System.out.println("========enter method getImageThumbnails. [filepath]=" + filepath);
+        // System.out.println("========enter method getImageThumbnails. [filepath]="
+        // + filepath);
 
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getImageThumbnails. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getImageThumbnails. "));
         try {
             return myApi.getImageThumbnails(filepath);
         } catch (Exception ex) {
@@ -1325,13 +1239,12 @@ public class MessageApi extends ClientApi {
         return null;
     }
 
-    public byte[] getVideoThumbnails(String filepath)
-            throws ServiceDisconnectedException {
-        //LogHelper.e("error log, enter method getVideoThumbnails. [filepath]=" + filepath);
+    public byte[] getVideoThumbnails(String filepath) throws ServiceDisconnectedException {
+        // LogHelper.e("error log, enter method getVideoThumbnails. [filepath]="
+        // + filepath);
 
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getVideoThumbnails. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getVideoThumbnails. "));
         try {
             return myApi.getVideoThumbnails(filepath);
         } catch (Exception ex) {
@@ -1342,8 +1255,7 @@ public class MessageApi extends ClientApi {
 
     public int getAllUnreadCount() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getAllUnreadCount. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getAllUnreadCount. "));
         try {
             return myApi.getAllUnreadCount();
         } catch (Exception ex) {
@@ -1352,12 +1264,10 @@ public class MessageApi extends ClientApi {
         return 0;
     }
 
-    public int getUnreadMsgCountByThreadId(String threadId)
-            throws ServiceDisconnectedException {
+    public int getUnreadMsgCountByThreadId(String threadId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getUnreadMsgCountByThreadId. [threadId]=%s",
-                threadId));
+                "enter method:getUnreadMsgCountByThreadId. [threadId]=%s", threadId));
         try {
             return myApi.getUnreadMsgCountByThreadId(threadId);
         } catch (Exception ex) {
@@ -1366,12 +1276,10 @@ public class MessageApi extends ClientApi {
         return 0;
     }
 
-    public void removeUnreadMessageByThreadId(String threadId)
-            throws ServiceDisconnectedException {
+    public void removeUnreadMessageByThreadId(String threadId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:removeUnreadMessageByThreadId. [threadId]=%s",
-                threadId));
+                "enter method:removeUnreadMessageByThreadId. [threadId]=%s", threadId));
         try {
             myApi.removeUnreadMessageByThreadId(threadId);
         } catch (Exception ex) {
@@ -1392,30 +1300,29 @@ public class MessageApi extends ClientApi {
     public void setMsgSendPolicy(int policy) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:setMsgSendPolicy. [policy]=%s",
-                policy));
+                "enter method:setMsgSendPolicy. [policy]=%s", policy));
 
-        switch(policy) {
-        case APIConstant.MSG_SEND_POLICY_AUTO :
-        case APIConstant.MSG_SEND_POLICY_SMS :
-        case APIConstant.MSG_SEND_POLICY_IM :
-            try {
-                myApi.setMsgSendPolicy(policy);
-            } catch (Exception ex) {
-                LogHelper.e(ex.getMessage(), ex);
-            }
-            break ;
+        switch (policy) {
+            case APIConstant.MSG_SEND_POLICY_AUTO:
+            case APIConstant.MSG_SEND_POLICY_SMS:
+            case APIConstant.MSG_SEND_POLICY_IM:
+                try {
+                    myApi.setMsgSendPolicy(policy);
+                } catch (Exception ex) {
+                    LogHelper.e(ex.getMessage(), ex);
+                }
+                break;
 
-            default :
+            default:
                 LogHelper.d("method:setMsgSendPolicy input param not defined, param error.");
-                break ;
+                break;
         }
     }
 
     public int updateMessageRead(String id) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:updateMessageRead. [id]=%s", id));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:updateMessageRead. [id]=%s",
+                id));
         try {
             return myApi.updateMessageRead(id);
         } catch (Exception ex) {
@@ -1424,11 +1331,9 @@ public class MessageApi extends ClientApi {
         return 0;
     }
 
-    public void uploadFile(ChatMessage chatMessage)
-            throws ServiceDisconnectedException {
+    public void uploadFile(ChatMessage chatMessage) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:uploadFile. [chatMessage]=%s",
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:uploadFile. [chatMessage]=%s",
                 chatMessage.toString()));
         try {
             myApi.uploadFile(chatMessage);
@@ -1440,8 +1345,7 @@ public class MessageApi extends ClientApi {
     public int getPlayTime(int msgType, String data) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getPlayTime. [msgType,data]=%d,%s",
-                msgType, data));
+                "enter method:getPlayTime. [msgType,data]=%d,%s", msgType, data));
         try {
             return myApi.getPlayTime(msgType, data);
         } catch (Exception ex) {
@@ -1453,11 +1357,8 @@ public class MessageApi extends ClientApi {
     public GroupChatModel getGroupChatByConversationId(String conversationId)
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper
-                .i(String.format(
-                        Locale.getDefault(),
-                        "enter method:getGroupChatByConversationId. [conversationId]=%s",
-                        conversationId));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method:getGroupChatByConversationId. [conversationId]=%s", conversationId));
         try {
             return myApi.getGroupChatByConversationId(conversationId);
         } catch (Exception ex) {
@@ -1479,8 +1380,7 @@ public class MessageApi extends ClientApi {
 
     public int getSMSSentRemind() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getSMSSentRemind. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getSMSSentRemind. "));
         try {
             return myApi.getSMSSentRemind();
         } catch (Exception ex) {
@@ -1490,7 +1390,7 @@ public class MessageApi extends ClientApi {
     }
 
     public void burnAllMsgAtOnce() throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:burnAllMsgAtOnce. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:burnAllMsgAtOnce. "));
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.burnAllMsgAtOnce();
@@ -1499,36 +1399,53 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public void sendComposingMsg(long threadId, String contact, String contentType, int seconds) throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:sendComposingMsg. [threadId,contact,contentType,seconds]=%d,%s,%s,%d", threadId,contact,contentType,seconds));
+    public void sendComposingMsg(long threadId, String contact, String contentType, int seconds)
+            throws ServiceDisconnectedException {
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method:sendComposingMsg. [threadId,contact,contentType,seconds]=%d,%s,%s,%d",
+                        threadId, contact, contentType, seconds));
         VerificationUtil.ApiIsNull(myApi);
         if (!VerificationUtil.isNumber(contact)) {
             LogHelper.i("number field value error");
             return;
         }
         try {
-            myApi.sendComposingMsg(threadId, VerificationUtil.formatNumber(contact), contentType, seconds);
+            myApi.sendComposingMsg(threadId, VerificationUtil.formatNumber(contact), contentType,
+                    seconds);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendCancelComposingMsg(long threadId, String contact, String contentType, long lastActive) throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:sendCancelComposingMsg. [threadId,contact,contentType,lastActive]=%d,%s,%s,%d", threadId,contact,contentType,lastActive));
+    public void sendCancelComposingMsg(long threadId, String contact, String contentType,
+            long lastActive) throws ServiceDisconnectedException {
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method:sendCancelComposingMsg. [threadId,contact,contentType,lastActive]=%d,%s,%s,%d",
+                        threadId, contact, contentType, lastActive));
         VerificationUtil.ApiIsNull(myApi);
         if (!VerificationUtil.isNumber(contact)) {
             LogHelper.i("number field value error");
             return;
         }
         try {
-            myApi.sendCancelComposingMsg(threadId, VerificationUtil.formatNumber(contact), contentType, lastActive);
+            myApi.sendCancelComposingMsg(threadId, VerificationUtil.formatNumber(contact),
+                    contentType, lastActive);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendComposingMsgToGroup(long threadId, int id, String contentType, int seconds) throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:sendComposingMsgToGroup. [threadId,id,contentType,seconds]=%d,%d,%s,%d", threadId,id,contentType,seconds));
+    public void sendComposingMsgToGroup(long threadId, int id, String contentType, int seconds)
+            throws ServiceDisconnectedException {
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method:sendComposingMsgToGroup. [threadId,id,contentType,seconds]=%d,%d,%s,%d",
+                        threadId, id, contentType, seconds));
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.sendComposingMsgToGroup(threadId, id, contentType, seconds);
@@ -1537,8 +1454,13 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public void sendCancelComposingMsgToGroup(long threadId, int id, String contentType, long lastActive) throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:sendCancelComposingMsgToGroup. [threadId,id,contentType,lastActive]=%d,%d,%s,%d", threadId,id,contentType,lastActive));
+    public void sendCancelComposingMsgToGroup(long threadId, int id, String contentType,
+            long lastActive) throws ServiceDisconnectedException {
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method:sendCancelComposingMsgToGroup. [threadId,id,contentType,lastActive]=%d,%d,%s,%d",
+                        threadId, id, contentType, lastActive));
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.sendCancelComposingMsgToGroup(threadId, id, contentType, lastActive);
@@ -1547,36 +1469,56 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public void sendVCardList(final long thread_id, final long sms_id, final String number, final List<RCSContact> contactList, final int chatType) throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:sendVCardList. [thread_id, sms_id, number, contactList, chatType]=%d,%d,%s,%s,%d", thread_id, sms_id, number, contactList.toString(), chatType));
+    public void sendVCardList(final long thread_id, final long sms_id, final String number,
+            final List<RCSContact> contactList, final int chatType)
+            throws ServiceDisconnectedException {
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method:sendVCardList. [thread_id, sms_id, number, contactList, chatType]=%d,%d,%s,%s,%d",
+                        thread_id, sms_id, number, contactList.toString(), chatType));
         VerificationUtil.ApiIsNull(myApi);
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return;
         }
         try {
-            myApi.sendVCardList(thread_id, sms_id, VerificationUtil.formatNumber(number), contactList, chatType);
+            myApi.sendVCardList(thread_id, sms_id, VerificationUtil.formatNumber(number),
+                    contactList, chatType);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendOne2ManyVCardList(final long thread_id, final long sms_id, final List<String> numbers, final List<RCSContact> contactList) throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:sendOne2ManyVCardList. [thread_id, sms_id, numbers, contactList]=%d,%d,%s,%s", thread_id, sms_id, numbers.toString(), contactList.toString()));
+    public void sendOne2ManyVCardList(final long thread_id, final long sms_id,
+            final List<String> numbers, final List<RCSContact> contactList)
+            throws ServiceDisconnectedException {
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method:sendOne2ManyVCardList. [thread_id, sms_id, numbers, contactList]=%d,%d,%s,%s",
+                        thread_id, sms_id, numbers.toString(), contactList.toString()));
         VerificationUtil.ApiIsNull(myApi);
         if (!VerificationUtil.isAllNumber(numbers)) {
             LogHelper.i("number field value error");
             return;
         }
         try {
-            myApi.sendOne2ManyVCardList(thread_id, sms_id, VerificationUtil.formatNumbers(numbers), contactList);
+            myApi.sendOne2ManyVCardList(thread_id, sms_id, VerificationUtil.formatNumbers(numbers),
+                    contactList);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void sendGroupVCardList(final long thread_id, final String conversationId, final long sms_id, final List<RCSContact> contactList, final String groupId) throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:sendGroupVCardList. [thread_id, conversationId, sms_id, contactList, groupId]=%d,%s,%d,%s,%s", thread_id, conversationId, sms_id, contactList.toString(), groupId));
+    public void sendGroupVCardList(final long thread_id, final String conversationId,
+            final long sms_id, final List<RCSContact> contactList, final String groupId)
+            throws ServiceDisconnectedException {
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method:sendGroupVCardList. [thread_id, conversationId, sms_id, contactList, groupId]=%d,%s,%d,%s,%s",
+                        thread_id, conversationId, sms_id, contactList.toString(), groupId));
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.sendGroupVCardList(thread_id, conversationId, sms_id, contactList, groupId);
@@ -1586,7 +1528,7 @@ public class MessageApi extends ClientApi {
     }
 
     public long getImageFtMaxSize() throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:getImageFtMaxSize. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getImageFtMaxSize. "));
         VerificationUtil.ApiIsNull(myApi);
         try {
             return myApi.getImageFtMaxSize();
@@ -1597,7 +1539,7 @@ public class MessageApi extends ClientApi {
     }
 
     public long getAudioMaxTime() throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:getAudioMaxTime. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getAudioMaxTime. "));
         VerificationUtil.ApiIsNull(myApi);
         try {
             return myApi.getAudioMaxTime();
@@ -1608,7 +1550,7 @@ public class MessageApi extends ClientApi {
     }
 
     public long getVideoMaxTime() throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:getVideoMaxTime. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getVideoMaxTime. "));
         VerificationUtil.ApiIsNull(myApi);
         try {
             return myApi.getVideoMaxTime();
@@ -1619,7 +1561,7 @@ public class MessageApi extends ClientApi {
     }
 
     public long getVideoFtMaxSize() throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:getVideoFtMaxSize. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getVideoFtMaxSize. "));
         VerificationUtil.ApiIsNull(myApi);
         try {
             return myApi.getVideoFtMaxSize();
@@ -1629,8 +1571,10 @@ public class MessageApi extends ClientApi {
         return 0;
     }
 
-    public void removeMsgWithNotificationByThread(long threadId) throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:removeMsgWithNotificationByThread. [threadId]=%d", threadId));
+    public void removeMsgWithNotificationByThread(long threadId)
+            throws ServiceDisconnectedException {
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method:removeMsgWithNotificationByThread. [threadId]=%d", threadId));
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.removeMsgWithNotificationByThread(threadId);
@@ -1649,5 +1593,18 @@ public class MessageApi extends ClientApi {
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
+    }
+
+    public ChatMessage getMessageByTransferId(String transferId)
+            throws ServiceDisconnectedException {
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method:getMessageByTransferId. [transferId]=%s", transferId));
+        VerificationUtil.ApiIsNull(myApi);
+        try {
+            return myApi.getMessageByTransferId(transferId);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+        return null;
     }
 }
