@@ -135,7 +135,7 @@ public class GroupChatUser implements Parcelable {
     /**
      * Etype of user
      */
-    public static final String ETYPE_CAN_ASSIGN_AS_CHAIRMAN = "cmcccb";
+    public static final String ETYPE_CAN_ASSIGN_AS_CHAIRMAN = "gpmanage";
 
     public GroupChatUser(){
     }

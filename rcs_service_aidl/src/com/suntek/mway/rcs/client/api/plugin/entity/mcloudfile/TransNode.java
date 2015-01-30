@@ -332,7 +332,9 @@ public class TransNode implements Parcelable
 
         RESUME,
 
-        GET_INFO;
+        GET_INFO,
+
+        PAUSE;
 
         public static TransOper valueOf( int ordinal )
         {

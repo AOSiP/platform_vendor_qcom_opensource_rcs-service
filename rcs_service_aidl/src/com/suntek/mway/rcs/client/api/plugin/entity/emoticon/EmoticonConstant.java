@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.plugin.entity.emoticon;
 
 /**
@@ -33,4 +32,7 @@ public class EmoticonConstant {
 
     /** The Constant EMO_DYNAMIC_FILE. */
     public static final int EMO_DYNAMIC_FILE = 2;
+
+    /** The Constant EMO_PACKAGE_FILE. */
+    public static final int EMO_PACKAGE_FILE = 3;
 }

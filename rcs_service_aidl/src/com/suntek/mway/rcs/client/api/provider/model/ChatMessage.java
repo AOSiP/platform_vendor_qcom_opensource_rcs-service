@@ -20,7 +20,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.provider.model;
 
 import android.os.Parcel;
@@ -151,15 +150,21 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
     /** public account message. */
     private PublicMessage publicMessage;
 
+    /** cloud file message. */
+    private CloudFileMessage cloudFileMessage;
+
     /**
      * Mark message that is blacklist message.
      */
     private int msgBlackFlag = 0;
 
-    /**
-     * Mark message need transfer continue
-     */
     private int continueFlag;
+
+    private int duration;
+
+    private String filepath;
+
+    private String thumbpath;
 
     /**
      * Instantiates a new Chat Messages.
@@ -604,6 +609,24 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
     }
 
     /**
+     * Gets the cloud file message.
+     *
+     * @return the cloud file message
+     */
+    public CloudFileMessage getCloudFileMessage() {
+        return cloudFileMessage;
+    }
+
+    /**
+     * Sets the cloud file message.
+     *
+     * @param cloudFileMessage the new cloud file message
+     */
+    public void setCloudFileMessage(CloudFileMessage cloudFileMessage) {
+        this.cloudFileMessage = cloudFileMessage;
+    }
+
+    /**
      * Get the message body.
      *
      * @return the body
@@ -675,6 +698,30 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
         this.continueFlag = continueFlag;
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
+
+    public String getThumbpath() {
+        return thumbpath;
+    }
+
+    public void setThumbpath(String thumbpath) {
+        this.thumbpath = thumbpath;
+    }
+
     /* (non-Javadoc)
      * @see android.os.Parcelable#describeContents()
      */
@@ -718,6 +765,11 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
         dest.writeValue( publicMessage );
         dest.writeInt( msgBlackFlag );
         dest.writeInt( continueFlag );
+        dest.writeValue( cloudFileMessage );
+
+        dest.writeInt(duration);
+        dest.writeString(filepath);
+        dest.writeString(thumbpath);
 
     }
 
@@ -759,6 +811,11 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
         publicMessage = (PublicMessage) source.readValue(PublicMessage.class.getClassLoader());
         msgBlackFlag = source.readInt();
         continueFlag = source.readInt();
+        cloudFileMessage = (CloudFileMessage) source.readValue(CloudFileMessage.class.getClassLoader());
+
+        duration = source.readInt();
+        filepath = source.readString();
+        thumbpath = source.readString();
     }
 
     /** The Constant CREATOR. */
@@ -780,22 +837,37 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
      */
     @Override
     public String toString() {
-        return "ChatMessage [id=" + id + ", contact=" + contact
-                + ", messageId=" + messageId + ", data=" + data + ", time="
-                + time + ", filename=" + filename + ", filesize=" + filesize
-                + ", mimeType=" + mimeType + ", msgType=" + msgType
-                + ", sendReceive=" + sendReceive + ", isRead=" + isRead
-                + ", msgState=" + msgState + ", chatType=" + chatType
-                + ", threadId=" + threadId + ", conversationId="
-                + conversationId + ", contributionId=" + contributionId
-                + ", fileSelector=" + fileSelector + ", fileTransferExt="
-                + fileTransferExt + ", fileTransferId=" + fileTransferId
-                + ", fileIcon=" + fileIcon + ", msgBurnAfterReadFlag="
-                + msgBurnAfterReadFlag + ", barCycle=" + barCycle
+        StringBuffer buf = new StringBuffer();
+        buf.append("ChatMessage [id=").append(id).append(", contact=")
+            .append(contact).append(", messageId=").append(messageId)
+            .append(", data=").append(data).append(", time=").append(time)
+            .append(", filename=").append(filename).append(", filesize=").append(filesize)
+            .append(", mimeType=").append(mimeType).append(", msgType=").append(msgType)
+            .append(", sendReceive=").append(sendReceive).append(", isRead=").append(isRead)
+            .append(", msgState=").append(msgState).append(", chatType=").append(chatType)
+            .append(", threadId=").append(threadId)
+            .append(", conversationId=").append(conversationId)
+            .append(", contributionId=").append(contributionId)
+            .append(", fileSelector=").append(fileSelector)
+            .append(", fileTransferExt=").append(fileTransferExt)
+            .append(", fileTransferId=").append(fileTransferId)
+            .append(", fileIcon=").append(fileIcon)
+            .append(", msgBurnAfterReadFlag=").append(msgBurnAfterReadFlag)
+            .append(", barCycle=").append(barCycle
 //                + ", header=" + header + ", body=" + body
-                + ", publicMessage="
-                + publicMessage + "], msgBlackFlag = " + msgBlackFlag
-                + ", continueFlag = " + continueFlag;
+                    )
+            .append(", publicMessage=").append(publicMessage)
+            .append("], msgBlackFlag = ").append(msgBlackFlag)
+            .append(", continueFlag = ").append(continueFlag)
+            .append(", duration=").append(duration)
+            .append(", filepath=").append(filepath)
+            .append(", thumbpath=").append(thumbpath);
+
+        return buf.toString();
+    }
+
+    public String print() {
+        return super.toString();
     }
 
     @Override

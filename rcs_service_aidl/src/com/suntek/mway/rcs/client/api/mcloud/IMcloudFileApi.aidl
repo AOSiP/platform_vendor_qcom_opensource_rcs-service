@@ -20,18 +20,17 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
- 
 package com.suntek.mway.rcs.client.api.mcloud;
 
 interface IMcloudFileApi {
     void putFile(String localPath, String remotePath, int transOper);
     void shareFile(String fullPathInID, String shareDesc);
-    void shareFileAndSend(String fullPathInID, String shareDesc, String contact, long threadId, String beforeText, String afterText);
+    void shareFileAndSend(String fullPathInID, String shareDesc, String contact, long threadId, String smsContentTemp);
     void getShareFileList(int beginIndex, int endIndex);
     void downloadFileFromUrl(String remoteUrl, String fileName, int transOper);
 
-    void shareFileAndSendGroup(String fullPathInID, String shareDesc, long threadId, String conversationId, String groupId, String beforeText, String afterText);
-    void shareFileAndSendOne2Many(String fullPathInID, String shareDesc, in List<String> contacts, long threadId, String beforeText, String afterText);
+    void shareFileAndSendGroup(String fullPathInID, String shareDesc, long threadId, String conversationId, String groupId);
+    void shareFileAndSendOne2Many(String fullPathInID, String shareDesc, in List<String> contacts, long threadId, String smsContentTemp);
 
     void getRemoteFileList(String remotePath, int beginIndex, int endIndex, int fileNodeOrder);
 
