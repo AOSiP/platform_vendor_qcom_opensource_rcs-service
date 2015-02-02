@@ -65,7 +65,7 @@ public class BroadcastConstants {
 
     /**  Notify Native UI that message has been transfered to SMS. */
     public static final String UI_MESSAGE_TRANSFER_SMS = "com.suntek.mway.rcs.ACTION_UI_MESSAGE_TRANSFER_SMS";
-    
+
     /**  Notify Native UI that download paid emoction result. */
     public static final String UI_MESSAGE_PAID_EMO_DOWNLOAD_RESULT = "com.suntek.mway.rcs.ACTION_UI_MESSAGE_PAID_EMO_DOWNLOAD_RESULTS";
 

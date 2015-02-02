@@ -23,8 +23,10 @@
 package com.suntek.mway.rcs.client.aidl.capability;
 
 import com.suntek.mway.rcs.client.aidl.plugin.callback.ICapabiltyListener;
+import com.suntek.mway.rcs.client.aidl.capability.RCSCapabilities;
 
 interface ICapabilityApi
 {
     void findCapabilityByNumber(String number, ICapabiltyListener listener);
+    RCSCapabilities getMyCapabilities();
 }

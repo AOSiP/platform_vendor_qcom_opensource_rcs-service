@@ -25,7 +25,6 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-// TODO: Auto-generated Javadoc
 /**
  * <p>
  * Title: The public account detail entity
@@ -105,6 +104,9 @@ public class PublicAccountsDetail implements Parcelable
     /** The sip uri. */
 //    private String    sipUri;
 
+    /** The number. */
+    private String    number;
+
     /**
      * Instantiates a new public accounts detail.
      */
@@ -166,6 +168,7 @@ public class PublicAccountsDetail implements Parcelable
         dest.writeString( qrCode );
         dest.writeString( logoUrl );
 //        dest.writeString( sipUri );
+        dest.writeString( number );
     }
 
     /**
@@ -198,6 +201,7 @@ public class PublicAccountsDetail implements Parcelable
         qrCode = source.readString();
         logoUrl = source.readString();
 //        sipUri = source.readString();
+        number = source.readString();
     }
 
     /** The parcel creator. */
@@ -626,6 +630,7 @@ public class PublicAccountsDetail implements Parcelable
         StringBuffer sbuffer = new StringBuffer();
         sbuffer.append("paUuid=").append(this.paUuid)
                .append(",name=").append(this.name)
+               .append(",number=").append(this.number)
                .append(",logoUrl=").append(this.logoUrl)
                .append(",recommendLevel=").append(this.recommendLevel)
 //               .append(",sipUri=").append(this.sipUri)
@@ -647,5 +652,13 @@ public class PublicAccountsDetail implements Parcelable
         ;
 
         return sbuffer.toString();
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

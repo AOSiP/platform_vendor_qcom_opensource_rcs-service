@@ -24,6 +24,7 @@ package com.suntek.mway.rcs.client.aidl.plugin.callback;
 
 import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.MsgContent;
 import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.MenuInfo;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.MenuInfoMode;
 import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.PublicAccounts;
 import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.PublicAccountsDetail;
 import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.PublicAccounts;
@@ -72,9 +73,9 @@ interface IPublicAccountCallbackAPI
     /**
      * response the query public account menu info
      * @param result if query success
-     * @param menus the menu's entity list
+     * @param menus the menu's entity
      */
-    void respGetPublicMenuInfo( boolean result, in List<MenuInfo> menus );
+    void respGetPublicMenuInfo( boolean result, in MenuInfoMode menuInfoMode );
     
     /**
      * response the query user follow public account list

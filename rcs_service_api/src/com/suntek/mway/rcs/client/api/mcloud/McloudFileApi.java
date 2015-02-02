@@ -23,6 +23,7 @@
 package com.suntek.mway.rcs.client.api.mcloud;
 
 import com.suntek.mway.rcs.client.aidl.mcloud.IMcloudFileApi;
+import com.suntek.mway.rcs.client.aidl.plugin.callback.IMcloudOperationCtrl;
 import com.suntek.mway.rcs.client.aidl.plugin.entity.mcloudfile.FileNode;
 import com.suntek.mway.rcs.client.aidl.plugin.entity.mcloudfile.TransNode;
 import com.suntek.mway.rcs.client.api.ClientApi;
@@ -73,14 +74,15 @@ public class McloudFileApi extends ClientApi {
         super.initServiceConnect(mConnection);
     }
 
-    public void downloadFileFromUrl(String remoteUrl, String fileName, TransNode.TransOper transOper) throws ServiceDisconnectedException {
+    public IMcloudOperationCtrl downloadFileFromUrl(String remoteUrl, String fileName, TransNode.TransOper transOper) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
                 "enter method:downloadFileFromUrl. [remoteUrl,fileName,transOper]=%s,%d", remoteUrl, fileName, transOper.ordinal()));
         try {
-            myApi.downloadFileFromUrl(remoteUrl, fileName, transOper.ordinal());
+            return myApi.downloadFileFromUrl(remoteUrl, fileName, transOper.ordinal());
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
+            return null;
         }
     }
 
@@ -96,16 +98,17 @@ public class McloudFileApi extends ClientApi {
         }
     }
 
-    public void putFile(String localPath, String remotePath, TransNode.TransOper transOper) throws ServiceDisconnectedException, FileSuffixException {
+    public IMcloudOperationCtrl putFile(String localPath, String remotePath, TransNode.TransOper transOper) throws ServiceDisconnectedException, FileSuffixException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
                 "enter method:putFile. [localPath,remotePath,transOper]=%s,%s,%d",
                 localPath, remotePath, transOper.ordinal()));
         VerificationUtil.isCloudFile(localPath);
         try {
-            myApi.putFile(localPath, remotePath, transOper.ordinal());
+            return myApi.putFile(localPath, remotePath, transOper.ordinal());
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
+            return null;
         }
     }
 
