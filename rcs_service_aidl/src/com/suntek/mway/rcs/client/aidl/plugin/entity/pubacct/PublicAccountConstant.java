@@ -28,6 +28,9 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
  */
 public class PublicAccountConstant {
 
+    /** account pre number. */
+    public static final int ACCOUNT_PRE_NUMBER = 8;
+
     /** order type: 0 is desc order by the follow time. */
     public static final int ACCOUNTLIST_ORDER_TYPE_FOLLOWTIME_DESC = 0;
 

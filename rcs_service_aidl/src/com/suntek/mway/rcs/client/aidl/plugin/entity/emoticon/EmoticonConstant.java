@@ -35,4 +35,14 @@ public class EmoticonConstant {
 
     /** The Constant EMO_PACKAGE_FILE. */
     public static final int EMO_PACKAGE_FILE = 3;
+
+    /** The Constant EMO_DOWNLOAD_SUCCESS. */
+    public static final int EMO_DOWNLOAD_SUCCESS = 1;
+
+    /** The Constant EMO_DOWNLOAD_FAILURE. */
+    public static final int EMO_DOWNLOAD_FAILURE = 0;
+
+    /** The Constant EMO_DOWNLOAD_LOADING. */
+    public static final int EMO_DOWNLOAD_LOADING = 2;
+
 }

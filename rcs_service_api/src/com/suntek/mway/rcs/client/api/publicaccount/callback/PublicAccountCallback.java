@@ -22,15 +22,15 @@
  */
 package com.suntek.mway.rcs.client.api.publicaccount.callback;
 
-import java.util.List;
-
-import android.os.RemoteException;
-
 import com.suntek.mway.rcs.client.aidl.plugin.callback.IPublicAccountCallbackAPI;
-import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.MenuInfo;
+import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.MenuInfoMode;
 import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.MsgContent;
 import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.PublicAccounts;
 import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.PublicAccountsDetail;
+
+import android.os.RemoteException;
+
+import java.util.List;
 
 public abstract class PublicAccountCallback extends IPublicAccountCallbackAPI.Stub{
 
@@ -106,7 +106,7 @@ public abstract class PublicAccountCallback extends IPublicAccountCallbackAPI.St
     }
 
     @Override
-    public void respGetPublicMenuInfo(boolean result, List<MenuInfo> menuList)
+    public void respGetPublicMenuInfo(boolean result, MenuInfoMode menuInfoMode)
             throws RemoteException {
         // TODO Auto-generated method stub
 
