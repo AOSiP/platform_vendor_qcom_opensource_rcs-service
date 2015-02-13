@@ -33,24 +33,6 @@ import android.os.Parcelable;
  */
 public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
-    /** The createtime. */
-    private String createtime;
-
-    /** The forwardable. */
-//    private String forwardable;
-
-    /** The msgtype. */
-    private String msgtype;
-
-    /** The msg id. */
-//    private String msgId;
-
-    /** The smscontent. */
-//    private String smscontent;
-
-    /** The sectioncount. */
-//    private String sectioncount;
-
     /** The topics. */
     private List<PublicTopicContent> topics;
 
@@ -83,11 +65,10 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString( createtime );
-//        dest.writeString( forwardable );
+        dest.writeInt( forwardable );
         dest.writeString( msgtype );
-//        dest.writeString( msgId );
-//        dest.writeString( smscontent );
-//        dest.writeString( sectioncount );
+        dest.writeInt( activeStatus );
+        dest.writeString( paUuid );
         dest.writeList( topics );
     }
 
@@ -99,11 +80,10 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
     public void readFromParcel( Parcel source )
     {
         createtime = source.readString();
-//        forwardable = source.readString();
+        forwardable = source.readInt();
         msgtype = source.readString();
-//        msgId = source.readString();
-//        smscontent = source.readString();
-//        sectioncount = source.readString();
+        activeStatus = source.readInt();
+        paUuid = source.readString();
         topics = new LinkedList<PublicTopicContent>();
         source.readList( topics, this.getClass().getClassLoader() );
     }
@@ -122,115 +102,6 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
                                                                                     return new PublicTopicMessage[ size ];
                                                                                 }
                                                                             };
-
-
-    /**
-     * Gets the createtime.
-     *
-     * @return the createtime
-     */
-    public String getCreatetime() {
-        return createtime;
-    }
-
-    /**
-     * Sets the createtime.
-     *
-     * @param createtime the new createtime
-     */
-    public void setCreatetime(String createtime) {
-        this.createtime = createtime;
-    }
-
-    /**
-     * Gets the forwardable.
-     *
-     * @return the forwardable
-     */
-//    public String getForwardable() {
-//        return forwardable;
-//    }
-
-    /**
-     * Sets the forwardable.
-     *
-     * @param forwardable the new forwardable
-     */
-//    public void setForwardable(String forwardable) {
-//        this.forwardable = forwardable;
-//    }
-
-    /**
-     * Gets the msgtype.
-     *
-     * @return the msgtype
-     */
-    public String getMsgtype() {
-        return msgtype;
-    }
-
-    /**
-     * Sets the msgtype.
-     *
-     * @param msgtype the new msgtype
-     */
-    public void setMsgtype(String msgtype) {
-        this.msgtype = msgtype;
-    }
-
-    /**
-     * Gets the msg id.
-     *
-     * @return the msg id
-     */
-//    public String getMsgId() {
-//        return msgId;
-//    }
-
-    /**
-     * Sets the msg id.
-     *
-     * @param msgId the new msg id
-     */
-//    public void setMsgId(String msgId) {
-//        this.msgId = msgId;
-//    }
-
-    /**
-     * Gets the smscontent.
-     *
-     * @return the smscontent
-     */
-//    public String getSmscontent() {
-//        return smscontent;
-//    }
-
-    /**
-     * Sets the smscontent.
-     *
-     * @param smscontent the new smscontent
-     */
-//    public void setSmscontent(String smscontent) {
-//        this.smscontent = smscontent;
-//    }
-
-    /**
-     * Gets the sectioncount.
-     *
-     * @return the sectioncount
-     */
-//    public String getSectioncount() {
-//        return sectioncount;
-//    }
-
-    /**
-     * Sets the sectioncount.
-     *
-     * @param sectioncount the new sectioncount
-     */
-//    public void setSectioncount(String sectioncount) {
-//        this.sectioncount = sectioncount;
-//    }
 
     /**
      * Gets the topics.

@@ -25,6 +25,8 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * <p>
  * Title: The public account entity
@@ -43,7 +45,7 @@ import android.os.Parcelable;
  * @version 1.0
  *
  */
-public class PublicAccounts implements Parcelable
+public class PublicAccounts implements Parcelable, Comparable<PublicAccounts>
 {
     /** The logo url. */
     private String    logo;
@@ -280,5 +282,42 @@ public class PublicAccounts implements Parcelable
         ;
 
         return sbuffer.toString();
+    }
+
+    @Override
+    public int compareTo(PublicAccounts account) {
+        int lenA = name.length();
+        int lenB = account.getName().length();
+        int lenComp = lenA >= lenB ? lenB : lenA;
+        int result = 0;
+        for(int i = 0; i < lenComp; i++){
+            result = getHexString(name.charAt(0)).compareTo(getHexString(account.getName().charAt(0)));
+            if(result == 0){
+                continue;
+            }else{
+                return result;
+            }
+        }
+        if(lenA > lenB){
+            return 1;
+        }else if(lenA == lenB){
+            return 0;
+        }else{
+            return -1;
+        }
+    }
+    
+    public static String getHexString(char c) {
+        byte[] b = null;
+        StringBuffer sb = new StringBuffer();
+        try {
+            b = new String(new char[] {c}).getBytes("gb2312");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < b.length; i++) {
+            sb.append(Integer.toHexString(b[i] & 0xFF));
+        }
+        return sb.toString();
     }
 }

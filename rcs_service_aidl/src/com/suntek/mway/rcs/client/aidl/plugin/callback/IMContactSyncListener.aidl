@@ -48,7 +48,7 @@ interface IMContactSyncListener
     void onProgress(in Auth auth, int contactAction, int value, int max);
     void onHttpResponeText(String message, String resultcode);
     void onSync(in Auth auth, int syncAction, boolean success);
-    //void onThrowException(in Auth auth, int syncAction, Exception e);
+    void onThrowException(in Auth auth, int syncAction, String exceptionMessage);
     void onRunning();
 
 }

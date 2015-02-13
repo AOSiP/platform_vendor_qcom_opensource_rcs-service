@@ -57,6 +57,22 @@ public class PublicMessage  implements Parcelable{
     /** The Constant VCARD. */
     public static final String VCARD = "18";
 
+    
+    /** The createtime. */
+    protected String createtime;
+
+    /** The forwardable. */
+    protected int forwardable;
+
+    /** The msgtype. */
+    protected String msgtype;
+
+    /** The activeStatus. */
+    protected int activeStatus;
+    
+    /** The paUuid. */
+    protected String paUuid;
+    
     /**
      * Instantiates a new public message.
      */
@@ -70,7 +86,47 @@ public class PublicMessage  implements Parcelable{
      * @param source the source
      */
     public PublicMessage(Parcel source) {
+        readFromParcel( source );
+    }
+    
+    public String getCreatetime() {
+        return createtime;
+    }
 
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
+    public int getForwardable() {
+        return forwardable;
+    }
+
+    public void setForwardable(int forwardable) {
+        this.forwardable = forwardable;
+    }
+
+    public String getMsgtype() {
+        return msgtype;
+    }
+
+    public void setMsgtype(String msgtype) {
+        this.msgtype = msgtype;
+    }
+
+    public int getActiveStatus() {
+        return activeStatus;
+    }
+
+    public void setActiveStatus(int activeStatus) {
+        this.activeStatus = activeStatus;
+    }
+
+    public String getPaUuid() {
+        return paUuid;
+    }
+
+    public void setPaUuid(String paUuid) {
+        this.paUuid = paUuid;
     }
 
     /* (non-Javadoc)
@@ -85,10 +141,19 @@ public class PublicMessage  implements Parcelable{
      * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
      */
     @Override
-    public void writeToParcel(Parcel arg0, int arg1) {
-
+    public void writeToParcel(Parcel dest, int flags) {
+        
     }
 
+    /**
+     * Read from parcel.
+     *
+     * @param source the source
+     */
+    public void readFromParcel( Parcel source ){
+        
+    }
+    
     /** The Constant CREATOR. */
     public static final Parcelable.Creator<PublicMessage> CREATOR = new Parcelable.Creator<PublicMessage>() {
         public PublicMessage createFromParcel(Parcel in) {

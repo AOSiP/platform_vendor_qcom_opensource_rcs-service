@@ -45,6 +45,8 @@ public class GroupNotificationConst {
     public static final String MEMBER_QUIT = "quit";
 
     public static final String DISBAND = "disband";
+    
+    public static final String GONE = "gone";
 
 
 }

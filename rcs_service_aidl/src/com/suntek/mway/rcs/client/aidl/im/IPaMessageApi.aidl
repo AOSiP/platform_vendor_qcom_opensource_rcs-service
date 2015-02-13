@@ -57,4 +57,13 @@ interface IPaMessageApi{
     long getVideoMaxTime();
 
     long getVideoFtMaxSize();
+    
+    
+    long sendTextMessageSync(long thread_id, long sms_id, String uuid, String text);
+        
+    long sendImageFileSync(long thread_id, long sms_id, String uuid , String filepath, int quality);
+    
+    long sendAudioFileSync(long thread_id, long sms_id, String uuid, String filepath, int recordTime);
+    
+    long sendVideoFileSync(long thread_id, long sms_id, String uuid, String filepath, int length);
 }
