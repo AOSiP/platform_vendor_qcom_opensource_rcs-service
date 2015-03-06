@@ -77,6 +77,7 @@ interface IGroupManagerApi {
     
     GroupChatModel getGroupChatByThreadId(String threadId);
        GroupChatModel getGroupChatByChatUri(String chatUri);
+       GroupChatModel getGroupChatByChatUriIgnoreState(String chatUri);
 
     String getGroupChatDomainName();
 

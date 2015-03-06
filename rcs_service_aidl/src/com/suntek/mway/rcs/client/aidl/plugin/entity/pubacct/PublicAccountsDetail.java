@@ -103,7 +103,7 @@ public class PublicAccountsDetail implements Parcelable
 
     /** The sip uri. */
 //    private String    sipUri;
-
+    
     /** The number. */
     private String    number;
 
