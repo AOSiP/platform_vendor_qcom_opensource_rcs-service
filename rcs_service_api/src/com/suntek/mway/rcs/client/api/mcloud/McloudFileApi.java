@@ -74,12 +74,14 @@ public class McloudFileApi extends ClientApi {
         super.initServiceConnect(mConnection);
     }
 
-    public IMcloudOperationCtrl downloadFileFromUrl(String remoteUrl, String fileName, TransNode.TransOper transOper) throws ServiceDisconnectedException {
+    public IMcloudOperationCtrl downloadFileFromUrl(String remoteUrl, String fileName, TransNode.TransOper transOper, int chatMessageId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:downloadFileFromUrl. [remoteUrl,fileName,transOper]=%s,%d", remoteUrl, fileName, transOper.ordinal()));
+                "enter method:downloadFileFromUrl. [remoteUrl,fileName,transOper,chatMessageId]=%s,%s,%d,%d", remoteUrl, fileName, transOper.ordinal(), chatMessageId));
         try {
-            return myApi.downloadFileFromUrl(remoteUrl, fileName, transOper.ordinal());
+            IMcloudOperationCtrl operation = myApi.downloadFileFromUrl(remoteUrl, fileName, transOper.ordinal(), chatMessageId);
+            LogHelper.d("operation=" + operation);
+            return operation;
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
             return null;
@@ -105,7 +107,9 @@ public class McloudFileApi extends ClientApi {
                 localPath, remotePath, transOper.ordinal()));
         VerificationUtil.isCloudFile(localPath);
         try {
-            return myApi.putFile(localPath, remotePath, transOper.ordinal());
+            IMcloudOperationCtrl operation = myApi.putFile(localPath, remotePath, transOper.ordinal());
+            LogHelper.d("operation=" + operation);
+            return operation;
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
             return null;
@@ -182,6 +186,17 @@ public class McloudFileApi extends ClientApi {
             myApi.getRemoteFileList(remotePath, beginIndex, endIndex, fileOrder.ordinal());
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
+        }
+    }
+    
+    public String getLocalRootPath() throws ServiceDisconnectedException {
+        VerificationUtil.ApiIsNull(myApi);
+        LogHelper.i("enter method:getLocalRootPath");
+        try {
+            return myApi.getLocalRootPath();
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+            return "";
         }
     }
 }

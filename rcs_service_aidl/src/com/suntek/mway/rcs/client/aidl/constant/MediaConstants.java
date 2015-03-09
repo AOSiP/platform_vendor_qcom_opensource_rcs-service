@@ -37,6 +37,9 @@ public class MediaConstants {
     public static final String VIDEO_SUFFIX = "3GP,MP4";
     
     /** The suffixs of video. */
+    public static final String VCARD_SUFFIX = "VCF";
+    
+    /** The suffixs of video. */
     public static final String CLOUD_FILE_EXCLUDE_SUFFIX = "EXE,BAT,APK,SH,IPA,DEB,PXL,XAP";
 
     /** Maximum default file size. */

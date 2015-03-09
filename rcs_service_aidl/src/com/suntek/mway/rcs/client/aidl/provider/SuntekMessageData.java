@@ -72,6 +72,9 @@ public class SuntekMessageData {
     /** The Constant CHAT_GROUP_CONTENT_URI. */
     public static final Uri CHAT_GROUP_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY + "/" + TABLE_CHAT_GROUP);
     
+    /** The Constant CHAT_THREAD_CONTENT_URI. */
+    public static final Uri CHAT_THREAD_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY + "/" + TABLE_MESSAGE_THREAD);
+    
     /** The Constant GROUP_CHAT_DIVICE_API_CONTENT_URI. */
     public static final Uri GROUP_CHAT_DIVICE_API_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY + "/" + TABLE_DIVICE_API_CHAT_GROUP);
     

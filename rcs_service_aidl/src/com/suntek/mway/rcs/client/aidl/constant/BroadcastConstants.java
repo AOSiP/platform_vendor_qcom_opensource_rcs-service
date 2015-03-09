@@ -134,6 +134,9 @@ public class BroadcastConstants {
 
     /** Group has disband. */
     public static final String ACTION_TYPE_DELETED = "deleted";
+    
+    /** Group has gone. */
+    public static final String ACTION_TYPE_GONE = "gone";
 
     /** Update the subject of group. */
     public static final String ACTION_TYPE_UPDATE_SUBJECT = "updateSubject";
@@ -188,6 +191,9 @@ public class BroadcastConstants {
 
     /** UPDATE_DOWN_PROGRESS broadcast passed parameter name total long. */
     public static final String BC_VAR_TRANSFER_PRG_TOTAL = "total";
+    
+    /** Warning file is too large broadcast. */
+    public static final String UI_ALERT_FILE_NOT_EXISTS = "com.suntek.mway.rcs.ACTION_UI_MESSAGE_ALERT_FILE_NOT_EXISTS";
 
     /** Warning file is too large broadcast. */
     public static final String UI_ALERT_FILE_TOO_LARGE = "com.suntek.mway.rcs.ACTION_UI_MESSAGE_ALERT_FILE_TOO_LARGE";
@@ -269,7 +275,10 @@ public class BroadcastConstants {
 
     /** Create group not complete. */
     public static final String BC_VAR_SEND_ERROR_GROUP_NOT_COMPLETED = "group_not_completed";
-
+    
+    /** Wait other to join */
+    public static final String BC_VAR_SEND_ERROR_GROUP_NOT_MEMBER = "group_wait_member_join";
+    
     /** Group has deleted. */
     public static final String BC_VAR_SEND_ERROR_GROUP_HAS_DELETED = "group_has_deleted";
 
@@ -516,8 +525,11 @@ public class BroadcastConstants {
 
     /** Mcloud broadcast passed parameter name remoteNodeList list<FileNode>. */
     public static final String BC_VAR_MC_REMOTE_NODE_LIST = "remoteNodeList";
+
+    /** Mcloud broadcast passed parameter name chatMessage id String. */
+    public static final String BC_VAR_MC_CHATMESSAGE_ID = "chatMessageId";
     
-    /** . */
+    /** Mcloud broadcast passed parameter name exclude suffix id String. */
     public static final String BC_VAR_MC_EXCLUDE_SUFFIX = "excludeSuffix";
 
     /** The mcloud event type STARTED. */

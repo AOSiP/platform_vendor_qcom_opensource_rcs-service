@@ -199,4 +199,49 @@ interface IInstantMessageApi {
     void backupMessageList(in List<SimpleMsg> simpleMsgList);
 
 	ChatMessage getMessageByTransferId(String transferId);
+	
+	void cancelBackup();
+	
+	long sendTextMessageSync(long thread_id,String number, String text,
+            int burnFlag, int barCycle);
+	
+	long sendImageFileSync(long thread_id,long sms_id,String number, String filePath,
+            int burnFlag, int barCycle,int quality);
+    
+    long sendAudioFileSync(long thread_id,long sms_id,String number, String filePath,
+            int recordTime,int burnFlag, int barCycle) ;
+    long sendVideoFileSync(long thread_id,long sms_id,String number, String filePath,
+            int length,int burnFlag, int barCycle);
+            
+    long sendOne2ManyTextMessageSync(long thread_id,in List<String> numbers, String text,
+            int burnFlag, int barCycle);  
+          
+    long sendOne2ManyImageFileSync(long thread_id,long sms_id, in List<String> numbers, String filePath,
+            int burnFlag, int barCycle,int quality);
+    
+    long sendOne2ManyAudioFileSync(long thread_id,long sms_id,in List<String> numbers, String filePath,
+            int recordTime,int burnFlag, int barCycle);
+    long sendOne2ManyVideoFileSync(long thread_id,long sms_id,in List<String> numbers, String filePath,
+            int length,int burnFlag, int barCycle);
+            
+    long sendGroupMessageSync(long thread_id, String conversationId,long sms_id,String msg,
+            String groupId);
+          
+    long sendOne2ManyVCardByPathSync(long thread_id, long sms_id, 
+            in List<String> numbers, String vcardFilePath);
+    long sendVCardByPathSync(long thread_id,long sms_id,String number, String vcardFilePath);
+    
+    
+    void forwardImageFile(long thread_id,long sms_id,String number, String id,
+            int burnFlag, int barCycle);
+    void forwardVideoFile(long thread_id,long sms_id,String number, String id,
+            int length,int burnFlag, int barCycle);
+    void forwardOne2ManyImageFile(long thread_id,long sms_id, in List<String> numbers, String id,
+            int burnFlag, int barCycle);
+    void forwardOne2ManyVideoFile(long thread_id,long sms_id,in List<String> numbers, String id,
+            int length,int burnFlag, int barCycle);
+    void forwardGroupImageFile(long thread_id, String conversationId,long sms_id,String id,
+            String groupId);
+    void forwardGroupVideoFile(long thread_id, String conversationId,long sms_id,String id,
+            int  length ,String groupId);
 }

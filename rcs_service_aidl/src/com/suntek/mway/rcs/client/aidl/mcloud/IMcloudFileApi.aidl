@@ -29,12 +29,12 @@ interface IMcloudFileApi {
     void shareFile(String fullPathInID, String shareDesc);
     void shareFileAndSend(String fullPathInID, String shareDesc, String contact, long threadId, String smsContentTemp);
     void getShareFileList(int beginIndex, int endIndex);
-    IMcloudOperationCtrl downloadFileFromUrl(String remoteUrl, String fileName, int transOper);
+    IMcloudOperationCtrl downloadFileFromUrl(String remoteUrl, String fileName, int transOper, int chatMessageId);
 
     void shareFileAndSendGroup(String fullPathInID, String shareDesc, long threadId, String conversationId, String groupId);
     void shareFileAndSendOne2Many(String fullPathInID, String shareDesc, in List<String> contacts, long threadId, String smsContentTemp);
 
     void getRemoteFileList(String remotePath, int beginIndex, int endIndex, int fileNodeOrder);
-
+	String getLocalRootPath();
 }
 

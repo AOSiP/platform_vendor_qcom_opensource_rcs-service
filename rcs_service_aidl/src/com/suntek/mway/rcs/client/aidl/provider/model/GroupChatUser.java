@@ -432,7 +432,7 @@ public class GroupChatUser implements Parcelable {
      * @return
      */
     public String getAlias() {
-        return alias;
+        return alias == null ? "" : alias;
     }
 
     /**
