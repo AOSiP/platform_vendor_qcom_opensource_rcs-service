@@ -29,6 +29,7 @@ import java.util.Locale;
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.text.TextUtils;
 
 import com.suntek.mway.rcs.client.api.ClientApi;
 import com.suntek.mway.rcs.client.aidl.constant.APIConstant;
@@ -1606,5 +1607,200 @@ public class MessageApi extends ClientApi {
             LogHelper.e(ex.getMessage(), ex);
         }
         return null;
+    }
+    
+    public void cancelBackup() throws ServiceDisconnectedException {
+        LogHelper.i("enter method:cancelBackup.");
+        VerificationUtil.ApiIsNull(myApi);
+        try {
+            myApi.cancelBackup();
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+    }
+    
+    public void forwardImageFile(long thread_id, long sms_id, String number, String id,
+            int burnFlag, int barCycle) throws ServiceDisconnectedException {
+        VerificationUtil.ApiIsNull(myApi);
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method forwardImageFile. [thread_id,sms_id,number,id,burnFlag,barCycle]=%d,%d,%s,%s,%d,%d",
+                        thread_id, sms_id, number, id, burnFlag, barCycle));
+
+        if(TextUtils.isEmpty(id)){
+            LogHelper.i("id field value error");
+            return;
+        }
+        
+        if (!VerificationUtil.isNumber(number)) {
+            LogHelper.i("number field value error");
+            return;
+        }
+        if (!VerificationUtil.isBurnFlagCorrect(burnFlag)) {
+            LogHelper.i("burnFlag field must be 0 or 1");
+            return;
+        }
+        if (barCycle < 0) {
+            LogHelper.i("barCycle field must be a positive int");
+            return;
+        }
+
+        try {
+            myApi.forwardImageFile(thread_id, sms_id, VerificationUtil.formatNumber(number), id,
+                    burnFlag, barCycle);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+    }
+    
+    public void forwardVideoFile(long thread_id, long sms_id, String number, String id,
+            int length, int burnFlag, int barCycle, boolean isRecord)
+            throws ServiceDisconnectedException {
+        VerificationUtil.ApiIsNull(myApi);
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method forwardVideoFile. [thread_id,sms_id,number,id,length,burnFlag,barCycle,isRecord]=%d,%d,%s,%s,%d,%d,%d,%b",
+                        thread_id, sms_id, number, id, length, burnFlag, barCycle, isRecord));
+
+        if(TextUtils.isEmpty(id)){
+            LogHelper.i("id field value error");
+            return;
+        }
+        
+        if (!VerificationUtil.isNumber(number)) {
+            LogHelper.i("number field value error");
+            return;
+        }
+        if (!VerificationUtil.isBurnFlagCorrect(burnFlag)) {
+            LogHelper.i("burnFlag field must be 0 or 1");
+            return;
+        }
+        if (barCycle < 0) {
+            LogHelper.i("barCycle field must be a positive int");
+            return;
+        }
+        try {
+            myApi.forwardVideoFile(thread_id, sms_id, VerificationUtil.formatNumber(number), id,
+                    length, burnFlag, barCycle);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+    }
+
+    public void forwardOne2ManyImageFile(long thread_id, long sms_id, List<String> numbers,
+            String id, int burnFlag, int barCycle)
+            throws ServiceDisconnectedException {
+        VerificationUtil.ApiIsNull(myApi);
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method forwardOne2ManyImageFile. [thread_id,sms_id,numbers,id,burnFlag,barCycle]=%d,%d,%s,%s,%d,%d",
+                        thread_id, sms_id, numbers.toString(), id, burnFlag, barCycle));
+        
+        if(TextUtils.isEmpty(id)){
+            LogHelper.i("id field value error");
+            return;
+        }
+        
+        if (!VerificationUtil.isAllNumber(numbers)) {
+            LogHelper.i("number field value error");
+            return;
+        }
+        if (!VerificationUtil.isBurnFlagCorrect(burnFlag)) {
+            LogHelper.i("burnFlag field must be 0 or 1");
+            return;
+        }
+        if (barCycle < 0) {
+            LogHelper.i("barCycle field must be a positive int");
+            return;
+        }
+        
+        try {
+            myApi.forwardOne2ManyImageFile(thread_id, sms_id, VerificationUtil.formatNumbers(numbers),
+                    id, burnFlag, barCycle);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+    }
+    
+    public void forwardOne2ManyVideoFile(long thread_id, long sms_id, List<String> numbers,
+            String id, int length, int burnFlag, int barCycle, boolean isRecord)
+            throws ServiceDisconnectedException {
+        VerificationUtil.ApiIsNull(myApi);
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method forwardOne2ManyVideoFile. [thread_id,sms_id,numbers,id,length,burnFlag,barCycle,isRecord]=%d,%d,%s,%s,%d,%d,%d,%b",
+                        thread_id, sms_id, numbers.toString(), id, length, burnFlag,
+                        barCycle, isRecord));
+        
+        if(TextUtils.isEmpty(id)){
+            LogHelper.i("id field value error");
+            return;
+        }
+        
+        if (!VerificationUtil.isAllNumber(numbers)) {
+            LogHelper.i("number field value error");
+            return;
+        }
+        if (!VerificationUtil.isBurnFlagCorrect(burnFlag)) {
+            LogHelper.i("burnFlag field must be 0 or 1");
+            return;
+        }
+        if (barCycle < 0) {
+            LogHelper.i("barCycle field must be a positive int");
+            return;
+        }
+        try {
+            myApi.forwardOne2ManyVideoFile(thread_id, sms_id, VerificationUtil.formatNumbers(numbers),
+                    id, length, burnFlag, barCycle);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+    }
+    
+    public void forwardGroupImageFile(long thread_id, String conversationId, long sms_id,
+            String id, String groupId) throws ServiceDisconnectedException {
+        VerificationUtil.ApiIsNull(myApi);
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method forwardGroupImageFile. [thread_id,conversationId,sms_id,id,groupId]=%d,%s,%d,%s,%s",
+                        thread_id, conversationId, sms_id, id, groupId));
+        
+        if(TextUtils.isEmpty(id)){
+            LogHelper.i("id field value error");
+            return;
+        }
+
+        try {
+            myApi.forwardGroupImageFile(thread_id, conversationId, sms_id, id, groupId);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+    }
+
+    public void forwardGroupVideoFile(long thread_id, String conversationId, long sms_id,
+            String id, int length, String groupId, boolean isRecord)
+            throws ServiceDisconnectedException {
+        VerificationUtil.ApiIsNull(myApi);
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method forwardGroupVideoFile. [thread_id,conversationId,sms_id,id,length,groupId,isRecord]=%d,%s,%d,%s,%d,%s,%b",
+                        thread_id, conversationId, sms_id, id, length, groupId, isRecord));
+        
+        if(TextUtils.isEmpty(id)){
+            LogHelper.i("id field value error");
+            return;
+        }
+
+        try {
+            myApi.forwardGroupVideoFile(thread_id, conversationId, sms_id, id, length, groupId);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
     }
 }

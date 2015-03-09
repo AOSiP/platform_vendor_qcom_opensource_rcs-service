@@ -96,6 +96,26 @@ public class MediaUtils {
             return false;
         }
     }
+    
+    /**
+     * Checks if is vcard file.
+     *
+     * @param fileName the file name
+     * @return true, if is vcard file
+     */
+    public static boolean isVcardFile(String fileName){
+        if(TextUtils.isEmpty(fileName)){
+            return false;
+        }
+        
+        int suffixIndex = fileName.lastIndexOf(".");
+        if(suffixIndex != -1){
+            String suffix = fileName.substring(suffixIndex + 1);
+            return isVcardSuffix(suffix);
+        }else{
+            return false;
+        }
+    }
 
     /**
      * Checks if is video file.
@@ -157,6 +177,20 @@ public class MediaUtils {
         }
 
         return MediaConstants.VIDEO_SUFFIX.indexOf(suffix.toUpperCase(Locale.getDefault())) != -1;
+    }
+    
+    /**
+     * Checks if is vcard suffix.
+     *
+     * @param suffix the suffix
+     * @return true, if is vcard suffix
+     */
+    public static boolean isVcardSuffix(String suffix){
+        if(TextUtils.isEmpty(suffix)){
+            return false;
+        }
+        
+        return MediaConstants.VCARD_SUFFIX.indexOf(suffix.toUpperCase(Locale.getDefault())) != -1;
     }
     
     /**
