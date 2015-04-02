@@ -116,15 +116,8 @@ interface IPublicAccountAPI
 
     /**
      * query the user had follow public account.
-     *
-     * @param order            the query result order, default is 0, 0 is desc order by the
-     *            follow time; 1 is order by the public account name
-     * @param pageSize            the query result page size
-     * @param pageNum            the query result page number
-     * @return the query result will return by asynchronous callback, here only
-     *         return invoke result if it has exception
      */
-    boolean getUserSubscribePublicList( int order, int pageSize, int pageNum );
+    boolean getUserSubscribePublicList();
 
     /**
      * parse response message to message content entity json string.

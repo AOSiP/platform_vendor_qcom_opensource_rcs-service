@@ -68,15 +68,23 @@ interface IInstantMessageApi {
             String groupId);
     void sendGroupImageFile(long thread_id, String conversationId,long sms_id,String filepath,
             String groupId, int quality);
+    long sendGroupImageFileSync(long thread_id, String conversationId,long sms_id,String filepath,
+            String groupId, int quality);
     void sendGroupAudioFile(long thread_id, String conversationId,long sms_id,String filepath,
             int recordTime ,String groupId);
+    long sendGroupAudioFileSync(long thread_id, String conversationId,long sms_id,String filepath,
+            int recordTime ,String groupId);
     void sendGroupVideoFile(long thread_id, String conversationId,long sms_id,String filepath,
+            int  length ,String groupId);
+    long sendGroupVideoFileSync(long thread_id, String conversationId,long sms_id,String filepath,
             int  length ,String groupId);
     void sendGroupLocation(long thread_id,String conversationId,long sms_id, double lat,
             double lng,String text,String groupId);
     void sendGroupVCard(long thread_id,String conversationId,long sms_id,
             in RCSContact rcsContact,String groupId);
     void sendGroupVCardByPath(long thread_id,String conversationId,long sms_id,
+            String vcardFilePath,String groupId);
+    long sendGroupVCardByPathSync(long thread_id,String conversationId,long sms_id,
             String vcardFilePath,String groupId);
             
     void acceptFile(in ChatMessage chatMessage);

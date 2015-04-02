@@ -32,24 +32,24 @@ interface IGroupManagerApi {
 
     String createGroupChat(String subject, in List<String> users);
 
-    void agreeToJoinGroup(String conversationId, String contributionId,
+    int agreeToJoinGroup(String conversationId, String contributionId,
             String chatUri, String subject, String numberData, long inviteTime);
 
-    void refuseToJoinGroup(String conversationId);
+    int refuseToJoinGroup(String conversationId);
 
-    void updateGroupSubject(String groupId, String newSubject);
+    int updateGroupSubject(String groupId, String newSubject);
 
     void modifyGroupMemo(String groupId, String memo);
 
-    void disbandGroupChat(String groupId);
+    int disbandGroupChat(String groupId);
 
-    void kickedOutOfGroupChat(String groupId, String number);
+    int kickedOutOfGroupChat(String groupId, String number);
 
-    void assignGroupChairman(String groupId, String number);
+    int assignGroupChairman(String groupId, String number);
 
-    void quitGroupChat(String groupId, String number);
-    void quitGroupChatEx(String groupId, String oldChairman, String newChairman);
-    void setMyAlias(String groupId, String alias);
+    int quitGroupChat(String groupId, String number);
+    int quitGroupChatEx(String groupId, String oldChairman, String newChairman);
+    int setMyAlias(String groupId, String alias);
 
     String getGroupChatMemberDisplayName(String groupId, String number);
 
@@ -62,9 +62,9 @@ interface IGroupManagerApi {
 
     GroupChatUser getGroupChairman(String groupId);
 
-    void inviteOneMemberToGroupChat(String groupId, String number);
+    int inviteOneMemberToGroupChat(String groupId, String number);
 
-    void inviteToJoinGroupChat(String groupId, in List<String> numbers);
+    int inviteToJoinGroupChat(String groupId, in List<String> numbers);
     
     GroupChatModel getLastGroupModel();
     
@@ -83,7 +83,9 @@ interface IGroupManagerApi {
 
     String getPublicAccountDomainName();
 
-    void refuseAssigedAsChairman(String chatUri, long inviteTime, String conversationId, String contributionId);
+    int refuseAssigedAsChairman(String chatUri, long inviteTime, String conversationId, String contributionId);
 
-    void acceptAssignedAsChairman(String chatUri, long inviteTime, String conversationId, String contributionId);
+    int acceptAssignedAsChairman(String chatUri, long inviteTime, String conversationId, String contributionId);
+    
+    int rejoinGroupChat(String chatUri);
 }

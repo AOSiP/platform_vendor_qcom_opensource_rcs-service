@@ -53,6 +53,8 @@ public class BroadcastConstants {
 
     /** Notify UI that group operation failed. */
     public static final String UI_GROUP_ERROR = "com.suntek.mway.rcs.ACTION_UI_GROUP_ERROR";
+    
+    public static final String UI_GROUP_NOT_FOUND = "com.suntek.mway.rcs.ACTION_UI_GROUP_NOTFOUND";
 
     /** Notify UI that group state is invalid contains parameter groupId, state. */
     public static final String UI_GROUP_STATE_ERROR = "com.suntek.mway.rcs.ACTION_UI_GROUP_STATE_ERROR";

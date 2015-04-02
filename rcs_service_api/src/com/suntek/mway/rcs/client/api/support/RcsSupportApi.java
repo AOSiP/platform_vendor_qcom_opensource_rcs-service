@@ -22,9 +22,20 @@
  */
 package com.suntek.mway.rcs.client.api.support;
 
+import com.suntek.mway.rcs.client.aidl.constant.BroadcastConstants;
+import com.suntek.mway.rcs.client.aidl.setting.RcsUserProfileInfo;
+import com.suntek.mway.rcs.client.api.RCSServiceListener;
+import com.suntek.mway.rcs.client.api.autoconfig.RcsAccountApi;
+import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
+
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.RemoteException;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +94,9 @@ public class RcsSupportApi {
      */
     public static final int PLUGIN_PLUGIN_CENTER = 6;
 
+    private static final String TAG = "RCS_UI";
+    private static final int DMS_VERSION_UNKNOWN = -999;
+
     /**
      * Check that the RcsService module is been installed.
      *
@@ -121,6 +135,12 @@ public class RcsSupportApi {
         return false;
     }
 
+    private RcsAccountApi mAccountApi;
+    private Context mContext;
+
+    private boolean mIsRcsServiceInstalled;
+    private boolean mIsSimAvailableForRcs;
+
     /**
      * Dynamically detect the supported plug-in.
      *
@@ -142,5 +162,98 @@ public class RcsSupportApi {
         }
 
         return supportedPluginIds;
+    }
+
+    public void init(Context context) {
+        mContext = context;
+        mIsRcsServiceInstalled = isRcsServiceInstalled(context);
+
+        mAccountApi = new RcsAccountApi();
+        if (mIsRcsServiceInstalled) {
+            init();
+        }
+    }
+
+    private void init() {
+        new Thread() {
+            @Override
+            public void run() {
+                long t0, t1;
+                t0 = System.currentTimeMillis();
+                initRcsAccountApi();
+                t1 = System.currentTimeMillis();
+                Log.d(TAG, "initRcsAccountApi cost " + (t1 - t0) + " ms");
+            }
+        }.start();
+    }
+
+    private BroadcastReceiver userStatusChangedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mIsSimAvailableForRcs = isSimAvailableForRcs();
+        }
+    };
+
+    private void initRcsAccountApi() {
+        mAccountApi.init(mContext, new RCSServiceListener() {
+            @Override
+            public void onServiceDisconnected() throws RemoteException {
+                Log.d(TAG, "RcsAccountApi disconnected");
+            }
+
+            @Override
+            public void onServiceConnected() throws RemoteException {
+                Log.d(TAG, "RcsAccountApi connected");
+                mIsSimAvailableForRcs = isSimAvailableForRcs();
+
+                IntentFilter filter = new IntentFilter(BroadcastConstants.ACTION_DMS_USER_STATUS_CHANGED);
+                mContext.registerReceiver(userStatusChangedReceiver, filter);
+            }
+        });
+    }
+
+    /**
+     * Return whether the RCS is support. In general, use this method to define whether the RCS
+     * related UI entrance should display. The result might not accurate when it is still
+     * initializing. This is a compromise for performance.
+     * @param context
+     * @return Whether RCS is supported.
+     */
+    public boolean isRcsSupported() {
+        return mIsRcsServiceInstalled && mIsSimAvailableForRcs;
+//        return true;
+    }
+
+    /**
+     * Return whether the RCS is online. The result might not accurate when it is still
+     * initializing. This is a compromise for performance.
+     * @param context
+     * @return Whether RCS is supported.
+     */
+    public boolean isOnline() {
+        try {
+            return mAccountApi.isOnline();
+        } catch (ServiceDisconnectedException e) {
+            Log.w(TAG, "Failed invoking isOnline(). " + e.getMessage());
+            return false;
+        }
+    }
+
+    private boolean isSimAvailableForRcs() {
+        int dmVersion = getDmVersion();
+        Log.d(TAG, "DM version is " + dmVersion);
+
+        // If the version is larger than 0, the SIM is available for RCS.
+        return dmVersion > 0;
+    }
+
+    private int getDmVersion() {
+        try {
+            RcsUserProfileInfo userProfile = mAccountApi.getRcsUserProfileInfo();
+            return Integer.valueOf(userProfile.getVersion());
+        } catch (Exception e) {
+            Log.w(TAG, "Failed getting DM version. " + e.getMessage());
+            return DMS_VERSION_UNKNOWN;
+        }
     }
 }
