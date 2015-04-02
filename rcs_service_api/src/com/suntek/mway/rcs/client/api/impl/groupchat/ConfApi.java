@@ -33,6 +33,7 @@ import android.os.RemoteException;
 import com.suntek.mway.rcs.client.api.ClientApi;
 import com.suntek.mway.rcs.client.api.exception.MemberFullException;
 import com.suntek.mway.rcs.client.aidl.im.IGroupManagerApi;
+import com.suntek.mway.rcs.client.aidl.im.OprResponse;
 import com.suntek.mway.rcs.client.api.impl.callback.ConferenceCallback;
 import com.suntek.mway.rcs.client.aidl.provider.model.GroupChatModel;
 import com.suntek.mway.rcs.client.aidl.provider.model.GroupChatUser;
@@ -88,38 +89,41 @@ public class ConfApi extends ClientApi {
         return null;
     }
 
-    public void agreeToJoinGroup(String conversationId ,String contributionId ,String chatUri ,
+    public int agreeToJoinGroup(String conversationId ,String contributionId ,String chatUri ,
             String subject , String numberData, long inviteTime) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format( Locale.getDefault(),"enter method agreeToJoinGroup. [conversationId,contributionId,chatUri,subject,numberData,inviteTime]=%s,%s,%s,%s,%s,%d", conversationId,contributionId,chatUri,subject,numberData,inviteTime));
         try {
-            myApi.agreeToJoinGroup(conversationId, contributionId, chatUri, subject, numberData, inviteTime);
+            return myApi.agreeToJoinGroup(conversationId, contributionId, chatUri, subject, numberData, inviteTime);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
             LogHelper.e(ex.getMessage(),ex);
         }
+        return OprResponse.OTHRE_ERROR;
     }
 
-    public void refuseToJoinGroup(String conversationId) throws ServiceDisconnectedException {
+    public int refuseToJoinGroup(String conversationId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format( Locale.getDefault(),"enter method refuseToJoinGroup. [conversationId]=%s", conversationId));
         try {
-            myApi.refuseToJoinGroup(conversationId);
+            return myApi.refuseToJoinGroup(conversationId);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
             LogHelper.e(ex.getMessage(),ex);
         }
+        return OprResponse.OTHRE_ERROR;
     }
 
-    public void updateGroupSubject(String groupId,String newSubject) throws ServiceDisconnectedException {
+    public int updateGroupSubject(String groupId,String newSubject) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format( Locale.getDefault(),"enter method updateGroupSubject. [groupId,newSubject]=%s,%s", groupId,newSubject));
         try {
-            myApi.updateGroupSubject(groupId, newSubject);
+            return myApi.updateGroupSubject(groupId, newSubject);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
             LogHelper.e(ex.getMessage(),ex);
         }
+        return OprResponse.OTHRE_ERROR;
     }
 
     public void modifyGroupMemo(String groupId,String memo) throws ServiceDisconnectedException {
@@ -133,47 +137,51 @@ public class ConfApi extends ClientApi {
         }
     }
 
-    public void disbandGroupChat(String groupId) throws ServiceDisconnectedException {
+    public int disbandGroupChat(String groupId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format( Locale.getDefault(),"enter method disbandGroupChat. [groupId]=%s", groupId));
         try {
-            myApi.disbandGroupChat(groupId);
+            return myApi.disbandGroupChat(groupId);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
             LogHelper.e(ex.getMessage(),ex);
         }
+        return OprResponse.OTHRE_ERROR;
     }
 
-    public void kickedOutOfGroupChat(String groupId,String number) throws ServiceDisconnectedException {
+    public int kickedOutOfGroupChat(String groupId,String number) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format( Locale.getDefault(),"enter method kickedOutOfGroupChat. [groupId,number]=%s,%s", groupId,number));
         try {
-            myApi.kickedOutOfGroupChat(groupId, number);
+            return myApi.kickedOutOfGroupChat(groupId, number);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
             LogHelper.e(ex.getMessage(),ex);
         }
+        return OprResponse.OTHRE_ERROR;
     }
 
-    public void assignGroupChairman(String groupId,String number) throws ServiceDisconnectedException {
+    public int assignGroupChairman(String groupId,String number) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format( Locale.getDefault(),"enter method assignGroupChairman. [groupId,number]=%s,%s", groupId,number));
         try {
-            myApi.assignGroupChairman(groupId, number);
+            return myApi.assignGroupChairman(groupId, number);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
             LogHelper.e(ex.getMessage(),ex);
         }
+        return OprResponse.OTHRE_ERROR;
     }
-    public void quitGroupChat(String groupId,String number) throws ServiceDisconnectedException {
+    public int quitGroupChat(String groupId,String number) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format( Locale.getDefault(),"enter method quitGroupChat. [groupId,number]=%s,%s", groupId,number));
         try {
-            myApi.quitGroupChat(groupId, number);
+            return myApi.quitGroupChat(groupId, number);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
             LogHelper.e(ex.getMessage(),ex);
         }
+        return OprResponse.OTHRE_ERROR;
     }
 
     @Deprecated
@@ -188,15 +196,16 @@ public class ConfApi extends ClientApi {
         }
     }
 
-    public void setMyAlias(String groupId,String alias) throws ServiceDisconnectedException {
+    public int setMyAlias(String groupId,String alias) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format( Locale.getDefault(),"enter method setMyAlias. [groupId,alias]=%s,%s", groupId,alias));
         try {
-            myApi.setMyAlias(groupId, alias);
+            return myApi.setMyAlias(groupId, alias);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
             LogHelper.e(ex.getMessage(),ex);
         }
+        return OprResponse.OTHRE_ERROR;
     }
     public String getGroupChatMemberDisplayName(String groupId,String number) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
@@ -221,26 +230,28 @@ public class ConfApi extends ClientApi {
         }
         return null;
     }
-    public void inviteToJoinGroupChat(String groupId, String number) throws ServiceDisconnectedException {
+    public int inviteToJoinGroupChat(String groupId, String number) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format( Locale.getDefault(),"enter method inviteToJoinGroupChat. [groupId,number]=%s,%s", groupId,number));
         try {
-            myApi.inviteOneMemberToGroupChat(groupId, number);
+            return myApi.inviteOneMemberToGroupChat(groupId, number);
         } catch (RemoteException ex) {
             // TODO Auto-generated catch block
             LogHelper.e(ex.getMessage(),ex);
         }
+        return OprResponse.OTHRE_ERROR;
     }
 
-    public void inviteToJoinGroupChat(String groupId, List<String> numbers) throws ServiceDisconnectedException {
+    public int inviteToJoinGroupChat(String groupId, List<String> numbers) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format( Locale.getDefault(),"enter method inviteToJoinGroupChat. [groupId,numbers]=%s,%s", groupId,numbers.toString()));
         try {
-            myApi.inviteToJoinGroupChat(groupId, numbers);
+            return myApi.inviteToJoinGroupChat(groupId, numbers);
         } catch (RemoteException ex) {
             // TODO Auto-generated catch block
             LogHelper.e(ex.getMessage(),ex);
         }
+        return OprResponse.OTHRE_ERROR;
     }
 
     public void queryMemberHeadPic(String groupId, String number,int pixel, ConferenceCallback confCallback) throws ServiceDisconnectedException {
@@ -365,23 +376,36 @@ public class ConfApi extends ClientApi {
         return null;
     }
 
-    public void refuseAssigedAsChairman(String chatUri, long inviteTime, String conversationId, String contributionId) throws ServiceDisconnectedException {
+    public int refuseAssigedAsChairman(String chatUri, long inviteTime, String conversationId, String contributionId) throws ServiceDisconnectedException {
         LogHelper.i(String.format( Locale.getDefault(),"enter method:refuseAssigedAsChairman. [chatUri,inviteTime,conversationId,contributionId]=%s,%d,%s,%s", chatUri,inviteTime,conversationId,contributionId));
         VerificationUtil.ApiIsNull(myApi);
         try {
-            myApi.refuseAssigedAsChairman(chatUri, inviteTime, conversationId, contributionId);
+            return myApi.refuseAssigedAsChairman(chatUri, inviteTime, conversationId, contributionId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
+        return OprResponse.OTHRE_ERROR;
     }
 
-    public void acceptAssignedAsChairman(String chatUri, long inviteTime, String conversationId, String contributionId) throws ServiceDisconnectedException {
+    public int acceptAssignedAsChairman(String chatUri, long inviteTime, String conversationId, String contributionId) throws ServiceDisconnectedException {
         LogHelper.i(String.format( Locale.getDefault(),"enter method:acceptAssignedAsChairman. [chatUri,inviteTime,conversationId,contributionId]=%s,%d,%s,%s", chatUri,inviteTime,conversationId,contributionId));
         VerificationUtil.ApiIsNull(myApi);
         try {
-            myApi.acceptAssignedAsChairman(chatUri, inviteTime, conversationId, contributionId);
+            return myApi.acceptAssignedAsChairman(chatUri, inviteTime, conversationId, contributionId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
+        return OprResponse.OTHRE_ERROR;
+    }
+    
+    public int rejoinGroupChat(String chatUri) throws ServiceDisconnectedException {
+        LogHelper.i(String.format( Locale.getDefault(),"enter rejoinGroupChat. [chatUri]=%s", chatUri));
+        VerificationUtil.ApiIsNull(myApi);
+        try {
+            return myApi.rejoinGroupChat(chatUri);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+        return 0;
     }
 }

@@ -141,4 +141,11 @@ public abstract class PublicAccountCallback extends IPublicAccountCallbackAPI.St
         // TODO Auto-generated method stub
 
     }
+    
+    @Override
+    public void respSetAcceptStatus(boolean result, String uuid)
+            throws RemoteException {
+        // TODO Auto-generated method stub
+
+    }
 }

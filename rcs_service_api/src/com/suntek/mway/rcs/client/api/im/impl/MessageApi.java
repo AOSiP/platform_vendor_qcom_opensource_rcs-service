@@ -1781,7 +1781,7 @@ public class MessageApi extends ClientApi {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
-
+    
     public void forwardGroupVideoFile(long thread_id, String conversationId, long sms_id,
             String id, int length, String groupId, boolean isRecord)
             throws ServiceDisconnectedException {
@@ -1796,7 +1796,7 @@ public class MessageApi extends ClientApi {
             LogHelper.i("id field value error");
             return;
         }
-
+        
         try {
             myApi.forwardGroupVideoFile(thread_id, conversationId, sms_id, id, length, groupId);
         } catch (Exception ex) {

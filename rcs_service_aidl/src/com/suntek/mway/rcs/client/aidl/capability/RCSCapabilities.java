@@ -22,13 +22,12 @@
  */
 package com.suntek.mway.rcs.client.aidl.capability;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-
 import com.suntek.mway.rcs.client.aidl.constant.APIConstant;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.io.Serializable;
 
 /**
  * <p>Title: RCSCapabilities class</p>
@@ -47,9 +46,8 @@ import android.os.Parcelable;
  *
  */
 public class RCSCapabilities implements Parcelable,Serializable {
-    /**
-     *
-     */
+    
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 5516256269504150135L;
 
     /**
@@ -154,35 +152,29 @@ public class RCSCapabilities implements Parcelable,Serializable {
      */
     private boolean pageModeMsgSupported = false;
 
-    /**
-     * large mode message
-     */
+    /** large mode message. */
     private boolean largeModeMsgSupported = false;
 
-    /**
-     * public message
-     */
+    /** public message. */
     private boolean publicMsgSupported = false;
 
-    /**
-     * vemotion
-     */
+    /** vemotion. */
     private boolean vemotionSupported = false;
+    
+    /** cloudFile. */
+    private boolean cloudFileSupported = false;
 
-    /**
-     * cmcc
-     */
+    /** cmcc. */
     private boolean cmccSupported = false;
 
+    /** The burn after reading. */
     private boolean burnAfterReading = false;
 
-    /**
-     * Last capabilities update
-     */
+    /** Last capabilities update. */
     private long timestamp = System.currentTimeMillis();
 
     /**
-     * Constructor
+     * Constructor.
      */
     public RCSCapabilities() {
     }
@@ -212,6 +204,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
         this.largeModeMsgSupported = source.readInt() != 0;
         this.publicMsgSupported = source.readInt() != 0;
         this.vemotionSupported = source.readInt() != 0;
+        this.cloudFileSupported = source.readInt() != 0;
         this.cmccSupported = source.readInt() != 0;
         this.burnAfterReading = source.readInt() != 0;
         //this.sipAutomata = source.readInt() != 0;
@@ -220,7 +213,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Describe the kinds of special objects contained in this Parcelable's
-     * marshalled representation
+     * marshalled representation.
      *
      * @return Integer
      */
@@ -229,7 +222,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Write parcelable object
+     * Write parcelable object.
      *
      * @param dest The Parcel in which the object should be written
      * @param flags Additional flags about how the object should be written
@@ -254,6 +247,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
         dest.writeInt(largeModeMsgSupported ? 1 : 0);
         dest.writeInt(publicMsgSupported ? 1 : 0);
         dest.writeInt(vemotionSupported ? 1 : 0);
+        dest.writeInt(cloudFileSupported ? 1 : 0);
         dest.writeInt(cmccSupported ? 1 : 0);
         dest.writeInt(burnAfterReading ? 1 : 0);
         //dest.writeInt(sipAutomata ? 1 : 0);
@@ -275,7 +269,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     };
 
     /**
-     * Is image sharing supported
+     * Is image sharing supported.
      *
      * @return Boolean
      */
@@ -365,7 +359,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Set the IM session support
+     * Set the IM session support.
      *
      * @param supported Supported
      */
@@ -374,7 +368,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Is file transfer supported
+     * Is file transfer supported.
      *
      * @return Boolean
      */
@@ -383,7 +377,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Set the file transfer support
+     * Set the file transfer support.
      *
      * @param supported Supported
      */
@@ -392,7 +386,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Is CS video supported
+     * Is CS video supported.
      *
      * @return Boolean
      */
@@ -485,7 +479,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Set the Geolocation Pull support
+     * Set the Geolocation Pull support.
      *
      * @param supported Supported
      */
@@ -494,7 +488,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Is Geolocation Pull supported
+     * Is Geolocation Pull supported.
      *
      * @return Boolean
      */
@@ -503,7 +497,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Set the Geolocation Push support
+     * Set the Geolocation Push support.
      *
      * @param supported Supported
      */
@@ -512,7 +506,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Is file transfer thumbnail supported
+     * Is file transfer thumbnail supported.
      *
      * @return Boolean
      */
@@ -521,7 +515,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Set the file transfer thumbnail support
+     * Set the file transfer thumbnail support.
      *
      * @param supported Supported
      */
@@ -530,7 +524,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Is file transfer S&F supported
+     * Is file transfer S&F supported.
      *
      * @return Boolean
      */
@@ -540,7 +534,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Set the file transfer S&F support
+     * Set the file transfer S&F support.
      *
      * @param supported Supported
      */
@@ -550,7 +544,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Is group chat S&F supported
+     * Is group chat S&F supported.
      *
      * @return Boolean
      */
@@ -559,7 +553,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Set the group chat S&F support
+     * Set the group chat S&F support.
      *
      * @param supported Supported
      */
@@ -568,7 +562,8 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Is device an automata ?
+     * Is device an automata ?.
+     *
      * @return True if automata
      */
     /*
@@ -596,95 +591,124 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Set page mode message
-     * @param pageModeMsg
+     * Set page mode message.
+     *
+     * @param pageModeMsg the new page mode msg supported
      */
     public void setPageModeMsgSupported(boolean pageModeMsg) {
         this.pageModeMsgSupported = pageModeMsg;
     }
 
     /**
-     * large mode message or not
-     * @return
+     * large mode message or not.
+     *
+     * @return true, if is large mode msg supported
      */
     public boolean isLargeModeMsgSupported() {
         return largeModeMsgSupported;
     }
 
     /**
-     * set large mode message
-     * @param largeModeMsg
+     * set large mode message.
+     *
+     * @param largeModeMsg the new large mode msg supported
      */
     public void setLargeModeMsgSupported(boolean largeModeMsg) {
         this.largeModeMsgSupported = largeModeMsg;
     }
 
     /**
-     * public message or not
-     * @return
+     * public message or not.
+     *
+     * @return true, if is public msg supported
      */
     public boolean isPublicMsgSupported() {
         return publicMsgSupported;
     }
 
     /**
-     * set public message
-     * @param publicMsg
+     * set public message.
+     *
+     * @param publicMsg the new public msg supported
      */
     public void setPublicMsgSupported(boolean publicMsg) {
         this.publicMsgSupported = publicMsg;
     }
 
     /**
-     * ve motion or not
-     * @return
+     * ve motion or not.
+     *
+     * @return true, if is vemotion supported
      */
     public boolean isVemotionSupported() {
         return vemotionSupported;
     }
 
     /**
-     * set ve motion
-     * @param vemotion
+     * set ve motion.
+     *
+     * @param vemotion the new vemotion supported
      */
     public void setVemotionSupported(boolean vemotion) {
         this.vemotionSupported = vemotion;
     }
+    
+    /**
+     * Checks if is cloud file supported.
+     *
+     * @return true, if is cloud file supported
+     */
+    public boolean isCloudFileSupported() {
+        return cloudFileSupported;
+    }
 
     /**
-     * group management(modify group name, kick people, transfer the group) nor not
-     * @return
+     * Sets the cloud file supported.
+     *
+     * @param cloudFileSupported the new cloud file supported
+     */
+    public void setCloudFileSupported(boolean cloudFileSupported) {
+        this.cloudFileSupported = cloudFileSupported;
+    }
+
+    /**
+     * group management(modify group name, kick people, transfer the group) nor not.
+     *
+     * @return true, if is cmcc supported
      */
     public boolean isCmccSupported() {
         return cmccSupported;
     }
 
     /**
-     * set group management
-     * @param cmcc
+     * set group management.
+     *
+     * @param cmcc the new cmcc supported
      */
     public void setCmccSupported(boolean cmcc) {
         this.cmccSupported = cmcc;
     }
 
     /**
-     * Checks is burn after reading
-     * @return
+     * Checks is burn after reading.
+     *
+     * @return true, if is burn after reading
      */
     public boolean isBurnAfterReading() {
         return burnAfterReading;
     }
 
     /**
-     * Set burn after reading
-     * @param burnAfterReading
+     * Set burn after reading.
+     *
+     * @param burnAfterReading the new burn after reading
      */
     public void setBurnAfterReading(boolean burnAfterReading) {
         this.burnAfterReading = burnAfterReading;
     }
 
     /**
-     * Get the capabilities timestamp
+     * Get the capabilities timestamp.
      *
      * @return Timestamp (in milliseconds)
      */
@@ -693,16 +717,16 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Set capabilities timestamp
+     * Set capabilities timestamp.
      *
-     * @param Timestamp
+     * @param timestamp the new timestamp
      */
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 
     /**
-     * Returns a string representation of the object
+     * Returns a string representation of the object.
      *
      * @return String
      */
@@ -730,6 +754,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
             ", largeModeMsg=" + largeModeMsgSupported +
             ", publicMsg=" + publicMsgSupported +
             ", vemotion=" + vemotionSupported +
+            ", cloudFile=" + cloudFileSupported +
             ", cmcc=" + cmccSupported +
             ", burnAfterReading=" + burnAfterReading +
             //", SipAutomata=" + sipAutomata +
