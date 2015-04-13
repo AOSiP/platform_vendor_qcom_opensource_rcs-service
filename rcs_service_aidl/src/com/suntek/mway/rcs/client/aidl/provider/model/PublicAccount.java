@@ -92,6 +92,12 @@ public class PublicAccount {
 
     /** The field. */
     private String field;
+    
+    /** The logoType. */
+    private String logoType;
+    
+    /** The menuString. */
+    private String menuString;
 
     /**
      * Gets the pa uuid.
@@ -488,6 +494,42 @@ public class PublicAccount {
     public void setField(String field) {
         this.field = field;
     }
+    
+    /**
+     * Gets the logo type.
+     *
+     * @return the logo type
+     */
+    public String getLogoType() {
+        return logoType;
+    }
+
+    /**
+     * Sets the logo type.
+     *
+     * @param logoType the new logo type
+     */
+    public void setLogoType(String logoType) {
+        this.logoType = logoType;
+    }
+
+    /**
+     * Gets the menu string.
+     *
+     * @return the menu string
+     */
+    public String getMenuString() {
+        return menuString;
+    }
+
+    /**
+     * Sets the menu string.
+     *
+     * @param menuString the new menu string
+     */
+    public void setMenuString(String menuString) {
+        this.menuString = menuString;
+    }
 
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
@@ -517,6 +559,8 @@ public class PublicAccount {
                .append(",zip=").append(this.zip)
                .append(",addr=").append(this.addr)
                .append(",field=").append(this.field)
+               .append(",logoType=").append(this.logoType)
+               .append(",menuString=").append(this.menuString)
         ;
 
         return sbuffer.toString();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 pci-suntektech Technologies, Inc.  All Rights Reserved.
+ * Copyright (c) 2015 pci-suntektech Technologies, Inc.  All Rights Reserved.
  * pci-suntektech Technologies Proprietary and Confidential.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,7 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
-package com.suntek.mway.rcs.client.api.publicaccount.callback;
+package com.suntek.mway.rcs.client.aidl.plugin.callback;
 
 import com.suntek.mway.rcs.client.aidl.plugin.callback.IPublicAccountCallbackAPI;
 import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.MenuInfoMode;

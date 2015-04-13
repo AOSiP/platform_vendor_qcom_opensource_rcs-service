@@ -95,16 +95,16 @@ public class PublicAccountApi extends ClientApi {
         }
     }
 
-    public void getUserSubscribePublicList(int order,int pageSize,int pageNum,PublicAccountCallback callback) throws ServiceDisconnectedException {
+    public void getUserSubscribePublicList(PublicAccountCallback callback) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method getUserSubscribePublicList. [order,pageSize,pageNum]=%d,%d,%d", order,pageSize,pageNum));
-        if (order != 0 && order != 1) {
+        LogHelper.i(String.format( Locale.getDefault(),"enter method getUserSubscribePublicList. "));
+        /*if (order != 0 && order != 1) {
             LogHelper.i("order field value must be 0 or 1");
             return;
-        }
+        }*/
         try {
             myApi.registerCallback(callback);
-            myApi.getUserSubscribePublicList(order, pageSize, pageNum);
+            myApi.getUserSubscribePublicList();
         } catch (Exception ex) {
             // TODO Auto-generated catch block
             LogHelper.e(ex.getMessage(),ex);
