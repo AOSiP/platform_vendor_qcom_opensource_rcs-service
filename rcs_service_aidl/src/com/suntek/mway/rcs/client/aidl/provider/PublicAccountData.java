@@ -34,6 +34,9 @@ public class PublicAccountData {
 
     /** The Constant TABLE_ACCOUNT. */
     public static final String TABLE_ACCOUNT = "publicAccount";
+    
+    /** The Constant TABLE_ACCOUNT. */
+    public static final String TABLE_ACCOUNT_HIS = "publicAccountHis";
 
     /** The Constant PUBLIC_ACCOUNT_CONTENT_URI. */
     public static final Uri PUBLIC_ACCOUNT_CONTENT_URI = Uri.parse("content://" + PUBLIC_ACCOUNT_AUTHORITY + "/" + TABLE_ACCOUNT);
@@ -106,4 +109,10 @@ public class PublicAccountData {
 
     /** The Constant ACCOUNT_QRCODE. */
     public static final String ACCOUNT_QRCODE = "_qrCode";
+    
+    /** The Constant ACCOUNT_LOGO_TYPE. */
+    public static final String ACCOUNT_LOGO_TYPE = "_logoType";
+    
+    /** The Constant ACCOUNT_MENU_STRING. */
+    public static final String ACCOUNT_MENU_STRING = "_menuString";
 }
