@@ -20,10 +20,10 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.exception;
 
 /**
- *
  * <p>
  * Title:Class of Member Full Exception.
  * </p>
@@ -36,10 +36,9 @@ package com.suntek.mway.rcs.client.api.exception;
  * <p>
  * Company:pci-suntek
  * </p>
- *
+ * 
  * @author YFB
  * @version 1.0
- *
  */
 public class MemberFullException extends Exception {
 

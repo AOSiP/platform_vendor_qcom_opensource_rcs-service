@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.publicaccount.impl;
 
 import java.util.List;
@@ -41,9 +42,10 @@ import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 
 public class PublicAccountApi extends ClientApi {
 
-    private static String  serviceName = "com.suntek.mway.rcs.app.service.pubacct.plugin.service.PublicAccountPluginService";
+    private static String serviceName = "com.suntek.mway.rcs.app.service.pubacct.plugin.service.PublicAccountPluginService";
 
     IPublicAccountAPI myApi;
+
     PublicAccountCallback theCallback;
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -54,10 +56,11 @@ public class PublicAccountApi extends ClientApi {
         }
 
         public void onServiceDisconnected(ComponentName className) {
-            if(isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
+            if (isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
                 LogHelper.d("client api disconnect service...");
                 try {
-                    if (myApi != null && theCallback != null) myApi.unregisterCallback(theCallback);
+                    if (myApi != null && theCallback != null)
+                        myApi.unregisterCallback(theCallback);
                 } catch (Exception ex) {
                     // TODO Auto-generated catch block
                     LogHelper.e(ex.getMessage(), ex);
@@ -66,8 +69,7 @@ public class PublicAccountApi extends ClientApi {
                 myApi = null;
                 notifyServiceDisconnected();
             } else {
-                LogHelper.d("illegal call client api disconnect service :"
-                        + reconnectionTimes);
+                LogHelper.d("illegal call client api disconnect service :" + reconnectionTimes);
                 init(context, rcsListener);
                 if (!isBinded()) {
                     // app is uninstalled
@@ -84,98 +86,110 @@ public class PublicAccountApi extends ClientApi {
         super.initServiceConnect(mConnection);
     }
 
-
-    public void unregisterCallback(PublicAccountCallback callback)throws ServiceDisconnectedException {
+    public void unregisterCallback(PublicAccountCallback callback)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.unregisterCallback(callback);
         } catch (RemoteException ex) {
             // TODO Auto-generated catch block
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void getUserSubscribePublicList(PublicAccountCallback callback) throws ServiceDisconnectedException {
+    public void getUserSubscribePublicList(PublicAccountCallback callback)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method getUserSubscribePublicList. "));
-        /*if (order != 0 && order != 1) {
-            LogHelper.i("order field value must be 0 or 1");
-            return;
-        }*/
+        LogHelper
+                .i(String.format(Locale.getDefault(), "enter method getUserSubscribePublicList. "));
+        /*
+         * if (order != 0 && order != 1) {
+         * LogHelper.i("order field value must be 0 or 1"); return; }
+         */
         try {
             myApi.registerCallback(callback);
             myApi.getUserSubscribePublicList();
         } catch (Exception ex) {
             // TODO Auto-generated catch block
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void getPublicMenuInfo(String uuid,PublicAccountCallback callback) throws ServiceDisconnectedException {
+    public void getPublicMenuInfo(String uuid, PublicAccountCallback callback)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method getPublicMenuInfo. [uuid]=%s", uuid));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method getPublicMenuInfo. [uuid]=%s",
+                uuid));
         try {
             myApi.registerCallback(callback);
             myApi.getPublicMenuInfo(uuid);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void getPublicDetail(String uuid,PublicAccountCallback callback) throws ServiceDisconnectedException {
+    public void getPublicDetail(String uuid, PublicAccountCallback callback)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method getPublicDetail. [uuid]=%s", uuid));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method getPublicDetail. [uuid]=%s",
+                uuid));
         try {
             myApi.registerCallback(callback);
             myApi.getPublicDetail(uuid);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void addSubscribe(String uuid,PublicAccountCallback callback) throws ServiceDisconnectedException {
+    public void addSubscribe(String uuid, PublicAccountCallback callback)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method addSubscribe. [uuid]=%s", uuid));
+        LogHelper
+                .i(String.format(Locale.getDefault(), "enter method addSubscribe. [uuid]=%s", uuid));
         try {
             myApi.registerCallback(callback);
             myApi.addSubscribe(uuid);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-
-    public void cancelSubscribe(String uuid,PublicAccountCallback callback) throws ServiceDisconnectedException {
+    public void cancelSubscribe(String uuid, PublicAccountCallback callback)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method cancelSubscribe. [uuid]=%s", uuid));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method cancelSubscribe. [uuid]=%s",
+                uuid));
         try {
             myApi.registerCallback(callback);
             myApi.cancelSubscribe(uuid);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public boolean complainPublic(String uuid,String reason, String description, int type, String data ,PublicAccountCallback callback) throws ServiceDisconnectedException {
+    public boolean complainPublic(String uuid, String reason, String description, int type,
+            String data, PublicAccountCallback callback) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method complainPublic. [uuid,reason,description,type,data]=%s,%s,%s,%d,%s", uuid,reason,description,type,data));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method complainPublic. [uuid,reason,description,type,data]=%s,%s,%s,%d,%s",
+                uuid, reason, description, type, data));
         boolean flag = false;
         try {
             myApi.registerCallback(callback);
             flag = myApi.complainPublic(uuid, reason, description, type, data);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
         return flag;
     }
 
-    public boolean getPreMessage(String uuid, String timestamp, int order, int pageSize, int pageNum,
-            PublicAccountCallback callback) throws ServiceDisconnectedException {
+    public boolean getPreMessage(String uuid, String timestamp, int order, int pageSize,
+            int pageNum, PublicAccountCallback callback) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         boolean flag = false;
         try {
@@ -183,7 +197,7 @@ public class PublicAccountApi extends ClientApi {
             flag = myApi.getPreMessage(uuid, timestamp, order, pageSize, pageNum);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
         return flag;
     }
@@ -191,40 +205,44 @@ public class PublicAccountApi extends ClientApi {
     public boolean getPublicList(String keywords, int pageSize, int pageNum, int order,
             PublicAccountCallback callback) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method getPublicList. [keywords,pageSize,pageNum,order]=%s,%d,%d,%d", keywords,pageSize,pageNum,order));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method getPublicList. [keywords,pageSize,pageNum,order]=%s,%d,%d,%d",
+                keywords, pageSize, pageNum, order));
         boolean flag = false;
         try {
             myApi.registerCallback(callback);
             flag = myApi.getPublicList(keywords, pageSize, pageNum, order);
         } catch (Exception ex) {
             // TODO Auto-generated catch block
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
         return flag;
     }
 
-    public PublicAccountsDetail getPublicDetailCache(String uuid) throws ServiceDisconnectedException {
+    public PublicAccountsDetail getPublicDetailCache(String uuid)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         try {
             return myApi.getPublicDetailCache(uuid);
         } catch (Exception ex) {
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
             return null;
         }
     }
 
-    public List<PublicAccounts> getUserSubscribePublicListCache(int order, int pageSize, int pageNum) throws ServiceDisconnectedException {
+    public List<PublicAccounts> getUserSubscribePublicListCache(int order, int pageSize, int pageNum)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         try {
             return myApi.getUserSubscribePublicListCache(order, pageSize, pageNum);
         } catch (Exception ex) {
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
             return null;
         }
     }
 
-    public boolean getRecommendPublic(int type, int pageSize, int pageNum, PublicAccountCallback callback)
-            throws ServiceDisconnectedException {
+    public boolean getRecommendPublic(int type, int pageSize, int pageNum,
+            PublicAccountCallback callback) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         if (pageSize <= 0 || pageNum <= 0) {
             LogHelper.i("params is not valid");
@@ -236,7 +254,7 @@ public class PublicAccountApi extends ClientApi {
             myApi.registerCallback(callback);
             flag = myApi.getRecommendPublic(type, pageSize, pageNum);
         } catch (Exception ex) {
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
         return flag;
     }

@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.profile;
 
 import java.io.Serializable;
@@ -31,16 +32,24 @@ import android.os.Parcelable;
 import android.util.Log;
 
 /**
- * <p>Title: The profile entity class</p>
- * <p>Description: the profile include the home address, the email and so on</p>
- * <p>Copyright: Copyright (c) 2014</p>
- * <p>Company: pci-suntek</p>.
- *
+ * <p>
+ * Title: The profile entity class
+ * </p>
+ * <p>
+ * Description: the profile include the home address, the email and so on
+ * </p>
+ * <p>
+ * Copyright: Copyright (c) 2014
+ * </p>
+ * <p>
+ * Company: pci-suntek
+ * </p>
+ * .
+ * 
  * @author zrq
  * @version 1.0
  */
-public class Profile extends BaseModel implements Parcelable,Serializable
-{
+public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -8351378268771321120L;
@@ -48,60 +57,58 @@ public class Profile extends BaseModel implements Parcelable,Serializable
     /** The home address. */
     private String homeAddress;
 
-      /** The email. */
-      private String email;
+    /** The email. */
+    private String email;
 
-      /** The birthday. */
-      private String birthday;
+    /** The birthday. */
+    private String birthday;
 
-      /** The company name. */
-      private String companyName;
+    /** The company name. */
+    private String companyName;
 
-      /** The company duty. */
-      private String companyDuty;
+    /** The company duty. */
+    private String companyDuty;
 
-      /** The company tel. */
-      private String companyTel;
+    /** The company tel. */
+    private String companyTel;
 
-      /** The company address. */
-      private String companyAddress;
+    /** The company address. */
+    private String companyAddress;
 
-      /** The company fax. */
-      private String companyFax;
+    /** The company fax. */
+    private String companyFax;
 
-      /** The first name. */
-      private String firstName;
+    /** The first name. */
+    private String firstName;
 
-      /** The last name. */
-      private String lastName;
+    /** The last name. */
+    private String lastName;
 
-      /** The other tels. */
-      private ArrayList<TelephoneModel> otherTels;
+    /** The other tels. */
+    private ArrayList<TelephoneModel> otherTels;
 
-      /**
-       * Instantiates a new profile.
-       */
-      public Profile()
-      {}
+    /**
+     * Instantiates a new profile.
+     */
+    public Profile() {
+    }
 
-      /**
-       * Instantiates a new profile.
-       *
-       * @param source the source
-       */
-      public Profile( Parcel source )
-      {
-          readFromParcel( source );
-      }
+    /**
+     * Instantiates a new profile.
+     * 
+     * @param source the source
+     */
+    public Profile(Parcel source) {
+        readFromParcel(source);
+    }
 
-      /**
+    /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
@@ -109,24 +116,23 @@ public class Profile extends BaseModel implements Parcelable,Serializable
      * Write the profile entity to parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     *
+     * 
      * @param dest the dest
      * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        super.writeToParcel( dest,flags );
-        dest.writeString( homeAddress );
-        dest.writeString( email );
-        dest.writeString( birthday );
-        dest.writeString( companyName );
-        dest.writeString( companyDuty );
-        dest.writeString( companyTel );
-        dest.writeString( companyAddress );
-        dest.writeString( companyFax );
-        dest.writeString( this.firstName );
-        dest.writeString( this.lastName );
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(homeAddress);
+        dest.writeString(email);
+        dest.writeString(birthday);
+        dest.writeString(companyName);
+        dest.writeString(companyDuty);
+        dest.writeString(companyTel);
+        dest.writeString(companyAddress);
+        dest.writeString(companyFax);
+        dest.writeString(this.firstName);
+        dest.writeString(this.lastName);
         dest.writeList(otherTels);
     }
 
@@ -134,13 +140,11 @@ public class Profile extends BaseModel implements Parcelable,Serializable
      * Create the profile entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    public void readFromParcel( Parcel source )
-    {
-        super.readFromParcel( source );
+    public void readFromParcel(Parcel source) {
+        super.readFromParcel(source);
         homeAddress = source.readString();
         email = source.readString();
         birthday = source.readString();
@@ -157,185 +161,165 @@ public class Profile extends BaseModel implements Parcelable,Serializable
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<Profile>    CREATOR    = new Parcelable.Creator<Profile>() {
+    public static final Parcelable.Creator<Profile> CREATOR = new Parcelable.Creator<Profile>() {
         @Override
-        public Profile createFromParcel( Parcel source )
-        {
-            return new Profile( source );
+        public Profile createFromParcel(Parcel source) {
+            return new Profile(source);
         }
 
         @Override
-        public Profile[] newArray( int size )
-        {
-            return new Profile[ size ];
+        public Profile[] newArray(int size) {
+            return new Profile[size];
         }
     };
 
     /**
      * Gets the home address.
-     *
+     * 
      * @return the home address
      */
-    public String getHomeAddress()
-    {
+    public String getHomeAddress() {
         return homeAddress;
     }
 
     /**
      * Sets the home address.
-     *
+     * 
      * @param homeAddress the new home address
      */
-    public void setHomeAddress( String homeAddress )
-    {
+    public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
     }
 
     /**
      * Gets the email.
-     *
+     * 
      * @return the email
      */
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
     /**
      * Sets the email.
-     *
+     * 
      * @param email the new email
      */
-    public void setEmail( String email )
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
     /**
      * Gets the birthday.
-     *
+     * 
      * @return the birthday
      */
-    public String getBirthday()
-    {
+    public String getBirthday() {
         return birthday;
     }
 
     /**
      * Sets the birthday.
-     *
+     * 
      * @param birthday the new birthday
      */
-    public void setBirthday( String birthday )
-    {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
     /**
      * Gets the company name.
-     *
+     * 
      * @return the company name
      */
-    public String getCompanyName()
-    {
+    public String getCompanyName() {
         return companyName;
     }
 
     /**
      * Sets the company name.
-     *
+     * 
      * @param companyName the new company name
      */
-    public void setCompanyName( String companyName )
-    {
+    public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
 
     /**
      * Gets the company duty.
-     *
+     * 
      * @return the company duty
      */
-    public String getCompanyDuty()
-    {
+    public String getCompanyDuty() {
         return companyDuty;
     }
 
     /**
      * Sets the company duty.
-     *
+     * 
      * @param companyDuty the new company duty
      */
-    public void setCompanyDuty( String companyDuty )
-    {
+    public void setCompanyDuty(String companyDuty) {
         this.companyDuty = companyDuty;
     }
 
     /**
      * Gets the company tel.
-     *
+     * 
      * @return the company tel
      */
-    public String getCompanyTel()
-    {
+    public String getCompanyTel() {
         return companyTel;
     }
 
     /**
      * Sets the company tel.
-     *
+     * 
      * @param companyTel the new company tel
      */
-    public void setCompanyTel( String companyTel )
-    {
+    public void setCompanyTel(String companyTel) {
         this.companyTel = companyTel;
     }
 
     /**
      * Gets the company address.
-     *
+     * 
      * @return the company address
      */
-    public String getCompanyAddress()
-    {
+    public String getCompanyAddress() {
         return companyAddress;
     }
 
     /**
      * Sets the company address.
-     *
+     * 
      * @param companyAddress the new company address
      */
-    public void setCompanyAddress( String companyAddress )
-    {
+    public void setCompanyAddress(String companyAddress) {
         this.companyAddress = companyAddress;
     }
 
     /**
      * Gets the company fax.
-     *
+     * 
      * @return the company fax
      */
-    public String getCompanyFax()
-    {
+    public String getCompanyFax() {
         return companyFax;
     }
 
     /**
      * Sets the company fax.
-     *
+     * 
      * @param companyFax the new company fax
      */
-    public void setCompanyFax( String companyFax )
-    {
+    public void setCompanyFax(String companyFax) {
         this.companyFax = companyFax;
     }
 
-
-
     /**
      * Gets the first name.
-     *
+     * 
      * @return the first name
      */
     public String getFirstName() {
@@ -344,7 +328,7 @@ public class Profile extends BaseModel implements Parcelable,Serializable
 
     /**
      * Sets the first name.
-     *
+     * 
      * @param firstName the new first name
      */
     public void setFirstName(String firstName) {
@@ -353,7 +337,7 @@ public class Profile extends BaseModel implements Parcelable,Serializable
 
     /**
      * Gets the last name.
-     *
+     * 
      * @return the last name
      */
     public String getLastName() {
@@ -362,7 +346,7 @@ public class Profile extends BaseModel implements Parcelable,Serializable
 
     /**
      * Combine the first name and the last name.
-     *
+     * 
      * @return displayName
      */
     public String getDisplayName() {
@@ -413,7 +397,7 @@ public class Profile extends BaseModel implements Parcelable,Serializable
 
     /**
      * Sets the last name.
-     *
+     * 
      * @param lastName the new last name
      */
     public void setLastName(String lastName) {
@@ -422,11 +406,11 @@ public class Profile extends BaseModel implements Parcelable,Serializable
 
     /**
      * Gets the other tels.
-     *
+     * 
      * @return the other tels
      */
     public ArrayList<TelephoneModel> getOtherTels() {
-        if(otherTels == null){
+        if (otherTels == null) {
             return new ArrayList<TelephoneModel>();
         }
         return otherTels;
@@ -434,7 +418,7 @@ public class Profile extends BaseModel implements Parcelable,Serializable
 
     /**
      * Sets the other tels.
-     *
+     * 
      * @param otherTels the new other tels
      */
     public void setOtherTels(ArrayList<TelephoneModel> otherTels) {
@@ -442,23 +426,24 @@ public class Profile extends BaseModel implements Parcelable,Serializable
     }
 
     /*
-     * @see com.suntek.mway.rcs.client.api.plugin.entity.profile.BaseModel#toString()
+     * @see
+     * com.suntek.mway.rcs.client.api.plugin.entity.profile.BaseModel#toString()
      */
     @Override
     public String toString() {
         List<String> list = new ArrayList<String>();
-        list.add("homeAddress="+ this.homeAddress);
-        list.add("email="+ this.email);
-        list.add("birthday="+ this.birthday);
-        list.add("companyName="+ this.companyName);
-        list.add("companyDuty="+ this.companyDuty);
-        list.add("companyTel="+ this.companyTel);
-        list.add("companyAddress="+ this.companyAddress);
-        list.add("companyFax="+ this.companyFax);
-        list.add("firstName="+ this.firstName);
-        list.add("lastName="+ this.lastName);
-        list.add("otherTels="+ (this.otherTels == null ? null : this.otherTels.toString()));
-        list.add("account="+getAccount());
+        list.add("homeAddress=" + this.homeAddress);
+        list.add("email=" + this.email);
+        list.add("birthday=" + this.birthday);
+        list.add("companyName=" + this.companyName);
+        list.add("companyDuty=" + this.companyDuty);
+        list.add("companyTel=" + this.companyTel);
+        list.add("companyAddress=" + this.companyAddress);
+        list.add("companyFax=" + this.companyFax);
+        list.add("firstName=" + this.firstName);
+        list.add("lastName=" + this.lastName);
+        list.add("otherTels=" + (this.otherTels == null ? null : this.otherTels.toString()));
+        list.add("account=" + getAccount());
         list.add("etag=" + getEtag());
         return list.toString();
     }

@@ -20,24 +20,27 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl;
 
 import android.os.RemoteException;
 
 /**
- * <p>Title: ServiceUnknownException base class</p>
  * <p>
- * Description: The class <code>ServiceUnknownException</code> and its subclasses are a form of
- * <code>ServiceUnknownException</code> that indicates unregister status when trying to invoke some
- * methods of the APIs
- * such as {@link com.suntek.mway.rcs.client.api.capability.CapabilityApi},
+ * Title: ServiceUnknownException base class
+ * </p>
+ * <p>
+ * Description: The class <code>ServiceUnknownException</code> and its
+ * subclasses are a form of <code>ServiceUnknownException</code> that indicates
+ * unregister status when trying to invoke some methods of the APIs such as
+ * {@link com.suntek.mway.rcs.client.api.capability.CapabilityApi},
  * {@link com.suntek.mway.rcs.client.api.contacts.ContactApi},
  * {@link com.suntek.mway.rcs.client.api.im.MessageApi},
  * {@link com.suntek.mway.rcs.client.api.log.LogAPI},
  * {@link com.suntek.mway.rcs.client.api.setting.SettingApi},
- * {@link com.suntek.mway.rcs.client.api.voip.VoIpApi}
- * provided by RCS without invoke register() method
- * of {@link com.suntek.mway.rcs.client.api.registration.RegistrationApi}.
+ * {@link com.suntek.mway.rcs.client.api.voip.VoIpApi} provided by RCS without
+ * invoke register() method of
+ * {@link com.suntek.mway.rcs.client.api.registration.RegistrationApi}.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -45,16 +48,16 @@ import android.os.RemoteException;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class ServiceUnknownException extends RemoteException {
     static final long serialVersionUID = 10000L;
 
     /**
      * Constructs a new exception with the specified detail exception.
-     *
+     * 
      * @param ex Exception
      */
     public ServiceUnknownException(Exception ex) {
@@ -63,7 +66,7 @@ public class ServiceUnknownException extends RemoteException {
 
     /**
      * Constructs a new exception with the specified detail message.
-     *
+     * 
      * @param error Error message
      */
     public ServiceUnknownException(String message) {

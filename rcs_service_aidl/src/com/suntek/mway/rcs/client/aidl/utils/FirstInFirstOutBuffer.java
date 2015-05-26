@@ -20,14 +20,18 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.utils;
 
 import java.util.Vector;
 
 /**
- * <p>Title: FirstInFirstOutBuffer class</p>
  * <p>
- * Description: The class <code>FirstInFirstOutBuffer</code> is a utility for objects read and save in synchronization.
+ * Title: FirstInFirstOutBuffer class
+ * </p>
+ * <p>
+ * Description: The class <code>FirstInFirstOutBuffer</code> is a utility for
+ * objects read and save in synchronization.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -35,9 +39,9 @@ import java.util.Vector;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class FirstInFirstOutBuffer {
     /**
@@ -52,7 +56,7 @@ public class FirstInFirstOutBuffer {
 
     /**
      * Add an object in the buffer
-     *
+     * 
      * @param obj Object
      */
     public synchronized void addObject(Object obj) {
@@ -62,8 +66,9 @@ public class FirstInFirstOutBuffer {
     }
 
     /**
-     * Read an object in the buffer. This is a blocking method until an object is read.
-     *
+     * Read an object in the buffer. This is a blocking method until an object
+     * is read.
+     * 
      * @return Object
      */
     public synchronized Object getObject() {
@@ -86,9 +91,8 @@ public class FirstInFirstOutBuffer {
 
     /**
      * Read an object in the buffer.
-     *
-     * @param timeout
-     *             the milliseconds that thread wait
+     * 
+     * @param timeout the milliseconds that thread wait
      * @return Object
      */
     public synchronized Object getObject(int timeout) {
@@ -113,7 +117,7 @@ public class FirstInFirstOutBuffer {
      * Notify thread
      */
     public void close() {
-        synchronized(this) {
+        synchronized (this) {
             this.notifyAll();
         }
     }

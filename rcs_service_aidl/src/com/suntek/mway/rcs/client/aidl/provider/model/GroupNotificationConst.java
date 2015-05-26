@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 public class GroupNotificationConst {
@@ -45,8 +46,7 @@ public class GroupNotificationConst {
     public static final String MEMBER_QUIT = "quit";
 
     public static final String DISBAND = "disband";
-    
-    public static final String GONE = "gone";
 
+    public static final String GONE = "gone";
 
 }

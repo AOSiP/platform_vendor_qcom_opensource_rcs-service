@@ -20,16 +20,19 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl;
 
 import android.content.Context;
 import android.content.Intent;
 
 /**
- * <p>Title: ServiceInterface class</p>
  * <p>
- * Description: The class <code>ServiceInterface</code> is used to initialize the service context
- * for future use.
+ * Title: ServiceInterface class
+ * </p>
+ * <p>
+ * Description: The class <code>ServiceInterface</code> is used to initialize
+ * the service context for future use.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -37,9 +40,9 @@ import android.content.Intent;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class ServiceInterface {
 
@@ -49,9 +52,10 @@ public class ServiceInterface {
     public static final String SERVICE_NAME = "com.suntek.mway.rcs.SERVICE";
 
     /**
-     * initialize the service context. when invoke the method
-     * a service associated with the constant key <code>SERVICE_NAME</code>
-     * will be initialize and started by the specified parameter ctx.
+     * initialize the service context. when invoke the method a service
+     * associated with the constant key <code>SERVICE_NAME</code> will be
+     * initialize and started by the specified parameter ctx.
+     * 
      * @param ctx android.content.Context
      */
     public static void init(Context ctx) {

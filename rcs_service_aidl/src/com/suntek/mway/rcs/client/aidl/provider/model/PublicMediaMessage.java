@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 import android.os.Parcel;
@@ -28,7 +29,7 @@ import android.os.Parcelable;
 /**
  * The Class PublicMediaMessage.
  */
-public class PublicMediaMessage extends PublicMessage implements Parcelable{
+public class PublicMediaMessage extends PublicMessage implements Parcelable {
 
     /** The media. */
     private PublicMediaContent media;
@@ -36,72 +37,75 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
     /**
      * Instantiates a new public media message.
      */
-    public PublicMediaMessage(){}
+    public PublicMediaMessage() {
+    }
 
     /**
      * Instantiates a new public media message.
-     *
+     * 
      * @param source the source
      */
-    public PublicMediaMessage( Parcel source )
-    {
-        readFromParcel( source );
+    public PublicMediaMessage(Parcel source) {
+        readFromParcel(source);
     }
 
-    /* (non-Javadoc)
-     * @see com.suntek.mway.rcs.client.api.provider.model.PublicMessage#describeContents()
+    /*
+     * (non-Javadoc)
+     * @see
+     * com.suntek.mway.rcs.client.api.provider.model.PublicMessage#describeContents
+     * ()
      */
     @Override
     public int describeContents() {
         return 0;
     }
 
-    /* (non-Javadoc)
-     * @see com.suntek.mway.rcs.client.api.provider.model.PublicMessage#writeToParcel(android.os.Parcel, int)
+    /*
+     * (non-Javadoc)
+     * @see
+     * com.suntek.mway.rcs.client.api.provider.model.PublicMessage#writeToParcel
+     * (android.os.Parcel, int)
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString( createtime );
-        dest.writeInt( forwardable );
-        dest.writeString( msgtype );
-        dest.writeInt( activeStatus );
-        dest.writeString( paUuid );
-        dest.writeValue( media );
+        dest.writeString(createtime);
+        dest.writeInt(forwardable);
+        dest.writeString(msgtype);
+        dest.writeInt(activeStatus);
+        dest.writeString(paUuid);
+        dest.writeValue(media);
     }
 
     /**
      * Read from parcel.
-     *
+     * 
      * @param source the source
      */
-    public void readFromParcel( Parcel source )
-    {
+    public void readFromParcel(Parcel source) {
         createtime = source.readString();
         forwardable = source.readInt();
         msgtype = source.readString();
         activeStatus = source.readInt();
         paUuid = source.readString();
-        media = (PublicMediaContent) source.readValue(this.getClass().getClassLoader());
+        media = (PublicMediaContent)source.readValue(this.getClass().getClassLoader());
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<PublicMediaMessage>    CREATOR    = new Parcelable.Creator<PublicMediaMessage>() {
-                                                                                @Override
-                                                                                public PublicMediaMessage createFromParcel( Parcel source )
-                                                                                {
-                                                                                    return new PublicMediaMessage( source );
-                                                                                }
+    public static final Parcelable.Creator<PublicMediaMessage> CREATOR = new Parcelable.Creator<PublicMediaMessage>() {
+        @Override
+        public PublicMediaMessage createFromParcel(Parcel source) {
+            return new PublicMediaMessage(source);
+        }
 
-                                                                                @Override
-                                                                                public PublicMediaMessage[] newArray( int size )
-                                                                                {
-                                                                                    return new PublicMediaMessage[ size ];
-                                                                                }
-                                                                            };
+        @Override
+        public PublicMediaMessage[] newArray(int size) {
+            return new PublicMediaMessage[size];
+        }
+    };
 
     /**
      * Gets the media.
-     *
+     * 
      * @return the media
      */
     public PublicMediaContent getMedia() {
@@ -110,7 +114,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
     /**
      * Sets the media.
-     *
+     * 
      * @param media the new media
      */
     public void setMedia(PublicMediaContent media) {
@@ -120,7 +124,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
     /**
      * The Class PublicMediaContent.
      */
-    public static class PublicMediaContent implements Parcelable{
+    public static class PublicMediaContent implements Parcelable {
 
         /** The thumb link. */
         private String thumbLink;
@@ -141,7 +145,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
         private String fileType;
 
         /** The createtime. */
-//        private String createtime;
+        // private String createtime;
 
         /** The media uuid. */
         private String mediaUuid;
@@ -149,19 +153,20 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
         /**
          * Instantiates a new public media content.
          */
-        public PublicMediaContent(){}
+        public PublicMediaContent() {
+        }
 
         /**
          * Instantiates a new public media content.
-         *
+         * 
          * @param source the source
          */
-        public PublicMediaContent( Parcel source )
-        {
-            readFromParcel( source );
+        public PublicMediaContent(Parcel source) {
+            readFromParcel(source);
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
          * @see android.os.Parcelable#describeContents()
          */
         @Override
@@ -169,56 +174,54 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
             return 0;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
          * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
          */
         @Override
         public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString( thumbLink );
-            dest.writeString( originalLink );
-            dest.writeString( title );
-            dest.writeString( fileSize );
-            dest.writeString( duration );
-            dest.writeString( fileType );
-//            dest.writeString( createtime );
-            dest.writeString( mediaUuid );
+            dest.writeString(thumbLink);
+            dest.writeString(originalLink);
+            dest.writeString(title);
+            dest.writeString(fileSize);
+            dest.writeString(duration);
+            dest.writeString(fileType);
+            // dest.writeString( createtime );
+            dest.writeString(mediaUuid);
         }
 
         /**
          * Read from parcel.
-         *
+         * 
          * @param source the source
          */
-        public void readFromParcel( Parcel source )
-        {
+        public void readFromParcel(Parcel source) {
             thumbLink = source.readString();
             originalLink = source.readString();
             title = source.readString();
             fileSize = source.readString();
             duration = source.readString();
             fileType = source.readString();
-//            createtime = source.readString();
+            // createtime = source.readString();
             mediaUuid = source.readString();
         }
 
         /** The parcel creator. */
-        public static final Parcelable.Creator<PublicMediaContent>    CREATOR    = new Parcelable.Creator<PublicMediaContent>() {
-                                                                                    @Override
-                                                                                    public PublicMediaContent createFromParcel( Parcel source )
-                                                                                    {
-                                                                                        return new PublicMediaContent( source );
-                                                                                    }
+        public static final Parcelable.Creator<PublicMediaContent> CREATOR = new Parcelable.Creator<PublicMediaContent>() {
+            @Override
+            public PublicMediaContent createFromParcel(Parcel source) {
+                return new PublicMediaContent(source);
+            }
 
-                                                                                    @Override
-                                                                                    public PublicMediaContent[] newArray( int size )
-                                                                                    {
-                                                                                        return new PublicMediaContent[ size ];
-                                                                                    }
-                                                                                };
+            @Override
+            public PublicMediaContent[] newArray(int size) {
+                return new PublicMediaContent[size];
+            }
+        };
 
         /**
          * Gets the thumb link.
-         *
+         * 
          * @return the thumb link
          */
         public String getThumbLink() {
@@ -227,7 +230,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the thumb link.
-         *
+         * 
          * @param thumbLink the new thumb link
          */
         public void setThumbLink(String thumbLink) {
@@ -236,7 +239,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the original link.
-         *
+         * 
          * @return the original link
          */
         public String getOriginalLink() {
@@ -245,7 +248,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the original link.
-         *
+         * 
          * @param originalLink the new original link
          */
         public void setOriginalLink(String originalLink) {
@@ -254,7 +257,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the title.
-         *
+         * 
          * @return the title
          */
         public String getTitle() {
@@ -263,7 +266,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the title.
-         *
+         * 
          * @param title the new title
          */
         public void setTitle(String title) {
@@ -272,7 +275,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the file size.
-         *
+         * 
          * @return the file size
          */
         public String getFileSize() {
@@ -281,7 +284,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the file size.
-         *
+         * 
          * @param fileSize the new file size
          */
         public void setFileSize(String fileSize) {
@@ -290,7 +293,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the duration.
-         *
+         * 
          * @return the duration
          */
         public String getDuration() {
@@ -299,7 +302,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the duration.
-         *
+         * 
          * @param duration the new duration
          */
         public void setDuration(String duration) {
@@ -308,7 +311,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the file type.
-         *
+         * 
          * @return the file type
          */
         public String getFileType() {
@@ -317,7 +320,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the file type.
-         *
+         * 
          * @param fileType the new file type
          */
         public void setFileType(String fileType) {
@@ -326,25 +329,21 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the createtime.
-         *
-         * @return the createtime
-        public String getCreatetime() {
-            return createtime;
-        }
+         * 
+         * @return the createtime public String getCreatetime() { return
+         *         createtime; }
          */
 
         /**
          * Sets the createtime.
-         *
-         * @param createtime the new createtime
-        public void setCreatetime(String createtime) {
-            this.createtime = createtime;
-        }
+         * 
+         * @param createtime the new createtime public void setCreatetime(String
+         *            createtime) { this.createtime = createtime; }
          */
 
         /**
          * Gets the media uuid.
-         *
+         * 
          * @return the media uuid
          */
         public String getMediaUuid() {
@@ -353,7 +352,7 @@ public class PublicMediaMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the media uuid.
-         *
+         * 
          * @param mediaUuid the new media uuid
          */
         public void setMediaUuid(String mediaUuid) {

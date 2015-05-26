@@ -20,14 +20,18 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.utils;
 
 import android.telephony.PhoneNumberUtils;
 
 /**
- * <p>Title: RcsPhoneUtils class</p>
  * <p>
- * Description: The class <code>RcsPhoneUtils</code> is a utility for phone number operation
+ * Title: RcsPhoneUtils class
+ * </p>
+ * <p>
+ * Description: The class <code>RcsPhoneUtils</code> is a utility for phone
+ * number operation
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -35,19 +39,20 @@ import android.telephony.PhoneNumberUtils;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public abstract class RcsPhoneUtils {
 
     private static String NATIOIN_CODE = "+86";
+
     private static String NATION_AREA_CODE = "0";
 
     /**
      * Parse phone to international
-     * @param number
-     *             the phone number
+     * 
+     * @param number the phone number
      * @return international phone
      */
     public static String parseNumToInternational(String number) {
@@ -61,8 +66,8 @@ public abstract class RcsPhoneUtils {
 
         if (phone.startsWith("00" + NATIOIN_CODE.substring(1))) {
             phone = NATIOIN_CODE + phone.substring(4);
-        } else if ((NATION_AREA_CODE != null) && (NATION_AREA_CODE.length() > 0) &&
-                phone.startsWith(NATION_AREA_CODE)) {
+        } else if ((NATION_AREA_CODE != null) && (NATION_AREA_CODE.length() > 0)
+                && phone.startsWith(NATION_AREA_CODE)) {
             phone = NATIOIN_CODE + phone.substring(NATION_AREA_CODE.length());
         } else if (!phone.startsWith("+")) {
             phone = NATIOIN_CODE + phone;
@@ -72,9 +77,8 @@ public abstract class RcsPhoneUtils {
 
     /**
      * Draw out phone from URI
-     *
-     * @param uri
-     *             the URI
+     * 
+     * @param uri the URI
      * @return international phone
      */
     public static String drawNumberFromUri(String uri) {
@@ -85,18 +89,18 @@ public abstract class RcsPhoneUtils {
         try {
             int index0 = uri.indexOf("<");
             if (index0 != -1) {
-                uri = uri.substring(index0+1, uri.indexOf(">", index0));
+                uri = uri.substring(index0 + 1, uri.indexOf(">", index0));
             }
 
             int index1 = uri.indexOf("tel:");
             if (index1 != -1) {
-                uri = uri.substring(index1+4);
+                uri = uri.substring(index1 + 4);
             }
 
             index1 = uri.indexOf("sip:");
             if (index1 != -1) {
                 int index2 = uri.indexOf("@", index1);
-                uri = uri.substring(index1+4, index2);
+                uri = uri.substring(index1 + 4, index2);
             }
 
             int index2 = uri.indexOf(";");
@@ -105,7 +109,7 @@ public abstract class RcsPhoneUtils {
             }
 
             return parseNumToInternational(uri);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }

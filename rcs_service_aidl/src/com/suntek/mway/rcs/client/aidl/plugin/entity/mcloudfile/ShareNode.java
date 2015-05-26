@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.mcloudfile;
 
 import java.util.Arrays;
@@ -28,253 +29,233 @@ import java.util.Map;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ShareNode implements Parcelable
-{
+public class ShareNode implements Parcelable {
     private String url;
+
     private String thumbUrl;
+
     private String createTime;
+
     private String updateTime;
+
     private ShareType type;
+
     private String desc;
+
     private int downloads;
+
     private FileNode[] file;
+
     private ShareNode[] subShares;
+
     private String id;
+
     private boolean isSuccess;
+
     private Order order;
+
     private Map<String, String> fields;
 
-    public ShareNode()
-    {}
+    public ShareNode() {
+    }
 
-    public ShareNode( Parcel source )
-    {
-        readFromParcel( source );
+    public ShareNode(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
     /**
-     * Write the configure node entity to parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
+     * Write the configure node entity to parcel stream. Pay attention to read
+     * and write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param dest
-     *            the dest parcel stream
-     * @param flags
-     *            the flags
+     * 
+     * @param dest the dest parcel stream
+     * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        dest.writeString( url );
-        dest.writeString( thumbUrl );
-        dest.writeString( createTime );
-        dest.writeString( updateTime );
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(url);
+        dest.writeString(thumbUrl);
+        dest.writeString(createTime);
+        dest.writeString(updateTime);
         dest.writeInt(type.ordinal());
-        dest.writeString( desc );
+        dest.writeString(desc);
         dest.writeInt(downloads);
         dest.writeParcelableArray(file, flags);
         dest.writeParcelableArray(subShares, flags);
-        dest.writeString( id );
+        dest.writeString(id);
         dest.writeInt(isSuccess ? 1 : 0);
         dest.writeInt(order.ordinal());
-        dest.writeMap( fields );
+        dest.writeMap(fields);
     }
 
     /**
-     * Create the share node entity from parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
+     * Create the share node entity from parcel stream. Pay attention to read
+     * and write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    @SuppressWarnings( "unchecked" )
-    public void readFromParcel( Parcel source )
-    {
+    @SuppressWarnings("unchecked")
+    public void readFromParcel(Parcel source) {
         url = source.readString();
         thumbUrl = source.readString();
         createTime = source.readString();
         updateTime = source.readString();
-        type = ShareType.valueOf( source.readInt() );
+        type = ShareType.valueOf(source.readInt());
         desc = source.readString();
         downloads = source.readInt();
-//        file = (FileNode[])source.readParcelableArray( this.getClass().getClassLoader() );
-//        subShares = (ShareNode[])source.readParcelableArray( this.getClass().getClassLoader() );
-        Parcelable[] fileParcelableArray = source.readParcelableArray( this.getClass().getClassLoader() );
-        file = new FileNode[]{};
+        // file = (FileNode[])source.readParcelableArray(
+        // this.getClass().getClassLoader() );
+        // subShares = (ShareNode[])source.readParcelableArray(
+        // this.getClass().getClassLoader() );
+        Parcelable[] fileParcelableArray = source.readParcelableArray(this.getClass()
+                .getClassLoader());
+        file = new FileNode[] {};
         if (fileParcelableArray != null) {
             file = Arrays.copyOf(fileParcelableArray, fileParcelableArray.length, FileNode[].class);
         }
 
-        Parcelable[] subSharesParcelableArray = source.readParcelableArray( this.getClass().getClassLoader() );
-        subShares = new ShareNode[]{};
+        Parcelable[] subSharesParcelableArray = source.readParcelableArray(this.getClass()
+                .getClassLoader());
+        subShares = new ShareNode[] {};
         if (subSharesParcelableArray != null) {
-            subShares = Arrays.copyOf(subSharesParcelableArray, subSharesParcelableArray.length, ShareNode[].class);
+            subShares = Arrays.copyOf(subSharesParcelableArray, subSharesParcelableArray.length,
+                    ShareNode[].class);
         }
         id = source.readString();
         isSuccess = source.readInt() == 1 ? true : false;
         order = Order.valueOf(source.readInt());
-        fields = source.readHashMap( this.getClass().getClassLoader() );
+        fields = source.readHashMap(this.getClass().getClassLoader());
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<ShareNode>    CREATOR    = new Parcelable.Creator<ShareNode>() {
+    public static final Parcelable.Creator<ShareNode> CREATOR = new Parcelable.Creator<ShareNode>() {
         @Override
-        public ShareNode createFromParcel( Parcel source )
-        {
-            return new ShareNode( source );
+        public ShareNode createFromParcel(Parcel source) {
+            return new ShareNode(source);
         }
 
         @Override
-        public ShareNode[] newArray( int size )
-        {
-            return new ShareNode[ size ];
+        public ShareNode[] newArray(int size) {
+            return new ShareNode[size];
         }
     };
 
-    public String getUrl()
-    {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl( String url )
-    {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public String getThumbUrl()
-    {
+    public String getThumbUrl() {
         return thumbUrl;
     }
 
-    public void setThumbUrl( String thumbUrl )
-    {
+    public void setThumbUrl(String thumbUrl) {
         this.thumbUrl = thumbUrl;
     }
 
-    public String getCreateTime()
-    {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime( String createTime )
-    {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public String getUpdateTime()
-    {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime( String updateTime )
-    {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 
-    public ShareType getType()
-    {
+    public ShareType getType() {
         return type;
     }
 
-    public void setType( ShareType type )
-    {
+    public void setType(ShareType type) {
         this.type = type;
     }
 
-    public String getDesc()
-    {
+    public String getDesc() {
         return desc;
     }
 
-    public void setDesc( String desc )
-    {
+    public void setDesc(String desc) {
         this.desc = desc;
     }
 
-    public int getDownloads()
-    {
+    public int getDownloads() {
         return downloads;
     }
 
-    public void setDownloads( int downloads )
-    {
+    public void setDownloads(int downloads) {
         this.downloads = downloads;
     }
 
-    public FileNode[] getFile()
-    {
+    public FileNode[] getFile() {
         return file;
     }
 
-    public void setFile( FileNode[] file )
-    {
+    public void setFile(FileNode[] file) {
         this.file = file;
     }
 
-    public ShareNode[] getSubShares()
-    {
+    public ShareNode[] getSubShares() {
         return subShares;
     }
 
-    public void setSubShares( ShareNode[] subShares )
-    {
+    public void setSubShares(ShareNode[] subShares) {
         this.subShares = subShares;
     }
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId( String id )
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public boolean isSuccess()
-    {
+    public boolean isSuccess() {
         return isSuccess;
     }
 
-    public void setSuccess( boolean isSuccess )
-    {
+    public void setSuccess(boolean isSuccess) {
         this.isSuccess = isSuccess;
     }
 
-    public Order getOrder()
-    {
+    public Order getOrder() {
         return order;
     }
 
-    public void setOrder( Order order )
-    {
+    public void setOrder(Order order) {
         this.order = order;
     }
 
-    public Map<String, String> getFields()
-    {
+    public Map<String, String> getFields() {
         return fields;
     }
 
-    public void setFields( Map<String, String> fields )
-    {
+    public void setFields(Map<String, String> fields) {
         this.fields = fields;
     }
 
-    public static enum Order
-    {
+    public static enum Order {
         createTime,
 
         createTime_Reverse,
@@ -287,33 +268,28 @@ public class ShareNode implements Parcelable
 
         Downloads_Reverse;
 
-        public static Order valueOf( int ordinal )
-        {
-            if( ordinal < 0 || ordinal >= values().length )
-            {
-                throw new IndexOutOfBoundsException( "Invalid ordinal" );
+        public static Order valueOf(int ordinal) {
+            if (ordinal < 0 || ordinal >= values().length) {
+                throw new IndexOutOfBoundsException("Invalid ordinal");
             }
 
-            return values()[ ordinal ];
+            return values()[ordinal];
         }
     }
 
-    public static enum ShareType
-    {
+    public static enum ShareType {
         sharedFile,
 
         sharedFolder,
 
         sharedGroup;
 
-        public static ShareType valueOf( int ordinal )
-        {
-            if( ordinal < 0 || ordinal >= values().length )
-            {
-                throw new IndexOutOfBoundsException( "Invalid ordinal" );
+        public static ShareType valueOf(int ordinal) {
+            if (ordinal < 0 || ordinal >= values().length) {
+                throw new IndexOutOfBoundsException("Invalid ordinal");
             }
 
-            return values()[ ordinal ];
+            return values()[ordinal];
         }
     }
 }

@@ -27,7 +27,7 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
  * The Class PublicAccountConstant.
  */
 public class PublicAccountConstant {
-    
+
     /** account pre number. */
     public static final int ACCOUNT_PRE_NUMBER = 8;
 
@@ -87,11 +87,11 @@ public class PublicAccountConstant {
 
     /** The Constant MENU_TYPE_APPLICATION. */
     public static final int MENU_TYPE_APPLICATION = 3;
-    
+
     /** The Constant MESSAGE_FORWARD_ABLE. */
     public static final int MESSAGE_FORWARD_ABLE = 0;
-    
+
     /** The Constant MESSAGE_FORWARD_UNABLE. */
     public static final int MESSAGE_FORWARD_UNABLE = 1;
-    
+
 }

@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 import android.os.Parcel;
@@ -41,7 +42,7 @@ import com.suntek.mway.rcs.client.aidl.provider.SuntekMessageData;
  * <p>
  * Company:pci-suntek
  * </p>
- *
+ * 
  * @author YFB
  * @version 1.0
  */
@@ -73,13 +74,15 @@ public class MessageSessionModel implements Parcelable, Comparable<MessageSessio
     private long time;
 
     /**
-     * Receiving or sending messages
-     * send message @see {@link SuntekMessageData#MSG_SEND} or receive message @see {@link SuntekMessageData#MSG_RECEIVE}
+     * Receiving or sending messages send message @see
+     * {@link SuntekMessageData#MSG_SEND} or receive message @see
+     * {@link SuntekMessageData#MSG_RECEIVE}
      */
     private int sendReceive;
 
     /**
      * The chat type
+     * 
      * @see {@link SuntekMessageData#KEY_CHAT_TYPE}
      */
     private int chatType;
@@ -95,14 +98,14 @@ public class MessageSessionModel implements Parcelable, Comparable<MessageSessio
     private long lastTime;
 
     /**
-     * The receivers of one to many chat message
-     * null if chat type is not @see {@link SuntekMessageData#CHAT_TYPE_ONE2GROUP}
+     * The receivers of one to many chat message null if chat type is not @see
+     * {@link SuntekMessageData#CHAT_TYPE_ONE2GROUP}
      */
     private String receiversOfOne2Many;
 
     /**
-     * The group chat info
-     * null if chat type is not @see {@link SuntekMessageData#CHAT_TYPE_GROUP}
+     * The group chat info null if chat type is not @see
+     * {@link SuntekMessageData#CHAT_TYPE_GROUP}
      */
     private GroupChatModel groupChatModel;
 
@@ -112,20 +115,20 @@ public class MessageSessionModel implements Parcelable, Comparable<MessageSessio
 
     public static final String KEY_LAST_TIME = "_lastTime";
 
-    private static final String KEY_COLUMN_NAME_COUNT = "count(distinct " + SuntekMessageData.KEY_THREAD_ID
-            + ") AS " + KEY_MSG_COUNT;
+    private static final String KEY_COLUMN_NAME_COUNT = "count(distinct "
+            + SuntekMessageData.KEY_THREAD_ID + ") AS " + KEY_MSG_COUNT;
 
-    private static final String KEY_COLUMN_NAME_LASTTIME = "max(" + SuntekMessageData.KEY_TIME + ") AS "
-            + KEY_LAST_TIME;
+    private static final String KEY_COLUMN_NAME_LASTTIME = "max(" + SuntekMessageData.KEY_TIME
+            + ") AS " + KEY_LAST_TIME;
 
     public static final String[] SESSION_PROJECTION = {
-        SuntekMessageData.KEY_ID, SuntekMessageData.KEY_THREAD_ID, SuntekMessageData.KEY_CONTACT,
-        SuntekMessageData.KEY_DATA, SuntekMessageData.KEY_TIME, SuntekMessageData.KEY_SEND_RECEIVE,
-        SuntekMessageData.KEY_CHAT_TYPE,
-        KEY_COLUMN_NAME_COUNT, KEY_COLUMN_NAME_LASTTIME
+            SuntekMessageData.KEY_ID, SuntekMessageData.KEY_THREAD_ID,
+            SuntekMessageData.KEY_CONTACT, SuntekMessageData.KEY_DATA, SuntekMessageData.KEY_TIME,
+            SuntekMessageData.KEY_SEND_RECEIVE, SuntekMessageData.KEY_CHAT_TYPE,
+            KEY_COLUMN_NAME_COUNT, KEY_COLUMN_NAME_LASTTIME
     };
 
-    public MessageSessionModel(){
+    public MessageSessionModel() {
     }
 
     public MessageSessionModel(Parcel in) {
@@ -135,18 +138,13 @@ public class MessageSessionModel implements Parcelable, Comparable<MessageSessio
     @Override
     public String toString() {
         StringBuffer buf = new StringBuffer();
-        buf.append("MessageSessionModel{")
-            .append("messageId:").append(messageId)
-            .append(",threadId:").append(threadId)
-            .append(",contact:").append(contact)
-            .append(",data:").append(data)
-            .append(",time:").append(time)
-            .append(",sendReceive:").append(sendReceive)
-            .append(",messageCount:").append(messageCount)
-            .append(",lastTime:").append(lastTime)
-            .append(",chatType:").append(chatType)
-            .append(",receiversOfOne2Many:").append(receiversOfOne2Many)
-            .append("}");
+        buf.append("MessageSessionModel{").append("messageId:").append(messageId)
+                .append(",threadId:").append(threadId).append(",contact:").append(contact)
+                .append(",data:").append(data).append(",time:").append(time)
+                .append(",sendReceive:").append(sendReceive).append(",messageCount:")
+                .append(messageCount).append(",lastTime:").append(lastTime).append(",chatType:")
+                .append(chatType).append(",receiversOfOne2Many:").append(receiversOfOne2Many)
+                .append("}");
         return buf.toString();
     }
 
@@ -278,8 +276,8 @@ public class MessageSessionModel implements Parcelable, Comparable<MessageSessio
         lastTime = source.readLong();
         chatType = source.readInt();
         receiversOfOne2Many = source.readString();
-        groupChatModel = (GroupChatModel) source.readValue(this.getClass().getClassLoader());
-        publicAccountModel = (PublicAccounts) source.readValue(this.getClass().getClassLoader());
+        groupChatModel = (GroupChatModel)source.readValue(this.getClass().getClassLoader());
+        publicAccountModel = (PublicAccounts)source.readValue(this.getClass().getClassLoader());
     }
 
     public static final Parcelable.Creator<MessageSessionModel> CREATOR = new Parcelable.Creator<MessageSessionModel>() {
@@ -297,10 +295,10 @@ public class MessageSessionModel implements Parcelable, Comparable<MessageSessio
     @Override
     public int compareTo(MessageSessionModel msgSession) {
         // TODO Auto-generated method stub
-//        return (int) (time - msgSession.getTime());
-        if (time - msgSession.getTime()>0) {
+        // return (int) (time - msgSession.getTime());
+        if (time - msgSession.getTime() > 0) {
             return 1;
-        }else if (time - msgSession.getTime()==0) {
+        } else if (time - msgSession.getTime() == 0) {
             return 0;
         } else {
             return -1;

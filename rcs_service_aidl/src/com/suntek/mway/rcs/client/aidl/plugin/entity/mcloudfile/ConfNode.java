@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.mcloudfile;
 
 import java.util.Map;
@@ -27,94 +28,81 @@ import java.util.Map;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ConfNode implements Parcelable
-{
+public class ConfNode implements Parcelable {
     private String version;
+
     private Map<String, String> fields;
 
-    public ConfNode()
-    {}
+    public ConfNode() {
+    }
 
-    public ConfNode( Parcel source )
-    {
-        readFromParcel( source );
+    public ConfNode(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
     /**
-     * Write the configure node entity to parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
+     * Write the configure node entity to parcel stream. Pay attention to read
+     * and write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param dest
-     *            the dest parcel stream
-     * @param flags
-     *            the flags
+     * 
+     * @param dest the dest parcel stream
+     * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        dest.writeString( version );
-        dest.writeMap( fields );
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(version);
+        dest.writeMap(fields);
     }
 
     /**
-     * Create the configure node entity from parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
-     * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * Create the configure node entity from parcel stream. Pay attention to
+     * read and write variables variables sequence should be consistent or not
+     * the correct results
+     * 
+     * @param source The parcel stream
      */
-    @SuppressWarnings( "unchecked" )
-    public void readFromParcel( Parcel source )
-    {
+    @SuppressWarnings("unchecked")
+    public void readFromParcel(Parcel source) {
         version = source.readString();
-        fields = source.readHashMap( this.getClass().getClassLoader() );
+        fields = source.readHashMap(this.getClass().getClassLoader());
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<ConfNode>    CREATOR    = new Parcelable.Creator<ConfNode>() {
+    public static final Parcelable.Creator<ConfNode> CREATOR = new Parcelable.Creator<ConfNode>() {
         @Override
-        public ConfNode createFromParcel( Parcel source )
-        {
-            return new ConfNode( source );
+        public ConfNode createFromParcel(Parcel source) {
+            return new ConfNode(source);
         }
 
         @Override
-        public ConfNode[] newArray( int size )
-        {
-            return new ConfNode[ size ];
+        public ConfNode[] newArray(int size) {
+            return new ConfNode[size];
         }
     };
 
-    public String getVersion()
-    {
+    public String getVersion() {
         return version;
     }
 
-    public void setVersion( String version )
-    {
+    public void setVersion(String version) {
         this.version = version;
     }
 
-    public Map<String, String> getFields()
-    {
+    public Map<String, String> getFields() {
         return fields;
     }
 
-    public void setFields( Map<String, String> fields )
-    {
+    public void setFields(Map<String, String> fields) {
         this.fields = fields;
     }
 }

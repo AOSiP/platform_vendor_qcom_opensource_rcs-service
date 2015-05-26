@@ -20,16 +20,23 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 public class ImdnNotification {
 
     private String messageId;
+
     private String datetime;
+
     private String recipientUri;
+
     private String originalRecipientUri;
+
     private String displayNotificationStatus;
+
     private String deliveryNotificationStatus;
+
     private int status;
 
     public String getMessageId() {

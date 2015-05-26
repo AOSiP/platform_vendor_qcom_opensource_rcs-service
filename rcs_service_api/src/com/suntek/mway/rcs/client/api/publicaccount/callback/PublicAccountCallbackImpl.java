@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.publicaccount.callback;
 
 import com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct.MenuInfoMode;
@@ -37,24 +38,23 @@ public class PublicAccountCallbackImpl extends PublicAccountCallback {
         // TODO Auto-generated constructor stub
     }
 
-//    @Override
-//    public void respAddSubscribe(boolean arg0) throws RemoteException {
-//        // TODO Auto-generated method stub
-//
-//    }
+    // @Override
+    // public void respAddSubscribe(boolean arg0) throws RemoteException {
+    // // TODO Auto-generated method stub
+    //
+    // }
 
     @Override
-    public void respAddSubscribeAccount(boolean arg0, PublicAccounts arg1)
-            throws RemoteException {
+    public void respAddSubscribeAccount(boolean arg0, PublicAccounts arg1) throws RemoteException {
         // TODO Auto-generated method stub
 
     }
 
-//    @Override
-//    public void respCancelSubscribe(boolean arg0) throws RemoteException {
-//        // TODO Auto-generated method stub
-//
-//    }
+    // @Override
+    // public void respCancelSubscribe(boolean arg0) throws RemoteException {
+    // // TODO Auto-generated method stub
+    //
+    // }
 
     @Override
     public void respCancelSubscribeAccount(boolean arg0, PublicAccounts arg1)
@@ -63,43 +63,39 @@ public class PublicAccountCallbackImpl extends PublicAccountCallback {
 
     }
 
-//    @Override
-//    public void respComplainPublic(boolean arg0) throws RemoteException {
-//        // TODO Auto-generated method stub
-//
-//    }
+    // @Override
+    // public void respComplainPublic(boolean arg0) throws RemoteException {
+    // // TODO Auto-generated method stub
+    //
+    // }
 
     @Override
-    public void respComplainPublicAccount(boolean arg0, PublicAccounts arg1)
-            throws RemoteException {
+    public void respComplainPublicAccount(boolean arg0, PublicAccounts arg1) throws RemoteException {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void respGetPreMessage(boolean arg0, List<MsgContent> arg1)
-            throws RemoteException {
+    public void respGetPreMessage(boolean arg0, List<MsgContent> arg1) throws RemoteException {
         // TODO Auto-generated method stub
 
     }
 
-//    @Override
-//    public void respGetPreMessageAccount(boolean arg0, PublicAccounts arg1)
-//            throws RemoteException {
-//        // TODO Auto-generated method stub
-//
-//    }
+    // @Override
+    // public void respGetPreMessageAccount(boolean arg0, PublicAccounts arg1)
+    // throws RemoteException {
+    // // TODO Auto-generated method stub
+    //
+    // }
 
     @Override
-    public void respGetPublicDetail(boolean arg0, PublicAccountsDetail arg1)
-            throws RemoteException {
+    public void respGetPublicDetail(boolean arg0, PublicAccountsDetail arg1) throws RemoteException {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void respGetPublicList(boolean arg0, List<PublicAccounts> arg1)
-            throws RemoteException {
+    public void respGetPublicList(boolean arg0, List<PublicAccounts> arg1) throws RemoteException {
         // TODO Auto-generated method stub
 
     }
@@ -111,23 +107,24 @@ public class PublicAccountCallbackImpl extends PublicAccountCallback {
 
     }
 
-//    @Override
-//    public void respGetPublicMenuInfoAccount(boolean arg0, PublicAccounts arg1)
-//            throws RemoteException {
-//        // TODO Auto-generated method stub
-//
-//    }
+    // @Override
+    // public void respGetPublicMenuInfoAccount(boolean arg0, PublicAccounts
+    // arg1)
+    // throws RemoteException {
+    // // TODO Auto-generated method stub
+    //
+    // }
 
-//    @Override
-//    public void respGetPublicMenuInfoString(boolean arg0, String arg1)
-//            throws RemoteException {
-//        // TODO Auto-generated method stub
-//
-//    }
+    // @Override
+    // public void respGetPublicMenuInfoString(boolean arg0, String arg1)
+    // throws RemoteException {
+    // // TODO Auto-generated method stub
+    //
+    // }
 
     @Override
-    public void respGetUserSubscribePublicList(boolean arg0,
-            List<PublicAccounts> arg1) throws RemoteException {
+    public void respGetUserSubscribePublicList(boolean arg0, List<PublicAccounts> arg1)
+            throws RemoteException {
         // TODO Auto-generated method stub
 
     }
@@ -140,8 +137,7 @@ public class PublicAccountCallbackImpl extends PublicAccountCallback {
     }
 
     @Override
-    public void respSetAcceptStatus(boolean result, String uuid)
-            throws RemoteException {
+    public void respSetAcceptStatus(boolean result, String uuid) throws RemoteException {
         // TODO Auto-generated method stub
 
     }

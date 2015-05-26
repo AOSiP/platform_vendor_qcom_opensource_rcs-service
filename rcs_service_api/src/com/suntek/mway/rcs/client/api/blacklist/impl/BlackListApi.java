@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.blacklist.impl;
 
 import java.util.List;
@@ -36,25 +37,29 @@ import com.suntek.mway.rcs.client.api.util.VerificationUtil;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 
 /**
- * <p>Title: BlackListApi class</p>
+ * <p>
+ * Title: BlackListApi class
+ * </p>
  * <p>
  * Description: The class <code>BlackListApi</code> offers the functions of
- * operating the blacklist information.
- * In order to use BlackListApi, one must to initialize the API
- * in the method onCreate() in UI(Activity for example).<p></p>
- * Here is the pseudo code example:<p></p>
- * blacklistApi = new BlackListApi();<br/>
- * blacklistApi.init(this);
+ * operating the blacklist information. In order to use BlackListApi, one must
+ * to initialize the API in the method onCreate() in UI(Activity for example).
+ * <p>
  * </p>
+ * Here is the pseudo code example:
+ * <p>
+ * </p>
+ * blacklistApi = new BlackListApi();<br/>
+ * blacklistApi.init(this); </p>
  * <p>
  * Copyright: Copyright (c) 2014
  * </p>
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class BlackListApi extends ClientApi {
 
@@ -69,11 +74,11 @@ public class BlackListApi extends ClientApi {
         public void onServiceConnected(ComponentName className, IBinder service) {
             myApi = IBlackListApi.Stub.asInterface(service);
             notifyServiceConnected();
-            LogHelper.d("IBlackListApi have success connect, api="+myApi);
+            LogHelper.d("IBlackListApi have success connect, api=" + myApi);
         }
 
         public void onServiceDisconnected(ComponentName className) {
-            if(isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
+            if (isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
                 LogHelper.d("IBlackListApi api disconnect service");
                 myApi = null;
                 notifyServiceDisconnected();
@@ -101,12 +106,12 @@ public class BlackListApi extends ClientApi {
 
     /**
      * Adds the number to blacklist.
-     *
+     * 
      * @param number the number
      */
     public boolean add(String number) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method add. [number]=%s", number));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method add. [number]=%s", number));
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return false;
@@ -121,12 +126,12 @@ public class BlackListApi extends ClientApi {
 
     /**
      * Removes the number from blacklist.
-     *
+     * 
      * @param number the number
      */
     public boolean remove(String number) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method remove. [number]=%s", number));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method remove. [number]=%s", number));
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return false;
@@ -144,7 +149,7 @@ public class BlackListApi extends ClientApi {
      */
     public void clear() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method clear. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method clear. "));
         try {
             myApi.clear();
         } catch (Exception ex) {
@@ -154,13 +159,14 @@ public class BlackListApi extends ClientApi {
 
     /**
      * Check whether the number is in blacklist or not.
-     *
+     * 
      * @param number the number
      * @return true, if successful
      */
     public boolean checkIsBlack(String number) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method checkIsBlack. [number]=%s", number));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method checkIsBlack. [number]=%s",
+                number));
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return false;
@@ -170,7 +176,7 @@ public class BlackListApi extends ClientApi {
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
-        return false;//default value is non-black user
+        return false;// default value is non-black user
     }
 
     public List<String> getList() throws ServiceDisconnectedException {
@@ -181,5 +187,15 @@ public class BlackListApi extends ClientApi {
             LogHelper.e(ex.getMessage(), ex);
         }
         return null;
+    }
+
+    public void setProviderUri(String authorities, boolean bFirewall)
+            throws ServiceDisconnectedException {
+        VerificationUtil.ApiIsNull(myApi);
+        try {
+            myApi.setProviderUri(authorities, bFirewall);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
     }
 }

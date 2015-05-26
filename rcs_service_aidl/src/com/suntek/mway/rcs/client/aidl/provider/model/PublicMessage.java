@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 import android.os.Parcel;
@@ -28,7 +29,7 @@ import android.os.Parcelable;
 /**
  * The Class PublicMessage.
  */
-public class PublicMessage  implements Parcelable{
+public class PublicMessage implements Parcelable {
 
     /** The Constant TEXT. */
     public static final String TEXT = "10";
@@ -50,14 +51,13 @@ public class PublicMessage  implements Parcelable{
 
     /** The Constant TOPIC MORE. */
     public static final String TOPIC_MORE = "52";
-    
+
     /** The Constant LOCATION. */
     public static final String LOCATION = "19";
-    
+
     /** The Constant VCARD. */
     public static final String VCARD = "18";
 
-    
     /** The createtime. */
     protected String createtime;
 
@@ -69,10 +69,10 @@ public class PublicMessage  implements Parcelable{
 
     /** The activeStatus. */
     protected int activeStatus;
-    
+
     /** The paUuid. */
     protected String paUuid;
-    
+
     /**
      * Instantiates a new public message.
      */
@@ -82,13 +82,13 @@ public class PublicMessage  implements Parcelable{
 
     /**
      * Instantiates a new public message.
-     *
+     * 
      * @param source the source
      */
     public PublicMessage(Parcel source) {
-        readFromParcel( source );
+        readFromParcel(source);
     }
-    
+
     public String getCreatetime() {
         return createtime;
     }
@@ -129,7 +129,8 @@ public class PublicMessage  implements Parcelable{
         this.paUuid = paUuid;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see android.os.Parcelable#describeContents()
      */
     @Override
@@ -137,23 +138,24 @@ public class PublicMessage  implements Parcelable{
         return 0;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        
+
     }
 
     /**
      * Read from parcel.
-     *
+     * 
      * @param source the source
      */
-    public void readFromParcel( Parcel source ){
-        
+    public void readFromParcel(Parcel source) {
+
     }
-    
+
     /** The Constant CREATOR. */
     public static final Parcelable.Creator<PublicMessage> CREATOR = new Parcelable.Creator<PublicMessage>() {
         public PublicMessage createFromParcel(Parcel in) {

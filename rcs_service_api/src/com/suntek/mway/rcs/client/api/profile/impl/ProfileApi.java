@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.profile.impl;
 
 import java.util.Locale;
@@ -41,27 +42,31 @@ import com.suntek.mway.rcs.client.api.util.VerificationUtil;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 
 /**
- * <p>Title: ProfileApi class</p>
+ * <p>
+ * Title: ProfileApi class
+ * </p>
  * <p>
  * Description: The class <code>ProfileApi</code> offers the functions of
- * operating the profile information.
- * In order to use ProfileApi, one must to initialize the API
- * in the method onCreate() in UI(Activity for example).<p></p>
- * Here is the pseudo code example:<p></p>
- * profileApi = new ProfileApi();<br/>
- * profileApi.init(this);
+ * operating the profile information. In order to use ProfileApi, one must to
+ * initialize the API in the method onCreate() in UI(Activity for example).
+ * <p>
  * </p>
+ * Here is the pseudo code example:
+ * <p>
+ * </p>
+ * profileApi = new ProfileApi();<br/>
+ * profileApi.init(this); </p>
  * <p>
  * Copyright: Copyright (c) 2014
  * </p>
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
-public class ProfileApi extends ClientApi  {
+public class ProfileApi extends ClientApi {
 
     /** The service name. */
     private static String serviceName = "com.suntek.mway.rcs.app.service.api.impl.profile.ProfileApiService";
@@ -74,17 +79,17 @@ public class ProfileApi extends ClientApi  {
         public void onServiceConnected(ComponentName className, IBinder service) {
             myApi = IProfileApi.Stub.asInterface(service);
             notifyServiceConnected();
-            LogHelper.d("IProfileApi have success connect, api="+myApi);
+            LogHelper.d("IProfileApi have success connect, api=" + myApi);
         }
 
         public void onServiceDisconnected(ComponentName className) {
-            if(isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
+            if (isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
                 LogHelper.d("IProfileApi api disconnect service");
                 myApi = null;
                 notifyServiceDisconnected();
             } else {
-                LogHelper.d("illegal call IProfileApi api disconnect service :"
-                        + reconnectionTimes);
+                LogHelper
+                        .d("illegal call IProfileApi api disconnect service :" + reconnectionTimes);
                 init(context, rcsListener);
                 if (!isBinded()) {
                     // app is uninstalled
@@ -106,95 +111,103 @@ public class ProfileApi extends ClientApi  {
 
     /**
      * Sets the my profile.
-     *
+     * 
      * @param profile the profile
      * @param listener the listener
      */
-    public void setMyProfile(Profile profile, ProfileListener listener) throws ServiceDisconnectedException {
+    public void setMyProfile(Profile profile, ProfileListener listener)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method setMyProfile. [profile]=%s", profile.toString()));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method setMyProfile. [profile]=%s",
+                profile.toString()));
         try {
             myApi.setMyProfile(profile, listener);
         } catch (Exception ex) {
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
     /**
      * Sets the my head pic.
-     *
+     * 
      * @param imgObj the img obj
      * @param listener the listener
      */
-    public void setMyHeadPic(Avatar imgObj,ProfileListener listener) throws ServiceDisconnectedException {
+    public void setMyHeadPic(Avatar imgObj, ProfileListener listener)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method setMyHeadPic. [imgObj]=%s", imgObj.toString()));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method setMyHeadPic. [imgObj]=%s",
+                imgObj.toString()));
         try {
             myApi.setMyHeadPic(imgObj, listener);
         } catch (Exception ex) {
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
     /**
      * Gets the my profile.
-     *
+     * 
      * @param listener the listener
      * @return the my profile
      */
     public void getMyProfile(ProfileListener listener) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method getMyProfile. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method getMyProfile. "));
         try {
-            myApi.getMyProfile( listener);
+            myApi.getMyProfile(listener);
         } catch (Exception ex) {
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
     /**
      * Gets the my head pic.
-     *
+     * 
      * @param listener the listener
      * @return the my head pic
      */
     public void getMyHeadPic(ProfileListener listener) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method getMyHeadPic. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method getMyHeadPic. "));
         try {
-            myApi.getMyHeadPic( listener);
+            myApi.getMyHeadPic(listener);
         } catch (Exception ex) {
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
     /**
      * Gets the head pic by contact.
-     *
+     * 
      * @param contactId the contact id
      * @param listener the listener
      * @return the head pic by contact
      */
-    public void getHeadPicByContact(long contactId,ProfileListener listener) throws ServiceDisconnectedException {
+    public void getHeadPicByContact(long contactId, ProfileListener listener)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method getHeadPicByContact. [contactId]=%d", contactId));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method getHeadPicByContact. [contactId]=%d", contactId));
         try {
             myApi.getHeadPicByContact(contactId, listener);
         } catch (Exception ex) {
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
     /**
      * Gets the head pic by number.
-     *
+     * 
      * @param number the number
      * @param listener the listener
      * @return the head pic by number
      */
-    public void getHeadPicByNumber(String number,int pixel,ProfileListener listener) throws ServiceDisconnectedException {
+    public void getHeadPicByNumber(String number, int pixel, ProfileListener listener)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method getHeadPicByNumber. [number]=%s", number));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method getHeadPicByNumber. [number]=%s", number));
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return;
@@ -202,52 +215,58 @@ public class ProfileApi extends ClientApi  {
         try {
             myApi.getHeadPicByNumber(VerificationUtil.formatNumber(number), pixel, listener);
         } catch (Exception ex) {
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
     /**
      * Refresh my qr img.
-     *
+     * 
      * @param profile the profile
      * @param includeEInfo the include e info
      * @param listener the listener
      */
-    public void refreshMyQRImg(Profile profile, boolean includeEInfo,QRImgListener listener) throws ServiceDisconnectedException {
+    public void refreshMyQRImg(Profile profile, boolean includeEInfo, QRImgListener listener)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method refreshMyQRImg. [profile,includeEInfo]=%s,%b", profile.toString(),includeEInfo));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method refreshMyQRImg. [profile,includeEInfo]=%s,%b", profile.toString(),
+                includeEInfo));
         try {
-            myApi.refreshMyQRImg(profile,includeEInfo, listener);
+            myApi.refreshMyQRImg(profile, includeEInfo, listener);
         } catch (Exception ex) {
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
     /**
      * update the the contacts head photo at fixed time every day.
-     *
-     * @param hhmm The timing of the trigger. the time format is HH:mm in 24-hour time system
+     * 
+     * @param hhmm The timing of the trigger. the time format is HH:mm in
+     *            24-hour time system
      * @param listener a callback whose method named onAvatarGet will be called
      * @return
      */
-    public void updateContactsHeadPicAtFixedRateEveryDay(String hhmm,
-            IProfileListener listener) throws ServiceDisconnectedException{
+    public void updateContactsHeadPicAtFixedRateEveryDay(String hhmm, IProfileListener listener)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method updateContactsHeadPicAtFixedRateEveryDay. [hhmm]=%s", hhmm));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method updateContactsHeadPicAtFixedRateEveryDay. [hhmm]=%s", hhmm));
         try {
             myApi.updateContactsHeadPicAtFixedRateEveryDay(hhmm, listener);
         } catch (Exception ex) {
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public String getUpdateTimeOfContactsHeadPic() throws ServiceDisconnectedException{
+    public String getUpdateTimeOfContactsHeadPic() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method getUpdateTimeOfContactsHeadPic"));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method getUpdateTimeOfContactsHeadPic"));
         try {
             return myApi.getUpdateTimeOfContactsHeadPic();
         } catch (Exception ex) {
-            LogHelper.e(ex.getMessage(),ex);
+            LogHelper.e(ex.getMessage(), ex);
         }
         return null;
     }

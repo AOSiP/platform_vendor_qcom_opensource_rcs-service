@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 import android.os.Parcel;
@@ -28,7 +29,7 @@ import android.os.Parcelable;
 /**
  * The Class PublicTextMessage.
  */
-public class PublicTextMessage extends PublicMessage implements Parcelable{
+public class PublicTextMessage extends PublicMessage implements Parcelable {
 
     /** The content. */
     private String content;
@@ -36,46 +37,51 @@ public class PublicTextMessage extends PublicMessage implements Parcelable{
     /**
      * Instantiates a new public text message.
      */
-    public PublicTextMessage(){}
+    public PublicTextMessage() {
+    }
 
     /**
      * Instantiates a new public text message.
-     *
+     * 
      * @param source the source
      */
-    public PublicTextMessage( Parcel source )
-    {
-        readFromParcel( source );
+    public PublicTextMessage(Parcel source) {
+        readFromParcel(source);
     }
 
-    /* (non-Javadoc)
-     * @see com.suntek.mway.rcs.client.aidl.provider.model.PublicMessage#describeContents()
+    /*
+     * (non-Javadoc)
+     * @see
+     * com.suntek.mway.rcs.client.aidl.provider.model.PublicMessage#describeContents
+     * ()
      */
     @Override
     public int describeContents() {
         return 0;
     }
 
-    /* (non-Javadoc)
-     * @see com.suntek.mway.rcs.client.aidl.provider.model.PublicMessage#writeToParcel(android.os.Parcel, int)
+    /*
+     * (non-Javadoc)
+     * @see
+     * com.suntek.mway.rcs.client.aidl.provider.model.PublicMessage#writeToParcel
+     * (android.os.Parcel, int)
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString( createtime );
-        dest.writeInt( forwardable );
-        dest.writeString( msgtype );
-        dest.writeString( content );
-        dest.writeInt( activeStatus );
-        dest.writeString( paUuid );
+        dest.writeString(createtime);
+        dest.writeInt(forwardable);
+        dest.writeString(msgtype);
+        dest.writeString(content);
+        dest.writeInt(activeStatus);
+        dest.writeString(paUuid);
     }
 
     /**
      * Read from parcel.
-     *
+     * 
      * @param source the source
      */
-    public void readFromParcel( Parcel source )
-    {
+    public void readFromParcel(Parcel source) {
         createtime = source.readString();
         forwardable = source.readInt();
         msgtype = source.readString();
@@ -85,24 +91,21 @@ public class PublicTextMessage extends PublicMessage implements Parcelable{
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<PublicTextMessage>    CREATOR    = new Parcelable.Creator<PublicTextMessage>() {
-                                                                                @Override
-                                                                                public PublicTextMessage createFromParcel( Parcel source )
-                                                                                {
-                                                                                    return new PublicTextMessage( source );
-                                                                                }
+    public static final Parcelable.Creator<PublicTextMessage> CREATOR = new Parcelable.Creator<PublicTextMessage>() {
+        @Override
+        public PublicTextMessage createFromParcel(Parcel source) {
+            return new PublicTextMessage(source);
+        }
 
-                                                                                @Override
-                                                                                public PublicTextMessage[] newArray( int size )
-                                                                                {
-                                                                                    return new PublicTextMessage[ size ];
-                                                                                }
-                                                                            };
-
+        @Override
+        public PublicTextMessage[] newArray(int size) {
+            return new PublicTextMessage[size];
+        }
+    };
 
     /**
      * Gets the content.
-     *
+     * 
      * @return the content
      */
     public String getContent() {
@@ -111,7 +114,7 @@ public class PublicTextMessage extends PublicMessage implements Parcelable{
 
     /**
      * Sets the content.
-     *
+     * 
      * @param content the new content
      */
     public void setContent(String content) {

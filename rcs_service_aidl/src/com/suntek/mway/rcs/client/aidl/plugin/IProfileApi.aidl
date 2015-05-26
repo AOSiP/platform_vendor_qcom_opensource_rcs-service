@@ -28,6 +28,8 @@ import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Avatar;
 
 interface IProfileApi
 {
+	boolean checkPluginStatus();
+
     void setMyProfile(in Profile profile, IProfileListener listener);
     
     void setMyHeadPic(in Avatar avatar, IProfileListener listener);

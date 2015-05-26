@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.mcloud;
 
 import com.suntek.mway.rcs.client.aidl.mcloud.IMcloudFileApi;
@@ -41,6 +42,7 @@ import java.util.Locale;
 
 public class McloudFileApi extends ClientApi {
     private static String serviceName = "com.suntek.mway.rcs.app.service.api.impl.mcloud.McloudApiService";
+
     IMcloudFileApi myApi;
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -51,13 +53,12 @@ public class McloudFileApi extends ClientApi {
         }
 
         public void onServiceDisconnected(ComponentName className) {
-            if(isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
+            if (isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
                 LogHelper.d("client api disconnect service");
                 myApi = null;
                 notifyServiceDisconnected();
             } else {
-                LogHelper.d("illegal call client api disconnect service :"
-                        + reconnectionTimes);
+                LogHelper.d("illegal call client api disconnect service :" + reconnectionTimes);
                 init(context, rcsListener);
                 if (!isBinded()) {
                     // app is uninstalled
@@ -74,12 +75,17 @@ public class McloudFileApi extends ClientApi {
         super.initServiceConnect(mConnection);
     }
 
-    public IMcloudOperationCtrl downloadFileFromUrl(String remoteUrl, String fileName, TransNode.TransOper transOper, int chatMessageId) throws ServiceDisconnectedException {
+    public IMcloudOperationCtrl downloadFileFromUrl(String remoteUrl, String fileName,
+            TransNode.TransOper transOper, int chatMessageId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:downloadFileFromUrl. [remoteUrl,fileName,transOper,chatMessageId]=%s,%s,%d,%d", remoteUrl, fileName, transOper.ordinal(), chatMessageId));
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method:downloadFileFromUrl. [remoteUrl,fileName,transOper,chatMessageId]=%s,%s,%d,%d",
+                        remoteUrl, fileName, transOper.ordinal(), chatMessageId));
         try {
-            IMcloudOperationCtrl operation = myApi.downloadFileFromUrl(remoteUrl, fileName, transOper.ordinal(), chatMessageId);
+            IMcloudOperationCtrl operation = myApi.downloadFileFromUrl(remoteUrl, fileName,
+                    transOper.ordinal(), chatMessageId);
             LogHelper.d("operation=" + operation);
             return operation;
         } catch (Exception ex) {
@@ -90,9 +96,10 @@ public class McloudFileApi extends ClientApi {
 
     public void getShareFileList(int beginIndex, int endIndex) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getShareFileList. [beginIndex,endIndex]=%d,%d",
-                beginIndex, endIndex));
+        LogHelper
+                .i(String.format(Locale.getDefault(),
+                        "enter method:getShareFileList. [beginIndex,endIndex]=%d,%d", beginIndex,
+                        endIndex));
         try {
             myApi.getShareFileList(beginIndex, endIndex);
         } catch (Exception ex) {
@@ -100,14 +107,16 @@ public class McloudFileApi extends ClientApi {
         }
     }
 
-    public IMcloudOperationCtrl putFile(String localPath, String remotePath, TransNode.TransOper transOper) throws ServiceDisconnectedException, FileSuffixException {
+    public IMcloudOperationCtrl putFile(String localPath, String remotePath,
+            TransNode.TransOper transOper) throws ServiceDisconnectedException, FileSuffixException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:putFile. [localPath,remotePath,transOper]=%s,%s,%d",
-                localPath, remotePath, transOper.ordinal()));
+                "enter method:putFile. [localPath,remotePath,transOper]=%s,%s,%d", localPath,
+                remotePath, transOper.ordinal()));
         VerificationUtil.isCloudFile(localPath);
         try {
-            IMcloudOperationCtrl operation = myApi.putFile(localPath, remotePath, transOper.ordinal());
+            IMcloudOperationCtrl operation = myApi.putFile(localPath, remotePath,
+                    transOper.ordinal());
             LogHelper.d("operation=" + operation);
             return operation;
         } catch (Exception ex) {
@@ -116,11 +125,11 @@ public class McloudFileApi extends ClientApi {
         }
     }
 
-    public void shareFile(String fullPathInID, String shareDesc) throws ServiceDisconnectedException {
+    public void shareFile(String fullPathInID, String shareDesc)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:shareFile. [fullPathInID,shareDesc]=%s,%s",
-                fullPathInID, shareDesc));
+                "enter method:shareFile. [fullPathInID,shareDesc]=%s,%s", fullPathInID, shareDesc));
         try {
             myApi.shareFile(fullPathInID, shareDesc);
         } catch (Exception ex) {
@@ -128,9 +137,8 @@ public class McloudFileApi extends ClientApi {
         }
     }
 
-    public void shareFileAndSend(String fullPathInID, String shareDesc,
-            String contact, long threadId, String smsContentTemp)
-            throws ServiceDisconnectedException {
+    public void shareFileAndSend(String fullPathInID, String shareDesc, String contact,
+            long threadId, String smsContentTemp) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
@@ -144,9 +152,8 @@ public class McloudFileApi extends ClientApi {
         }
     }
 
-    public void shareFileAndSendGroup(String fullPathInID, String shareDesc,
-            long threadId, String conversationId, String groupId)
-            throws ServiceDisconnectedException {
+    public void shareFileAndSendGroup(String fullPathInID, String shareDesc, long threadId,
+            String conversationId, String groupId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
@@ -154,15 +161,15 @@ public class McloudFileApi extends ClientApi {
                         "enter method:shareFileAndSendGroup. [fullPathInID,shareDesc,threadId,conversationId,groupId]=%s,%s,%d,%s,%s",
                         fullPathInID, shareDesc, threadId, conversationId, groupId));
         try {
-            myApi.shareFileAndSendGroup(fullPathInID, shareDesc, threadId,
-                    conversationId, groupId);
+            myApi.shareFileAndSendGroup(fullPathInID, shareDesc, threadId, conversationId, groupId);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
     public void shareFileAndSendOne2Many(String fullPathInID, String shareDesc,
-            List<String> contacts, long threadId, String smsContentTemp) throws ServiceDisconnectedException {
+            List<String> contacts, long threadId, String smsContentTemp)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
@@ -170,25 +177,28 @@ public class McloudFileApi extends ClientApi {
                         "enter method:shareFileAndSendOne2Many. [fullPathInID,shareDesc,contacts,threadId,smsContentTemp]=%s,%s,%s,%d,%s",
                         fullPathInID, shareDesc, contacts.toString(), threadId, smsContentTemp));
         try {
-            myApi.shareFileAndSendOne2Many(fullPathInID, shareDesc, contacts,
-                    threadId, smsContentTemp);
+            myApi.shareFileAndSendOne2Many(fullPathInID, shareDesc, contacts, threadId,
+                    smsContentTemp);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
-    public void getRemoteFileList(String remotePath, int beginIndex, int endIndex, FileNode.Order fileOrder) throws ServiceDisconnectedException {
+    public void getRemoteFileList(String remotePath, int beginIndex, int endIndex,
+            FileNode.Order fileOrder) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getRemoteFileList. [remotePath,beginIndex,endIndex,fileOrder]=%s,%d,%d,%d",
-                remotePath, beginIndex, endIndex, fileOrder.ordinal()));
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method:getRemoteFileList. [remotePath,beginIndex,endIndex,fileOrder]=%s,%d,%d,%d",
+                        remotePath, beginIndex, endIndex, fileOrder.ordinal()));
         try {
             myApi.getRemoteFileList(remotePath, beginIndex, endIndex, fileOrder.ordinal());
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
-    
+
     public String getLocalRootPath() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i("enter method:getLocalRootPath");

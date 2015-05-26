@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.setting;
 
 import java.util.ArrayList;
@@ -31,10 +32,12 @@ import android.os.Parcelable;
 public class LoginUser implements Parcelable {
 
     private String loginAccout;
+
     private String password;
+
     private boolean isSupportVoLTE;
 
-    public LoginUser(String account,String pwd) {
+    public LoginUser(String account, String pwd) {
         // TODO Auto-generated constructor stub
         this.loginAccout = account;
         this.password = pwd;
@@ -42,7 +45,7 @@ public class LoginUser implements Parcelable {
 
     public LoginUser(Parcel source) {
         // TODO Auto-generated constructor stub
-        readFromParcel( source );
+        readFromParcel(source);
     }
 
     public String getLoginAccout() {
@@ -80,17 +83,18 @@ public class LoginUser implements Parcelable {
         // TODO Auto-generated method stub
         dest.writeString(loginAccout);
         dest.writeString(password);
-        dest.writeBooleanArray( new boolean[]{ isSupportVoLTE } );
+        dest.writeBooleanArray(new boolean[] {
+            isSupportVoLTE
+        });
     }
 
-    public void readFromParcel( Parcel source )
-    {
+    public void readFromParcel(Parcel source) {
         loginAccout = source.readString();
         password = source.readString();
 
-        boolean[] val = new boolean[ 1 ];
-        source.readBooleanArray( val );
-        isSupportVoLTE = val[ 0 ];
+        boolean[] val = new boolean[1];
+        source.readBooleanArray(val);
+        isSupportVoLTE = val[0];
     }
 
     /**
@@ -114,6 +118,5 @@ public class LoginUser implements Parcelable {
         list.add("isSupportVoLTE=" + this.isSupportVoLTE);
         return list.toString();
     }
-
 
 }

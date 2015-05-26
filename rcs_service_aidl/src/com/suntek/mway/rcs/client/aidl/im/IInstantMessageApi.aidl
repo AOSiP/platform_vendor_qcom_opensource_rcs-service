@@ -102,8 +102,10 @@ interface IInstantMessageApi {
     ChatMessage getMessageByMessageId(String messageId);
     
     void removeMessageByThreadId(long threadId);
+    void removeButRemainLockMessageByThreadId(long threadId);
     void removeOneMessage(String id);
     void removeAllMessage();
+    void removeAllButRemainLockMessage();
     
     void topMessage(long threadId);
     void cancelTopMessage(long threadId);
@@ -144,6 +146,9 @@ interface IInstantMessageApi {
     int recoveBlackMsgByMessageId(String messageId);
     int recoveBlackMsgByThreadId(long threadId);
     int recoveBlackMsgAll();
+    
+    int lockMessageById(String id);
+    int unlockMessageById(String id);
     
     void retransmitMessageById(String id);
     void sendDisplayNotification(String conversationId, String number, String messageId);
@@ -203,6 +208,7 @@ interface IInstantMessageApi {
     long getVideoFtMaxSize();
 
     void removeMsgWithNotificationByThread(long threadId);
+    void removeButRemainLockMsgWithNotificationByThread(long threadId);
 
     void backupMessageList(in List<SimpleMsg> simpleMsgList);
 
@@ -252,4 +258,9 @@ interface IInstantMessageApi {
             String groupId);
     void forwardGroupVideoFile(long thread_id, String conversationId,long sms_id,String id,
             int  length ,String groupId);
+        
+    void sendTextMessageAtTime(long thread_id,String number, String text,
+            int burnFlag, int barCycle, long orderTime);
+    void sendOne2ManyTextMessageAtTime(long thread_id,in List<String> numbers, String text,
+            int burnFlag, int barCycle, long orderTime);
 }

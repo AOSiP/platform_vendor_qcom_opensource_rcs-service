@@ -30,4 +30,5 @@ interface IBlackListApi
     void clear();
     boolean checkIsBlack(String number);
     List<String> getList();
+    void setProviderUri(String authorities, boolean bFirewall);
 }

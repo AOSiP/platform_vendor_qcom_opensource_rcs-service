@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.profile;
 
 import java.util.ArrayList;
@@ -29,32 +30,30 @@ import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class OtherTels implements Parcelable
-{
-    //private String                    homeTel;
+public class OtherTels implements Parcelable {
+    // private String homeTel;
 
-    //private String                    mobilePhone;
+    // private String mobilePhone;
 
-    //private String                    fixedTel;
+    // private String fixedTel;
 
-    private HashMap<String, String>    otherTels    ;
+    private HashMap<String, String> otherTels;
 
-    public OtherTels()
-    {otherTels = new HashMap<String, String>();}
+    public OtherTels() {
+        otherTels = new HashMap<String, String>();
+    }
 
-    public OtherTels( Parcel source )
-    {
-        readFromParcel( source );
+    public OtherTels(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
@@ -62,99 +61,69 @@ public class OtherTels implements Parcelable
      * Write the avatar entity to parcel stream. Pay attention to read and write
      * variables variables sequence should be consistent or not the correct
      * results
-     *
-     * @param dest
-     *            the dest
-     * @param flags
-     *            the flags
+     * 
+     * @param dest the dest
+     * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        //dest.writeString( homeTel );
-        //dest.writeString( mobilePhone );
-        //dest.writeString( fixedTel );
-        dest.writeMap( otherTels );
+    public void writeToParcel(Parcel dest, int flags) {
+        // dest.writeString( homeTel );
+        // dest.writeString( mobilePhone );
+        // dest.writeString( fixedTel );
+        dest.writeMap(otherTels);
     }
 
     /**
      * Create the avatar entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    @SuppressWarnings( "unchecked" )
-    public void readFromParcel( Parcel source )
-    {
-        //homeTel = source.readString();
-        //mobilePhone = source.readString();
-        //fixedTel = source.readString();
+    @SuppressWarnings("unchecked")
+    public void readFromParcel(Parcel source) {
+        // homeTel = source.readString();
+        // mobilePhone = source.readString();
+        // fixedTel = source.readString();
         source.readMap(otherTels, this.getClass().getClassLoader());
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<OtherTels>    CREATOR    = new Parcelable.Creator<OtherTels>() {
+    public static final Parcelable.Creator<OtherTels> CREATOR = new Parcelable.Creator<OtherTels>() {
         @Override
-        public OtherTels createFromParcel( Parcel source )
-        {
-            return new OtherTels( source );
+        public OtherTels createFromParcel(Parcel source) {
+            return new OtherTels(source);
         }
 
         @Override
-        public OtherTels[] newArray( int size )
-        {
-            return new OtherTels[ size ];
+        public OtherTels[] newArray(int size) {
+            return new OtherTels[size];
         }
     };
-/*
-    public String getHomeTel()
-    {
-        return homeTel;
-    }
 
-    public void setHomeTel( String homeTel )
-    {
-        this.homeTel = homeTel;
-    }
-
-    public String getMobilePhone()
-    {
-        return mobilePhone;
-    }
-
-    public void setMobilePhone( String mobilePhone )
-    {
-        this.mobilePhone = mobilePhone;
-    }
-
-    public String getFixedTel()
-    {
-        return fixedTel;
-    }
-
-    public void setFixedTel( String fixedTel )
-    {
-        this.fixedTel = fixedTel;
-    }
-*/
-    public HashMap<String, String> getOtherTels()
-    {
+    /*
+     * public String getHomeTel() { return homeTel; } public void setHomeTel(
+     * String homeTel ) { this.homeTel = homeTel; } public String
+     * getMobilePhone() { return mobilePhone; } public void setMobilePhone(
+     * String mobilePhone ) { this.mobilePhone = mobilePhone; } public String
+     * getFixedTel() { return fixedTel; } public void setFixedTel( String
+     * fixedTel ) { this.fixedTel = fixedTel; }
+     */
+    public HashMap<String, String> getOtherTels() {
         return otherTels;
     }
 
-    public void setOtherTels( HashMap<String, String> otherTels )
-    {
+    public void setOtherTels(HashMap<String, String> otherTels) {
         this.otherTels = otherTels;
     }
+
     @Override
     public String toString() {
         List<String> list = new ArrayList<String>();
-        //list.add("homeTel="+ this.homeTel);
-        //list.add("mobilePhone="+ this.mobilePhone);
-        //list.add("fixedTel="+ this.fixedTel);
-        list.add("otherTels="+otherTels);
+        // list.add("homeTel="+ this.homeTel);
+        // list.add("mobilePhone="+ this.mobilePhone);
+        // list.add("fixedTel="+ this.fixedTel);
+        list.add("otherTels=" + otherTels);
         return list.toString();
     }
 }

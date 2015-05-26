@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 import java.util.ArrayList;
@@ -31,10 +32,12 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 
 /**
- * <p>Title: ChatGroupModel class</p>
  * <p>
- * Description: The class <code>ChatGroupModel</code> represents a chat group information
- * which is indicated by the field definition in this class.
+ * Title: ChatGroupModel class
+ * </p>
+ * <p>
+ * Description: The class <code>ChatGroupModel</code> represents a chat group
+ * information which is indicated by the field definition in this class.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -42,9 +45,9 @@ import android.text.TextUtils;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class GroupChatModel implements Parcelable {
 
@@ -124,7 +127,8 @@ public class GroupChatModel implements Parcelable {
     private String contactGroupId;
 
     /**
-     * The list of chat group user represented by class {@link com.suntek.mway.rcs.client.api.provider.model.ChatGroupUser}
+     * The list of chat group user represented by class
+     * {@link com.suntek.mway.rcs.client.api.provider.model.ChatGroupUser}
      */
     private List<GroupChatUser> userList = new ArrayList<GroupChatUser>();
 
@@ -148,21 +152,25 @@ public class GroupChatModel implements Parcelable {
      */
     private int remindPolicy;
 
-    public GroupChatModel(){
+    public GroupChatModel() {
     }
 
     public GroupChatModel(Parcel in) {
         readFromParcel(in);
     }
+
     /**
      * Get the record id.
+     * 
      * @return the record id
      */
     public int getId() {
         return id;
     }
+
     /**
      * set the record id.
+     * 
      * @param id the record id
      */
     public void setId(int id) {
@@ -171,20 +179,25 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Get the chat group uri.
+     * 
      * @return the chat group uri
      */
     public String getChatUri() {
         return chatUri;
     }
+
     /**
      * Set the chat group uri
+     * 
      * @param chatUri the chat group uri
      */
     public void setChatUri(String chatUri) {
         this.chatUri = chatUri;
     }
+
     /**
-     * Get the chat group name for display. Return 'subject' if the 'remark' is empry.
+     * Get the chat group name for display. Return 'subject' if the 'remark' is
+     * empry.
      */
     public String getDisplayName() {
         if (!TextUtils.isEmpty(remark)) {
@@ -193,99 +206,127 @@ public class GroupChatModel implements Parcelable {
             return subject;
         }
     }
+
     /**
      * Get the chat group subject.
+     * 
      * @return the chat group subject
      */
     public String getSubject() {
         return subject;
     }
+
     /**
      * Set the chat group subject.
+     * 
      * @param subject the chat group subject
      */
     public void setSubject(String subject) {
         this.subject = subject;
     }
+
     /**
      * Get the chat group thread id.
+     * 
      * @return the chat group thread id
      */
     public long getThreadId() {
         return threadId;
     }
+
     /**
      * Set the chat group thread id.
+     * 
      * @param threadId the chat group thread id
      */
     public void setThreadId(long threadId) {
         this.threadId = threadId;
     }
+
     /**
      * Get the chat group contribution id.
+     * 
      * @return the chat group contribution id
      */
     public String getContributionId() {
         return contributionId;
     }
+
     /**
      * Set the chat group contribution id.
+     * 
      * @param contributionId the chat group contribution id
      */
     public void setContributionId(String contributionId) {
         this.contributionId = contributionId;
     }
+
     /**
      * Get the contact group id.
-     * @return If the group chat is created by contact group, the id here is the contact group id.
+     * 
+     * @return If the group chat is created by contact group, the id here is the
+     *         contact group id.
      */
     public String getContactGroupId() {
         return contactGroupId;
     }
+
     /**
      * Set the contact group id.
-     * @param contactGroupId  the contact group id.
+     * 
+     * @param contactGroupId the contact group id.
      */
     public void setContactGroupId(String contactGroupId) {
         this.contactGroupId = contactGroupId;
     }
+
     /**
-     * Get a formatted string of Group chat contacts which are semicolon-separated.
-     * The every separated part is separated by commas, and each part separated by commas is
-     * phone number, display name, status and role of contact. The four parts is represented by class
+     * Get a formatted string of Group chat contacts which are
+     * semicolon-separated. The every separated part is separated by commas, and
+     * each part separated by commas is phone number, display name, status and
+     * role of contact. The four parts is represented by class
      * {@link com.suntek.mway.rcs.client.api.provider.model.ChatGroupUser}
-     * @return a formatted string of Group chat contacts which are semicolon-separated.
+     * 
+     * @return a formatted string of Group chat contacts which are
+     *         semicolon-separated.
      */
     public String getDataMembers() {
         return dataMembers;
     }
+
     /**
-     * Set a formatted string of Group chat contacts which are semicolon-separated.
-     * @param dataMembers a formatted string of Group chat contacts which are semicolon-separated.
-     * The every separated part is separated by commas, and each part separated by commas is
-     * phone number, display name, status and role of contact. The four parts is represented by class
-     * {@link com.suntek.mway.rcs.client.api.provider.model.ChatGroupUser}
+     * Set a formatted string of Group chat contacts which are
+     * semicolon-separated.
+     * 
+     * @param dataMembers a formatted string of Group chat contacts which are
+     *            semicolon-separated. The every separated part is separated by
+     *            commas, and each part separated by commas is phone number,
+     *            display name, status and role of contact. The four parts is
+     *            represented by class
+     *            {@link com.suntek.mway.rcs.client.api.provider.model.ChatGroupUser}
      */
     public void setDataMembers(String dataMembers) {
         this.dataMembers = dataMembers;
         userList.clear();
-        if(this.dataMembers != null) {
+        if (this.dataMembers != null) {
             String[] dataList = dataMembers.split(";");
-            for(int i = 0; i < dataList.length; i++) {
+            for (int i = 0; i < dataList.length; i++) {
                 GroupChatUser groupUser = GroupChatUser.fromFormatString(dataMembers);
-                if(groupUser != null) {
+                if (groupUser != null) {
                     userList.add(groupUser);
                 }
             }
         }
     }
+
     /**
      * Set phone numbers of chat group contacts.
+     * 
      * @param members phone numbers
      */
     public void setDataMemberList(List<String> members) {
         List<GroupChatUser> users = new ArrayList<GroupChatUser>();
-        for(int i = 0; i < members.size(); i++) {
+        for (int i = 0; i < members.size(); i++) {
             GroupChatUser user = new GroupChatUser();
             user.setNumber(members.get(i));
             users.add(user);
@@ -295,16 +336,18 @@ public class GroupChatModel implements Parcelable {
     }
 
     /**
-     * Format a list chat group contact phone number to a string which are semicolon-separated.
+     * Format a list chat group contact phone number to a string which are
+     * semicolon-separated.
+     * 
      * @param users
      * @return
      */
     private String formatToSaveNumberData(List<GroupChatUser> users) {
         StringBuffer sb = new StringBuffer();
-        for(int i = 0; i < users.size(); i++) {
+        for (int i = 0; i < users.size(); i++) {
             GroupChatUser user = users.get(i);
             sb.append(user.toFormatString());
-            if(i != users.size() - 1) {
+            if (i != users.size() - 1) {
                 sb.append(";");
             }
         }
@@ -313,6 +356,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Get a list of chat group user.
+     * 
      * @return
      */
     public List<GroupChatUser> getUserList() {
@@ -321,6 +365,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Get time of creating group
+     * 
      * @return
      */
     public long getTime() {
@@ -329,6 +374,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Set time of creating group
+     * 
      * @param time
      */
     public void setTime(long time) {
@@ -337,6 +383,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Set group member
+     * 
      * @param userList
      */
     public void setUserList(List<GroupChatUser> userList) {
@@ -345,6 +392,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Get group status
+     * 
      * @return
      */
     public int getStatus() {
@@ -353,6 +401,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Set group status
+     * 
      * @param status
      */
     public void setStatus(int status) {
@@ -361,6 +410,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Get max count of members
+     * 
      * @return
      */
     public int getMaxCount() {
@@ -369,6 +419,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Set max count of members
+     * 
      * @param maxCount
      */
     public void setMaxCount(int maxCount) {
@@ -377,6 +428,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Get conversationId
+     * 
      * @return
      */
     public String getConversationId() {
@@ -385,6 +437,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Set conversationId
+     * 
      * @param conversationId
      */
     public void setConversationId(String conversationId) {
@@ -393,6 +446,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Get remark
+     * 
      * @return remark
      */
     public String getRemark() {
@@ -401,6 +455,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Set remark
+     * 
      * @param remark the remark of group
      */
     public void setRemark(String remark) {
@@ -409,6 +464,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Get message reminding policy
+     * 
      * @return remindPolicy
      */
     public int getRemindPolicy() {
@@ -417,6 +473,7 @@ public class GroupChatModel implements Parcelable {
 
     /**
      * Set message reminding policy
+     * 
      * @param remindPolicy
      */
     public void setRemindPolicy(int remindPolicy) {
@@ -466,14 +523,12 @@ public class GroupChatModel implements Parcelable {
 
     @Override
     public String toString() {
-        return "GroupChatModel [id=" + id + ", chatUri=" + chatUri
-                + ", subject=" + subject + ", time=" + time + ", status="
-                + status + ", threadId=" + threadId + ", dataMembers="
-                + dataMembers + ", contributionId=" + contributionId
-                + ", contactGroupId=" + contactGroupId + ", userList="
-                + userList + ", maxCount=" + maxCount + ", conversationId="
-                + conversationId + ", remark=" + remark + ", remindPolicy="
-                + remindPolicy + "]";
+        return "GroupChatModel [id=" + id + ", chatUri=" + chatUri + ", subject=" + subject
+                + ", time=" + time + ", status=" + status + ", threadId=" + threadId
+                + ", dataMembers=" + dataMembers + ", contributionId=" + contributionId
+                + ", contactGroupId=" + contactGroupId + ", userList=" + userList + ", maxCount="
+                + maxCount + ", conversationId=" + conversationId + ", remark=" + remark
+                + ", remindPolicy=" + remindPolicy + "]";
     }
 
     public void readFromParcel(Parcel source) {

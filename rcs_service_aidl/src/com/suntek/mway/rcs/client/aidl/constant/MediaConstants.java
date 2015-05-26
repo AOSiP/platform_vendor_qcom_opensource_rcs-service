@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.constant;
 
 /**
@@ -35,10 +36,10 @@ public class MediaConstants {
 
     /** The suffixs of video. */
     public static final String VIDEO_SUFFIX = "3GP,MP4";
-    
+
     /** The suffixs of video. */
     public static final String VCARD_SUFFIX = "VCF";
-    
+
     /** The suffixs of video. */
     public static final String CLOUD_FILE_EXCLUDE_SUFFIX = "EXE,BAT,APK,SH,IPA,DEB,PXL,XAP";
 
@@ -50,7 +51,7 @@ public class MediaConstants {
 
     /** Maximum video file size. */
     public static final long VIDEO_FT_MAX_SIZE = 500 * 1024;
-    
+
     /** Maximum cloud file size. */
     public static final long CLOUD_FT_MAX_SIZE = 500 * 1024;
 

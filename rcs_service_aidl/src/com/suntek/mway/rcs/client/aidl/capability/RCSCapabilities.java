@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.capability;
 
 import com.suntek.mway.rcs.client.aidl.constant.APIConstant;
@@ -30,10 +31,13 @@ import android.os.Parcelable;
 import java.io.Serializable;
 
 /**
- * <p>Title: RCSCapabilities class</p>
+ * <p>
+ * Title: RCSCapabilities class
+ * </p>
  * <p>
  * Description: The class <code>RCSCapabilities</code> represents a series of
- * capabilities of the contact, which is indicated by the field definition in this class.
+ * capabilities of the contact, which is indicated by the field definition in
+ * this class.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -41,75 +45,67 @@ import java.io.Serializable;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
-public class RCSCapabilities implements Parcelable,Serializable {
-    
+public class RCSCapabilities implements Parcelable, Serializable {
+
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 5516256269504150135L;
 
     /**
-     * Image sharing support,
-     * "urn%3Aurn-7%3A3gpp-application.ims.iari.gsma-is"
+     * Image sharing support, "urn%3Aurn-7%3A3gpp-application.ims.iari.gsma-is"
      */
-    //private boolean imageSharingSupported = false;
+    // private boolean imageSharingSupported = false;
 
     /**
-     * Video sharing support
-     * +g.3gpp.cs-voice
+     * Video sharing support +g.3gpp.cs-voice
      */
-    //private boolean videoSharingSupported = false;
+    // private boolean videoSharingSupported = false;
 
     /**
-     * IP voice call support
-     * "urn%3Aurn-7%3A3gpp-service.ims.icsi.mmtel"
+     * IP voice call support "urn%3Aurn-7%3A3gpp-service.ims.icsi.mmtel"
      */
-    //private boolean ipVoiceCallSupported = false;
+    // private boolean ipVoiceCallSupported = false;
 
     /**
-     * IP video call support
-     * "urn%3Aurn-7%3A3gpp-service.ims.icsi.mmtel";video
+     * IP video call support "urn%3Aurn-7%3A3gpp-service.ims.icsi.mmtel";video
      */
-    //private boolean ipVideoCallSupported = false;
+    // private boolean ipVideoCallSupported = false;
 
     /**
-     * IM session support
-     * "urn%3Aurn-7%3A3gpp-service.ims.icsi.oma.cpm.session"
+     * IM session support "urn%3Aurn-7%3A3gpp-service.ims.icsi.oma.cpm.session"
      */
     private boolean imSessionSupported = false;
 
     /**
-     * File transfer support
-     * "urn%3Aurn-7%3A3gpp-application.ims.iari.rcse.ft"
+     * File transfer support "urn%3Aurn-7%3A3gpp-application.ims.iari.rcse.ft"
      * "urn%3Aurn-7%3A3gppservice.ims.icsi.oma.cpm.filetransfer"
      */
     private boolean fileTransferSupported = false;
 
     /**
-     * CS video support
-     * +g.3gpp.cs-voice
+     * CS video support +g.3gpp.cs-voice
      */
-    //private boolean csVideoSupported = false;
+    // private boolean csVideoSupported = false;
 
     /**
      * Presence discovery support
      * "urn%3Aurn-7%3A3gpp-application.ims.iari.rcse.dp"
      */
-    //private boolean presenceDiscoverySupported = false;
+    // private boolean presenceDiscoverySupported = false;
 
     /**
-     * Social presence support
-     * "urn%3Aurn-7%3A3gpp-application.ims.iari.rcse.sp"
+     * Social presence support "urn%3Aurn-7%3A3gpp-application.ims.iari.rcse.sp"
      */
-    //private boolean socialPresenceSupported = false;
+    // private boolean socialPresenceSupported = false;
 
     /**
      * File transfer over HTTP support
      * "urn%3Aurn-7%3A3gpp-application.ims.iari.rcs.fthttp"
      */
-    //private boolean fileTransferHttpSupported = false;
+    // private boolean fileTransferHttpSupported = false;
 
     /**
      * Geolocation push support
@@ -130,8 +126,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     private boolean fileTransferThumbnailSupported = false;
 
     /**
-     * File Transfer S&F
-     * "urn%3Aurn-7%3A3gpp-application.ims.iari.rcs.ftstandfw"
+     * File Transfer S&F "urn%3Aurn-7%3A3gpp-application.ims.iari.rcs.ftstandfw"
      */
     private boolean fileTransferStoreForwardSupported = false;
 
@@ -142,8 +137,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
     private boolean groupChatStoreForwardSupported = false;
 
     /**
-     * SIP automata (@see RFC 3840)
-     * +g.oma.sip-im
+     * SIP automata (@see RFC 3840) +g.oma.sip-im
      */
     //
 
@@ -160,7 +154,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /** vemotion. */
     private boolean vemotionSupported = false;
-    
+
     /** cloudFile. */
     private boolean cloudFileSupported = false;
 
@@ -180,21 +174,22 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * Construct a new RCSCapabilities() with another specified instance of RCSCapabilities.
-     *
+     * Construct a new RCSCapabilities() with another specified instance of
+     * RCSCapabilities.
+     * 
      * @param source another instance of RCSCapabilities.
      */
     public RCSCapabilities(Parcel source) {
-        //this.imageSharingSupported = source.readInt() != 0;
-        //this.videoSharingSupported = source.readInt() != 0;
-        //this.ipVoiceCallSupported = source.readInt() != 0;
-        //this.ipVideoCallSupported = source.readInt() != 0;
+        // this.imageSharingSupported = source.readInt() != 0;
+        // this.videoSharingSupported = source.readInt() != 0;
+        // this.ipVoiceCallSupported = source.readInt() != 0;
+        // this.ipVideoCallSupported = source.readInt() != 0;
         this.imSessionSupported = source.readInt() != 0;
         this.fileTransferSupported = source.readInt() != 0;
-        //this.csVideoSupported = source.readInt() != 0;
-        //this.presenceDiscoverySupported = source.readInt() != 0;
-        //this.socialPresenceSupported = source.readInt() != 0;
-        //this.fileTransferHttpSupported = source.readInt() != 0;
+        // this.csVideoSupported = source.readInt() != 0;
+        // this.presenceDiscoverySupported = source.readInt() != 0;
+        // this.socialPresenceSupported = source.readInt() != 0;
+        // this.fileTransferHttpSupported = source.readInt() != 0;
         this.geolocationPushSupported = source.readInt() != 0;
         this.geolocationPullSupported = source.readInt() != 0;
         this.fileTransferThumbnailSupported = source.readInt() != 0;
@@ -207,14 +202,14 @@ public class RCSCapabilities implements Parcelable,Serializable {
         this.cloudFileSupported = source.readInt() != 0;
         this.cmccSupported = source.readInt() != 0;
         this.burnAfterReading = source.readInt() != 0;
-        //this.sipAutomata = source.readInt() != 0;
+        // this.sipAutomata = source.readInt() != 0;
         this.timestamp = source.readLong();
     }
 
     /**
      * Describe the kinds of special objects contained in this Parcelable's
      * marshalled representation.
-     *
+     * 
      * @return Integer
      */
     public int describeContents() {
@@ -223,21 +218,21 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Write parcelable object.
-     *
+     * 
      * @param dest The Parcel in which the object should be written
      * @param flags Additional flags about how the object should be written
      */
     public void writeToParcel(Parcel dest, int flags) {
-        //dest.writeInt(imageSharingSupported ? 1 : 0);
-        //dest.writeInt(videoSharingSupported ? 1 : 0);
-        //dest.writeInt(ipVoiceCallSupported ? 1 : 0);
-        //dest.writeInt(ipVideoCallSupported ? 1 : 0);
+        // dest.writeInt(imageSharingSupported ? 1 : 0);
+        // dest.writeInt(videoSharingSupported ? 1 : 0);
+        // dest.writeInt(ipVoiceCallSupported ? 1 : 0);
+        // dest.writeInt(ipVideoCallSupported ? 1 : 0);
         dest.writeInt(imSessionSupported ? 1 : 0);
         dest.writeInt(fileTransferSupported ? 1 : 0);
-        //dest.writeInt(csVideoSupported ? 1 : 0);
-        //dest.writeInt(presenceDiscoverySupported ? 1 : 0);
-        //dest.writeInt(socialPresenceSupported ? 1 : 0);
-        //dest.writeInt(fileTransferHttpSupported ? 1 : 0);
+        // dest.writeInt(csVideoSupported ? 1 : 0);
+        // dest.writeInt(presenceDiscoverySupported ? 1 : 0);
+        // dest.writeInt(socialPresenceSupported ? 1 : 0);
+        // dest.writeInt(fileTransferHttpSupported ? 1 : 0);
         dest.writeInt(geolocationPushSupported ? 1 : 0);
         dest.writeInt(geolocationPullSupported ? 1 : 0);
         dest.writeInt(fileTransferThumbnailSupported ? 1 : 0);
@@ -250,15 +245,14 @@ public class RCSCapabilities implements Parcelable,Serializable {
         dest.writeInt(cloudFileSupported ? 1 : 0);
         dest.writeInt(cmccSupported ? 1 : 0);
         dest.writeInt(burnAfterReading ? 1 : 0);
-        //dest.writeInt(sipAutomata ? 1 : 0);
+        // dest.writeInt(sipAutomata ? 1 : 0);
         dest.writeLong(timestamp);
     }
 
     /**
      * a fast way to get a Parcelable creator.
      */
-    public static final Parcelable.Creator<RCSCapabilities> CREATOR
-            = new Parcelable.Creator<RCSCapabilities>() {
+    public static final Parcelable.Creator<RCSCapabilities> CREATOR = new Parcelable.Creator<RCSCapabilities>() {
         public RCSCapabilities createFromParcel(Parcel source) {
             return new RCSCapabilities(source);
         }
@@ -270,88 +264,78 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Is image sharing supported.
-     *
+     * 
      * @return Boolean
      */
     /*
-    public boolean isImageSharingSupported() {
-        return imageSharingSupported;
-    }
-    */
+     * public boolean isImageSharingSupported() { return imageSharingSupported;
+     * }
+     */
     /**
      * Set the image sharing support
-     *
+     * 
      * @param supported Supported
      */
     /*
-    public void setImageSharingSupported(boolean supported) {
-        this.imageSharingSupported = supported;
-    }
-    */
+     * public void setImageSharingSupported(boolean supported) {
+     * this.imageSharingSupported = supported; }
+     */
     /**
      * Is video sharing supported
-     *
+     * 
      * @return Boolean
      */
     /*
-    public boolean isVideoSharingSupported() {
-        return videoSharingSupported;
-    }
-    */
+     * public boolean isVideoSharingSupported() { return videoSharingSupported;
+     * }
+     */
     /**
      * Set the video sharing support
-     *
+     * 
      * @param supported Supported
      */
     /*
-    public void setVideoSharingSupported(boolean supported) {
-        this.videoSharingSupported = supported;
-    }
-    */
+     * public void setVideoSharingSupported(boolean supported) {
+     * this.videoSharingSupported = supported; }
+     */
 
     /**
      * Is IP voice call supported
-     *
+     * 
      * @return Boolean
      */
     /*
-    public boolean isIpVoiceCallSupported() {
-        return ipVoiceCallSupported;
-    }
-    */
+     * public boolean isIpVoiceCallSupported() { return ipVoiceCallSupported; }
+     */
     /**
      * Is IP video call supported
-     *
+     * 
      * @return Boolean
      */
     /*
-    public boolean isIpVideoCallSupported() {
-        return ipVideoCallSupported;
-    }
-    */
+     * public boolean isIpVideoCallSupported() { return ipVideoCallSupported; }
+     */
     /**
      * Set the IP voice call support
-     *
+     * 
      * @param supported Supported
      */
     /*
-    public void setIpVoiceCallSupported(boolean supported) {
-        this.ipVoiceCallSupported = supported;
-    }
-    */
+     * public void setIpVoiceCallSupported(boolean supported) {
+     * this.ipVoiceCallSupported = supported; }
+     */
     /**
      * Set the IP video call support
-     *
+     * 
      * @param supported Supported
      */
     /*
-    public void setIpVideoCallSupported(boolean supported) {
-        this.ipVideoCallSupported = supported;
-    }
-    */
+     * public void setIpVideoCallSupported(boolean supported) {
+     * this.ipVideoCallSupported = supported; }
+     */
     /**
      * Is IM session supported
-     *
+     * 
      * @return Boolean
      */
     public boolean isImSessionSupported() {
@@ -360,7 +344,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Set the IM session support.
-     *
+     * 
      * @param supported Supported
      */
     public void setImSessionSupported(boolean supported) {
@@ -369,7 +353,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Is file transfer supported.
-     *
+     * 
      * @return Boolean
      */
     public boolean isFileTransferSupported() {
@@ -378,7 +362,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Set the file transfer support.
-     *
+     * 
      * @param supported Supported
      */
     public void setFileTransferSupported(boolean supported) {
@@ -387,91 +371,82 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Is CS video supported.
-     *
+     * 
      * @return Boolean
      */
     /*
-    public boolean isCsVideoSupported() {
-        return csVideoSupported;
-    }
-    */
+     * public boolean isCsVideoSupported() { return csVideoSupported; }
+     */
     /**
      * Set the CS video support
-     *
+     * 
      * @param supported Supported
      */
     /*
-    public void setCsVideoSupported(boolean supported) {
-        this.csVideoSupported = supported;
-    }
-    */
+     * public void setCsVideoSupported(boolean supported) {
+     * this.csVideoSupported = supported; }
+     */
     /**
      * Is presence discovery supported
-     *
+     * 
      * @return Boolean
      */
     /*
-    public boolean isPresenceDiscoverySupported() {
-        return presenceDiscoverySupported;
-    }
-    */
+     * public boolean isPresenceDiscoverySupported() { return
+     * presenceDiscoverySupported; }
+     */
 
     /**
      * Set the presence discovery support
-     *
+     * 
      * @param supported Supported
      */
     /*
-    public void setPresenceDiscoverySupported(boolean supported) {
-        this.presenceDiscoverySupported = supported;
-    }
-    */
+     * public void setPresenceDiscoverySupported(boolean supported) {
+     * this.presenceDiscoverySupported = supported; }
+     */
 
     /**
      * Is social presence supported
-     *
+     * 
      * @return Boolean
      */
     /*
-    public boolean isSocialPresenceSupported() {
-        return socialPresenceSupported;
-    }
-    */
+     * public boolean isSocialPresenceSupported() { return
+     * socialPresenceSupported; }
+     */
 
     /**
      * Set the social presence support
-     *
+     * 
      * @param supported Supported
      */
     /*
-    public void setSocialPresenceSupported(boolean supported) {
-        this.socialPresenceSupported = supported;
-    }
-    */
+     * public void setSocialPresenceSupported(boolean supported) {
+     * this.socialPresenceSupported = supported; }
+     */
 
     /**
      * Is file transfer over HTTP supported
-     *
+     * 
      * @return Boolean
      */
     /*
-    public boolean isFileTransferHttpSupported() {
-        return fileTransferHttpSupported;
-    }
-    */
+     * public boolean isFileTransferHttpSupported() { return
+     * fileTransferHttpSupported; }
+     */
     /**
      * Set the file transfer over HTTP support
-     *
+     * 
      * @param supported Supported
      */
     /*
-    public void setFileTransferHttpSupported(boolean supported) {
-        this.fileTransferHttpSupported = supported;
-    }
-    */
+     * public void setFileTransferHttpSupported(boolean supported) {
+     * this.fileTransferHttpSupported = supported; }
+     */
     /**
      * Is Geolocation Push supported
-     *
+     * 
      * @return Boolean
      */
     public boolean isGeolocationPushSupported() {
@@ -480,7 +455,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Set the Geolocation Pull support.
-     *
+     * 
      * @param supported Supported
      */
     public void setGeolocationPullSupported(boolean supported) {
@@ -489,7 +464,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Is Geolocation Pull supported.
-     *
+     * 
      * @return Boolean
      */
     public boolean isGeolocationPullSupported() {
@@ -498,7 +473,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Set the Geolocation Push support.
-     *
+     * 
      * @param supported Supported
      */
     public void setGeolocationPushSupported(boolean supported) {
@@ -507,7 +482,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Is file transfer thumbnail supported.
-     *
+     * 
      * @return Boolean
      */
     public boolean isFileTransferThumbnailSupported() {
@@ -516,7 +491,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Set the file transfer thumbnail support.
-     *
+     * 
      * @param supported Supported
      */
     public void setFileTransferThumbnailSupported(boolean supported) {
@@ -525,7 +500,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Is file transfer S&F supported.
-     *
+     * 
      * @return Boolean
      */
 
@@ -535,7 +510,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Set the file transfer S&F support.
-     *
+     * 
      * @param supported Supported
      */
 
@@ -545,7 +520,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Is group chat S&F supported.
-     *
+     * 
      * @return Boolean
      */
     public boolean isGroupChatStoreForwardSupported() {
@@ -554,7 +529,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Set the group chat S&F support.
-     *
+     * 
      * @param supported Supported
      */
     public void setGroupChatStoreForwardSupported(boolean supported) {
@@ -563,27 +538,26 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Is device an automata ?.
-     *
+     * 
      * @return True if automata
      */
     /*
-    public boolean isSipAutomata() {
-        return sipAutomata;
-    }
-    */
+     * public boolean isSipAutomata() { return sipAutomata; }
+     */
 
     /**
      * Set the SIP automata feature tag
+     * 
      * @param sipAutomata
      */
     /*
-    public void setSipAutomata(boolean sipAutomata) {
-        this.sipAutomata = sipAutomata;
-    }
-    */
+     * public void setSipAutomata(boolean sipAutomata) { this.sipAutomata =
+     * sipAutomata; }
+     */
 
     /**
      * page mode message or not
+     * 
      * @return
      */
     public boolean isPageModeMsgSupported() {
@@ -592,7 +566,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Set page mode message.
-     *
+     * 
      * @param pageModeMsg the new page mode msg supported
      */
     public void setPageModeMsgSupported(boolean pageModeMsg) {
@@ -601,7 +575,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * large mode message or not.
-     *
+     * 
      * @return true, if is large mode msg supported
      */
     public boolean isLargeModeMsgSupported() {
@@ -610,7 +584,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * set large mode message.
-     *
+     * 
      * @param largeModeMsg the new large mode msg supported
      */
     public void setLargeModeMsgSupported(boolean largeModeMsg) {
@@ -619,7 +593,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * public message or not.
-     *
+     * 
      * @return true, if is public msg supported
      */
     public boolean isPublicMsgSupported() {
@@ -628,7 +602,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * set public message.
-     *
+     * 
      * @param publicMsg the new public msg supported
      */
     public void setPublicMsgSupported(boolean publicMsg) {
@@ -637,7 +611,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * ve motion or not.
-     *
+     * 
      * @return true, if is vemotion supported
      */
     public boolean isVemotionSupported() {
@@ -646,16 +620,16 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * set ve motion.
-     *
+     * 
      * @param vemotion the new vemotion supported
      */
     public void setVemotionSupported(boolean vemotion) {
         this.vemotionSupported = vemotion;
     }
-    
+
     /**
      * Checks if is cloud file supported.
-     *
+     * 
      * @return true, if is cloud file supported
      */
     public boolean isCloudFileSupported() {
@@ -664,7 +638,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Sets the cloud file supported.
-     *
+     * 
      * @param cloudFileSupported the new cloud file supported
      */
     public void setCloudFileSupported(boolean cloudFileSupported) {
@@ -672,8 +646,9 @@ public class RCSCapabilities implements Parcelable,Serializable {
     }
 
     /**
-     * group management(modify group name, kick people, transfer the group) nor not.
-     *
+     * group management(modify group name, kick people, transfer the group) nor
+     * not.
+     * 
      * @return true, if is cmcc supported
      */
     public boolean isCmccSupported() {
@@ -682,7 +657,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * set group management.
-     *
+     * 
      * @param cmcc the new cmcc supported
      */
     public void setCmccSupported(boolean cmcc) {
@@ -691,7 +666,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Checks is burn after reading.
-     *
+     * 
      * @return true, if is burn after reading
      */
     public boolean isBurnAfterReading() {
@@ -700,7 +675,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Set burn after reading.
-     *
+     * 
      * @param burnAfterReading the new burn after reading
      */
     public void setBurnAfterReading(boolean burnAfterReading) {
@@ -709,7 +684,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Get the capabilities timestamp.
-     *
+     * 
      * @return Timestamp (in milliseconds)
      */
     public long getTimestamp() {
@@ -718,7 +693,7 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Set capabilities timestamp.
-     *
+     * 
      * @param timestamp the new timestamp
      */
     public void setTimestamp(long timestamp) {
@@ -727,37 +702,39 @@ public class RCSCapabilities implements Parcelable,Serializable {
 
     /**
      * Returns a string representation of the object.
-     *
+     * 
      * @return String
      */
     public String toString() {
 
         return
 
-            //", Video_share=" + videoSharingSupported +
-            //", IP_voice_call=" + ipVoiceCallSupported +
-            //", IP_video_call=" + ipVideoCallSupported +
-            "File_transfer=" + fileTransferSupported +
-            //", Image_share=" + imageSharingSupported +
-            ", File_transferStoreForward=" + fileTransferStoreForwardSupported +
+        // ", Video_share=" + videoSharingSupported +
+        // ", IP_voice_call=" + ipVoiceCallSupported +
+        // ", IP_video_call=" + ipVideoCallSupported +
+        "File_transfer="
+                + fileTransferSupported
+                +
+                // ", Image_share=" + imageSharingSupported +
+                ", File_transferStoreForward="
+                + fileTransferStoreForwardSupported
+                +
 
-            ", Chat=" + imSessionSupported +
-            //", CS_video=" + csVideoSupported +
-            //", Presence_discovery=" + presenceDiscoverySupported +
-            //", Social_presence=" + socialPresenceSupported +
-            //", FT_http=" + fileTransferHttpSupported +
-            ", groupChatStoreForward=" + groupChatStoreForwardSupported +
-            ", Geolocation_push=" + geolocationPushSupported +
-            ", Geolocation_pull=" + geolocationPullSupported +
-            ", FT_thumbnail=" + fileTransferThumbnailSupported +
-            ", pageModeMsg=" + pageModeMsgSupported +
-            ", largeModeMsg=" + largeModeMsgSupported +
-            ", publicMsg=" + publicMsgSupported +
-            ", vemotion=" + vemotionSupported +
-            ", cloudFile=" + cloudFileSupported +
-            ", cmcc=" + cmccSupported +
-            ", burnAfterReading=" + burnAfterReading +
-            //", SipAutomata=" + sipAutomata +
-            ", Timestamp=" + timestamp;
+                ", Chat="
+                + imSessionSupported
+                +
+                // ", CS_video=" + csVideoSupported +
+                // ", Presence_discovery=" + presenceDiscoverySupported +
+                // ", Social_presence=" + socialPresenceSupported +
+                // ", FT_http=" + fileTransferHttpSupported +
+                ", groupChatStoreForward=" + groupChatStoreForwardSupported + ", Geolocation_push="
+                + geolocationPushSupported + ", Geolocation_pull=" + geolocationPullSupported
+                + ", FT_thumbnail=" + fileTransferThumbnailSupported + ", pageModeMsg="
+                + pageModeMsgSupported + ", largeModeMsg=" + largeModeMsgSupported + ", publicMsg="
+                + publicMsgSupported + ", vemotion=" + vemotionSupported + ", cloudFile="
+                + cloudFileSupported + ", cmcc=" + cmccSupported + ", burnAfterReading="
+                + burnAfterReading +
+                // ", SipAutomata=" + sipAutomata +
+                ", Timestamp=" + timestamp;
     }
 }

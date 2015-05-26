@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 import java.util.LinkedList;
@@ -31,7 +32,7 @@ import android.os.Parcelable;
 /**
  * The Class PublicTopicMessage.
  */
-public class PublicTopicMessage extends PublicMessage implements Parcelable{
+public class PublicTopicMessage extends PublicMessage implements Parcelable {
 
     /** The topics. */
     private List<PublicTopicContent> topics;
@@ -39,73 +40,76 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
     /**
      * Instantiates a new public topic message.
      */
-    public PublicTopicMessage(){}
+    public PublicTopicMessage() {
+    }
 
     /**
      * Instantiates a new public topic message.
-     *
+     * 
      * @param source the source
      */
-    public PublicTopicMessage( Parcel source )
-    {
-        readFromParcel( source );
+    public PublicTopicMessage(Parcel source) {
+        readFromParcel(source);
     }
 
-    /* (non-Javadoc)
-     * @see com.suntek.mway.rcs.client.api.provider.model.PublicMessage#describeContents()
+    /*
+     * (non-Javadoc)
+     * @see
+     * com.suntek.mway.rcs.client.api.provider.model.PublicMessage#describeContents
+     * ()
      */
     @Override
     public int describeContents() {
         return 0;
     }
 
-    /* (non-Javadoc)
-     * @see com.suntek.mway.rcs.client.api.provider.model.PublicMessage#writeToParcel(android.os.Parcel, int)
+    /*
+     * (non-Javadoc)
+     * @see
+     * com.suntek.mway.rcs.client.api.provider.model.PublicMessage#writeToParcel
+     * (android.os.Parcel, int)
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString( createtime );
-        dest.writeInt( forwardable );
-        dest.writeString( msgtype );
-        dest.writeInt( activeStatus );
-        dest.writeString( paUuid );
-        dest.writeList( topics );
+        dest.writeString(createtime);
+        dest.writeInt(forwardable);
+        dest.writeString(msgtype);
+        dest.writeInt(activeStatus);
+        dest.writeString(paUuid);
+        dest.writeList(topics);
     }
 
     /**
      * Read from parcel.
-     *
+     * 
      * @param source the source
      */
-    public void readFromParcel( Parcel source )
-    {
+    public void readFromParcel(Parcel source) {
         createtime = source.readString();
         forwardable = source.readInt();
         msgtype = source.readString();
         activeStatus = source.readInt();
         paUuid = source.readString();
         topics = new LinkedList<PublicTopicContent>();
-        source.readList( topics, this.getClass().getClassLoader() );
+        source.readList(topics, this.getClass().getClassLoader());
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<PublicTopicMessage>    CREATOR    = new Parcelable.Creator<PublicTopicMessage>() {
-                                                                                @Override
-                                                                                public PublicTopicMessage createFromParcel( Parcel source )
-                                                                                {
-                                                                                    return new PublicTopicMessage( source );
-                                                                                }
+    public static final Parcelable.Creator<PublicTopicMessage> CREATOR = new Parcelable.Creator<PublicTopicMessage>() {
+        @Override
+        public PublicTopicMessage createFromParcel(Parcel source) {
+            return new PublicTopicMessage(source);
+        }
 
-                                                                                @Override
-                                                                                public PublicTopicMessage[] newArray( int size )
-                                                                                {
-                                                                                    return new PublicTopicMessage[ size ];
-                                                                                }
-                                                                            };
+        @Override
+        public PublicTopicMessage[] newArray(int size) {
+            return new PublicTopicMessage[size];
+        }
+    };
 
     /**
      * Gets the topics.
-     *
+     * 
      * @return the topics
      */
     public List<PublicTopicContent> getTopics() {
@@ -114,7 +118,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
     /**
      * Sets the topics.
-     *
+     * 
      * @param topics the new topics
      */
     public void setTopics(List<PublicTopicContent> topics) {
@@ -124,7 +128,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
     /**
      * The Class PublicTopicContent.
      */
-    public static class PublicTopicContent implements Parcelable{
+    public static class PublicTopicContent implements Parcelable {
 
         /** The title. */
         private String title;
@@ -153,18 +157,20 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
         /**
          * Instantiates a new public topic content.
          */
-        public PublicTopicContent(){}
+        public PublicTopicContent() {
+        }
 
         /**
          * Instantiates a new public topic content.
-         *
+         * 
          * @param source the source
          */
-        public PublicTopicContent(Parcel source){
-            readFromParcel( source );
+        public PublicTopicContent(Parcel source) {
+            readFromParcel(source);
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
          * @see android.os.Parcelable#describeContents()
          */
         @Override
@@ -172,7 +178,8 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
             return 0;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
          * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
          */
         @Override
@@ -189,10 +196,10 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Read from parcel.
-         *
+         * 
          * @param source the source
          */
-        public void readFromParcel( Parcel source ){
+        public void readFromParcel(Parcel source) {
             title = source.readString();
             author = source.readString();
             thumbLink = source.readString();
@@ -204,23 +211,21 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
         }
 
         /** The parcel creator. */
-        public static final Parcelable.Creator<PublicTopicContent>    CREATOR    = new Parcelable.Creator<PublicTopicContent>() {
-                                                                                    @Override
-                                                                                    public PublicTopicContent createFromParcel( Parcel source )
-                                                                                    {
-                                                                                        return new PublicTopicContent( source );
-                                                                                    }
+        public static final Parcelable.Creator<PublicTopicContent> CREATOR = new Parcelable.Creator<PublicTopicContent>() {
+            @Override
+            public PublicTopicContent createFromParcel(Parcel source) {
+                return new PublicTopicContent(source);
+            }
 
-                                                                                    @Override
-                                                                                    public PublicTopicContent[] newArray( int size )
-                                                                                    {
-                                                                                        return new PublicTopicContent[ size ];
-                                                                                    }
-                                                                                };
+            @Override
+            public PublicTopicContent[] newArray(int size) {
+                return new PublicTopicContent[size];
+            }
+        };
 
         /**
          * Gets the title.
-         *
+         * 
          * @return the title
          */
         public String getTitle() {
@@ -229,7 +234,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the title.
-         *
+         * 
          * @param title the new title
          */
         public void setTitle(String title) {
@@ -238,7 +243,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the author.
-         *
+         * 
          * @return the author
          */
         public String getAuthor() {
@@ -247,7 +252,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the author.
-         *
+         * 
          * @param author the new author
          */
         public void setAuthor(String author) {
@@ -256,7 +261,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the thumb link.
-         *
+         * 
          * @return the thumb link
          */
         public String getThumbLink() {
@@ -265,7 +270,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the thumb link.
-         *
+         * 
          * @param thumbLink the new thumb link
          */
         public void setThumbLink(String thumbLink) {
@@ -274,7 +279,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the original link.
-         *
+         * 
          * @return the original link
          */
         public String getOriginalLink() {
@@ -283,7 +288,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the original link.
-         *
+         * 
          * @param originalLink the new original link
          */
         public void setOriginalLink(String originalLink) {
@@ -292,7 +297,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the source link.
-         *
+         * 
          * @return the source link
          */
         public String getSourceLink() {
@@ -301,7 +306,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the source link.
-         *
+         * 
          * @param sourceLink the new source link
          */
         public void setSourceLink(String sourceLink) {
@@ -310,7 +315,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the media uuid.
-         *
+         * 
          * @return the media uuid
          */
         public String getMediaUuid() {
@@ -319,7 +324,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the media uuid.
-         *
+         * 
          * @param mediaUuid the new media uuid
          */
         public void setMediaUuid(String mediaUuid) {
@@ -328,7 +333,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the main text.
-         *
+         * 
          * @return the main text
          */
         public String getMainText() {
@@ -337,7 +342,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the main text.
-         *
+         * 
          * @param mainText the new main text
          */
         public void setMainText(String mainText) {
@@ -346,7 +351,7 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Gets the body link.
-         *
+         * 
          * @return the body link
          */
         public String getBodyLink() {
@@ -355,13 +360,12 @@ public class PublicTopicMessage extends PublicMessage implements Parcelable{
 
         /**
          * Sets the body link.
-         *
+         * 
          * @param bodyLink the new body link
          */
         public void setBodyLink(String bodyLink) {
             this.bodyLink = bodyLink;
         }
-
 
     }
 }

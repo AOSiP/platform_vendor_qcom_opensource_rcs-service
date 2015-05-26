@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.support;
 
 import com.suntek.mway.rcs.client.aidl.constant.BroadcastConstants;
@@ -35,6 +36,7 @@ import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
+import android.os.SystemProperties;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -42,9 +44,8 @@ import java.util.List;
 
 /**
  * Dynamically detect the installation status of RCS components during runtime.
- *
+ * 
  * @author lrb
- *
  */
 public class RcsSupportApi {
     /**
@@ -95,11 +96,20 @@ public class RcsSupportApi {
     public static final int PLUGIN_PLUGIN_CENTER = 6;
 
     private static final String TAG = "RCS_UI";
+
     private static final int DMS_VERSION_UNKNOWN = -999;
+
+    private static final int RCS_DISABLED = 0;
+
+    private static final int RCS_ENABLED = 1;
+
+    private static final String PROPERTY_NAME_RCS_ENABLED = "persist.sys.rcs.enabled";
+
+    private static final String PROPERTY_NAME_DM_VERSION = "persist.sys.rcs.dm.version";
 
     /**
      * Check that the RcsService module is been installed.
-     *
+     * 
      * @param context
      * @return true if RcsService module is installed.
      */
@@ -109,7 +119,7 @@ public class RcsSupportApi {
 
     /**
      * Check that the RcsService module is been installed.
-     *
+     * 
      * @param context
      * @return true if RcsService module is installed.
      */
@@ -136,14 +146,14 @@ public class RcsSupportApi {
     }
 
     private RcsAccountApi mAccountApi;
+
     private Context mContext;
 
     private boolean mIsRcsServiceInstalled;
-    private boolean mIsSimAvailableForRcs;
 
     /**
      * Dynamically detect the supported plug-in.
-     *
+     * 
      * @param context
      * @return The plug-in list that is supported.
      */
@@ -187,13 +197,6 @@ public class RcsSupportApi {
         }.start();
     }
 
-    private BroadcastReceiver userStatusChangedReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            mIsSimAvailableForRcs = isSimAvailableForRcs();
-        }
-    };
-
     private void initRcsAccountApi() {
         mAccountApi.init(mContext, new RCSServiceListener() {
             @Override
@@ -204,29 +207,27 @@ public class RcsSupportApi {
             @Override
             public void onServiceConnected() throws RemoteException {
                 Log.d(TAG, "RcsAccountApi connected");
-                mIsSimAvailableForRcs = isSimAvailableForRcs();
-
-                IntentFilter filter = new IntentFilter(BroadcastConstants.ACTION_DMS_USER_STATUS_CHANGED);
-                mContext.registerReceiver(userStatusChangedReceiver, filter);
             }
         });
     }
 
     /**
-     * Return whether the RCS is support. In general, use this method to define whether the RCS
-     * related UI entrance should display. The result might not accurate when it is still
-     * initializing. This is a compromise for performance.
+     * Return whether the RCS is support. In general, use this method to define
+     * whether the RCS related UI entrance should display. The result might not
+     * accurate when it is still initializing. This is a compromise for
+     * performance.
+     * 
      * @param context
      * @return Whether RCS is supported.
      */
     public boolean isRcsSupported() {
-        return mIsRcsServiceInstalled && mIsSimAvailableForRcs;
-//        return true;
+        return isRcsEnabled() && mIsRcsServiceInstalled && isSimAvailableForRcs();
     }
 
     /**
-     * Return whether the RCS is online. The result might not accurate when it is still
-     * initializing. This is a compromise for performance.
+     * Return whether the RCS is online. The result might not accurate when it
+     * is still initializing. This is a compromise for performance.
+     * 
      * @param context
      * @return Whether RCS is supported.
      */
@@ -249,11 +250,18 @@ public class RcsSupportApi {
 
     private int getDmVersion() {
         try {
-            RcsUserProfileInfo userProfile = mAccountApi.getRcsUserProfileInfo();
-            return Integer.valueOf(userProfile.getVersion());
+            int dmVersion = SystemProperties.getInt(PROPERTY_NAME_DM_VERSION, DMS_VERSION_UNKNOWN);
+            return dmVersion;
         } catch (Exception e) {
             Log.w(TAG, "Failed getting DM version. " + e.getMessage());
             return DMS_VERSION_UNKNOWN;
         }
+    }
+
+    private boolean isRcsEnabled() {
+        int rcsEnabled = SystemProperties.getInt(PROPERTY_NAME_RCS_ENABLED, RCS_ENABLED);
+        boolean isRcsEnabled = RCS_ENABLED == rcsEnabled;
+        Log.d(TAG, "isRcsEnabled(): " + isRcsEnabled + ", rcsEnabled: " + rcsEnabled);
+        return isRcsEnabled;
     }
 }

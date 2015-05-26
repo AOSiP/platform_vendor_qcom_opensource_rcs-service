@@ -20,11 +20,11 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
-package com.suntek.mway.rcs.client.api.capability.callback;
 
+package com.suntek.mway.rcs.client.api.capability.callback;
 
 import com.suntek.mway.rcs.client.aidl.plugin.callback.ICapabiltyListener;
 
-public abstract class CapabiltyListener extends ICapabiltyListener.Stub{
+public abstract class CapabiltyListener extends ICapabiltyListener.Stub {
 
 }

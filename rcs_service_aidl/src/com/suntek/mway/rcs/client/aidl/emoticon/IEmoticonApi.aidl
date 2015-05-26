@@ -178,7 +178,7 @@ interface IEmoticonApi {
      */
     //void authUseEmoticon( in Map paramMap, IEmoticonCallbackApi callback );
     
-    void isCanSend(String emoticonId, String phone, IEmoticonCanSendCallback cansendCallback);
+    boolean isCanSend(String emoticonId);
     
     /**
      * Gets the storage root path.
@@ -217,4 +217,8 @@ interface IEmoticonApi {
 */
 
 //    ResultBO doLogout(String userPhone, String date);
+
+	boolean isEmojiStoreInstall();
+	
+	void startEmojiStoreApp();
 }

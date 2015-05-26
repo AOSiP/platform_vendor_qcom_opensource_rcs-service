@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.richscrn;
 
 import android.os.Parcel;
@@ -38,162 +39,144 @@ import android.os.Parcelable;
  * <p>
  * Company: pci-suntek
  * </p>
- *
+ * 
  * @author zrq
  * @version 1.0
- *
  */
-public class ResultUtil implements Parcelable
-{
+public class ResultUtil implements Parcelable {
     /** The result succ flag, true is succ, otherwise it is fail. */
-    private boolean                                        resultFlag;
+    private boolean resultFlag;
 
     /** The result info. */
-    private String                                        resultMsg;
+    private String resultMsg;
+
     /**
      * The result additional object, different conditions have different result
      * object.
      */
-    private Object                                        resultObj;
+    private Object resultObj;
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<ResultUtil>    CREATOR    = new Parcelable.Creator<ResultUtil>() {
-                                                                    @Override
-                                                                    public ResultUtil createFromParcel( Parcel source )
-                                                                    {
-                                                                        return new ResultUtil( source );
-                                                                    }
+    public static final Parcelable.Creator<ResultUtil> CREATOR = new Parcelable.Creator<ResultUtil>() {
+        @Override
+        public ResultUtil createFromParcel(Parcel source) {
+            return new ResultUtil(source);
+        }
 
-                                                                    @Override
-                                                                    public ResultUtil[] newArray( int size )
-                                                                    {
-                                                                        return new ResultUtil[ size ];
-                                                                    }
-                                                                };
+        @Override
+        public ResultUtil[] newArray(int size) {
+            return new ResultUtil[size];
+        }
+    };
 
     /**
      * Instantiates a new result entity.
      */
-    public ResultUtil()
-    {}
+    public ResultUtil() {
+    }
 
     /**
      * Instantiates a new result entity from parcel.
-     *
-     * @param source
-     *            the parcel source.
+     * 
+     * @param source the parcel source.
      */
-    public ResultUtil( Parcel source )
-    {
-        readFromParcel( source );
+    public ResultUtil(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * The result entity write to parcel stream. Pay attention to write
      * variables and read the ordering of the variables should be consistent or
      * not the correct results.
-     *
-     * @param dest
-     *            The parcel stream
-     * @param flags
-     *            The write to parcel flag
+     * 
+     * @param dest The parcel stream
+     * @param flags The write to parcel flag
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        dest.writeBooleanArray( new boolean[] { resultFlag } );
-        dest.writeString( resultMsg );
-        dest.writeValue( resultObj );
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeBooleanArray(new boolean[] {
+            resultFlag
+        });
+        dest.writeString(resultMsg);
+        dest.writeValue(resultObj);
     }
 
     /**
      * Create the result entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    public void readFromParcel( Parcel source )
-    {
-        boolean[] val = new boolean[ 1 ];
-        source.readBooleanArray( val );
-        resultFlag = val[ 0 ];
+    public void readFromParcel(Parcel source) {
+        boolean[] val = new boolean[1];
+        source.readBooleanArray(val);
+        resultFlag = val[0];
         resultMsg = source.readString();
-        resultObj = source.readValue( this.getClass().getClassLoader() );
+        resultObj = source.readValue(this.getClass().getClassLoader());
     }
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
     /**
      * Checks if is result succ.
-     *
+     * 
      * @return true, if is result succ
      */
-    public boolean isResultFlag()
-    {
+    public boolean isResultFlag() {
         return resultFlag;
     }
 
     /**
      * Sets the result flag.
-     *
-     * @param resultFlag
-     *            the new result flag
+     * 
+     * @param resultFlag the new result flag
      */
-    public void setResultFlag( boolean resultFlag )
-    {
+    public void setResultFlag(boolean resultFlag) {
         this.resultFlag = resultFlag;
     }
 
     /**
      * Gets the result info.
-     *
+     * 
      * @return the result info
      */
-    public String getResultMsg()
-    {
+    public String getResultMsg() {
         return resultMsg;
     }
 
     /**
      * Sets the result info.
-     *
-     * @param resultMsg
-     *            the new result info.
+     * 
+     * @param resultMsg the new result info.
      */
-    public void setResultMsg( String resultMsg )
-    {
+    public void setResultMsg(String resultMsg) {
         this.resultMsg = resultMsg;
     }
 
     /**
      * Gets the result object.
-     *
+     * 
      * @return the result object
      */
-    public Object getResultObj()
-    {
+    public Object getResultObj() {
         return resultObj;
     }
 
     /**
      * Sets the result object.
-     *
-     * @param resultObj
-     *            the new result object
+     * 
+     * @param resultObj the new result object
      */
-    public void setResultObj( Object resultObj )
-    {
+    public void setResultObj(Object resultObj) {
         this.resultObj = resultObj;
     }
 }

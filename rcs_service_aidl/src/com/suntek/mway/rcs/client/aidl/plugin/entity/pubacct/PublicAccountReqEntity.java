@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
 
 import android.os.Parcel;
@@ -39,49 +40,48 @@ import android.os.Parcelable;
  * Company: pci-suntek
  * </p>
  * .
- *
+ * 
  * @author zrq
  * @version 1.0
  */
-public class PublicAccountReqEntity implements Parcelable
-{
+public class PublicAccountReqEntity implements Parcelable {
     /** the public account uuid. */
-    private String    paUuid;
+    private String paUuid;
+
     /** the public account name. */
-    private String    name;
+    private String name;
+
     /**
      * the public account recommend level. the value range is 1-5, default value
      * is 1.
      */
-    private int        recommendLevel;
+    private int recommendLevel;
+
     /** the public account logo url. */
-    private String    logo;
+    private String logo;
 
     /**
      * Instantiates a new public account request entity.
      */
-    public PublicAccountReqEntity()
-    {}
+    public PublicAccountReqEntity() {
+    }
 
     /**
      * Instantiates a new public account request entity.
-     *
-     * @param source
-     *            the parcel source
+     * 
+     * @param source the parcel source
      */
-    public PublicAccountReqEntity( Parcel source )
-    {
-        readFromParcel( source );
+    public PublicAccountReqEntity(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         // TODO Auto-generated method stub
         return 0;
     }
@@ -90,31 +90,26 @@ public class PublicAccountReqEntity implements Parcelable
      * write the public account request entity to parcel stream. Pay attention
      * to read and write variables variables sequence should be consistent or
      * not the correct results
-     *
-     * @param dest
-     *            the dest
-     * @param flags
-     *            the flags
+     * 
+     * @param dest the dest
+     * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        dest.writeString( paUuid );
-        dest.writeString( name );
-        dest.writeInt( recommendLevel );
-        dest.writeString( logo );
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(paUuid);
+        dest.writeString(name);
+        dest.writeInt(recommendLevel);
+        dest.writeString(logo);
     }
 
     /**
      * Create the public account request entity from parcel stream. Pay
      * attention to read and write variables variables sequence should be
      * consistent or not the correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    public void readFromParcel( Parcel source )
-    {
+    public void readFromParcel(Parcel source) {
         paUuid = source.readString();
         name = source.readString();
         recommendLevel = source.readInt();
@@ -122,101 +117,87 @@ public class PublicAccountReqEntity implements Parcelable
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<PublicAccountReqEntity>    CREATOR    = new Parcelable.Creator<PublicAccountReqEntity>() {
-                                                                                @Override
-                                                                                public PublicAccountReqEntity createFromParcel( Parcel source )
-                                                                                {
-                                                                                    return new PublicAccountReqEntity( source );
-                                                                                }
+    public static final Parcelable.Creator<PublicAccountReqEntity> CREATOR = new Parcelable.Creator<PublicAccountReqEntity>() {
+        @Override
+        public PublicAccountReqEntity createFromParcel(Parcel source) {
+            return new PublicAccountReqEntity(source);
+        }
 
-                                                                                @Override
-                                                                                public PublicAccountReqEntity[] newArray( int size )
-                                                                                {
-                                                                                    return new PublicAccountReqEntity[ size ];
-                                                                                }
-                                                                            };
+        @Override
+        public PublicAccountReqEntity[] newArray(int size) {
+            return new PublicAccountReqEntity[size];
+        }
+    };
 
     /**
      * Gets the public account uuid.
-     *
+     * 
      * @return the public account uuid
      */
-    public String getPaUuid()
-    {
+    public String getPaUuid() {
         return paUuid;
     }
 
     /**
      * Sets the public account uuid.
-     *
-     * @param paUuid
-     *            the new public account uuid
+     * 
+     * @param paUuid the new public account uuid
      */
-    public void setPaUuid( String paUuid )
-    {
+    public void setPaUuid(String paUuid) {
         this.paUuid = paUuid;
     }
 
     /**
      * Gets the public account name.
-     *
+     * 
      * @return the public account name
      */
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
     /**
      * Sets the public account name.
-     *
-     * @param name
-     *            the new public account name
+     * 
+     * @param name the new public account name
      */
-    public void setName( String name )
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
     /**
      * Gets the recommend level.
-     *
+     * 
      * @return the recommend level
      */
-    public int getRecommendLevel()
-    {
+    public int getRecommendLevel() {
         return recommendLevel;
     }
 
     /**
      * Sets the recommend level.
-     *
-     * @param recommendLevel
-     *            the new recommend level
+     * 
+     * @param recommendLevel the new recommend level
      */
-    public void setRecommendLevel( int recommendLevel )
-    {
+    public void setRecommendLevel(int recommendLevel) {
         this.recommendLevel = recommendLevel;
     }
 
     /**
      * Gets the logo url.
-     *
+     * 
      * @return the logo url
      */
-    public String getLogo()
-    {
+    public String getLogo() {
         return logo;
     }
 
     /**
      * Sets the logo url.
-     *
-     * @param logo
-     *            the new logo url
+     * 
+     * @param logo the new logo url
      */
-    public void setLogo( String logo )
-    {
+    public void setLogo(String logo) {
         this.logo = logo;
     }
 }

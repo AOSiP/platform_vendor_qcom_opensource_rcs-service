@@ -20,29 +20,23 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.mcontact;
 
-
 public enum ContactAction {
-    CONTACT_ACTION_READ,
-    CONTACT_ACTION_ADD,
-    CONTACT_ACTION_DELETE,
-    CONTACT_ACTION_UPDATE,
-    CONTACT_ACTION_UNKNOWN;
+    CONTACT_ACTION_READ, CONTACT_ACTION_ADD, CONTACT_ACTION_DELETE, CONTACT_ACTION_UPDATE, CONTACT_ACTION_UNKNOWN;
 
     /**
      * Value of.
-     *
+     * 
      * @param ordinal the ordinal
      * @return the event
      */
-    public static ContactAction valueOf( int ordinal )
-    {
-        if( ordinal < 0 || ordinal >= values().length )
-        {
-            throw new IndexOutOfBoundsException( "Invalid ordinal" );
+    public static ContactAction valueOf(int ordinal) {
+        if (ordinal < 0 || ordinal >= values().length) {
+            throw new IndexOutOfBoundsException("Invalid ordinal");
         }
 
-        return values()[ ordinal ];
+        return values()[ordinal];
     }
 }

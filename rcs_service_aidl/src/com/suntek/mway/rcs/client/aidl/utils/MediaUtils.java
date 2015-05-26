@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.utils;
 
 import java.io.File;
@@ -39,112 +40,112 @@ public class MediaUtils {
 
     /**
      * Checks if is image file.
-     *
+     * 
      * @param fileName the file name
      * @return true, if is image file
      */
-    public static boolean isImageFile(String fileName){
-        if(TextUtils.isEmpty(fileName)){
+    public static boolean isImageFile(String fileName) {
+        if (TextUtils.isEmpty(fileName)) {
             return false;
         }
 
         int suffixIndex = fileName.lastIndexOf(".");
-        if(suffixIndex != -1){
+        if (suffixIndex != -1) {
             String suffix = fileName.substring(suffixIndex + 1);
             return isImageSuffix(suffix);
-        }else{
+        } else {
             return false;
         }
     }
 
     /**
      * Checks if is audio file.
-     *
+     * 
      * @param fileName the file name
      * @return true, if is audio file
      */
-    public static boolean isAudioFile(String fileName){
-        if(TextUtils.isEmpty(fileName)){
+    public static boolean isAudioFile(String fileName) {
+        if (TextUtils.isEmpty(fileName)) {
             return false;
         }
 
         int suffixIndex = fileName.lastIndexOf(".");
-        if(suffixIndex != -1){
+        if (suffixIndex != -1) {
             String suffix = fileName.substring(suffixIndex + 1);
             return isAudioSuffix(suffix);
-        }else{
+        } else {
             return false;
         }
     }
 
     /**
      * Checks if is video file.
-     *
+     * 
      * @param fileName the file name
      * @return true, if is video file
      */
-    public static boolean isVideoFile(String fileName){
-        if(TextUtils.isEmpty(fileName)){
+    public static boolean isVideoFile(String fileName) {
+        if (TextUtils.isEmpty(fileName)) {
             return false;
         }
 
         int suffixIndex = fileName.lastIndexOf(".");
-        if(suffixIndex != -1){
+        if (suffixIndex != -1) {
             String suffix = fileName.substring(suffixIndex + 1);
             return isVideoSuffix(suffix);
-        }else{
+        } else {
             return false;
         }
     }
-    
+
     /**
      * Checks if is vcard file.
-     *
+     * 
      * @param fileName the file name
      * @return true, if is vcard file
      */
-    public static boolean isVcardFile(String fileName){
-        if(TextUtils.isEmpty(fileName)){
+    public static boolean isVcardFile(String fileName) {
+        if (TextUtils.isEmpty(fileName)) {
             return false;
         }
-        
+
         int suffixIndex = fileName.lastIndexOf(".");
-        if(suffixIndex != -1){
+        if (suffixIndex != -1) {
             String suffix = fileName.substring(suffixIndex + 1);
             return isVcardSuffix(suffix);
-        }else{
+        } else {
             return false;
         }
     }
 
     /**
      * Checks if is video file.
-     *
+     * 
      * @param fileName the file name
      * @return true, if is video file
      */
-    public static boolean isCloudFileAllowedFile(String fileName){
-        if(TextUtils.isEmpty(fileName)){
+    public static boolean isCloudFileAllowedFile(String fileName) {
+        if (TextUtils.isEmpty(fileName)) {
             return false;
         }
 
         int suffixIndex = fileName.lastIndexOf(".");
-        if(suffixIndex != -1){
+        if (suffixIndex != -1) {
             String suffix = fileName.substring(suffixIndex + 1);
             return !isCloudFileExcludeSuffix(suffix);
-        }else{
+        } else {
             return false;
         }
     }
 
     /**
      * Checks if is image suffix.
-     *
+     * 
      * @param suffix the suffix
      * @return true, if is image suffix
      */
-    public static boolean isImageSuffix(String suffix){
-        if(TextUtils.isEmpty(suffix)){
+    public static boolean isImageSuffix(String suffix) {
+        if (TextUtils.isEmpty(suffix)) {
             return false;
         }
 
@@ -153,12 +154,12 @@ public class MediaUtils {
 
     /**
      * Checks if is audio suffix.
-     *
+     * 
      * @param suffix the suffix
      * @return true, if is audio suffix
      */
-    public static boolean isAudioSuffix(String suffix){
-        if(TextUtils.isEmpty(suffix)){
+    public static boolean isAudioSuffix(String suffix) {
+        if (TextUtils.isEmpty(suffix)) {
             return false;
         }
 
@@ -167,53 +168,52 @@ public class MediaUtils {
 
     /**
      * Checks if is video suffix.
-     *
+     * 
      * @param suffix the suffix
      * @return true, if is video suffix
      */
-    public static boolean isVideoSuffix(String suffix){
-        if(TextUtils.isEmpty(suffix)){
+    public static boolean isVideoSuffix(String suffix) {
+        if (TextUtils.isEmpty(suffix)) {
             return false;
         }
 
         return MediaConstants.VIDEO_SUFFIX.indexOf(suffix.toUpperCase(Locale.getDefault())) != -1;
     }
-    
+
     /**
      * Checks if is vcard suffix.
-     *
+     * 
      * @param suffix the suffix
      * @return true, if is vcard suffix
      */
-    public static boolean isVcardSuffix(String suffix){
-        if(TextUtils.isEmpty(suffix)){
-            return false;
-        }
-        
-        return MediaConstants.VCARD_SUFFIX.indexOf(suffix.toUpperCase(Locale.getDefault())) != -1;
-    }
-    
-    /**
-     * Checks if is cloud file exclude suffix.
-     *
-     * @param suffix the suffix
-     * @return true, if is cloud file exclude suffix
-     */
-    public static boolean isCloudFileExcludeSuffix(String suffix){
-        if(TextUtils.isEmpty(suffix)){
+    public static boolean isVcardSuffix(String suffix) {
+        if (TextUtils.isEmpty(suffix)) {
             return false;
         }
 
-        return MediaConstants.CLOUD_FILE_EXCLUDE_SUFFIX.indexOf(suffix.toUpperCase(Locale.getDefault())) != -1;
+        return MediaConstants.VCARD_SUFFIX.indexOf(suffix.toUpperCase(Locale.getDefault())) != -1;
+    }
+
+    /**
+     * Checks if is cloud file exclude suffix.
+     * 
+     * @param suffix the suffix
+     * @return true, if is cloud file exclude suffix
+     */
+    public static boolean isCloudFileExcludeSuffix(String suffix) {
+        if (TextUtils.isEmpty(suffix)) {
+            return false;
+        }
+
+        return MediaConstants.CLOUD_FILE_EXCLUDE_SUFFIX.indexOf(suffix.toUpperCase(Locale
+                .getDefault())) != -1;
     }
 
     /**
      * Gets the amr file duration.
-     *
-     * @param context
-     *            the context
-     * @param file
-     *            the file
+     * 
+     * @param context the context
+     * @param file the file
      * @return the amr file duration
      */
     public static final int getAmrFileDuration(Context context, File file) {
@@ -225,11 +225,9 @@ public class MediaUtils {
 
     /**
      * Gets the video file duration.
-     *
-     * @param context
-     *            the context
-     * @param file
-     *            the file
+     * 
+     * @param context the context
+     * @param file the file
      * @return the video file duration
      */
     public static final int getVideoFileDuration(Context context, File file) {

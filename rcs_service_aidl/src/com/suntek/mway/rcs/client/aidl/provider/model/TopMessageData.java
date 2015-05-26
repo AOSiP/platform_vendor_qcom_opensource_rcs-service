@@ -20,14 +20,13 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
-public class TopMessageData implements Parcelable{
-
+public class TopMessageData implements Parcelable {
 
     // messages show on the top of frame
     public static final String TABLE_TOP_MESSAGE = "topMessage";
@@ -41,14 +40,13 @@ public class TopMessageData implements Parcelable{
     // the time of setting message placed at the top
     public static final String KEY_TIME = "_time";
 
-
     private int id;
 
     private String threadId;
 
     private long time;
 
-    public TopMessageData(){
+    public TopMessageData() {
     }
 
     public TopMessageData(Parcel in) {
@@ -111,7 +109,6 @@ public class TopMessageData implements Parcelable{
 
     @Override
     public String toString() {
-        return "TopMessageData [id=" + id + ", threadId=" + threadId
-                + ", time=" + time + "]";
+        return "TopMessageData [id=" + id + ", threadId=" + threadId + ", time=" + time + "]";
     }
 }

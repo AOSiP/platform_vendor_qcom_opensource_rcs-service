@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.mcloudfile;
 
 import java.util.Map;
@@ -27,187 +28,168 @@ import java.util.Map;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class AuthNode implements Parcelable
-{
-    private byte[]                captcha;
-    private boolean                isOffline;
-    private AuthNodeUpdateInfo            updateInfo;
-    private int                    timeout;
-    private UserType                userType;
-    private PwdType                pwdType;
-    private RegType                regType;
-    private ResetType            resetType;
-    private Map<String, String>    fields;
+public class AuthNode implements Parcelable {
+    private byte[] captcha;
 
-    public AuthNode()
-    {}
+    private boolean isOffline;
 
-    public AuthNode( Parcel source )
-    {
-        readFromParcel( source );
+    private AuthNodeUpdateInfo updateInfo;
+
+    private int timeout;
+
+    private UserType userType;
+
+    private PwdType pwdType;
+
+    private RegType regType;
+
+    private ResetType resetType;
+
+    private Map<String, String> fields;
+
+    public AuthNode() {
+    }
+
+    public AuthNode(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
     /**
-     * Write the mcloud result entity to parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
+     * Write the mcloud result entity to parcel stream. Pay attention to read
+     * and write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param dest
-     *            the dest parcel stream
-     * @param flags
-     *            the flags
+     * 
+     * @param dest the dest parcel stream
+     * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        dest.writeByteArray( captcha );
-        dest.writeBooleanArray( new boolean[]{ isOffline } );
-        dest.writeValue( updateInfo );
-        dest.writeInt( timeout );
-        dest.writeInt( userType.ordinal() );
-        dest.writeInt( pwdType.ordinal() );
-        dest.writeInt( regType.ordinal() );
-        dest.writeInt( resetType.ordinal() );
-        dest.writeMap( fields );
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByteArray(captcha);
+        dest.writeBooleanArray(new boolean[] {
+            isOffline
+        });
+        dest.writeValue(updateInfo);
+        dest.writeInt(timeout);
+        dest.writeInt(userType.ordinal());
+        dest.writeInt(pwdType.ordinal());
+        dest.writeInt(regType.ordinal());
+        dest.writeInt(resetType.ordinal());
+        dest.writeMap(fields);
     }
 
     /**
-     * Create the mcloud result entity from parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
+     * Create the mcloud result entity from parcel stream. Pay attention to read
+     * and write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    @SuppressWarnings( "unchecked" )
-    public void readFromParcel( Parcel source )
-    {
+    @SuppressWarnings("unchecked")
+    public void readFromParcel(Parcel source) {
         captcha = source.createByteArray();
-        boolean[] val = new boolean[ 1 ];
-        source.readBooleanArray( val );
-        isOffline = val[ 0 ];
-        updateInfo = ( AuthNodeUpdateInfo )source.readValue( this.getClass().getClassLoader() );
-        userType = UserType.valueOf( source.readInt() );
-        pwdType = PwdType.valueOf( source.readInt() );
-        regType = RegType.valueOf( source.readInt() );
-        resetType = ResetType.valueOf( source.readInt() );
-        fields = source.readHashMap( this.getClass().getClassLoader() );
+        boolean[] val = new boolean[1];
+        source.readBooleanArray(val);
+        isOffline = val[0];
+        updateInfo = (AuthNodeUpdateInfo)source.readValue(this.getClass().getClassLoader());
+        userType = UserType.valueOf(source.readInt());
+        pwdType = PwdType.valueOf(source.readInt());
+        regType = RegType.valueOf(source.readInt());
+        resetType = ResetType.valueOf(source.readInt());
+        fields = source.readHashMap(this.getClass().getClassLoader());
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<AuthNode>    CREATOR    = new Parcelable.Creator<AuthNode>() {
+    public static final Parcelable.Creator<AuthNode> CREATOR = new Parcelable.Creator<AuthNode>() {
         @Override
-        public AuthNode createFromParcel( Parcel source )
-        {
-            return new AuthNode( source );
+        public AuthNode createFromParcel(Parcel source) {
+            return new AuthNode(source);
         }
 
         @Override
-        public AuthNode[] newArray( int size )
-        {
-            return new AuthNode[ size ];
+        public AuthNode[] newArray(int size) {
+            return new AuthNode[size];
         }
     };
 
-
-    public byte[] getCaptcha()
-    {
+    public byte[] getCaptcha() {
         return captcha;
     }
 
-    public void setCaptcha( byte[] captcha )
-    {
+    public void setCaptcha(byte[] captcha) {
         this.captcha = captcha;
     }
 
-    public boolean isOffline()
-    {
+    public boolean isOffline() {
         return isOffline;
     }
 
-    public void setOffline( boolean isOffline )
-    {
+    public void setOffline(boolean isOffline) {
         this.isOffline = isOffline;
     }
 
-    public AuthNodeUpdateInfo getUpdateInfo()
-    {
+    public AuthNodeUpdateInfo getUpdateInfo() {
         return updateInfo;
     }
 
-    public void setUpdateInfo( AuthNodeUpdateInfo updateInfo )
-    {
+    public void setUpdateInfo(AuthNodeUpdateInfo updateInfo) {
         this.updateInfo = updateInfo;
     }
 
-    public int getTimeout()
-    {
+    public int getTimeout() {
         return timeout;
     }
 
-    public void setTimeout( int timeout )
-    {
+    public void setTimeout(int timeout) {
         this.timeout = timeout;
     }
 
-    public UserType getUserType()
-    {
+    public UserType getUserType() {
         return userType;
     }
 
-    public void setUserType( UserType userType )
-    {
+    public void setUserType(UserType userType) {
         this.userType = userType;
     }
 
-    public PwdType getPwdType()
-    {
+    public PwdType getPwdType() {
         return pwdType;
     }
 
-    public void setPwdType( PwdType pwdType )
-    {
+    public void setPwdType(PwdType pwdType) {
         this.pwdType = pwdType;
     }
 
-    public RegType getRegType()
-    {
+    public RegType getRegType() {
         return regType;
     }
 
-    public void setRegType( RegType regType )
-    {
+    public void setRegType(RegType regType) {
         this.regType = regType;
     }
 
-    public ResetType getResetType()
-    {
+    public ResetType getResetType() {
         return resetType;
     }
 
-    public void setResetType( ResetType resetType )
-    {
+    public void setResetType(ResetType resetType) {
         this.resetType = resetType;
     }
 
-    public Map<String, String> getFields()
-    {
+    public Map<String, String> getFields() {
         return fields;
     }
 
-    public void setFields( Map<String, String> fields )
-    {
+    public void setFields(Map<String, String> fields) {
         this.fields = fields;
     }
 
@@ -220,28 +202,24 @@ public class AuthNode implements Parcelable
 
         thirdParty;
 
-        public static PwdType valueOf( int ordinal )
-        {
-            if( ordinal < 0 || ordinal >= values().length )
-            {
-                throw new IndexOutOfBoundsException( "Invalid ordinal" );
+        public static PwdType valueOf(int ordinal) {
+            if (ordinal < 0 || ordinal >= values().length) {
+                throw new IndexOutOfBoundsException("Invalid ordinal");
             }
 
-            return values()[ ordinal ];
+            return values()[ordinal];
         }
     }
 
     public static enum RegType {
         cellPhone;
 
-        public static RegType valueOf( int ordinal )
-        {
-            if( ordinal < 0 || ordinal >= values().length )
-            {
-                throw new IndexOutOfBoundsException( "Invalid ordinal" );
+        public static RegType valueOf(int ordinal) {
+            if (ordinal < 0 || ordinal >= values().length) {
+                throw new IndexOutOfBoundsException("Invalid ordinal");
             }
 
-            return values()[ ordinal ];
+            return values()[ordinal];
         }
     }
 
@@ -250,14 +228,12 @@ public class AuthNode implements Parcelable
 
         thirdParty;
 
-        public static ResetType valueOf( int ordinal )
-        {
-            if( ordinal < 0 || ordinal >= values().length )
-            {
-                throw new IndexOutOfBoundsException( "Invalid ordinal" );
+        public static ResetType valueOf(int ordinal) {
+            if (ordinal < 0 || ordinal >= values().length) {
+                throw new IndexOutOfBoundsException("Invalid ordinal");
             }
 
-            return values()[ ordinal ];
+            return values()[ordinal];
         }
     }
 
@@ -270,14 +246,12 @@ public class AuthNode implements Parcelable
 
         email;
 
-        public static UserType valueOf( int ordinal )
-        {
-            if( ordinal < 0 || ordinal >= values().length )
-            {
-                throw new IndexOutOfBoundsException( "Invalid ordinal" );
+        public static UserType valueOf(int ordinal) {
+            if (ordinal < 0 || ordinal >= values().length) {
+                throw new IndexOutOfBoundsException("Invalid ordinal");
             }
 
-            return values()[ ordinal ];
+            return values()[ordinal];
         }
     }
 }

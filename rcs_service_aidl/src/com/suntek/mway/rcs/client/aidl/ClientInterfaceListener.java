@@ -20,13 +20,16 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl;
 
 /**
- * <p>Title: ClientInterfaceListener interface</p>
  * <p>
- * Description: The interface <code>ClientInterfaceListener</code> defines two callback methods
- * about connect/disconnect between local and service.
+ * Title: ClientInterfaceListener interface
+ * </p>
+ * <p>
+ * Description: The interface <code>ClientInterfaceListener</code> defines two
+ * callback methods about connect/disconnect between local and service.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -34,9 +37,9 @@ package com.suntek.mway.rcs.client.aidl;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public interface ClientInterfaceListener {
     /**

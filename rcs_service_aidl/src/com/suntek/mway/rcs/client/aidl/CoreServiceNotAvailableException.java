@@ -20,14 +20,17 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl;
 
 /**
- * <p>Title: CoreServiceNotAvailableException base class</p>
  * <p>
- * Description: The class <code>CoreServiceNotAvailableException</code> and its subclasses are a form of
- * {@link ClientInterfaceException} that indicates conditions that a reasonable application
- * might want to catch.
+ * Title: CoreServiceNotAvailableException base class
+ * </p>
+ * <p>
+ * Description: The class <code>CoreServiceNotAvailableException</code> and its
+ * subclasses are a form of {@link ClientInterfaceException} that indicates
+ * conditions that a reasonable application might want to catch.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -35,18 +38,23 @@ package com.suntek.mway.rcs.client.aidl;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class CoreServiceNotAvailableException extends ClientInterfaceException {
     private static final long serialVersionUID = 8574566864861749638L;
+
     /**
-     * Constant of CORE_SERVICE_NOT_AVAILABLE whose value is Core service not available;
+     * Constant of CORE_SERVICE_NOT_AVAILABLE whose value is Core service not
+     * available;
      */
     private static final String CORE_SERVICE_NOT_AVAILABLE = "Core service not available";
+
     /**
-     * Constructs a new exception with the pre-defined constant message {@code CORE_SERVICE_NOT_AVAILABLE} .
+     * Constructs a new exception with the pre-defined constant message
+     * {@code CORE_SERVICE_NOT_AVAILABLE} .
+     * 
      * @param message the detail message.
      */
     public CoreServiceNotAvailableException() {

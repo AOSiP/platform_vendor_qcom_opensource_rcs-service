@@ -20,46 +20,70 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.mcontact;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Auth implements Parcelable{
+public class Auth implements Parcelable {
 
     private String username;
+
     private String session;
+
     private String userId;
+
     private String sessionkey;
+
     private String message;
+
     private String imei;
+
     private String deviceId;
+
     private String token;
+
     private String version;
+
     private String mContact_session;
+
     private boolean enableSync;
+
     private boolean isAutoSync;
+
     private String syncSn;
+
     private String aoiToken;
+
     private String contactUserId;
+
     private boolean isLocalIntent;
+
     private String channelId;
+
     private boolean isThirdPart = false;
+
     private int error_code;
+
     private String error_message;
+
     private String syncFrequency;
+
     private int result_code;
 
-    public Auth(){}
+    public Auth() {
+    }
 
-    public Auth(Parcel source){
-        readFromParcel( source );
+    public Auth(Parcel source) {
+        readFromParcel(source);
     }
 
     @Override
     public int describeContents() {
         return 0;
     }
+
     @Override
     public void writeToParcel(Parcel paramParcel, int paramInt) {
         paramParcel.writeString(this.username);
@@ -86,7 +110,7 @@ public class Auth implements Parcelable{
         paramParcel.writeInt(this.result_code);
     }
 
-    public void readFromParcel( Parcel paramParcel ){
+    public void readFromParcel(Parcel paramParcel) {
         String str1 = paramParcel.readString();
         setUsername(str1);
         String str2 = paramParcel.readString();
@@ -134,149 +158,190 @@ public class Auth implements Parcelable{
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<Auth>    CREATOR    = new Parcelable.Creator<Auth>() {
+    public static final Parcelable.Creator<Auth> CREATOR = new Parcelable.Creator<Auth>() {
         @Override
-        public Auth createFromParcel( Parcel source )
-        {
-            return new Auth( source );
+        public Auth createFromParcel(Parcel source) {
+            return new Auth(source);
         }
 
         @Override
-        public Auth[] newArray( int size )
-        {
-            return new Auth[ size ];
+        public Auth[] newArray(int size) {
+            return new Auth[size];
         }
     };
 
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getSession() {
         return session;
     }
+
     public void setSession(String session) {
         this.session = session;
     }
+
     public String getUserId() {
         return userId;
     }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
     public String getSessionkey() {
         return sessionkey;
     }
+
     public void setSessionkey(String sessionkey) {
         this.sessionkey = sessionkey;
     }
+
     public String getMessage() {
         return message;
     }
+
     public void setMessage(String message) {
         this.message = message;
     }
+
     public String getImei() {
         return imei;
     }
+
     public void setImei(String imei) {
         this.imei = imei;
     }
+
     public String getDeviceId() {
         return deviceId;
     }
+
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
     }
+
     public String getToken() {
         return token;
     }
+
     public void setToken(String token) {
         this.token = token;
     }
+
     public String getVersion() {
         return version;
     }
+
     public void setVersion(String version) {
         this.version = version;
     }
+
     public String getmContact_session() {
         return mContact_session;
     }
+
     public void setmContact_session(String mContact_session) {
         this.mContact_session = mContact_session;
     }
+
     public boolean isEnableSync() {
         return enableSync;
     }
+
     public void setEnableSync(boolean enableSync) {
         this.enableSync = enableSync;
     }
+
     public boolean isAutoSync() {
         return isAutoSync;
     }
+
     public void setAutoSync(boolean isAutoSync) {
         this.isAutoSync = isAutoSync;
     }
+
     public String getSyncSn() {
         return syncSn;
     }
+
     public void setSyncSn(String syncSn) {
         this.syncSn = syncSn;
     }
+
     public String getAoiToken() {
         return aoiToken;
     }
+
     public void setAoiToken(String aoiToken) {
         this.aoiToken = aoiToken;
     }
+
     public String getContactUserId() {
         return contactUserId;
     }
+
     public void setContactUserId(String contactUserId) {
         this.contactUserId = contactUserId;
     }
+
     public boolean isLocalIntent() {
         return isLocalIntent;
     }
+
     public void setLocalIntent(boolean isLocalIntent) {
         this.isLocalIntent = isLocalIntent;
     }
+
     public String getChannelId() {
         return channelId;
     }
+
     public void setChannelId(String channelId) {
         this.channelId = channelId;
     }
+
     public boolean isThirdPart() {
         return isThirdPart;
     }
+
     public void setThirdPart(boolean isThirdPart) {
         this.isThirdPart = isThirdPart;
     }
+
     public int getError_code() {
         return error_code;
     }
+
     public void setError_code(int error_code) {
         this.error_code = error_code;
     }
+
     public String getError_message() {
         return error_message;
     }
+
     public void setError_message(String error_message) {
         this.error_message = error_message;
     }
+
     public String getSyncFrequency() {
         return syncFrequency;
     }
+
     public void setSyncFrequency(String syncFrequency) {
         this.syncFrequency = syncFrequency;
     }
+
     public int getResult_code() {
         return result_code;
     }
+
     public void setResult_code(int result_code) {
         this.result_code = result_code;
     }

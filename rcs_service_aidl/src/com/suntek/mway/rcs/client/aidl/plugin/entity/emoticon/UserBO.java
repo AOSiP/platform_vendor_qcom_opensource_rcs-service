@@ -20,70 +20,76 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.emoticon;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * <p>Title: The emotion user entity class</p>
- * <p>Description: The emotion user entity save some user info</p>
- * <p>Copyright: Copyright (c) 2014</p>
- * <p>Company: pci-suntek</p>
- *
+ * <p>
+ * Title: The emotion user entity class
+ * </p>
+ * <p>
+ * Description: The emotion user entity save some user info
+ * </p>
+ * <p>
+ * Copyright: Copyright (c) 2014
+ * </p>
+ * <p>
+ * Company: pci-suntek
+ * </p>
+ * 
  * @author zrq
  * @version 1.0
- *
  */
-public class UserBO implements Parcelable
-{
+public class UserBO implements Parcelable {
     /** The user's phone number. */
-    private String    userPhone;
+    private String userPhone;
+
     /** The user's nickname. */
-    private String    userNick;
+    private String userNick;
+
     /** The user login time. */
-    private String    userLoginTime;
+    private String userLoginTime;
+
     /** The user current state. */
-    private String    userState;
+    private String userState;
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
     /**
-     * Write the user entity to parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
-     * correct results
-     *
+     * Write the user entity to parcel stream. Pay attention to read and write
+     * variables variables sequence should be consistent or not the correct
+     * results
+     * 
      * @param dest the dest
      * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        dest.writeString( userPhone );
-        dest.writeString( userNick );
-        dest.writeString( userLoginTime );
-        dest.writeString( userState );
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(userPhone);
+        dest.writeString(userNick);
+        dest.writeString(userLoginTime);
+        dest.writeString(userState);
     }
 
     /**
      * Create the user entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    public void readFromParcel( Parcel source )
-    {
+    public void readFromParcel(Parcel source) {
         userPhone = source.readString();
         userNick = source.readString();
         userLoginTime = source.readString();
@@ -91,113 +97,102 @@ public class UserBO implements Parcelable
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<UserBO>    CREATOR    = new Parcelable.Creator<UserBO>() {
+    public static final Parcelable.Creator<UserBO> CREATOR = new Parcelable.Creator<UserBO>() {
         @Override
-        public UserBO createFromParcel( Parcel source )
-        {
-            return new UserBO( source );
+        public UserBO createFromParcel(Parcel source) {
+            return new UserBO(source);
         }
 
         @Override
-        public UserBO[] newArray( int size )
-        {
-            return new UserBO[ size ];
+        public UserBO[] newArray(int size) {
+            return new UserBO[size];
         }
     };
 
     /**
      * Instantiates a new user entity.
      */
-    public UserBO()
-    {}
+    public UserBO() {
+    }
 
     /**
      * Instantiates a new user entity from parcel.
-     *
+     * 
      * @param source the parcel source
      */
-    public UserBO( Parcel source )
-    {
-        readFromParcel( source );
+    public UserBO(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * Gets the user phone number.
-     *
+     * 
      * @return the user phone number
      */
-    public String getUserPhone()
-    {
+    public String getUserPhone() {
         return userPhone;
     }
 
     /**
      * Sets the user phone number.
-     *
+     * 
      * @param userPhone the new user phone number
      */
-    public void setUserPhone( String userPhone )
-    {
+    public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
     }
 
     /**
      * Gets the user nickname.
-     *
+     * 
      * @return the user nickname
      */
-    public String getUserNick()
-    {
+    public String getUserNick() {
         return userNick;
     }
 
     /**
      * Sets the user nickname.
-     *
+     * 
      * @param userNick the new user nickname
      */
-    public void setUserNick( String userNick )
-    {
+    public void setUserNick(String userNick) {
         this.userNick = userNick;
     }
 
     /**
      * Gets the user login time.
-     *
+     * 
      * @return the user login time
      */
-    public String getUserLoginTime()
-    {
+    public String getUserLoginTime() {
         return userLoginTime;
     }
 
     /**
      * Sets the user login time.
-     *
+     * 
      * @param userLoginTime the new user login time
      */
-    public void setUserLoginTime( String userLoginTime )
-    {
+    public void setUserLoginTime(String userLoginTime) {
         this.userLoginTime = userLoginTime;
     }
 
     /**
      * Gets the user state.
-     *
+     * 
      * @return the user state
      */
-    public String getUserState()
-    {
+    public String getUserState() {
         return userState;
     }
 
     /**
      * Sets the user state.
-     *
+     * 
      * @param userState the new user state
      */
-    public void setUserState( String userState )
-    {
+    public void setUserState(String userState) {
         this.userState = userState;
     }
 

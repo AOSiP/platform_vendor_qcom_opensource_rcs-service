@@ -20,16 +20,19 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.utils;
 
 import java.io.Closeable;
 import java.io.IOException;
 
 /**
- * <p>Title: CloseableUtils class</p>
  * <p>
- * Description: The class <code>CloseFileUtils</code> is a utility that
- * closes properly objects implementing CloseFileUtils (input stream, output stream...)
+ * Title: CloseableUtils class
+ * </p>
+ * <p>
+ * Description: The class <code>CloseFileUtils</code> is a utility that closes
+ * properly objects implementing CloseFileUtils (input stream, output stream...)
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -37,17 +40,17 @@ import java.io.IOException;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public abstract class CloseFileUtils {
 
     /**
-     * Closes properly objects implementing CloseFileUtils (input stream, output stream...)
-     *
-     * @param c
-     *            object to close or null
+     * Closes properly objects implementing CloseFileUtils (input stream, output
+     * stream...)
+     * 
+     * @param c object to close or null
      * @return IOException or null
      */
     public static IOException close(Closeable c) {

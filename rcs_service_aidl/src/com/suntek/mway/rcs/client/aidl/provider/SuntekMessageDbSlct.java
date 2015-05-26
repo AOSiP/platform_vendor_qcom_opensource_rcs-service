@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider;
 
 import java.util.ArrayList;
@@ -36,9 +37,12 @@ import com.suntek.mway.rcs.client.aidl.provider.model.ChatThread;
 import com.suntek.mway.rcs.client.aidl.provider.model.GroupChatModel;
 
 /**
- * <p>Title: SuntekMessageDbSlct class</p>
  * <p>
- * Description: The class <code>SuntekMessageDbSlct</code> offers functions for query rich message database.
+ * Title: SuntekMessageDbSlct class
+ * </p>
+ * <p>
+ * Description: The class <code>SuntekMessageDbSlct</code> offers functions for
+ * query rich message database.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -46,9 +50,9 @@ import com.suntek.mway.rcs.client.aidl.provider.model.GroupChatModel;
  * <p>
  * Company: pci-sunteck
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class SuntekMessageDbSlct {
 
@@ -63,15 +67,17 @@ public class SuntekMessageDbSlct {
     private ContentResolver contentResolver;
 
     /**
-     * Static method for instance creation with the specified subclass of android.content.Context,
-     * here is the instance of RCSApplication.
-     * @param context subclass of android.content.Context, here is the instance of RCSApplication.
+     * Static method for instance creation with the specified subclass of
+     * android.content.Context, here is the instance of RCSApplication.
+     * 
+     * @param context subclass of android.content.Context, here is the instance
+     *            of RCSApplication.
      * @return instance of SuntekMessageDbSlct
      */
     public static SuntekMessageDbSlct createInstance(Context context) {
-        if(instance == null){
-            synchronized(SuntekMessageDbSlct.class){
-                if(instance == null){
+        if (instance == null) {
+            synchronized (SuntekMessageDbSlct.class) {
+                if (instance == null) {
                     instance = new SuntekMessageDbSlct(context);
                 }
             }
@@ -81,25 +87,27 @@ public class SuntekMessageDbSlct {
 
     /**
      * Private constructor to avoid creating instance directly
-     * @param context subclass of android.content.Context, here is the instance of RCSApplication.
+     * 
+     * @param context subclass of android.content.Context, here is the instance
+     *            of RCSApplication.
      */
     private SuntekMessageDbSlct(Context context) {
         contentResolver = context.getContentResolver();
     }
 
-
     /**
      * Query all phone numbers of contact by thread id.
+     * 
      * @param threadId a thread id that identities a chat session.
      * @return phone numbers which are semicolon-separated.
      */
     public String getAllNumbersByThreadId(String threadId) {
         StringBuffer sb = new StringBuffer();
-        Cursor cursor = contentResolver.query(SuntekMessageData.SUNTEK_MESSAGE_CONTENT_URI, new String[] {
-                "distinct " + SuntekMessageData.KEY_CONTACT
-        },
-        SuntekMessageData.KEY_THREAD_ID + "=?", new String[] {
-                threadId + ""
+        Cursor cursor = contentResolver.query(SuntekMessageData.SUNTEK_MESSAGE_CONTENT_URI,
+                new String[] {
+                    "distinct " + SuntekMessageData.KEY_CONTACT
+                }, SuntekMessageData.KEY_THREAD_ID + "=?", new String[] {
+                    threadId + ""
                 }, null);
         if (cursor != null) {
             cursor.moveToFirst();
@@ -119,22 +127,26 @@ public class SuntekMessageDbSlct {
     }
 
     /**
-     * Query chat group detail information by thread id. The chat group information is represented by class {@link  com.suntek.mway.rcs.client.api.provider.model.ChatGroupModel}
+     * Query chat group detail information by thread id. The chat group
+     * information is represented by class
+     * {@link com.suntek.mway.rcs.client.api.provider.model.ChatGroupModel}
+     * 
      * @param threadId thread_id a thread id that identities a chat session.
      * @return return null if can not find record
      */
     public GroupChatModel getChatGroupByThreadId(String threadId) {
-        String[] projection = new String[]{SuntekMessageData.KEY_ID,
-                SuntekMessageData.KEY_SUBJECT,
-                SuntekMessageData.KEY_CHAT_URI,
-                SuntekMessageData.KEY_CONTRIBUTION_ID,
-                SuntekMessageData.KEY_CONTACT_GROUP_ID,
-                SuntekMessageData.KEY_DATA_MEMBERS,
-                SuntekMessageData.KEY_THREAD_ID};
-        Cursor cursor = contentResolver.query(SuntekMessageData.CHAT_GROUP_CONTENT_URI, projection, SuntekMessageData.KEY_THREAD_ID+"=?",
-                new String[]{threadId}, null);
-        if(cursor != null) {
-            while(cursor.moveToNext()) {
+        String[] projection = new String[] {
+                SuntekMessageData.KEY_ID, SuntekMessageData.KEY_SUBJECT,
+                SuntekMessageData.KEY_CHAT_URI, SuntekMessageData.KEY_CONTRIBUTION_ID,
+                SuntekMessageData.KEY_CONTACT_GROUP_ID, SuntekMessageData.KEY_DATA_MEMBERS,
+                SuntekMessageData.KEY_THREAD_ID
+        };
+        Cursor cursor = contentResolver.query(SuntekMessageData.CHAT_GROUP_CONTENT_URI, projection,
+                SuntekMessageData.KEY_THREAD_ID + "=?", new String[] {
+                    threadId
+                }, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
                 GroupChatModel model = cursorToChatGroupModel(cursor);
                 return model;
             }
@@ -144,22 +156,23 @@ public class SuntekMessageDbSlct {
     }
 
     /**
-     * Query a list of chat group information which is represented by class {@link  com.suntek.mway.rcs.client.api.provider.model.ChatGroupModel}
+     * Query a list of chat group information which is represented by class
+     * {@link com.suntek.mway.rcs.client.api.provider.model.ChatGroupModel}
+     * 
      * @return a list of chat group
      */
     public List<GroupChatModel> getChatGroupList() {
         List<GroupChatModel> list = new ArrayList<GroupChatModel>();
-        String[] projection = new String[]{SuntekMessageData.KEY_ID,
-                SuntekMessageData.KEY_SUBJECT,
-                SuntekMessageData.KEY_CHAT_URI,
-                SuntekMessageData.KEY_CONTRIBUTION_ID,
-                SuntekMessageData.KEY_CONTACT_GROUP_ID,
-                SuntekMessageData.KEY_DATA_MEMBERS,
-                SuntekMessageData.KEY_THREAD_ID};
-        Cursor cursor = contentResolver.query(SuntekMessageData.CHAT_GROUP_CONTENT_URI, projection, null,
-                null, null);
-        if(cursor != null) {
-            while(cursor.moveToNext()) {
+        String[] projection = new String[] {
+                SuntekMessageData.KEY_ID, SuntekMessageData.KEY_SUBJECT,
+                SuntekMessageData.KEY_CHAT_URI, SuntekMessageData.KEY_CONTRIBUTION_ID,
+                SuntekMessageData.KEY_CONTACT_GROUP_ID, SuntekMessageData.KEY_DATA_MEMBERS,
+                SuntekMessageData.KEY_THREAD_ID
+        };
+        Cursor cursor = contentResolver.query(SuntekMessageData.CHAT_GROUP_CONTENT_URI, projection,
+                null, null, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
                 GroupChatModel model = cursorToChatGroupModel(cursor);
                 list.add(model);
             }
@@ -169,18 +182,24 @@ public class SuntekMessageDbSlct {
     }
 
     /**
-     * Transform a record pointed by an android.database.Cursor to
-     * a chat group information represented by class {@link com.suntek.mway.rcs.client.api.contacts.ChatGroupModel}
+     * Transform a record pointed by an android.database.Cursor to a chat group
+     * information represented by class
+     * {@link com.suntek.mway.rcs.client.api.contacts.ChatGroupModel}
+     * 
      * @param cursor an android.database.Cursor
-     * @return a chat group information represented by class {@link  com.suntek.mway.rcs.client.api.provider.model.ChatGroupModel}
+     * @return a chat group information represented by class
+     *         {@link com.suntek.mway.rcs.client.api.provider.model.ChatGroupModel}
      */
     private GroupChatModel cursorToChatGroupModel(Cursor cursor) {
         int id = cursor.getInt(cursor.getColumnIndex(SuntekMessageData.KEY_ID));
         String subject = cursor.getString(cursor.getColumnIndex(SuntekMessageData.KEY_SUBJECT));
         String chatUri = cursor.getString(cursor.getColumnIndex(SuntekMessageData.KEY_CHAT_URI));
-        String contributionId = cursor.getString(cursor.getColumnIndex(SuntekMessageData.KEY_CONTRIBUTION_ID));
-        String contactGroupId = cursor.getString(cursor.getColumnIndex(SuntekMessageData.KEY_CONTACT_GROUP_ID));
-        String dataMembers = cursor.getString(cursor.getColumnIndex(SuntekMessageData.KEY_DATA_MEMBERS));
+        String contributionId = cursor.getString(cursor
+                .getColumnIndex(SuntekMessageData.KEY_CONTRIBUTION_ID));
+        String contactGroupId = cursor.getString(cursor
+                .getColumnIndex(SuntekMessageData.KEY_CONTACT_GROUP_ID));
+        String dataMembers = cursor.getString(cursor
+                .getColumnIndex(SuntekMessageData.KEY_DATA_MEMBERS));
         long threadId = cursor.getLong(cursor.getColumnIndex(SuntekMessageData.KEY_THREAD_ID));
         GroupChatModel model = new GroupChatModel();
         model.setId(id);
@@ -195,15 +214,19 @@ public class SuntekMessageDbSlct {
     }
 
     /**
-     * Transform a record pointed by an android.database.Cursor to
-     * a chat message information represented by class {@link com.suntek.mway.rcs.client.api.contacts.ChatMessage}
+     * Transform a record pointed by an android.database.Cursor to a chat
+     * message information represented by class
+     * {@link com.suntek.mway.rcs.client.api.contacts.ChatMessage}
+     * 
      * @param cursor an android.database.Cursor
-     * @return a chat message information represented by class {@link  com.suntek.mway.rcs.client.aidl.provider.model.ChatMessage}
+     * @return a chat message information represented by class
+     *         {@link com.suntek.mway.rcs.client.aidl.provider.model.ChatMessage}
      */
     private ChatMessage cursorToChatMessage(Cursor cursor) {
         int id = cursor.getInt(cursor.getColumnIndex(SuntekMessageData.KEY_ID));
         String contact = cursor.getString(cursor.getColumnIndex(SuntekMessageData.KEY_CONTACT));
-        String messageId = cursor.getString(cursor.getColumnIndex(SuntekMessageData.KEY_MESSAGE_ID));
+        String messageId = cursor
+                .getString(cursor.getColumnIndex(SuntekMessageData.KEY_MESSAGE_ID));
         String data = cursor.getString(cursor.getColumnIndex(SuntekMessageData.KEY_DATA));
         long time = cursor.getLong(cursor.getColumnIndex(SuntekMessageData.KEY_TIME));
         String filename = cursor.getString(cursor.getColumnIndex(SuntekMessageData.KEY_FILENAME));
@@ -236,32 +259,29 @@ public class SuntekMessageDbSlct {
 
     /**
      * Query a list of chat message by thread id.
+     * 
      * @param threadId a thread id that identities a chat session.
      * @return a list of chat message
      */
     public List<ChatMessage> getChatMessageListByThreadId(String threadId) {
         List<ChatMessage> list = new ArrayList<ChatMessage>();
-        String[] projection = new String[]{SuntekMessageData.KEY_ID,
-                SuntekMessageData.KEY_CONTACT,
-                SuntekMessageData.KEY_MESSAGE_ID,
-                SuntekMessageData.KEY_DATA,
-                SuntekMessageData.KEY_TIME,
-                SuntekMessageData.KEY_FILENAME,
-                SuntekMessageData.KEY_FILESIZE,
-                SuntekMessageData.KEY_MIME_TYPE,
-                SuntekMessageData.KEY_MSG_TYPE,
-                SuntekMessageData.KEY_SEND_RECEIVE,
-                SuntekMessageData.KEY_IS_READ,
-                SuntekMessageData.KEY_MSG_STATE,
-                SuntekMessageData.KEY_CHAT_TYPE,
-                SuntekMessageData.KEY_THREAD_ID
-                };
-        String selection = SuntekMessageData.KEY_THREAD_ID+"=?";
-        String[] selectionArgs = new String[]{threadId};
-        Cursor cursor = contentResolver.query(SuntekMessageData.SUNTEK_MESSAGE_CONTENT_URI, projection, selection,
-                selectionArgs, null);
-        if(cursor != null) {
-            while(cursor.moveToNext()) {
+        String[] projection = new String[] {
+                SuntekMessageData.KEY_ID, SuntekMessageData.KEY_CONTACT,
+                SuntekMessageData.KEY_MESSAGE_ID, SuntekMessageData.KEY_DATA,
+                SuntekMessageData.KEY_TIME, SuntekMessageData.KEY_FILENAME,
+                SuntekMessageData.KEY_FILESIZE, SuntekMessageData.KEY_MIME_TYPE,
+                SuntekMessageData.KEY_MSG_TYPE, SuntekMessageData.KEY_SEND_RECEIVE,
+                SuntekMessageData.KEY_IS_READ, SuntekMessageData.KEY_MSG_STATE,
+                SuntekMessageData.KEY_CHAT_TYPE, SuntekMessageData.KEY_THREAD_ID
+        };
+        String selection = SuntekMessageData.KEY_THREAD_ID + "=?";
+        String[] selectionArgs = new String[] {
+            threadId
+        };
+        Cursor cursor = contentResolver.query(SuntekMessageData.SUNTEK_MESSAGE_CONTENT_URI,
+                projection, selection, selectionArgs, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
                 ChatMessage model = cursorToChatMessage(cursor);
                 list.add(model);
             }

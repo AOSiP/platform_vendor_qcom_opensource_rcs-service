@@ -20,14 +20,17 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl;
 
 /**
- * <p>Title: ClientInterfaceException base class</p>
  * <p>
- * Description: The class <code>ClientInterfaceException</code> and its subclasses are a form of
- * <code>Exception</code> that indicates conditions that a reasonable application
- * might want to catch.
+ * Title: ClientInterfaceException base class
+ * </p>
+ * <p>
+ * Description: The class <code>ClientInterfaceException</code> and its
+ * subclasses are a form of <code>Exception</code> that indicates conditions
+ * that a reasonable application might want to catch.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -35,15 +38,16 @@ package com.suntek.mway.rcs.client.aidl;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class ClientInterfaceException extends java.lang.Exception {
     static final long serialVersionUID = 4210559475585831906L;
 
     /**
      * Constructs a new exception with the specified detail message.
+     * 
      * @param message the detail message.
      */
     public ClientInterfaceException(String message) {

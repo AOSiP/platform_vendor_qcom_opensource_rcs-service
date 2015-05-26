@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.setting;
 
 import android.os.Parcel;
@@ -28,15 +29,21 @@ import android.os.Parcelable;
 public class SystemInfo implements Parcelable {
 
     private int networkType;
+
     private int networkFastType;
+
     private String ssid;
+
     private String apn;
+
     private boolean isSimCardExist;
+
     private String ipAddress;
 
     public SystemInfo() {
         // TODO Auto-generated constructor stub
     }
+
     public SystemInfo(Parcel source) {
         // TODO Auto-generated constructor stub
         networkType = source.readInt();
@@ -44,9 +51,9 @@ public class SystemInfo implements Parcelable {
         ssid = source.readString();
         apn = source.readString();
 
-        boolean[] value = new boolean[ 1 ];
-        source.readBooleanArray( value );
-        isSimCardExist = value[ 0 ];
+        boolean[] value = new boolean[1];
+        source.readBooleanArray(value);
+        isSimCardExist = value[0];
 
         ipAddress = source.readString();
     }
@@ -54,39 +61,51 @@ public class SystemInfo implements Parcelable {
     public int getNetworkType() {
         return networkType;
     }
+
     public void setNetworkType(int networkType) {
         this.networkType = networkType;
     }
+
     public int getNetworkFastType() {
         return networkFastType;
     }
+
     public void setNetworkFastType(int networkFastType) {
         this.networkFastType = networkFastType;
     }
+
     public String getSsid() {
         return ssid;
     }
+
     public void setSsid(String ssid) {
         this.ssid = ssid;
     }
+
     public String getApn() {
         return apn;
     }
+
     public void setApn(String apn) {
         this.apn = apn;
     }
+
     public boolean isSimCardExist() {
         return isSimCardExist;
     }
+
     public void setSimCardExist(boolean isSimCardExist) {
         this.isSimCardExist = isSimCardExist;
     }
+
     public String getIpAddress() {
         return ipAddress;
     }
+
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
+
     @Override
     public int describeContents() {
         // TODO Auto-generated method stub
@@ -113,16 +132,17 @@ public class SystemInfo implements Parcelable {
         dest.writeInt(networkFastType);
         dest.writeString(ssid);
         dest.writeString(apn);
-        dest.writeBooleanArray( new boolean[] { isSimCardExist } );
+        dest.writeBooleanArray(new boolean[] {
+            isSimCardExist
+        });
         dest.writeString(ipAddress);
     }
 
     @Override
     public String toString() {
-        return "SystemInfo [networkType=" + networkType + ", networkFastType="
-                + networkFastType + ", ssid=" + ssid + ", apn=" + apn
-                + ", isSimCardExist=" + isSimCardExist + ", ipAddress="
-                + ipAddress + "]";
+        return "SystemInfo [networkType=" + networkType + ", networkFastType=" + networkFastType
+                + ", ssid=" + ssid + ", apn=" + apn + ", isSimCardExist=" + isSimCardExist
+                + ", ipAddress=" + ipAddress + "]";
     }
 
 }

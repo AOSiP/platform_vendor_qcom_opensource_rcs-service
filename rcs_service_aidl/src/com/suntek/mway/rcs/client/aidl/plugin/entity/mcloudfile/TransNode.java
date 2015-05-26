@@ -26,6 +26,7 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.mcloudfile;
 
 import java.util.Map;
@@ -33,93 +34,103 @@ import java.util.Map;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class TransNode implements Parcelable
-{
+public class TransNode implements Parcelable {
     private String id;
+
     private long completeSize;
+
     private String url;
+
     private String localPath;
+
     private TransType type;
+
     private FileNode file;
+
     private Status status;
+
     private boolean isSuccess;
+
     private String uploadID;
+
     private String batchID;
+
     private int speed;
+
     private int percent;
+
     private FileNode.FileType mode;
+
     private String param;
+
     private long order;
+
     private Result result;
+
     private Map<String, String> fields;
 
-    public TransNode()
-    {}
+    public TransNode() {
+    }
 
-    public TransNode( Parcel source )
-    {
-        readFromParcel( source );
+    public TransNode(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
     /**
-     * Write the mcloud result entity to parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
+     * Write the mcloud result entity to parcel stream. Pay attention to read
+     * and write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param dest
-     *            the dest parcel stream
-     * @param flags
-     *            the flags
+     * 
+     * @param dest the dest parcel stream
+     * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        dest.writeString( id );
-        dest.writeString( url );
-        dest.writeString( localPath );
-        dest.writeString( param );
-        dest.writeString( uploadID );
-        dest.writeString( batchID );
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(url);
+        dest.writeString(localPath);
+        dest.writeString(param);
+        dest.writeString(uploadID);
+        dest.writeString(batchID);
 
-        dest.writeLong( completeSize );
-        dest.writeLong( order );
-        dest.writeInt( speed );
-        dest.writeInt( percent );
+        dest.writeLong(completeSize);
+        dest.writeLong(order);
+        dest.writeInt(speed);
+        dest.writeInt(percent);
 
-        dest.writeBooleanArray( new boolean[]{ isSuccess } );
+        dest.writeBooleanArray(new boolean[] {
+            isSuccess
+        });
 
-        dest.writeInt( type.ordinal() );
-        dest.writeInt( mode.ordinal() );
-        dest.writeInt( status.ordinal() );
+        dest.writeInt(type.ordinal());
+        dest.writeInt(mode.ordinal());
+        dest.writeInt(status.ordinal());
 
-        dest.writeValue( file );
-        dest.writeValue( result );
+        dest.writeValue(file);
+        dest.writeValue(result);
 
-        dest.writeMap( fields );
+        dest.writeMap(fields);
     }
 
     /**
-     * Create the mcloud result entity from parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
+     * Create the mcloud result entity from parcel stream. Pay attention to read
+     * and write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    @SuppressWarnings( "unchecked" )
-    public void readFromParcel( Parcel source )
-    {
+    @SuppressWarnings("unchecked")
+    public void readFromParcel(Parcel source) {
         id = source.readString();
         url = source.readString();
         localPath = source.readString();
@@ -132,205 +143,168 @@ public class TransNode implements Parcelable
         speed = source.readInt();
         percent = source.readInt();
 
-        isSuccess = source.createBooleanArray()[ 0 ];
+        isSuccess = source.createBooleanArray()[0];
 
-        type = TransType.valueOf( source.readInt() );
-        mode = FileNode.FileType.valueOf( source.readInt() );
-        status = Status.valueOf( source.readInt() );
+        type = TransType.valueOf(source.readInt());
+        mode = FileNode.FileType.valueOf(source.readInt());
+        status = Status.valueOf(source.readInt());
 
-        file = ( FileNode )source.readValue( this.getClass().getClassLoader() );
-        result = ( Result )source.readValue( this.getClass().getClassLoader() );
+        file = (FileNode)source.readValue(this.getClass().getClassLoader());
+        result = (Result)source.readValue(this.getClass().getClassLoader());
 
-        fields = source.readHashMap( this.getClass().getClassLoader() );
+        fields = source.readHashMap(this.getClass().getClassLoader());
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<TransNode>    CREATOR    = new Parcelable.Creator<TransNode>() {
+    public static final Parcelable.Creator<TransNode> CREATOR = new Parcelable.Creator<TransNode>() {
         @Override
-        public TransNode createFromParcel( Parcel source )
-        {
-            return new TransNode( source );
+        public TransNode createFromParcel(Parcel source) {
+            return new TransNode(source);
         }
 
         @Override
-        public TransNode[] newArray( int size )
-        {
-            return new TransNode[ size ];
+        public TransNode[] newArray(int size) {
+            return new TransNode[size];
         }
     };
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId( String id )
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public long getCompleteSize()
-    {
+    public long getCompleteSize() {
         return completeSize;
     }
 
-    public void setCompleteSize( long completeSize )
-    {
+    public void setCompleteSize(long completeSize) {
         this.completeSize = completeSize;
     }
 
-    public String getUrl()
-    {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl( String url )
-    {
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public String getLocalPath()
-    {
+    public String getLocalPath() {
         return localPath;
     }
 
-    public void setLocalPath( String localPath )
-    {
+    public void setLocalPath(String localPath) {
         this.localPath = localPath;
     }
 
-    public TransType getType()
-    {
+    public TransType getType() {
         return type;
     }
 
-    public void setType( TransType type )
-    {
+    public void setType(TransType type) {
         this.type = type;
     }
 
-    public FileNode getFile()
-    {
+    public FileNode getFile() {
         return file;
     }
 
-    public void setFile( FileNode file )
-    {
+    public void setFile(FileNode file) {
         this.file = file;
     }
 
-    public Status getStatus()
-    {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus( Status status )
-    {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public boolean isSuccess()
-    {
+    public boolean isSuccess() {
         return isSuccess;
     }
 
-    public void setSuccess( boolean isSuccess )
-    {
+    public void setSuccess(boolean isSuccess) {
         this.isSuccess = isSuccess;
     }
 
-    public String getUploadID()
-    {
+    public String getUploadID() {
         return uploadID;
     }
 
-    public void setUploadID( String uploadID )
-    {
+    public void setUploadID(String uploadID) {
         this.uploadID = uploadID;
     }
 
-    public String getBatchID()
-    {
+    public String getBatchID() {
         return batchID;
     }
 
-    public void setBatchID( String batchID )
-    {
+    public void setBatchID(String batchID) {
         this.batchID = batchID;
     }
 
-    public int getSpeed()
-    {
+    public int getSpeed() {
         return speed;
     }
 
-    public void setSpeed( int speed )
-    {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 
-    public int getPercent()
-    {
+    public int getPercent() {
         return percent;
     }
 
-    public void setPercent( int percent )
-    {
+    public void setPercent(int percent) {
         this.percent = percent;
     }
 
-    public FileNode.FileType getMode()
-    {
+    public FileNode.FileType getMode() {
         return mode;
     }
 
-    public void setMode( FileNode.FileType mode )
-    {
+    public void setMode(FileNode.FileType mode) {
         this.mode = mode;
     }
 
-    public String getParam()
-    {
+    public String getParam() {
         return param;
     }
 
-    public void setParam( String param )
-    {
+    public void setParam(String param) {
         this.param = param;
     }
 
-    public long getOrder()
-    {
+    public long getOrder() {
         return order;
     }
 
-    public void setOrder( long order )
-    {
+    public void setOrder(long order) {
         this.order = order;
     }
 
-    public Result getResult()
-    {
+    public Result getResult() {
         return result;
     }
 
-    public void setResult( Result result )
-    {
+    public void setResult(Result result) {
         this.result = result;
     }
 
-    public Map<String, String> getFields()
-    {
+    public Map<String, String> getFields() {
         return fields;
     }
 
-    public void setFields( Map<String, String> fields )
-    {
+    public void setFields(Map<String, String> fields) {
         this.fields = fields;
     }
 
-    public static enum TransOper
-    {
+    public static enum TransOper {
         NEW,
 
         OVER_WRITE,
@@ -339,19 +313,16 @@ public class TransNode implements Parcelable
 
         GET_INFO;
 
-        public static TransOper valueOf( int ordinal )
-        {
-            if( ordinal < 0 || ordinal >= values().length )
-            {
-                throw new IndexOutOfBoundsException( "Invalid ordinal" );
+        public static TransOper valueOf(int ordinal) {
+            if (ordinal < 0 || ordinal >= values().length) {
+                throw new IndexOutOfBoundsException("Invalid ordinal");
             }
 
-            return values()[ ordinal ];
+            return values()[ordinal];
         }
     }
 
-    public static enum TransType
-    {
+    public static enum TransType {
         UPLOAD,
 
         DOWNLOAD,
@@ -366,14 +337,12 @@ public class TransNode implements Parcelable
 
         SHOOT;
 
-        public static TransType valueOf( int ordinal )
-        {
-            if( ordinal < 0 || ordinal >= values().length )
-            {
-                throw new IndexOutOfBoundsException( "Invalid ordinal" );
+        public static TransType valueOf(int ordinal) {
+            if (ordinal < 0 || ordinal >= values().length) {
+                throw new IndexOutOfBoundsException("Invalid ordinal");
             }
 
-            return values()[ ordinal ];
+            return values()[ordinal];
         }
     }
 }

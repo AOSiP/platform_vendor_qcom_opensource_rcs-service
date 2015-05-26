@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.autoconfig;
 
 import java.util.Locale;
@@ -52,11 +53,11 @@ public class RcsAccountApi extends ClientApi {
         public void onServiceConnected(ComponentName className, IBinder service) {
             myApi = IRcsSettingApi.Stub.asInterface(service);
             notifyServiceConnected();
-            LogHelper.d("IRcsSettingApi have success connect, api="+myApi);
+            LogHelper.d("IRcsSettingApi have success connect, api=" + myApi);
         }
 
         public void onServiceDisconnected(ComponentName className) {
-            if(isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
+            if (isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
                 LogHelper.d("IRcsSettingApi api disconnect service");
                 myApi = null;
                 notifyServiceDisconnected();
@@ -78,7 +79,6 @@ public class RcsAccountApi extends ClientApi {
         super(serviceName);
         super.initServiceConnect(mConnection);
     }
-
 
     public RcsUserProfileInfo getRcsUserProfileInfo() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
@@ -119,25 +119,28 @@ public class RcsAccountApi extends ClientApi {
         return false;
     }
 
-    private void login(LoginUser loginUser,AccountEventListener listener) throws ServiceDisconnectedException {
+    private void login(LoginUser loginUser, AccountEventListener listener)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
     }
 
-    private void logout(LoginUser loginUser,AccountEventListener listener) throws ServiceDisconnectedException {
+    private void logout(LoginUser loginUser, AccountEventListener listener)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
     }
 
-    private void startService(Context context, AccountEventListener listener) throws ServiceDisconnectedException {
+    private void startService(Context context, AccountEventListener listener)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
     }
 
-    private void stopService(Context context, AccountEventListener listener) throws ServiceDisconnectedException {
+    private void stopService(Context context, AccountEventListener listener)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
     }
 
     public void checkOtp(String otp) throws RemoteException {
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:checkOtp. [otp]=%s", otp));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:checkOtp. [otp]=%s", otp));
         try {
             myApi.checkOtp(otp);
         } catch (Exception ex) {
@@ -147,7 +150,7 @@ public class RcsAccountApi extends ClientApi {
     }
 
     public void start() throws ServiceDisconnectedException {
-        LogHelper.i(String.format( Locale.getDefault(),"enter method:start. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:start. "));
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.start();

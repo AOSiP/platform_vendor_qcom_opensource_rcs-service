@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.profile.callback;
 
 import com.suntek.mway.rcs.client.aidl.plugin.callback.IProfileListener;
@@ -29,9 +30,11 @@ import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 public abstract class ProfileListener extends IProfileListener.Stub {
 
     /**
-     * The default implementation of this interface, the method did not want to expose upward.
+     * The default implementation of this interface, the method did not want to
+     * expose upward.
      */
-    public void onQRImgGet( QRCardImg qrImgObj, int resultCode, String resultDesc ) {
-        LogHelper.d("onQRImgGet(): resultCode --> "+resultCode + "resultDesc = " + resultDesc);;
+    public void onQRImgGet(QRCardImg qrImgObj, int resultCode, String resultDesc) {
+        LogHelper.d("onQRImgGet(): resultCode --> " + resultCode + "resultDesc = " + resultDesc);
+        ;
     }
 }

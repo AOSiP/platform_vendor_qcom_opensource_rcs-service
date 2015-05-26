@@ -20,8 +20,12 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.login.impl;
+
 import com.suntek.mway.rcs.client.aidl.login.ILoginEventListener;
-public abstract class LoginEventListener extends ILoginEventListener.Stub{
-    public LoginEventListener(){}
+
+public abstract class LoginEventListener extends ILoginEventListener.Stub {
+    public LoginEventListener() {
+    }
 }

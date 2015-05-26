@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.profile.callback;
 
 import com.suntek.mway.rcs.client.aidl.plugin.callback.IProfileListener;
@@ -30,31 +31,37 @@ import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 public abstract class QRImgListener extends IProfileListener.Stub {
 
     /**
-     * The default implementation of this interface, the method did not want to expose upward.
+     * The default implementation of this interface, the method did not want to
+     * expose upward.
      */
-    public void onProfileUpdated( int resultCode, String resultDesc ) {
-        LogHelper.d("onProfileUpdated(): resultCode --> "+resultCode + "resultDesc = " + resultDesc);
+    public void onProfileUpdated(int resultCode, String resultDesc) {
+        LogHelper.d("onProfileUpdated(): resultCode --> " + resultCode + "resultDesc = "
+                + resultDesc);
     }
 
     /**
-     * The default implementation of this interface, the method did not want to expose upward.
+     * The default implementation of this interface, the method did not want to
+     * expose upward.
      */
-    public void onAvatarUpdated( int resultCode, String resultDesc ) {
-        LogHelper.d("onAvatarUpdated(): resultCode --> "+resultCode + "resultDesc = " + resultDesc);
+    public void onAvatarUpdated(int resultCode, String resultDesc) {
+        LogHelper.d("onAvatarUpdated(): resultCode --> " + resultCode + "resultDesc = "
+                + resultDesc);
     }
 
     /**
-     * The default implementation of this interface, the method did not want to expose upward.
+     * The default implementation of this interface, the method did not want to
+     * expose upward.
      */
-    public void onAvatarGet( Avatar avatar, int resultCode, String resultDesc ) {
-        LogHelper.d("onAvatarGet(): resultCode --> "+resultCode + "resultDesc = " + resultDesc);
+    public void onAvatarGet(Avatar avatar, int resultCode, String resultDesc) {
+        LogHelper.d("onAvatarGet(): resultCode --> " + resultCode + "resultDesc = " + resultDesc);
     }
 
     /**
-     * The default implementation of this interface, the method did not want to expose upward.
+     * The default implementation of this interface, the method did not want to
+     * expose upward.
      */
-    public void onProfileGet( Profile profile, int resultCode, String resultDesc ) {
-        LogHelper.d("onProfileGet(): resultCode --> "+resultCode + "resultDesc = " + resultDesc);
+    public void onProfileGet(Profile profile, int resultCode, String resultDesc) {
+        LogHelper.d("onProfileGet(): resultCode --> " + resultCode + "resultDesc = " + resultDesc);
     }
 
 }

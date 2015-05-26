@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 pci-suntektech Technologies, Inc.  All Rights Reserved.
+ * Copyright (c) 2014 pci-suntektech Technologies, Inc.  All Rights Reserved.
  * pci-suntektech Technologies Proprietary and Confidential.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,14 +21,26 @@
  * IN THE SOFTWARE.
  */
 
-package com.suntek.mway.rcs.client.aidl.im;
+package com.suntek.mway.rcs.client.api.util;
 
-public class OprResponse {
+public class OrderTimeAboutExpireException extends Exception {
 
-    public static final int SUCCESS = 200;
+    private static final long serialVersionUID = 1L;
 
-    public static final int OFFLINE = 900;
+    public OrderTimeAboutExpireException() {
+        super();
+    }
 
-    public static final int OTHRE_ERROR = 999;
+    public OrderTimeAboutExpireException(String detailMessage, Throwable throwable) {
+        super(detailMessage, throwable);
+    }
+
+    public OrderTimeAboutExpireException(String detailMessage) {
+        super(detailMessage);
+    }
+
+    public OrderTimeAboutExpireException(Throwable throwable) {
+        super(throwable);
+    }
 
 }

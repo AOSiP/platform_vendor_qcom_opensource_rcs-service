@@ -23,31 +23,33 @@
 
 package com.suntek.mway.rcs.client.api.im.impl;
 
-import java.util.List;
-import java.util.Locale;
-
-import android.content.ComponentName;
-import android.content.ServiceConnection;
-import android.os.IBinder;
-import android.text.TextUtils;
-
-import com.suntek.mway.rcs.client.api.ClientApi;
 import com.suntek.mway.rcs.client.aidl.constant.APIConstant;
 import com.suntek.mway.rcs.client.aidl.contacts.RCSContact;
-import com.suntek.mway.rcs.client.api.exception.OperatorException;
 import com.suntek.mway.rcs.client.aidl.im.IInstantMessageApi;
+import com.suntek.mway.rcs.client.aidl.provider.SuntekMessageData;
 import com.suntek.mway.rcs.client.aidl.provider.model.ChatMessage;
 import com.suntek.mway.rcs.client.aidl.provider.model.FavoriteMessage;
 import com.suntek.mway.rcs.client.aidl.provider.model.GroupChatModel;
 import com.suntek.mway.rcs.client.aidl.provider.model.MessageSessionModel;
 import com.suntek.mway.rcs.client.aidl.provider.model.SimpleMsg;
 import com.suntek.mway.rcs.client.aidl.provider.model.TopMessageData;
+import com.suntek.mway.rcs.client.api.ClientApi;
+import com.suntek.mway.rcs.client.api.exception.OperatorException;
 import com.suntek.mway.rcs.client.api.util.FileDurationException;
 import com.suntek.mway.rcs.client.api.util.FileSuffixException;
 import com.suntek.mway.rcs.client.api.util.FileTransferException;
+import com.suntek.mway.rcs.client.api.util.OrderTimeAboutExpireException;
 import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.suntek.mway.rcs.client.api.util.VerificationUtil;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;
+
+import android.content.ComponentName;
+import android.content.ServiceConnection;
+import android.os.IBinder;
+import android.text.TextUtils;
+
+import java.util.List;
+import java.util.Locale;
 
 public class MessageApi extends ClientApi {
 
@@ -685,6 +687,20 @@ public class MessageApi extends ClientApi {
         }
     }
 
+    public boolean removeButRemainLockMessageByThreadId(long threadId)
+            throws ServiceDisconnectedException {
+        VerificationUtil.ApiIsNull(myApi);
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method removeButRemainLockMessageByThreadId. [threadId]=%d", threadId));
+        try {
+            myApi.removeButRemainLockMessageByThreadId(threadId);
+            return true;
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+            return false;
+        }
+    }
+
     public void removeOneMessage(String messageId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
@@ -701,6 +717,17 @@ public class MessageApi extends ClientApi {
         LogHelper.i(String.format(Locale.getDefault(), "enter method removeAllMessage. "));
         try {
             myApi.removeAllMessage();
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+    }
+
+    public void removeAllButRemainLockMessage() throws ServiceDisconnectedException {
+        VerificationUtil.ApiIsNull(myApi);
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method removeAllButRemainLockMessage. "));
+        try {
+            myApi.removeAllButRemainLockMessage();
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
@@ -1119,6 +1146,30 @@ public class MessageApi extends ClientApi {
         LogHelper.i(String.format(Locale.getDefault(), "enter method:recoveBlackMsgAll. "));
         try {
             return myApi.recoveBlackMsgAll();
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+        return 0;
+    }
+
+    public int lockMessageById(String id) throws ServiceDisconnectedException {
+        VerificationUtil.ApiIsNull(myApi);
+        LogHelper
+                .i(String.format(Locale.getDefault(), "enter method:lockMessageById. [id]=%s", id));
+        try {
+            return myApi.lockMessageById(id);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+        return 0;
+    }
+
+    public int unlockMessageById(String id) throws ServiceDisconnectedException {
+        VerificationUtil.ApiIsNull(myApi);
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:unlockMessageById. [id]=%s",
+                id));
+        try {
+            return myApi.unlockMessageById(id);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
@@ -1584,6 +1635,19 @@ public class MessageApi extends ClientApi {
         }
     }
 
+    public void removeButRemainLockMsgWithNotificationByThread(long threadId)
+            throws ServiceDisconnectedException {
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method:removeButRemainLockMsgWithNotificationByThread. [threadId]=%d",
+                threadId));
+        VerificationUtil.ApiIsNull(myApi);
+        try {
+            myApi.removeButRemainLockMsgWithNotificationByThread(threadId);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+    }
+
     public void backupMessageList(List<SimpleMsg> simpleMsgList)
             throws ServiceDisconnectedException {
         LogHelper.i(String.format(Locale.getDefault(),
@@ -1628,7 +1692,7 @@ public class MessageApi extends ClientApi {
                         "enter method forwardImageFile. [thread_id,sms_id,number,id,burnFlag,barCycle]=%d,%d,%s,%s,%d,%d",
                         thread_id, sms_id, number, id, burnFlag, barCycle));
 
-        if(TextUtils.isEmpty(id)){
+        if (TextUtils.isEmpty(id)) {
             LogHelper.i("id field value error");
             return;
         }
@@ -1654,9 +1718,8 @@ public class MessageApi extends ClientApi {
         }
     }
 
-    public void forwardVideoFile(long thread_id, long sms_id, String number, String id,
-            int length, int burnFlag, int barCycle, boolean isRecord)
-            throws ServiceDisconnectedException {
+    public void forwardVideoFile(long thread_id, long sms_id, String number, String id, int length,
+            int burnFlag, int barCycle, boolean isRecord) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
@@ -1664,7 +1727,7 @@ public class MessageApi extends ClientApi {
                         "enter method forwardVideoFile. [thread_id,sms_id,number,id,length,burnFlag,barCycle,isRecord]=%d,%d,%s,%s,%d,%d,%d,%b",
                         thread_id, sms_id, number, id, length, burnFlag, barCycle, isRecord));
 
-        if(TextUtils.isEmpty(id)){
+        if (TextUtils.isEmpty(id)) {
             LogHelper.i("id field value error");
             return;
         }
@@ -1690,8 +1753,7 @@ public class MessageApi extends ClientApi {
     }
 
     public void forwardOne2ManyImageFile(long thread_id, long sms_id, List<String> numbers,
-            String id, int burnFlag, int barCycle)
-            throws ServiceDisconnectedException {
+            String id, int burnFlag, int barCycle) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper
                 .i(String.format(
@@ -1699,7 +1761,7 @@ public class MessageApi extends ClientApi {
                         "enter method forwardOne2ManyImageFile. [thread_id,sms_id,numbers,id,burnFlag,barCycle]=%d,%d,%s,%s,%d,%d",
                         thread_id, sms_id, numbers.toString(), id, burnFlag, barCycle));
 
-        if(TextUtils.isEmpty(id)){
+        if (TextUtils.isEmpty(id)) {
             LogHelper.i("id field value error");
             return;
         }
@@ -1718,8 +1780,8 @@ public class MessageApi extends ClientApi {
         }
 
         try {
-            myApi.forwardOne2ManyImageFile(thread_id, sms_id, VerificationUtil.formatNumbers(numbers),
-                    id, burnFlag, barCycle);
+            myApi.forwardOne2ManyImageFile(thread_id, sms_id,
+                    VerificationUtil.formatNumbers(numbers), id, burnFlag, barCycle);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
@@ -1733,10 +1795,10 @@ public class MessageApi extends ClientApi {
                 .i(String.format(
                         Locale.getDefault(),
                         "enter method forwardOne2ManyVideoFile. [thread_id,sms_id,numbers,id,length,burnFlag,barCycle,isRecord]=%d,%d,%s,%s,%d,%d,%d,%b",
-                        thread_id, sms_id, numbers.toString(), id, length, burnFlag,
-                        barCycle, isRecord));
+                        thread_id, sms_id, numbers.toString(), id, length, burnFlag, barCycle,
+                        isRecord));
 
-        if(TextUtils.isEmpty(id)){
+        if (TextUtils.isEmpty(id)) {
             LogHelper.i("id field value error");
             return;
         }
@@ -1754,8 +1816,8 @@ public class MessageApi extends ClientApi {
             return;
         }
         try {
-            myApi.forwardOne2ManyVideoFile(thread_id, sms_id, VerificationUtil.formatNumbers(numbers),
-                    id, length, burnFlag, barCycle);
+            myApi.forwardOne2ManyVideoFile(thread_id, sms_id,
+                    VerificationUtil.formatNumbers(numbers), id, length, burnFlag, barCycle);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
@@ -1770,7 +1832,7 @@ public class MessageApi extends ClientApi {
                         "enter method forwardGroupImageFile. [thread_id,conversationId,sms_id,id,groupId]=%d,%s,%d,%s,%s",
                         thread_id, conversationId, sms_id, id, groupId));
 
-        if(TextUtils.isEmpty(id)){
+        if (TextUtils.isEmpty(id)) {
             LogHelper.i("id field value error");
             return;
         }
@@ -1792,13 +1854,89 @@ public class MessageApi extends ClientApi {
                         "enter method forwardGroupVideoFile. [thread_id,conversationId,sms_id,id,length,groupId,isRecord]=%d,%s,%d,%s,%d,%s,%b",
                         thread_id, conversationId, sms_id, id, length, groupId, isRecord));
 
-        if(TextUtils.isEmpty(id)){
+        if (TextUtils.isEmpty(id)) {
             LogHelper.i("id field value error");
             return;
         }
 
         try {
             myApi.forwardGroupVideoFile(thread_id, conversationId, sms_id, id, length, groupId);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+    }
+
+    public void sendTextMessageAtTime(long thread_id, String number, String text, int burnFlag,
+            int barCycle, long orderTime) throws ServiceDisconnectedException,
+            OrderTimeAboutExpireException {
+        VerificationUtil.ApiIsNull(myApi);
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method sendTextMessage. [thread_id,number,text,burnFlag,barCycle,orderTime]=%d,%s,%s,%d,%d,%d",
+                        thread_id, number, text, burnFlag, barCycle, orderTime));
+        if ("".equals(text.trim())) {
+            LogHelper.i("text value is null/Space");
+            return;
+        }
+        if (!VerificationUtil.isNumber(number)) {
+            LogHelper.i("number field value error");
+            return;
+        }
+        if (!VerificationUtil.isBurnFlagCorrect(burnFlag)) {
+            LogHelper.i("burnFlag field must be 0 or 1");
+            return;
+        }
+        if (barCycle < 0) {
+            LogHelper.i("barCycle field must be a positive int");
+            return;
+        }
+        if (!VerificationUtil.isOrderTimeExpired(orderTime)) {
+            LogHelper.i("order time is about to expire");
+            throw new OrderTimeAboutExpireException(
+                    String.valueOf(SuntekMessageData.ORDER_TIME_EXPIRE_INTERVAL_SECOND));
+        }
+        try {
+            myApi.sendTextMessageAtTime(thread_id, VerificationUtil.formatNumber(number), text,
+                    burnFlag, barCycle, orderTime);
+        } catch (Exception ex) {
+            LogHelper.e(ex.getMessage(), ex);
+        }
+    }
+
+    public void sendOne2ManyTextMessageAtTime(long thread_id, List<String> numbers, String text,
+            int burnFlag, int barCycle, long orderTime) throws ServiceDisconnectedException,
+            OrderTimeAboutExpireException {
+        VerificationUtil.ApiIsNull(myApi);
+        if ("".equals(text.trim())) {
+            LogHelper.i("text value is null/Space");
+            return;
+        }
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method sendOne2ManyTextMessageAtTime. [thread_id,numbers,text,burnFlag,barCycle, orderTime]=%d,%s,%s,%d,%d,%d",
+                        thread_id, numbers.toString(), text, burnFlag, barCycle, orderTime));
+        if (!VerificationUtil.isAllNumber(numbers)) {
+            LogHelper.i("number field value error");
+            return;
+        }
+        if (!VerificationUtil.isBurnFlagCorrect(burnFlag)) {
+            LogHelper.i("burnFlag field must be 0 or 1");
+            return;
+        }
+        if (barCycle < 0) {
+            LogHelper.i("barCycle field must be a positive int");
+            return;
+        }
+        if (!VerificationUtil.isOrderTimeExpired(orderTime)) {
+            LogHelper.i("order time is about to expire");
+            throw new OrderTimeAboutExpireException(
+                    String.valueOf(SuntekMessageData.ORDER_TIME_EXPIRE_INTERVAL_SECOND));
+        }
+        try {
+            myApi.sendOne2ManyTextMessageAtTime(thread_id, VerificationUtil.formatNumbers(numbers),
+                    text, burnFlag, barCycle, orderTime);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }

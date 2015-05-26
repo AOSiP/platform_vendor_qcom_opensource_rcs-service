@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.plugincenter;
 
 import java.util.Locale;
@@ -37,6 +38,7 @@ import com.suntek.mway.rcs.client.aidl.plugincenter.IPluginCenterApi;
 
 public class PluginCenterApi extends ClientApi {
     private static String serviceName = "com.suntek.mway.rcs.app.service.api.impl.plugincenter.PluginCenterApiService";
+
     IPluginCenterApi myApi;
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -52,8 +54,7 @@ public class PluginCenterApi extends ClientApi {
                 myApi = null;
                 notifyServiceDisconnected();
             } else {
-                LogHelper.d("illegal call client api disconnect service :"
-                        + reconnectionTimes);
+                LogHelper.d("illegal call client api disconnect service :" + reconnectionTimes);
                 init(context, rcsListener);
                 if (!isBinded()) {
                     // app is uninstalled
@@ -73,8 +74,7 @@ public class PluginCenterApi extends ClientApi {
     public void intentApk() throws ServiceDisconnectedException {
         if (RcsSupportApi.isRcsPluginCenterInstalled(context)) {
             VerificationUtil.ApiIsNull(myApi);
-            LogHelper.i(String.format(Locale.getDefault(),
-                    "enter method:intentApk. "));
+            LogHelper.i(String.format(Locale.getDefault(), "enter method:intentApk. "));
             try {
                 myApi.intentApk();
             } catch (Exception ex) {

@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
 
 import android.os.Parcel;
@@ -31,7 +32,7 @@ import java.util.List;
 /**
  * The Class MenuInfoMode.
  */
-public class MenuInfoMode implements Parcelable{
+public class MenuInfoMode implements Parcelable {
 
     /** The pa uuid. */
     private String paUuid;
@@ -45,81 +46,73 @@ public class MenuInfoMode implements Parcelable{
     /**
      * Instantiates a new menu info mode.
      */
-    public MenuInfoMode(){
-        
+    public MenuInfoMode() {
+
     }
-    
+
     /**
      * Instantiates a new menu info mode.
-     *
+     * 
      * @param source the source
      */
-    public MenuInfoMode( Parcel source )
-    {
-        readFromParcel( source );
+    public MenuInfoMode(Parcel source) {
+        readFromParcel(source);
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
      * @see android.os.Parcelable#describeContents()
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
-    }
-    
-    /**
-     * Write the menu entity to parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
-     * correct results
-     *
-     * @param dest
-     *            the dest parcel stream
-     * @param flags
-     *            the flags
-     */
-    @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        dest.writeString( paUuid );
-        dest.writeString( menutimestamp );
-        dest.writeList( menuInfoList );
     }
 
     /**
-     * Create the menu entity from parcel stream. Pay attention to read
-     * and write variables variables sequence should be consistent or not the
-     * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * Write the menu entity to parcel stream. Pay attention to read and write
+     * variables variables sequence should be consistent or not the correct
+     * results
+     * 
+     * @param dest the dest parcel stream
+     * @param flags the flags
      */
-    public void readFromParcel( Parcel source )
-    {
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(paUuid);
+        dest.writeString(menutimestamp);
+        dest.writeList(menuInfoList);
+    }
+
+    /**
+     * Create the menu entity from parcel stream. Pay attention to read and
+     * write variables variables sequence should be consistent or not the
+     * correct results
+     * 
+     * @param source The parcel stream
+     */
+    public void readFromParcel(Parcel source) {
         paUuid = source.readString();
         menutimestamp = source.readString();
         menuInfoList = new LinkedList<MenuInfo>();
-        source.readList( menuInfoList, this.getClass().getClassLoader() );
+        source.readList(menuInfoList, this.getClass().getClassLoader());
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<MenuInfoMode>    CREATOR    = new Parcelable.Creator<MenuInfoMode>() {
+    public static final Parcelable.Creator<MenuInfoMode> CREATOR = new Parcelable.Creator<MenuInfoMode>() {
         @Override
-        public MenuInfoMode createFromParcel( Parcel source )
-        {
-            return new MenuInfoMode( source );
+        public MenuInfoMode createFromParcel(Parcel source) {
+            return new MenuInfoMode(source);
         }
 
         @Override
-        public MenuInfoMode[] newArray( int size )
-        {
-            return new MenuInfoMode[ size ];
+        public MenuInfoMode[] newArray(int size) {
+            return new MenuInfoMode[size];
         }
     };
-    
+
     /**
      * Gets the pa uuid.
-     *
+     * 
      * @return the pa uuid
      */
     public String getPaUuid() {
@@ -128,7 +121,7 @@ public class MenuInfoMode implements Parcelable{
 
     /**
      * Sets the pa uuid.
-     *
+     * 
      * @param paUuid the new pa uuid
      */
     public void setPaUuid(String paUuid) {
@@ -137,7 +130,7 @@ public class MenuInfoMode implements Parcelable{
 
     /**
      * Gets the menutimestamp.
-     *
+     * 
      * @return the menutimestamp
      */
     public String getMenutimestamp() {
@@ -146,7 +139,7 @@ public class MenuInfoMode implements Parcelable{
 
     /**
      * Sets the menutimestamp.
-     *
+     * 
      * @param menutimestamp the new menutimestamp
      */
     public void setMenutimestamp(String menutimestamp) {
@@ -155,7 +148,7 @@ public class MenuInfoMode implements Parcelable{
 
     /**
      * Gets the menu info list.
-     *
+     * 
      * @return the menu info list
      */
     public List<MenuInfo> getMenuInfoList() {
@@ -164,7 +157,7 @@ public class MenuInfoMode implements Parcelable{
 
     /**
      * Sets the menu info list.
-     *
+     * 
      * @param menuInfoList the new menu info list
      */
     public void setMenuInfoList(List<MenuInfo> menuInfoList) {

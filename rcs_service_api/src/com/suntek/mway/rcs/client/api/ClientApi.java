@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api;
 
 import java.util.List;
@@ -41,12 +42,17 @@ public abstract class ClientApi implements ClientApiInterface {
     private boolean isBinded = false;
 
     private String serviceName = null;
+
     private ServiceConnection mConnection = null;
+
     protected RCSServiceListener rcsListener = null;
+
     protected Context context = null;
 
     protected boolean isNormallyClosed = false;
+
     protected int reconnectionTimes = 1;
+
     protected final int MAX_RECONECTION_TIMES = 10;
 
     public ClientApi(String theService) {
@@ -56,6 +62,7 @@ public abstract class ClientApi implements ClientApiInterface {
 
     /**
      * judge the bind state about remote service.
+     * 
      * @return true if binded, return false if unbinded.
      */
     public boolean isBinded() {
@@ -69,15 +76,13 @@ public abstract class ClientApi implements ClientApiInterface {
     public void init(Context context, RCSServiceListener listener) {
         this.rcsListener = listener;
         this.context = context;
-        if (context.getPackageName() != null
-                && !"".equals(context.getPackageName())) {
-            LogHelper.MYLOG_PATH_SDCARD_DIR = LogHelper.MYLOG_PATH_SDCARD_DIR
-                    .replace("com.suntek.mway.rcs.service.api",
-                            context.getPackageName());
+        if (context.getPackageName() != null && !"".equals(context.getPackageName())) {
+            LogHelper.MYLOG_PATH_SDCARD_DIR = LogHelper.MYLOG_PATH_SDCARD_DIR.replace(
+                    "com.suntek.mway.rcs.service.api", context.getPackageName());
         }
         // TODO Auto-generated constructor stub
         Intent intent = new Intent();
-//        intent.setAction(serviceName);
+        // intent.setAction(serviceName);
         intent.setClassName("com.suntek.mway.rcs.app.service", serviceName);
         isBinded = context.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         LogHelper.d("bind " + serviceName + "--> result:" + isBinded);
@@ -89,38 +94,40 @@ public abstract class ClientApi implements ClientApiInterface {
                 LogHelper.d("destory()--> to destroy service : " + serviceName);
                 isNormallyClosed = true;
                 context.unbindService(mConnection);
-            }
-            else {
-                LogHelper.i("destory()--> service("+serviceName+") already unbinded, do not need to destroy.");
+            } else {
+                LogHelper.i("destory()--> service(" + serviceName
+                        + ") already unbinded, do not need to destroy.");
             }
         } catch (Exception e) {
-            LogHelper.e("unbind " + serviceName + "--> result:" + e.getMessage(),e);
-        }finally {
+            LogHelper.e("unbind " + serviceName + "--> result:" + e.getMessage(), e);
+        } finally {
             isBinded = false;
         }
     }
 
-
     /**
      * check the service is start or not.
+     * 
      * @param ctx android.content.Context
      * @return true if the service is started , false otherwise.
      */
     public static boolean isMainServiceStarted(Context ctx) {
-        ActivityManager activityManager = (ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningServiceInfo> serviceList = activityManager.getRunningServices(Integer.MAX_VALUE);
-         for(int i = 0; i < serviceList.size(); i++) {
-               ActivityManager.RunningServiceInfo serviceInfo = serviceList.get(i);
-               ComponentName serviceName = serviceInfo.service;
-               if (serviceName.getClassName().equals(APIConstant.MAIN_SERVICE_NAME)) {
-                     if (serviceInfo.pid != 0) {
-                          return true;
-                     } else {
-                          return false;
-                     }
-               }
-         }
-         return false;
+        ActivityManager activityManager = (ActivityManager)ctx
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> serviceList = activityManager
+                .getRunningServices(Integer.MAX_VALUE);
+        for (int i = 0; i < serviceList.size(); i++) {
+            ActivityManager.RunningServiceInfo serviceInfo = serviceList.get(i);
+            ComponentName serviceName = serviceInfo.service;
+            if (serviceName.getClassName().equals(APIConstant.MAIN_SERVICE_NAME)) {
+                if (serviceInfo.pid != 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
     protected void notifyServiceConnected() {

@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.mcloudfile;
 
 public enum SdkType {
@@ -31,13 +32,11 @@ public enum SdkType {
 
     None;
 
-    public static SdkType valueOf( int ordinal )
-    {
-        if( ordinal < 0 || ordinal >= values().length )
-        {
-            throw new IndexOutOfBoundsException( "Invalid ordinal" );
+    public static SdkType valueOf(int ordinal) {
+        if (ordinal < 0 || ordinal >= values().length) {
+            throw new IndexOutOfBoundsException("Invalid ordinal");
         }
 
-        return values()[ ordinal ];
+        return values()[ordinal];
     }
 }

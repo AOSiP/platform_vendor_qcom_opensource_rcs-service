@@ -42,6 +42,13 @@ interface IPublicAccountAPI
 {
     
     /**
+     * Check plugin status.
+     * 
+     * @return true, if successful
+     */
+    boolean checkPluginStatus();
+    
+    /**
      * follow some public account.
      *
      * @param uuid            the public account uuid

@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.contacts;
 
 import java.util.ArrayList;
@@ -31,10 +32,12 @@ import android.os.Parcelable;
 import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Profile;
 
 /**
- * <p>Title: RCSContact class</p>
  * <p>
- * Description: The class <code>RCSContact</code> represents the informations
- * of RCS contact.
+ * Title: RCSContact class
+ * </p>
+ * <p>
+ * Description: The class <code>RCSContact</code> represents the informations of
+ * RCS contact.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -42,9 +45,9 @@ import com.suntek.mway.rcs.client.aidl.plugin.entity.profile.Profile;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class RCSContact extends Profile implements Parcelable {
 
@@ -64,7 +67,7 @@ public class RCSContact extends Profile implements Parcelable {
 
     /**
      * Checks if is rcs contact.
-     *
+     * 
      * @return true, if is rcs contact
      */
     public boolean isRcsContact() {
@@ -73,7 +76,7 @@ public class RCSContact extends Profile implements Parcelable {
 
     /**
      * Sets the rcs contact.
-     *
+     * 
      * @param isRcsContact the new rcs contact
      */
     public void setRcsContact(boolean isRcsContact) {
@@ -82,7 +85,7 @@ public class RCSContact extends Profile implements Parcelable {
 
     /**
      * Gets the id.
-     *
+     * 
      * @return the id
      */
     public long getId() {
@@ -91,7 +94,7 @@ public class RCSContact extends Profile implements Parcelable {
 
     /**
      * Sets the id.
-     *
+     * 
      * @param id the new id
      */
     public void setId(long id) {
@@ -100,7 +103,7 @@ public class RCSContact extends Profile implements Parcelable {
 
     /**
      * Gets the pinyin.
-     *
+     * 
      * @return the pinyin
      */
     public String getPinyin() {
@@ -109,7 +112,7 @@ public class RCSContact extends Profile implements Parcelable {
 
     /**
      * Sets the pinyin.
-     *
+     * 
      * @param pinyin the new pinyin
      */
     public void setPinyin(String pinyin) {
@@ -118,6 +121,7 @@ public class RCSContact extends Profile implements Parcelable {
 
     /**
      * Get photo
+     * 
      * @return
      */
     public byte[] getPhoto() {
@@ -126,6 +130,7 @@ public class RCSContact extends Profile implements Parcelable {
 
     /**
      * Set photo
+     * 
      * @param photo
      */
     public void setPhoto(byte[] photo) {
@@ -134,6 +139,7 @@ public class RCSContact extends Profile implements Parcelable {
 
     /**
      * Get photo base64 code
+     * 
      * @return
      */
     public String getPhotoBase64() {
@@ -142,6 +148,7 @@ public class RCSContact extends Profile implements Parcelable {
 
     /**
      * Set photo base64 code
+     * 
      * @param photoBase64
      */
     public void setPhotoBase64(String photoBase64) {
@@ -149,29 +156,27 @@ public class RCSContact extends Profile implements Parcelable {
     }
 
     /**
-       * Instantiates a new RCSContact.
-       */
-      public RCSContact()
-      {}
+     * Instantiates a new RCSContact.
+     */
+    public RCSContact() {
+    }
 
-      /**
-       * Instantiates a new RCSContact.
-       *
-       * @param source the source
-       */
-      public RCSContact( Parcel source )
-      {
-          readFromParcel( source );
-      }
+    /**
+     * Instantiates a new RCSContact.
+     * 
+     * @param source the source
+     */
+    public RCSContact(Parcel source) {
+        readFromParcel(source);
+    }
 
-      /**
+    /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
@@ -179,78 +184,71 @@ public class RCSContact extends Profile implements Parcelable {
      * Write the RCSContact entity to parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     *
+     * 
      * @param dest the dest
      * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        super.writeToParcel( dest,flags );
-        dest.writeLong( id );
-        dest.writeInt( isRcsContact ? 1 : 0);
-        dest.writeString( pinyin );
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeLong(id);
+        dest.writeInt(isRcsContact ? 1 : 0);
+        dest.writeString(pinyin);
 
         dest.writeString(photoBase64);
 
-        if( photo != null ) {
+        if (photo != null) {
             dest.writeByteArray(photo);
         }
     }
 
     /**
-     * Create the RCSContact entity from parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
+     * Create the RCSContact entity from parcel stream. Pay attention to read
+     * and write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    public void readFromParcel( Parcel source )
-    {
-        super.readFromParcel( source );
+    public void readFromParcel(Parcel source) {
+        super.readFromParcel(source);
         id = source.readLong();
         isRcsContact = source.readInt() == 1 ? true : false;
         pinyin = source.readString();
 
         photoBase64 = source.readString();
 
-        if( photo != null ) {
+        if (photo != null) {
             source.readByteArray(photo);
         }
 
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<RCSContact>    CREATOR    = new Parcelable.Creator<RCSContact>() {
+    public static final Parcelable.Creator<RCSContact> CREATOR = new Parcelable.Creator<RCSContact>() {
         @Override
-        public RCSContact createFromParcel( Parcel source )
-        {
-            return new RCSContact( source );
+        public RCSContact createFromParcel(Parcel source) {
+            return new RCSContact(source);
         }
 
         @Override
-        public RCSContact[] newArray( int size )
-        {
-            return new RCSContact[ size ];
+        public RCSContact[] newArray(int size) {
+            return new RCSContact[size];
         }
     };
-
 
     @Override
     public String toString() {
         int photoLen = 0;
-        if( photo != null ) {
+        if (photo != null) {
             photoLen = photo.length;
         }
         List<String> list = new ArrayList<String>();
-        list.add("id="+id);
-        list.add("isRcsContact="+isRcsContact);
-        list.add("pinyin="+pinyin);
-        list.add("photo.length="+photoLen);
-        list.add("profile="+super.toString());
+        list.add("id=" + id);
+        list.add("isRcsContact=" + isRcsContact);
+        list.add("pinyin=" + pinyin);
+        list.add("photo.length=" + photoLen);
+        list.add("profile=" + super.toString());
         return list.toString();
     }
-
 
 }

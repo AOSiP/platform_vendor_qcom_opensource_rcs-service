@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class SimpleMsg implements Parcelable {
 
     private int storeType;
 
-    public SimpleMsg(){
+    public SimpleMsg() {
     }
 
     public SimpleMsg(Parcel in) {

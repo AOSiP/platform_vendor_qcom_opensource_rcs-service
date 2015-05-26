@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.capability.impl;
 
 import java.util.Locale;
@@ -27,6 +28,7 @@ import java.util.Locale;
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.suntek.mway.rcs.client.api.ClientApi;
 import com.suntek.mway.rcs.client.aidl.capability.ICapabilityApi;
@@ -37,6 +39,7 @@ import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 
 public class CapabilityApi extends ClientApi {
     private static String serviceName = "com.suntek.mway.rcs.app.service.api.impl.capability.CapabilityApiService";
+
     ICapabilityApi myApi;
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -46,15 +49,13 @@ public class CapabilityApi extends ClientApi {
             myApi = ICapabilityApi.Stub.asInterface(service);
         }
 
-
         public void onServiceDisconnected(ComponentName className) {
-            if(isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
+            if (isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
                 LogHelper.d("client api disconnect service");
                 myApi = null;
                 notifyServiceDisconnected();
             } else {
-                LogHelper.d("illegal call client api disconnect service :"
-                        + reconnectionTimes);
+                LogHelper.d("illegal call client api disconnect service :" + reconnectionTimes);
                 init(context, rcsListener);
                 if (!isBinded()) {
                     // app is uninstalled
@@ -72,9 +73,15 @@ public class CapabilityApi extends ClientApi {
         super.initServiceConnect(mConnection);
     }
 
-    public void findCapabilityByNumber(String number,CapabiltyListener listener) throws ServiceDisconnectedException {
+    public void findCapabilityByNumber(String number, CapabiltyListener listener)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method findCapabilityByNumber. [number]=%s", number));
+
+        Log.d("_rcs_", String.format(Locale.getDefault(),
+                "enter method findCapabilityByNumber. [number]=%s", number));
+
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method findCapabilityByNumber. [number]=%s", number));
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return;
@@ -83,7 +90,7 @@ public class CapabilityApi extends ClientApi {
             myApi.findCapabilityByNumber(VerificationUtil.formatNumber(number), listener);
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            LogHelper.e(e.getMessage(),e);
+            LogHelper.e(e.getMessage(), e);
         }
     }
 }

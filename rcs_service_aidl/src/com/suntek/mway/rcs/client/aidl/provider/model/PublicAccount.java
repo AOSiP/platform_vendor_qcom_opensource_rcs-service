@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 /**
@@ -64,13 +65,13 @@ public class PublicAccount {
     private String updateTime;
 
     /** The menu type. */
-    private int    menuType;
+    private int menuType;
 
     /** The menu timestamp. */
     private String menuTimestamp;
 
     /** The subscribe status. */
-    private int    subscribeStatus;
+    private int subscribeStatus;
 
     /** The qr code. */
     private String qrCode;
@@ -92,16 +93,16 @@ public class PublicAccount {
 
     /** The field. */
     private String field;
-    
+
     /** The logoType. */
     private String logoType;
-    
+
     /** The menuString. */
     private String menuString;
 
     /**
      * Gets the pa uuid.
-     *
+     * 
      * @return the pa uuid
      */
     public String getPaUuid() {
@@ -110,7 +111,7 @@ public class PublicAccount {
 
     /**
      * Sets the pa uuid.
-     *
+     * 
      * @param paUuid the new pa uuid
      */
     public void setPaUuid(String paUuid) {
@@ -119,7 +120,7 @@ public class PublicAccount {
 
     /**
      * Gets the name.
-     *
+     * 
      * @return the name
      */
     public String getName() {
@@ -128,7 +129,7 @@ public class PublicAccount {
 
     /**
      * Sets the name.
-     *
+     * 
      * @param name the new name
      */
     public void setName(String name) {
@@ -137,7 +138,7 @@ public class PublicAccount {
 
     /**
      * Gets the logo.
-     *
+     * 
      * @return the logo
      */
     public String getLogo() {
@@ -146,7 +147,7 @@ public class PublicAccount {
 
     /**
      * Sets the logo.
-     *
+     * 
      * @param logo the new logo
      */
     public void setLogo(String logo) {
@@ -155,7 +156,7 @@ public class PublicAccount {
 
     /**
      * Gets the recommend level.
-     *
+     * 
      * @return the recommend level
      */
     public int getRecommendLevel() {
@@ -164,7 +165,7 @@ public class PublicAccount {
 
     /**
      * Sets the recommend level.
-     *
+     * 
      * @param recommendLevel the new recommend level
      */
     public void setRecommendLevel(int recommendLevel) {
@@ -173,7 +174,7 @@ public class PublicAccount {
 
     /**
      * Gets the sip uri.
-     *
+     * 
      * @return the sip uri
      */
     public String getSipUri() {
@@ -182,7 +183,7 @@ public class PublicAccount {
 
     /**
      * Sets the sip uri.
-     *
+     * 
      * @param sipUri the new sip uri
      */
     public void setSipUri(String sipUri) {
@@ -191,7 +192,7 @@ public class PublicAccount {
 
     /**
      * Checks if is followed.
-     *
+     * 
      * @return true, if is followed
      */
     public boolean isFollowed() {
@@ -200,7 +201,7 @@ public class PublicAccount {
 
     /**
      * Sets the followed.
-     *
+     * 
      * @param followed the new followed
      */
     public void setFollowed(boolean followed) {
@@ -209,7 +210,7 @@ public class PublicAccount {
 
     /**
      * Checks if is accept.
-     *
+     * 
      * @return true, if is accept
      */
     public boolean isAccept() {
@@ -218,7 +219,7 @@ public class PublicAccount {
 
     /**
      * Sets the accept.
-     *
+     * 
      * @param accept the new accept
      */
     public void setAccept(boolean accept) {
@@ -227,7 +228,7 @@ public class PublicAccount {
 
     /**
      * Gets the followed time.
-     *
+     * 
      * @return the followed time
      */
     public String getFollowedTime() {
@@ -236,7 +237,7 @@ public class PublicAccount {
 
     /**
      * Sets the followed time.
-     *
+     * 
      * @param followedTime the new followed time
      */
     public void setFollowedTime(String followedTime) {
@@ -245,7 +246,7 @@ public class PublicAccount {
 
     /**
      * Gets the company.
-     *
+     * 
      * @return the company
      */
     public String getCompany() {
@@ -254,7 +255,7 @@ public class PublicAccount {
 
     /**
      * Sets the company.
-     *
+     * 
      * @param company the new company
      */
     public void setCompany(String company) {
@@ -263,7 +264,7 @@ public class PublicAccount {
 
     /**
      * Gets the intro.
-     *
+     * 
      * @return the intro
      */
     public String getIntro() {
@@ -272,7 +273,7 @@ public class PublicAccount {
 
     /**
      * Sets the intro.
-     *
+     * 
      * @param intro the new intro
      */
     public void setIntro(String intro) {
@@ -281,7 +282,7 @@ public class PublicAccount {
 
     /**
      * Gets the type.
-     *
+     * 
      * @return the type
      */
     public String getType() {
@@ -290,7 +291,7 @@ public class PublicAccount {
 
     /**
      * Sets the type.
-     *
+     * 
      * @param type the new type
      */
     public void setType(String type) {
@@ -299,7 +300,7 @@ public class PublicAccount {
 
     /**
      * Gets the update time.
-     *
+     * 
      * @return the update time
      */
     public String getUpdateTime() {
@@ -308,7 +309,7 @@ public class PublicAccount {
 
     /**
      * Sets the update time.
-     *
+     * 
      * @param updateTime the new update time
      */
     public void setUpdateTime(String updateTime) {
@@ -317,7 +318,7 @@ public class PublicAccount {
 
     /**
      * Gets the menu type.
-     *
+     * 
      * @return the menu type
      */
     public int getMenuType() {
@@ -326,7 +327,7 @@ public class PublicAccount {
 
     /**
      * Sets the menu type.
-     *
+     * 
      * @param menuType the new menu type
      */
     public void setMenuType(int menuType) {
@@ -335,7 +336,7 @@ public class PublicAccount {
 
     /**
      * Gets the menu timestamp.
-     *
+     * 
      * @return the menu timestamp
      */
     public String getMenuTimestamp() {
@@ -344,7 +345,7 @@ public class PublicAccount {
 
     /**
      * Sets the menu timestamp.
-     *
+     * 
      * @param menuTimestamp the new menu timestamp
      */
     public void setMenuTimestamp(String menuTimestamp) {
@@ -353,7 +354,7 @@ public class PublicAccount {
 
     /**
      * Gets the subscribe status.
-     *
+     * 
      * @return the subscribe status
      */
     public int getSubscribeStatus() {
@@ -362,7 +363,7 @@ public class PublicAccount {
 
     /**
      * Sets the subscribe status.
-     *
+     * 
      * @param subscribeStatus the new subscribe status
      */
     public void setSubscribeStatus(int subscribeStatus) {
@@ -371,7 +372,7 @@ public class PublicAccount {
 
     /**
      * Gets the qr code.
-     *
+     * 
      * @return the qr code
      */
     public String getQrCode() {
@@ -380,7 +381,7 @@ public class PublicAccount {
 
     /**
      * Sets the qr code.
-     *
+     * 
      * @param qrCode the new qr code
      */
     public void setQrCode(String qrCode) {
@@ -389,7 +390,7 @@ public class PublicAccount {
 
     /**
      * Gets the active status.
-     *
+     * 
      * @return the active status
      */
     public int getActiveStatus() {
@@ -398,7 +399,7 @@ public class PublicAccount {
 
     /**
      * Sets the active status.
-     *
+     * 
      * @param activeStatus the new active status
      */
     public void setActiveStatus(int activeStatus) {
@@ -407,7 +408,7 @@ public class PublicAccount {
 
     /**
      * Gets the tel.
-     *
+     * 
      * @return the tel
      */
     public String getTel() {
@@ -416,7 +417,7 @@ public class PublicAccount {
 
     /**
      * Sets the tel.
-     *
+     * 
      * @param tel the new tel
      */
     public void setTel(String tel) {
@@ -425,7 +426,7 @@ public class PublicAccount {
 
     /**
      * Gets the email.
-     *
+     * 
      * @return the email
      */
     public String getEmail() {
@@ -434,7 +435,7 @@ public class PublicAccount {
 
     /**
      * Sets the email.
-     *
+     * 
      * @param email the new email
      */
     public void setEmail(String email) {
@@ -443,7 +444,7 @@ public class PublicAccount {
 
     /**
      * Gets the zip.
-     *
+     * 
      * @return the zip
      */
     public String getZip() {
@@ -452,7 +453,7 @@ public class PublicAccount {
 
     /**
      * Sets the zip.
-     *
+     * 
      * @param zip the new zip
      */
     public void setZip(String zip) {
@@ -461,7 +462,7 @@ public class PublicAccount {
 
     /**
      * Gets the addr.
-     *
+     * 
      * @return the addr
      */
     public String getAddr() {
@@ -470,7 +471,7 @@ public class PublicAccount {
 
     /**
      * Sets the addr.
-     *
+     * 
      * @param addr the new addr
      */
     public void setAddr(String addr) {
@@ -479,7 +480,7 @@ public class PublicAccount {
 
     /**
      * Gets the field.
-     *
+     * 
      * @return the field
      */
     public String getField() {
@@ -488,16 +489,16 @@ public class PublicAccount {
 
     /**
      * Sets the field.
-     *
+     * 
      * @param field the new field
      */
     public void setField(String field) {
         this.field = field;
     }
-    
+
     /**
      * Gets the logo type.
-     *
+     * 
      * @return the logo type
      */
     public String getLogoType() {
@@ -506,7 +507,7 @@ public class PublicAccount {
 
     /**
      * Sets the logo type.
-     *
+     * 
      * @param logoType the new logo type
      */
     public void setLogoType(String logoType) {
@@ -515,7 +516,7 @@ public class PublicAccount {
 
     /**
      * Gets the menu string.
-     *
+     * 
      * @return the menu string
      */
     public String getMenuString() {
@@ -524,44 +525,35 @@ public class PublicAccount {
 
     /**
      * Sets the menu string.
-     *
+     * 
      * @param menuString the new menu string
      */
     public void setMenuString(String menuString) {
         this.menuString = menuString;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         StringBuffer sbuffer = new StringBuffer();
-        sbuffer.append("paUuid=").append(this.paUuid)
-               .append(",name=").append(this.name)
-               .append(",logo=").append(this.logo)
-               .append(",recommendLevel=").append(this.recommendLevel)
-               .append(",sipUri=").append(this.sipUri)
-               .append(",followed=").append(this.followed)
-               .append(",accept=").append(this.accept)
-               .append(",followedTime=").append(this.followedTime)
-               .append(",company=").append(this.company)
-               .append(",intro=").append(this.intro)
-               .append(",type=").append(this.type)
-               .append(",updateTime=").append(this.updateTime)
-               .append(",menuType=").append(this.menuType)
-               .append(",menuTimestamp=").append(this.menuTimestamp)
-               .append(",subscribeStatus=").append(this.subscribeStatus)
-               .append(",qrCode=").append(this.qrCode)
-               .append(",activeStatus=").append(this.activeStatus)
-               .append(",tel=").append(this.tel)
-               .append(",email=").append(this.email)
-               .append(",zip=").append(this.zip)
-               .append(",addr=").append(this.addr)
-               .append(",field=").append(this.field)
-               .append(",logoType=").append(this.logoType)
-               .append(",menuString=").append(this.menuString)
-        ;
+        sbuffer.append("paUuid=").append(this.paUuid).append(",name=").append(this.name)
+                .append(",logo=").append(this.logo).append(",recommendLevel=")
+                .append(this.recommendLevel).append(",sipUri=").append(this.sipUri)
+                .append(",followed=").append(this.followed).append(",accept=").append(this.accept)
+                .append(",followedTime=").append(this.followedTime).append(",company=")
+                .append(this.company).append(",intro=").append(this.intro).append(",type=")
+                .append(this.type).append(",updateTime=").append(this.updateTime)
+                .append(",menuType=").append(this.menuType).append(",menuTimestamp=")
+                .append(this.menuTimestamp).append(",subscribeStatus=")
+                .append(this.subscribeStatus).append(",qrCode=").append(this.qrCode)
+                .append(",activeStatus=").append(this.activeStatus).append(",tel=")
+                .append(this.tel).append(",email=").append(this.email).append(",zip=")
+                .append(this.zip).append(",addr=").append(this.addr).append(",field=")
+                .append(this.field).append(",logoType=").append(this.logoType)
+                .append(",menuString=").append(this.menuString);
 
         return sbuffer.toString();
     }

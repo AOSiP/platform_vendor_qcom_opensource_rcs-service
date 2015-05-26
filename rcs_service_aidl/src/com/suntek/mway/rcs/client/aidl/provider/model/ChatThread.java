@@ -20,16 +20,19 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * <p>Title: ChatThread class</p>
  * <p>
- * Description: The class <code>ChatThread</code> represents a chat thread information
- * which is indicated by the field definition in this class.
+ * Title: ChatThread class
+ * </p>
+ * <p>
+ * Description: The class <code>ChatThread</code> represents a chat thread
+ * information which is indicated by the field definition in this class.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -37,9 +40,9 @@ import android.os.Parcelable;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class ChatThread implements Parcelable {
 
@@ -100,111 +103,142 @@ public class ChatThread implements Parcelable {
 
     /**
      * Get the thread id.
+     * 
      * @return
      */
     public long getThreadId() {
         return threadId;
     }
+
     /**
      * Set the thread id.
+     * 
      * @param threadId
      */
     public void setThreadId(long threadId) {
         this.threadId = threadId;
     }
+
     /**
      * Get the chat type.
-     * @return  The possible value can be<br/>
+     * 
+     * @return The possible value can be<br/>
      */
     public int getChatType() {
         return chatType;
     }
+
     /**
      * Set the chat type.
+     * 
      * @param chatType
      */
     public void setChatType(int chatType) {
         this.chatType = chatType;
     }
+
     /**
      * Get the last message content.
+     * 
      * @return the last message content
      */
     public String getLastMsg() {
         return lastMsg;
     }
+
     /**
      * Set the last message content.
-     * @param lastMsg  the last message content
+     * 
+     * @param lastMsg the last message content
      */
     public void setLastMsg(String lastMsg) {
         this.lastMsg = lastMsg;
     }
+
     /**
      * Get the last time of the message.
+     * 
      * @return the last time of the message.
      */
     public long getLastTime() {
         return lastTime;
     }
+
     /**
      * Set the last time of the message.
+     * 
      * @param lastTime
      */
     public void setLastTime(long lastTime) {
         this.lastTime = lastTime;
     }
+
     /**
      * Get the message type.
+     * 
      * @return The possible value can be<br/>
      */
     public int getMsgType() {
         return msgType;
     }
+
     /**
      * Set the message type.
-     * @param msgType  The possible value can be<br/>
+     * 
+     * @param msgType The possible value can be<br/>
      */
     public void setMsgType(int msgType) {
         this.msgType = msgType;
     }
+
     /**
      * Get contact
+     * 
      * @return contact
      */
     public String getContact() {
         return contact;
     }
+
     /**
      * Set contact
+     * 
      * @param contact contact
      */
     public void setContact(String contact) {
         this.contact = contact;
     }
+
     /**
      * Get last message identity
+     * 
      * @return
      */
     public int getLastMsgId() {
         return lastMsgId;
     }
+
     /**
      * Set last message identity
+     * 
      * @param lastMsgId
      */
     public void setLastMsgId(int lastMsgId) {
         this.lastMsgId = lastMsgId;
     }
+
     /**
      * Get Count of message
+     * 
      * @return
      */
     public int getCount() {
         return count;
     }
+
     /**
      * Set Count of message
+     * 
      * @param count
      */
     public void setCount(int count) {
@@ -213,6 +247,7 @@ public class ChatThread implements Parcelable {
 
     /**
      * Get count of unread message
+     * 
      * @return
      */
     public int getUnreadCount() {
@@ -221,6 +256,7 @@ public class ChatThread implements Parcelable {
 
     /**
      * Set count of unread message
+     * 
      * @param unreadCount
      */
     public void setUnreadCount(int unreadCount) {
@@ -229,6 +265,7 @@ public class ChatThread implements Parcelable {
 
     /**
      * Get group identity
+     * 
      * @return
      */
     public String getGroupId() {
@@ -237,6 +274,7 @@ public class ChatThread implements Parcelable {
 
     /**
      * Set group identity
+     * 
      * @param groupId
      */
     public void setGroupId(String groupId) {
@@ -245,6 +283,7 @@ public class ChatThread implements Parcelable {
 
     /**
      * Get message conversation id
+     * 
      * @return
      */
     public String getConversationId() {
@@ -253,6 +292,7 @@ public class ChatThread implements Parcelable {
 
     /**
      * Set message conversation id
+     * 
      * @param conversationId
      */
     public void setConversationId(String conversationId) {
@@ -281,7 +321,7 @@ public class ChatThread implements Parcelable {
         dest.writeString(groupId);
     }
 
-    public void readFromParcel( Parcel source ) {
+    public void readFromParcel(Parcel source) {
         threadId = source.readLong();
         contact = source.readString();
         lastMsgId = source.readInt();
@@ -297,11 +337,10 @@ public class ChatThread implements Parcelable {
 
     @Override
     public String toString() {
-        return "ChatThread [threadId=" + threadId + ", contact=" + contact
-                + ", lastMsgId=" + lastMsgId + ", lastTime=" + lastTime + ", lastMsg="
-                + lastMsg + ", count=" + count + ", unreadCount=" + unreadCount
-                + ", chatType=" + chatType + ", msgType=" + msgType
-                + ", conversationId=" + conversationId + ", groupId=" + groupId;
+        return "ChatThread [threadId=" + threadId + ", contact=" + contact + ", lastMsgId="
+                + lastMsgId + ", lastTime=" + lastTime + ", lastMsg=" + lastMsg + ", count="
+                + count + ", unreadCount=" + unreadCount + ", chatType=" + chatType + ", msgType="
+                + msgType + ", conversationId=" + conversationId + ", groupId=" + groupId;
     }
 
 }

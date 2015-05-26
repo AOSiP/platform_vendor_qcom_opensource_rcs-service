@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.profile;
 
 import java.io.Serializable;
@@ -29,23 +30,28 @@ import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class TelephoneModel implements Parcelable,Serializable{
+public class TelephoneModel implements Parcelable, Serializable {
 
     private static final long serialVersionUID = 2509804884372655920L;
+
     public static int TYPE_HOME = 1;
+
     public static int TYPE_MOBILE = 2;
+
     public static int TYPE_FIXED = 3;
+
     public static int TYPE_WORK = 4;
+
     public static int TYPE_OTHER = 5;
 
     private int type;
+
     private String telephone;
 
-    public TelephoneModel()
-    {}
+    public TelephoneModel() {
+    }
 
-    public TelephoneModel( Parcel source )
-    {
+    public TelephoneModel(Parcel source) {
         this.type = source.readInt();
         this.telephone = source.readString();
     }
@@ -53,36 +59,39 @@ public class TelephoneModel implements Parcelable,Serializable{
     public int getType() {
         return type;
     }
+
     public void setType(int type) {
         this.type = type;
     }
+
     public String getTelephone() {
         return telephone;
     }
+
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
     @Override
     public int describeContents() {
         return 0;
     }
+
     @Override
     public void writeToParcel(Parcel dest, int arg1) {
         dest.writeInt(this.type);
         dest.writeString(this.telephone);
     }
 
-    public static final Parcelable.Creator<TelephoneModel>    CREATOR    = new Parcelable.Creator<TelephoneModel>() {
+    public static final Parcelable.Creator<TelephoneModel> CREATOR = new Parcelable.Creator<TelephoneModel>() {
         @Override
-        public TelephoneModel createFromParcel( Parcel source )
-        {
-            return new TelephoneModel( source );
+        public TelephoneModel createFromParcel(Parcel source) {
+            return new TelephoneModel(source);
         }
 
         @Override
-        public TelephoneModel[] newArray( int size )
-        {
-            return new TelephoneModel[ size ];
+        public TelephoneModel[] newArray(int size) {
+            return new TelephoneModel[size];
         }
     };
 

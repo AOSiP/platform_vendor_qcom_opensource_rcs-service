@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.login.impl;
 
 import java.util.Locale;
@@ -35,10 +36,10 @@ import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.suntek.mway.rcs.client.api.util.VerificationUtil;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 
-
-public class LoginApi extends ClientApi{
+public class LoginApi extends ClientApi {
     /** The service name. */
     private static String serviceName = "com.suntek.mway.rcs.app.service.api.impl.login.LoginApiService";
+
     /** The api. */
     private static ILoginApi myApi;
 
@@ -47,17 +48,16 @@ public class LoginApi extends ClientApi{
         public void onServiceConnected(ComponentName className, IBinder service) {
             myApi = ILoginApi.Stub.asInterface(service);
             notifyServiceConnected();
-            LogHelper.d("ILoginApi have success connect, api="+myApi);
+            LogHelper.d("ILoginApi have success connect, api=" + myApi);
         }
 
         public void onServiceDisconnected(ComponentName className) {
-            if(isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
+            if (isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
                 LogHelper.d("ILoginApi api disconnect service");
                 myApi = null;
                 notifyServiceDisconnected();
             } else {
-                LogHelper.d("illegal call ILoginApi api disconnect service :"
-                        + reconnectionTimes);
+                LogHelper.d("illegal call ILoginApi api disconnect service :" + reconnectionTimes);
                 init(context, rcsListener);
                 if (!isBinded()) {
                     // app is uninstalled
@@ -74,22 +74,24 @@ public class LoginApi extends ClientApi{
         super.initServiceConnect(mConnection);
     }
 
-    public void login(LoginUser loginUser, LoginEventListener listener)throws ServiceDisconnectedException {
+    public void login(LoginUser loginUser, LoginEventListener listener)
+            throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method login.loginUser=" + loginUser.toString()));
-        try{
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method login.loginUser=" + loginUser.toString()));
+        try {
             myApi.login(loginUser, listener);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
 
     public void logout() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format( Locale.getDefault(),"enter method logout"));
-        try{
+        LogHelper.i(String.format(Locale.getDefault(), "enter method logout"));
+        try {
             myApi.logout();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
     }

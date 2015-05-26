@@ -20,10 +20,12 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.util;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.content.Context;
@@ -36,6 +38,7 @@ import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 
 public class VerificationUtil {
     private static final String SIP_PREFIX = "sip:";
+
     private static final String TEL_PREFIX = "tel:";
 
     public static void ApiIsNull(Object api) throws ServiceDisconnectedException {
@@ -48,8 +51,7 @@ public class VerificationUtil {
         if (number == null) {
             return false;
         }
-        return VerificationUtil
-                .formatWithout86(VerificationUtil.getNumberFromUri(number))
+        return VerificationUtil.formatWithout86(VerificationUtil.getNumberFromUri(number))
                 .replaceAll(" ", "").replaceAll("-", "").matches("\\d+");
     }
 
@@ -70,8 +72,10 @@ public class VerificationUtil {
     public static List<String> formatNumbers(List<String> numbers) {
         List<String> re = new ArrayList<String>();
         for (String number : numbers) {
-            re.add(formatNumber(number));
+            re.add(VerificationUtil.formatWithout86(VerificationUtil.getNumberFromUri(number))
+                    .replaceAll(" ", "").replaceAll("-", ""));
         }
+        Collections.sort(re);
         return re;
     }
 
@@ -82,28 +86,25 @@ public class VerificationUtil {
 
     public static void isImageFile(String filename) throws FileSuffixException {
         if (!MediaUtils.isImageFile(filename)) {
-            throw new FileSuffixException(
-                    "File extension is incorrect, the correct extension is '"
-                            + MediaConstants.IMAGE_SUFFIX + "'");
+            throw new FileSuffixException("File extension is incorrect, the correct extension is '"
+                    + MediaConstants.IMAGE_SUFFIX + "'");
         }
     }
 
     public static void isAudioFile(String filename) throws FileSuffixException {
         if (!MediaUtils.isAudioFile(filename)) {
-            throw new FileSuffixException(
-                    "File extension is incorrect, the correct extension is '"
-                            + MediaConstants.AUDIO_SUFFIX + "'");
+            throw new FileSuffixException("File extension is incorrect, the correct extension is '"
+                    + MediaConstants.AUDIO_SUFFIX + "'");
         }
     }
 
     public static void isVideoFile(String filename) throws FileSuffixException {
         if (!MediaUtils.isVideoFile(filename)) {
-            throw new FileSuffixException(
-                    "File extension is incorrect, the correct extension is '"
-                            + MediaConstants.VIDEO_SUFFIX + "'");
+            throw new FileSuffixException("File extension is incorrect, the correct extension is '"
+                    + MediaConstants.VIDEO_SUFFIX + "'");
         }
     }
-    
+
     public static void isCloudFile(String filename) throws FileSuffixException {
         if (!MediaUtils.isCloudFileAllowedFile(filename)) {
             throw new FileSuffixException(
@@ -116,39 +117,33 @@ public class VerificationUtil {
             throws FileTransferException {
         File file = new File(filename);
         if (file.exists() && file.isFile() && file.length() > (maxSize * 1024)) {
-            throw new FileTransferException("File too large "
-                    + (file.length() / 1024)
-                    + " KB. Max size of file to be transfer is " + maxSize
-                    + " KB.");
+            throw new FileTransferException("File too large " + (file.length() / 1024)
+                    + " KB. Max size of file to be transfer is " + maxSize + " KB.");
         }
     }
 
-    public static void isAudioDurationToLong(Context context, String filename, long maxDuration, int recordTime)
-            throws FileDurationException {
+    public static void isAudioDurationToLong(Context context, String filename, long maxDuration,
+            int recordTime) throws FileDurationException {
         File file = new File(filename);
-        if (file.exists() && file.isFile()){
+        if (file.exists() && file.isFile()) {
             int duration = MediaUtils.getAmrFileDuration(context, file);
-            if(duration >= (maxDuration + 1) * 1000 || recordTime > maxDuration){
+            if (duration >= (maxDuration + 1) * 1000 || recordTime > maxDuration) {
                 LogHelper.i("throw FileDurationException, duration=" + duration);
-                throw new FileDurationException("File duration too long "
-                        + duration
-                        + " s. Max duration is " + maxDuration
-                        + " s.");
+                throw new FileDurationException("File duration too long " + duration
+                        + " s. Max duration is " + maxDuration + " s.");
             }
         }
     }
 
-    public static void isVedioDurationToLong(Context context, String filename, long maxDuration, int recordTime)
-            throws FileDurationException {
+    public static void isVedioDurationToLong(Context context, String filename, long maxDuration,
+            int recordTime) throws FileDurationException {
         File file = new File(filename);
-        if (file.exists() && file.isFile()){
+        if (file.exists() && file.isFile()) {
             int duration = MediaUtils.getVideoFileDuration(context, file);
-            if(duration >= (maxDuration + 1) * 1000 || recordTime > maxDuration){
+            if (duration >= (maxDuration + 1) * 1000 || recordTime > maxDuration) {
                 LogHelper.i("throw FileDurationException, duration=" + duration);
-                throw new FileDurationException("File duration too long "
-                        + duration
-                        + " s. Max duration is " + maxDuration
-                        + " s.");
+                throw new FileDurationException("File duration too long " + duration
+                        + " s. Max duration is " + maxDuration + " s.");
             }
         }
     }
@@ -156,8 +151,7 @@ public class VerificationUtil {
     public static final String DMS_FT_MAX_SIZE = "ftMaxSize";
 
     public static long getFtMaxSize(Context context) {
-        return SettingUtils.getSetting(context, DMS_FT_MAX_SIZE,
-                MediaConstants.FT_MAX_SIZE);
+        return SettingUtils.getSetting(context, DMS_FT_MAX_SIZE, MediaConstants.FT_MAX_SIZE);
     }
 
     public static final String DMS_IMAGE_FT_MAX_SIZE = "imageFtMaxSize";
@@ -170,7 +164,8 @@ public class VerificationUtil {
     public static final String DMS_VIDEO_FT_MAX_SIZE = "videoFtMaxSize";
 
     public static long getVideoFtMaxSize(Context context) {
-        return SettingUtils.getSetting(context, DMS_VIDEO_FT_MAX_SIZE, MediaConstants.VIDEO_FT_MAX_SIZE);
+        return SettingUtils.getSetting(context, DMS_VIDEO_FT_MAX_SIZE,
+                MediaConstants.VIDEO_FT_MAX_SIZE);
     }
 
     public static final String DMS_VIDEO_MAX_TIME = "videoMaxTime";
@@ -228,9 +223,14 @@ public class VerificationUtil {
         }
 
         int pos = uriStr.indexOf("@");
-        if(pos != -1){
+        if (pos != -1) {
             uriStr = uriStr.substring(0, pos);
         }
         return uriStr;
+    }
+
+    public static boolean isOrderTimeExpired(long orderTime) {
+        return orderTime > System.currentTimeMillis()
+                + SuntekMessageData.ORDER_TIME_EXPIRE_INTERVAL_SECOND * 1000;
     }
 }

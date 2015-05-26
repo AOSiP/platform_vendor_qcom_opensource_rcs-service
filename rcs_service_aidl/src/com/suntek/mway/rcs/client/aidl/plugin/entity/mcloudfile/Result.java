@@ -20,70 +20,66 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.mcloudfile;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Result implements Parcelable
-{
-    private Error    mcloudError;
-    private String        mcloudDesc;
-    private String        socketCode;
-    private String        httpCode;
-    private String        serverCode;
+public class Result implements Parcelable {
+    private Error mcloudError;
 
-    public Result()
-    {
+    private String mcloudDesc;
+
+    private String socketCode;
+
+    private String httpCode;
+
+    private String serverCode;
+
+    public Result() {
     }
 
-    public Result( Parcel source )
-    {
-        readFromParcel( source );
+    public Result(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
     /**
-     * Write the mcloud result entity to parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
+     * Write the mcloud result entity to parcel stream. Pay attention to read
+     * and write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param dest
-     *            the dest parcel stream
-     * @param flags
-     *            the flags
+     * 
+     * @param dest the dest parcel stream
+     * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        dest.writeInt( mcloudError.ordinal() );
-        dest.writeString( mcloudDesc );
-        dest.writeString( socketCode );
-        dest.writeString( httpCode );
-        dest.writeString( serverCode );
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mcloudError.ordinal());
+        dest.writeString(mcloudDesc);
+        dest.writeString(socketCode);
+        dest.writeString(httpCode);
+        dest.writeString(serverCode);
     }
 
     /**
-     * Create the mcloud result entity from parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
+     * Create the mcloud result entity from parcel stream. Pay attention to read
+     * and write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    public void readFromParcel( Parcel source )
-    {
-        mcloudError = Error.valueOf( source.readInt() );
+    public void readFromParcel(Parcel source) {
+        mcloudError = Error.valueOf(source.readInt());
         mcloudDesc = source.readString();
         socketCode = source.readString();
         httpCode = source.readString();
@@ -91,67 +87,55 @@ public class Result implements Parcelable
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<Result>    CREATOR    = new Parcelable.Creator<Result>() {
+    public static final Parcelable.Creator<Result> CREATOR = new Parcelable.Creator<Result>() {
         @Override
-        public Result createFromParcel( Parcel source )
-        {
-            return new Result( source );
+        public Result createFromParcel(Parcel source) {
+            return new Result(source);
         }
 
         @Override
-        public Result[] newArray( int size )
-        {
-            return new Result[ size ];
+        public Result[] newArray(int size) {
+            return new Result[size];
         }
     };
 
-    public Error getMcloudError()
-    {
+    public Error getMcloudError() {
         return mcloudError;
     }
 
-    public void setMcloudError( Error mcloudError )
-    {
+    public void setMcloudError(Error mcloudError) {
         this.mcloudError = mcloudError;
     }
 
-    public String getMcloudDesc()
-    {
+    public String getMcloudDesc() {
         return mcloudDesc;
     }
 
-    public void setMcloudDesc( String mcloudDesc )
-    {
+    public void setMcloudDesc(String mcloudDesc) {
         this.mcloudDesc = mcloudDesc;
     }
 
-    public String getSocketCode()
-    {
+    public String getSocketCode() {
         return socketCode;
     }
 
-    public void setSocketCode( String socketCode )
-    {
+    public void setSocketCode(String socketCode) {
         this.socketCode = socketCode;
     }
 
-    public String getHttpCode()
-    {
+    public String getHttpCode() {
         return httpCode;
     }
 
-    public void setHttpCode( String httpCode )
-    {
+    public void setHttpCode(String httpCode) {
         this.httpCode = httpCode;
     }
 
-    public String getServerCode()
-    {
+    public String getServerCode() {
         return serverCode;
     }
 
-    public void setServerCode( String serverCode )
-    {
+    public void setServerCode(String serverCode) {
         this.serverCode = serverCode;
     }
 }

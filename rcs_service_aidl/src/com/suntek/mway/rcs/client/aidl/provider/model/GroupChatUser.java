@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 import android.content.Context;
@@ -33,10 +34,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>Title: ChatGroupUser class</p>
  * <p>
- * Description: The class <code>ChatGroupUser</code> represents a chat group user information
- * which is indicated by the field definition in this class.
+ * Title: ChatGroupUser class
+ * </p>
+ * <p>
+ * Description: The class <code>ChatGroupUser</code> represents a chat group
+ * user information which is indicated by the field definition in this class.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -44,14 +47,16 @@ import java.util.List;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class GroupChatUser implements Parcelable {
 
     public static final int AWAIT_TO_JOIN = 0;
+
     public static final int AGREE_TO_JOIN = 1;
+
     public static final int REFUSE_TO_JOIN = 2;
 
     /**
@@ -136,7 +141,7 @@ public class GroupChatUser implements Parcelable {
      */
     public static final String ETYPE_CAN_ASSIGN_AS_CHAIRMAN = "gpmanage";
 
-    public GroupChatUser(){
+    public GroupChatUser() {
     }
 
     public GroupChatUser(Parcel in) {
@@ -145,6 +150,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Get user uri
+     * 
      * @return
      */
     public String getUri() {
@@ -153,6 +159,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Set user uri
+     * 
      * @param uri
      */
     public void setUri(String uri) {
@@ -161,13 +168,16 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Get the display name
+     * 
      * @return the display name
      */
     public String getDisplayName() {
         return displayName;
     }
+
     /**
      * Get the display name
+     * 
      * @return the display name
      */
     public String getDisplayName(Context context) {
@@ -177,7 +187,11 @@ public class GroupChatUser implements Parcelable {
         }
 
         if (!TextUtils.isEmpty(number)) {
-            String displayName = getDisplayNameOnContactsProviderByNumber(context, number); // TODO Add country code support.
+            String displayName = getDisplayNameOnContactsProviderByNumber(context, number); // TODO
+                                                                                            // Add
+                                                                                            // country
+                                                                                            // code
+                                                                                            // support.
             if (!TextUtils.isEmpty(displayName)) {
                 return displayName;
             }
@@ -212,27 +226,34 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Set the display name
+     * 
      * @param displayName the display name
      */
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
+
     /**
      * Get the phone number
+     * 
      * @return the phone number
      */
     public String getNumber() {
         return number;
     }
+
     /**
      * Set the phone number
+     * 
      * @param number the phone number
      */
     public void setNumber(String number) {
         this.number = number;
     }
+
     /**
      * Get role(ordinary member or administrator)
+     * 
      * @return
      */
     public String getRole() {
@@ -241,6 +262,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Whether user is group administrator
+     * 
      * @return if true then user is group administrator
      */
     public boolean isAdminRole() {
@@ -249,31 +271,40 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Set role
+     * 
      * @param role role
      */
     public void setRole(String role) {
         this.role = role;
     }
+
     /**
-     * Get the formatted string which format is "number, displayName, status, role"
+     * Get the formatted string which format is
+     * "number, displayName, status, role"
+     * 
      * @return
      */
     public String toFormatString() {
         StringBuffer sb = new StringBuffer();
-        sb.append(TextUtils.isEmpty(number)?" ":number).append(",");
-        sb.append(TextUtils.isEmpty(displayName)?" ":displayName).append(",");
-        sb.append(TextUtils.isEmpty(status)?" ":status).append(",");
-        sb.append(TextUtils.isEmpty(role)? " " : role);
+        sb.append(TextUtils.isEmpty(number) ? " " : number).append(",");
+        sb.append(TextUtils.isEmpty(displayName) ? " " : displayName).append(",");
+        sb.append(TextUtils.isEmpty(status) ? " " : status).append(",");
+        sb.append(TextUtils.isEmpty(role) ? " " : role);
         return sb.toString();
     }
+
     /**
-     * Create an instance of the ChatGroupUser from formatted string which format is "number, displayName, status, role"
-     * @param data the formatted string which format is "number, displayName, status, role"
-     * @return an instance of the ChatGroupUser or null if the data is format error
+     * Create an instance of the ChatGroupUser from formatted string which
+     * format is "number, displayName, status, role"
+     * 
+     * @param data the formatted string which format is
+     *            "number, displayName, status, role"
+     * @return an instance of the ChatGroupUser or null if the data is format
+     *         error
      */
     public static GroupChatUser fromFormatString(String data) {
         String[] strs = data.split(",");
-        if(strs.length == 4) {
+        if (strs.length == 4) {
             GroupChatUser user = new GroupChatUser();
             user.setNumber(strs[0].trim());
             user.setDisplayName(strs[1].trim());
@@ -285,6 +316,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Get disconnection method
+     * 
      * @return disconnection method
      */
     public String getDisconnectionMethod() {
@@ -293,6 +325,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Set disconnection method
+     * 
      * @param disconnectionMethod disconnection method
      */
     public void setDisconnectionMethod(String disconnectionMethod) {
@@ -301,6 +334,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Get state
+     * 
      * @return state
      */
     public String getState() {
@@ -309,6 +343,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Set state
+     * 
      * @param state state
      */
     public void setState(String state) {
@@ -317,6 +352,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Get status
+     * 
      * @return
      */
     public String getStatus() {
@@ -325,6 +361,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Set status
+     * 
      * @param status
      */
     public void setStatus(String status) {
@@ -333,6 +370,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Get time of join the group
+     * 
      * @return
      */
     public long getTime() {
@@ -341,6 +379,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Get user identity of group
+     * 
      * @return
      */
     public String getId() {
@@ -349,6 +388,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Set user identity of group
+     * 
      * @param id
      */
     public void setId(String id) {
@@ -357,6 +397,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Get group id
+     * 
      * @return
      */
     public String getGroupId() {
@@ -365,6 +406,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Set group id
+     * 
      * @param groupId
      */
     public void setGroupId(String groupId) {
@@ -373,6 +415,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Set time of join the group
+     * 
      * @param time
      */
     public void setTime(long time) {
@@ -381,6 +424,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Get agree to join
+     * 
      * @return
      */
     public int getAgreeToJoin() {
@@ -389,6 +433,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Set agree to join
+     * 
      * @param agreeToJoin
      */
     public void setAgreeToJoin(int agreeToJoin) {
@@ -397,6 +442,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Get invite number
+     * 
      * @return
      */
     public String getInviteNumber() {
@@ -405,6 +451,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Set invite number
+     * 
      * @param inviteNumber
      */
     public void setInviteNumber(String inviteNumber) {
@@ -413,6 +460,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Set etype
+     * 
      * @return
      */
     public String getEtype() {
@@ -421,6 +469,7 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Get etype
+     * 
      * @param etype
      */
     public void setEtype(String etype) {
@@ -429,14 +478,16 @@ public class GroupChatUser implements Parcelable {
 
     /**
      * Get alias
+     * 
      * @return
      */
     public String getAlias() {
-        return alias == null ? "" : alias;
+        return alias;
     }
 
     /**
      * Set alias
+     * 
      * @param alias
      */
     public void setAlias(String alias) {
@@ -483,7 +534,6 @@ public class GroupChatUser implements Parcelable {
         inviteNumber = source.readString();
     }
 
-
     @Override
     public String toString() {
         List<String> list = new ArrayList<String>();
@@ -503,7 +553,6 @@ public class GroupChatUser implements Parcelable {
         list.add("inviteNumber=" + inviteNumber);
         return list.toString();
     }
-
 
     public static final Parcelable.Creator<GroupChatUser> CREATOR = new Parcelable.Creator<GroupChatUser>() {
         public GroupChatUser createFromParcel(Parcel in) {

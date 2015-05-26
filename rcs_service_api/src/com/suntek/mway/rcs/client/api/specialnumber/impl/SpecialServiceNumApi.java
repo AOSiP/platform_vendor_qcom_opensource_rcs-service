@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.specialnumber.impl;
 
 import java.util.List;
@@ -34,7 +35,7 @@ import com.suntek.mway.rcs.client.api.util.ServiceDisconnectedException;
 import com.suntek.mway.rcs.client.api.util.VerificationUtil;
 import com.suntek.mway.rcs.client.api.util.log.LogHelper;
 
-public class SpecialServiceNumApi extends ClientApi{
+public class SpecialServiceNumApi extends ClientApi {
 
     private static String serviceName = "com.suntek.mway.rcs.app.service.api.impl.specialnumber.SpecialServiceNumApiService";
 
@@ -48,7 +49,7 @@ public class SpecialServiceNumApi extends ClientApi{
         }
 
         public void onServiceDisconnected(ComponentName className) {
-            if(isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
+            if (isNormallyClosed || reconnectionTimes > MAX_RECONECTION_TIMES) {
                 LogHelper.d("ISpecialServiceNumApi api disconnect service");
                 myApi = null;
                 notifyServiceDisconnected();
@@ -73,57 +74,57 @@ public class SpecialServiceNumApi extends ClientApi{
 
     /**
      * Add special number.
-     *
+     * 
      * @param number the number
      */
-    public void add(String number)throws ServiceDisconnectedException {
+    public void add(String number) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.add(number);
         } catch (Exception e) {
-            LogHelper.e(e.getMessage(),e);
+            LogHelper.e(e.getMessage(), e);
         }
     }
 
     /**
      * Close function, Set status to close.
      */
-    public void closeFunction()throws ServiceDisconnectedException {
+    public void closeFunction() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.closeFunction();
         } catch (Exception e) {
-            LogHelper.e(e.getMessage(),e);
+            LogHelper.e(e.getMessage(), e);
         }
     }
 
     /**
      * Delete special number prefix.
-     *
+     * 
      * @param number the number
      * @return the string
      */
-    public String delSpecialPreNum(String telephone)throws ServiceDisconnectedException {
+    public String delSpecialPreNum(String telephone) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         try {
             return myApi.delSpecialPreNum(telephone);
         } catch (Exception e) {
-            LogHelper.e(e.getMessage(),e);
+            LogHelper.e(e.getMessage(), e);
             return "";
         }
     }
 
     /**
      * Gets the list of special numbers.
-     *
+     * 
      * @return the list
      */
-    public List<String> getList()throws ServiceDisconnectedException {
+    public List<String> getList() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         try {
             return myApi.getList();
         } catch (Exception e) {
-            LogHelper.e(e.getMessage(),e);
+            LogHelper.e(e.getMessage(), e);
             return null;
         }
     }
@@ -131,38 +132,38 @@ public class SpecialServiceNumApi extends ClientApi{
     /**
      * Open function, Set status to open.
      */
-    public void openFunction()throws ServiceDisconnectedException {
+    public void openFunction() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.openFunction();
         } catch (Exception e) {
-            LogHelper.e(e.getMessage(),e);
+            LogHelper.e(e.getMessage(), e);
         }
     }
 
     /**
      * Removes a special number.
-     *
+     * 
      * @param number the number
      */
-    public void remove(String number)throws ServiceDisconnectedException {
+    public void remove(String number) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.remove(number);
         } catch (Exception e) {
-            LogHelper.e(e.getMessage(),e);
+            LogHelper.e(e.getMessage(), e);
         }
     }
 
     /**
      * Removes all special number.
      */
-    public void removeAll()throws ServiceDisconnectedException {
+    public void removeAll() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         try {
             myApi.removeAll();
         } catch (Exception e) {
-            LogHelper.e(e.getMessage(),e);
+            LogHelper.e(e.getMessage(), e);
         }
     }
 }

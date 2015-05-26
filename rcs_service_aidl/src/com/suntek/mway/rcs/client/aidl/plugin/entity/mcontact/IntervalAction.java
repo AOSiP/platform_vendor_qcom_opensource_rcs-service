@@ -20,27 +20,23 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.mcontact;
 
 public enum IntervalAction {
-    INTERVAL_SYNC_ONE_DAY,
-    INTERVAL_SYNC_ONE_WEEK,
-    INTERVAL_SYNC_ONE_MONTH,
-    INTERVAL_SYNC_SELF_DEFINE;
+    INTERVAL_SYNC_ONE_DAY, INTERVAL_SYNC_ONE_WEEK, INTERVAL_SYNC_ONE_MONTH, INTERVAL_SYNC_SELF_DEFINE;
 
     /**
      * Value of.
-     *
+     * 
      * @param ordinal the ordinal
      * @return the event
      */
-    public static IntervalAction valueOf( int ordinal )
-    {
-        if( ordinal < 0 || ordinal >= values().length )
-        {
-            throw new IndexOutOfBoundsException( "Invalid ordinal" );
+    public static IntervalAction valueOf(int ordinal) {
+        if (ordinal < 0 || ordinal >= values().length) {
+            throw new IndexOutOfBoundsException("Invalid ordinal");
         }
 
-        return values()[ ordinal ];
+        return values()[ordinal];
     }
 }

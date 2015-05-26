@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
 
 import java.util.LinkedList;
@@ -29,16 +30,24 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * <p>Title: The menu info entity</p>
- * <p>Description: The menu info entity</p>
- * <p>Copyright: Copyright (c) 2014</p>
- * <p>Company: pci-suntek</p>.
- *
+ * <p>
+ * Title: The menu info entity
+ * </p>
+ * <p>
+ * Description: The menu info entity
+ * </p>
+ * <p>
+ * Copyright: Copyright (c) 2014
+ * </p>
+ * <p>
+ * Company: pci-suntek
+ * </p>
+ * .
+ * 
  * @author zrq
  * @version 1.0
  */
-public class MenuInfo implements Parcelable
-{
+public class MenuInfo implements Parcelable {
 
     /** The command id. */
     private String commandId;
@@ -58,197 +67,176 @@ public class MenuInfo implements Parcelable
     /**
      * Instantiates a new menu info.
      */
-    public MenuInfo( )
-    {}
+    public MenuInfo() {
+    }
 
     /**
      * Instantiates a new menu info.
-     *
+     * 
      * @param source the source
      */
-    public MenuInfo( Parcel source )
-    {
-        readFromParcel( source );
+    public MenuInfo(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
     /**
-     * Write the menu entity to parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
-     * correct results
-     *
-     * @param dest
-     *            the dest parcel stream
-     * @param flags
-     *            the flags
+     * Write the menu entity to parcel stream. Pay attention to read and write
+     * variables variables sequence should be consistent or not the correct
+     * results
+     * 
+     * @param dest the dest parcel stream
+     * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        dest.writeString( commandId );
-        dest.writeString( title );
-        dest.writeInt( type );
-        dest.writeInt( priority );
-        dest.writeList( subMenuList );
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(commandId);
+        dest.writeString(title);
+        dest.writeInt(type);
+        dest.writeInt(priority);
+        dest.writeList(subMenuList);
     }
 
     /**
-     * Create the menu entity from parcel stream. Pay attention to read
-     * and write variables variables sequence should be consistent or not the
+     * Create the menu entity from parcel stream. Pay attention to read and
+     * write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    public void readFromParcel( Parcel source )
-    {
+    public void readFromParcel(Parcel source) {
         commandId = source.readString();
         title = source.readString();
         type = source.readInt();
         priority = source.readInt();
         subMenuList = new LinkedList<MenuInfo>();
-        source.readList( subMenuList, this.getClass().getClassLoader() );
+        source.readList(subMenuList, this.getClass().getClassLoader());
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<MenuInfo>    CREATOR    = new Parcelable.Creator<MenuInfo>() {
-                                                                    @Override
-                                                                    public MenuInfo createFromParcel( Parcel source )
-                                                                    {
-                                                                        return new MenuInfo( source );
-                                                                    }
+    public static final Parcelable.Creator<MenuInfo> CREATOR = new Parcelable.Creator<MenuInfo>() {
+        @Override
+        public MenuInfo createFromParcel(Parcel source) {
+            return new MenuInfo(source);
+        }
 
-                                                                    @Override
-                                                                    public MenuInfo[] newArray( int size )
-                                                                    {
-                                                                        return new MenuInfo[ size ];
-                                                                    }
-                                                                };
+        @Override
+        public MenuInfo[] newArray(int size) {
+            return new MenuInfo[size];
+        }
+    };
 
     /**
      * Gets the command id.
-     *
+     * 
      * @return the command id
      */
-    public String getCommandId()
-    {
+    public String getCommandId() {
         return commandId;
     }
 
     /**
      * Sets the command id.
-     *
+     * 
      * @param commandId the new command id
      */
-    public void setCommandId( String commandId )
-    {
+    public void setCommandId(String commandId) {
         this.commandId = commandId;
     }
 
     /**
      * Gets the title.
-     *
+     * 
      * @return the title
      */
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
     /**
      * Sets the title.
-     *
+     * 
      * @param title the new title
      */
-    public void setTitle( String title )
-    {
+    public void setTitle(String title) {
         this.title = title;
     }
 
     /**
      * Gets the type.
-     *
+     * 
      * @return the type
      */
-    public int getType()
-    {
+    public int getType() {
         return type;
     }
 
     /**
      * Sets the type.
-     *
+     * 
      * @param type the new type
      */
-    public void setType( int type )
-    {
+    public void setType(int type) {
         this.type = type;
     }
 
     /**
      * Gets the priority.
-     *
+     * 
      * @return the priority
      */
-    public int getPriority()
-    {
+    public int getPriority() {
         return priority;
     }
 
     /**
      * Sets the priority.
-     *
+     * 
      * @param priority the new priority
      */
-    public void setPriority( int priority )
-    {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
 
     /**
      * Gets the sub menu list.
-     *
+     * 
      * @return the sub menu list
      */
-    public List<MenuInfo> getSubMenuList()
-    {
+    public List<MenuInfo> getSubMenuList() {
         return subMenuList;
     }
 
     /**
      * Sets the sub menu list.
-     *
+     * 
      * @param subMenuList the new sub menu list
      */
-    public void setSubMenuList( List<MenuInfo> subMenuList )
-    {
+    public void setSubMenuList(List<MenuInfo> subMenuList) {
         this.subMenuList = subMenuList;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         StringBuffer sbuffer = new StringBuffer();
-        sbuffer.append("commandId=").append(this.commandId)
-               .append(",title=").append(this.title)
-               .append(",type=").append(this.type)
-               .append(",priority=").append(this.priority)
-        ;
-        if(null != this.subMenuList && this.subMenuList.size() > 0){
+        sbuffer.append("commandId=").append(this.commandId).append(",title=").append(this.title)
+                .append(",type=").append(this.type).append(",priority=").append(this.priority);
+        if (null != this.subMenuList && this.subMenuList.size() > 0) {
             sbuffer.append(",subMenuList=").append("[");
-            for(MenuInfo menu : this.subMenuList){
+            for (MenuInfo menu : this.subMenuList) {
                 sbuffer.append(menu.toString());
             }
             sbuffer.append("]");

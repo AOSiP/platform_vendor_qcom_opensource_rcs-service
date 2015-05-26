@@ -20,10 +20,11 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.autoconfig.callback;
 
 import com.suntek.mway.rcs.client.aidl.setting.callback.IAccountEventListener;
 
-public abstract class AccountEventListener extends IAccountEventListener.Stub{
+public abstract class AccountEventListener extends IAccountEventListener.Stub {
 
 }

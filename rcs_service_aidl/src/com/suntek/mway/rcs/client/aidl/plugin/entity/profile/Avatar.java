@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.profile;
 
 import java.io.Serializable;
@@ -30,140 +31,136 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * <p>Title: The profile avatar entity class</p>
- * <p>Description: the profile avatar include image encoding type and image base64 string</p>
- * <p>Copyright: Copyright (c) 2014</p>
- * <p>Company: pci-suntek</p>
- *
+ * <p>
+ * Title: The profile avatar entity class
+ * </p>
+ * <p>
+ * Description: the profile avatar include image encoding type and image base64
+ * string
+ * </p>
+ * <p>
+ * Copyright: Copyright (c) 2014
+ * </p>
+ * <p>
+ * Company: pci-suntek
+ * </p>
+ * 
  * @author zrq
  * @version 1.0
- *
  */
-public class Avatar extends BaseModel implements Parcelable,Serializable
-{
+public class Avatar extends BaseModel implements Parcelable, Serializable {
     private static final long serialVersionUID = -47856440160432L;
 
     /** The avatar image type. */
-    private IMAGE_TYPE    avatarImgType    = IMAGE_TYPE.PNG;
+    private IMAGE_TYPE avatarImgType = IMAGE_TYPE.PNG;
 
     /** The image encoding. */
-    private String        imgEncoding        = "BASE64";
+    private String imgEncoding = "BASE64";
 
     /** The image base64 str. */
-    private String        imgBase64Str;
+    private String imgBase64Str;
 
     /**
      * Instantiates a new avatar.
      */
-    public Avatar()
-    {}
+    public Avatar() {
+    }
 
     /**
      * Instantiates a new avatar.
-     *
+     * 
      * @param source the source
      */
-    public Avatar( Parcel source )
-    {
-        readFromParcel( source );
+    public Avatar(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
     /**
-     * Write the avatar entity to parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
-     * correct results
-     *
+     * Write the avatar entity to parcel stream. Pay attention to read and write
+     * variables variables sequence should be consistent or not the correct
+     * results
+     * 
      * @param dest the dest
      * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        super.writeToParcel( dest, flags );
-        dest.writeInt( avatarImgType.ordinal() );
-        dest.writeString( imgEncoding );
-        dest.writeString( imgBase64Str );
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(avatarImgType.ordinal());
+        dest.writeString(imgEncoding);
+        dest.writeString(imgBase64Str);
     }
 
     /**
      * Create the avatar entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    public void readFromParcel( Parcel source )
-    {
-        super.readFromParcel( source );
-        avatarImgType = IMAGE_TYPE.valueOf( source.readInt() );
+    public void readFromParcel(Parcel source) {
+        super.readFromParcel(source);
+        avatarImgType = IMAGE_TYPE.valueOf(source.readInt());
         imgEncoding = source.readString();
         imgBase64Str = source.readString();
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<Avatar>    CREATOR    = new Parcelable.Creator<Avatar>() {
+    public static final Parcelable.Creator<Avatar> CREATOR = new Parcelable.Creator<Avatar>() {
         @Override
-        public Avatar createFromParcel( Parcel source )
-        {
-            return new Avatar( source );
+        public Avatar createFromParcel(Parcel source) {
+            return new Avatar(source);
         }
 
         @Override
-        public Avatar[] newArray( int size )
-        {
-            return new Avatar[ size ];
+        public Avatar[] newArray(int size) {
+            return new Avatar[size];
         }
     };
 
     /**
      * Gets the avatar image type.
-     *
+     * 
      * @return the avatar image type
      */
-    public IMAGE_TYPE getAvatarImgType()
-    {
+    public IMAGE_TYPE getAvatarImgType() {
         return avatarImgType;
     }
 
     /**
      * Sets the avatar image type.
-     *
+     * 
      * @param avatarImgType the new avatar image type
      */
-    public void setAvatarImgType( IMAGE_TYPE avatarImgType )
-    {
+    public void setAvatarImgType(IMAGE_TYPE avatarImgType) {
         this.avatarImgType = avatarImgType;
     }
 
     /**
      * Gets the image base64 string.
-     *
+     * 
      * @return the image base64 string
      */
-    public String getImgBase64Str()
-    {
+    public String getImgBase64Str() {
         return imgBase64Str;
     }
 
     /**
      * Sets the image base64 string.
-     *
+     * 
      * @param imgBase64Str the new image base64 string
      */
-    public void setImgBase64Str( String imgBase64Str )
-    {
+    public void setImgBase64Str(String imgBase64Str) {
         this.imgBase64Str = imgBase64Str;
     }
 
@@ -173,26 +170,23 @@ public class Avatar extends BaseModel implements Parcelable,Serializable
     public static enum IMAGE_TYPE {
         PNG, JPG, GIF;
 
-        public static IMAGE_TYPE valueOf( int ordinal )
-        {
-            if( ordinal < 0 || ordinal >= values().length )
-            {
-                throw new IndexOutOfBoundsException( "Invalid ordinal" );
+        public static IMAGE_TYPE valueOf(int ordinal) {
+            if (ordinal < 0 || ordinal >= values().length) {
+                throw new IndexOutOfBoundsException("Invalid ordinal");
             }
 
-            return values()[ ordinal ];
+            return values()[ordinal];
         }
     }
-
 
     @Override
     public String toString() {
         List<String> list = new ArrayList<String>();
-        list.add("avatarImgType="+ this.avatarImgType);
-        list.add("account="+getAccount());
+        list.add("avatarImgType=" + this.avatarImgType);
+        list.add("account=" + getAccount());
         list.add("etag=" + getEtag());
-        list.add("imgEncoding="+ this.imgEncoding);
-        list.add("imgBase64Str="+ this.imgBase64Str);
+        list.add("imgEncoding=" + this.imgEncoding);
+        list.add("imgBase64Str=" + this.imgBase64Str);
 
         return list.toString();
     }

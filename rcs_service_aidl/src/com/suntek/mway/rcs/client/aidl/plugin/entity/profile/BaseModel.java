@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.profile;
 
 import java.io.Serializable;
@@ -30,98 +31,101 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * <p>Title: The profile base model entity class</p>
- * <p>Description: the profile base model include the account and the etag</p>
- * <p>Copyright: Copyright (c) 2014</p>
- * <p>Company: pci-suntek</p>
- *
+ * <p>
+ * Title: The profile base model entity class
+ * </p>
+ * <p>
+ * Description: the profile base model include the account and the etag
+ * </p>
+ * <p>
+ * Copyright: Copyright (c) 2014
+ * </p>
+ * <p>
+ * Company: pci-suntek
+ * </p>
+ * 
  * @author zrq
  * @version 1.0
- *
  */
-public class BaseModel implements Parcelable,Serializable
-{
+public class BaseModel implements Parcelable, Serializable {
 
     private static final long serialVersionUID = -1599075631882399753L;
 
     /** The account. */
-    private String    account;
+    private String account;
 
     /** The etag. */
-    private String    etag;
-    public BaseModel(){
+    private String etag;
+
+    public BaseModel() {
 
     }
+
     /**
      * Instantiates a new BaseModel.
-     *
+     * 
      * @param source the source
      */
-    public BaseModel( Parcel source )
-    {
-        readFromParcel( source );
+    public BaseModel(Parcel source) {
+        readFromParcel(source);
     }
+
     @Override
     public void writeToParcel(Parcel dest, int arg1) {
-        dest.writeString( account );
-        dest.writeString( etag );
+        dest.writeString(account);
+        dest.writeString(etag);
     }
 
     /**
      * Read from parcel.
-     *
+     * 
      * @param source the source parcel
      */
-    public void readFromParcel( Parcel source )
-    {
+    public void readFromParcel(Parcel source) {
         account = source.readString();
         etag = source.readString();
     }
 
     /**
      * Gets the account.
-     *
+     * 
      * @return the account
      */
-    public String getAccount()
-    {
+    public String getAccount() {
         return account;
     }
 
     /**
      * Sets the account.
-     *
+     * 
      * @param account the new account
      */
-    public void setAccount( String account )
-    {
+    public void setAccount(String account) {
         this.account = account;
     }
 
     /**
      * Gets the etag.
-     *
+     * 
      * @return the etag
      */
-    public String getEtag()
-    {
+    public String getEtag() {
         return etag;
     }
 
     /**
      * Sets the etag.
-     *
+     * 
      * @param etag the new etag
      */
-    public void setEtag( String etag )
-    {
+    public void setEtag(String etag) {
         this.etag = etag;
     }
 
     @Override
     public String toString() {
         List<String> list = new ArrayList<String>();
-        list.add("account="+this.account);
+        list.add("account=" + this.account);
         list.add("etag=" + this.etag);
         return list.toString();
     }
@@ -132,17 +136,15 @@ public class BaseModel implements Parcelable,Serializable
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<BaseModel>    CREATOR    = new Parcelable.Creator<BaseModel>() {
+    public static final Parcelable.Creator<BaseModel> CREATOR = new Parcelable.Creator<BaseModel>() {
         @Override
-        public BaseModel createFromParcel( Parcel source )
-        {
-            return new BaseModel( source );
+        public BaseModel createFromParcel(Parcel source) {
+            return new BaseModel(source);
         }
 
         @Override
-        public BaseModel[] newArray( int size )
-        {
-            return new BaseModel[ size ];
+        public BaseModel[] newArray(int size) {
+            return new BaseModel[size];
         }
     };
 

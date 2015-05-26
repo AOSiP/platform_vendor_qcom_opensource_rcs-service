@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.profile;
 
 import java.util.ArrayList;
@@ -28,91 +29,82 @@ import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class QRCardBusinessFlag extends BaseModel implements Parcelable
-{
+public class QRCardBusinessFlag extends BaseModel implements Parcelable {
     private boolean businessFlag;
 
-    public QRCardBusinessFlag()
-    {}
+    public QRCardBusinessFlag() {
+    }
 
-    public QRCardBusinessFlag( Parcel source )
-    {
-        readFromParcel( source );
+    public QRCardBusinessFlag(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
     /**
-     * Write the qr card business flag entity to parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
-     * correct results
-     *
-     * @param dest
-     *            the dest
-     * @param flags
-     *            the flags
+     * Write the qr card business flag entity to parcel stream. Pay attention to
+     * read and write variables variables sequence should be consistent or not
+     * the correct results
+     * 
+     * @param dest the dest
+     * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
-        super.writeToParcel( dest,flags );
-        dest.writeBooleanArray( new boolean[]{ businessFlag } );
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeBooleanArray(new boolean[] {
+            businessFlag
+        });
     }
 
     /**
-     * Create the qr card business flag entity from parcel stream. Pay attention to read and
-     * write variables variables sequence should be consistent or not the
-     * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * Create the qr card business flag entity from parcel stream. Pay attention
+     * to read and write variables variables sequence should be consistent or
+     * not the correct results
+     * 
+     * @param source The parcel stream
      */
-    public void readFromParcel( Parcel source )
-    {
-        super.readFromParcel( source );
-        boolean[] val = new boolean[ 1 ];
-        source.readBooleanArray( val );
-        businessFlag = val[ 0 ];
+    public void readFromParcel(Parcel source) {
+        super.readFromParcel(source);
+        boolean[] val = new boolean[1];
+        source.readBooleanArray(val);
+        businessFlag = val[0];
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<QRCardBusinessFlag>    CREATOR    = new Parcelable.Creator<QRCardBusinessFlag>() {
+    public static final Parcelable.Creator<QRCardBusinessFlag> CREATOR = new Parcelable.Creator<QRCardBusinessFlag>() {
         @Override
-        public QRCardBusinessFlag createFromParcel( Parcel source )
-        {
-            return new QRCardBusinessFlag( source );
+        public QRCardBusinessFlag createFromParcel(Parcel source) {
+            return new QRCardBusinessFlag(source);
         }
 
         @Override
-        public QRCardBusinessFlag[] newArray( int size )
-        {
-            return new QRCardBusinessFlag[ size ];
+        public QRCardBusinessFlag[] newArray(int size) {
+            return new QRCardBusinessFlag[size];
         }
     };
 
-    public boolean isBusinessFlag()
-    {
+    public boolean isBusinessFlag() {
         return businessFlag;
     }
 
-    public void setBusinessFlag( boolean businessFlag )
-    {
+    public void setBusinessFlag(boolean businessFlag) {
         this.businessFlag = businessFlag;
     }
+
     @Override
     public String toString() {
         List<String> list = new ArrayList<String>();
-        list.add("businessFlag="+ this.businessFlag);
-        list.add("account="+getAccount());
+        list.add("businessFlag=" + this.businessFlag);
+        list.add("account=" + getAccount());
         list.add("etag=" + getEtag());
         return list.toString();
     }

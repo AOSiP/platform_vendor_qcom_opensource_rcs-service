@@ -20,10 +20,13 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl;
 
 /**
- * <p>Title: ClientInterfaceNotify class</p>
+ * <p>
+ * Title: ClientInterfaceNotify class
+ * </p>
  * <p>
  * Description: The class <code>ClientInterfaceNotify</code> is a singleton that
  * represents the notification when local is connecting to the service.
@@ -34,9 +37,9 @@ package com.suntek.mway.rcs.client.aidl;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class ClientInterfaceNotify {
     /**
@@ -46,12 +49,13 @@ public class ClientInterfaceNotify {
 
     /**
      * the only one static method to be invoked to get a singleton instance.
+     * 
      * @return singleton instance of ClientInterfaceNotify
      */
     public static ClientInterfaceNotify getInstance() {
-        if(instance == null) {
-            synchronized(ClientInterfaceNotify.class){
-                if(instance == null){
+        if (instance == null) {
+            synchronized (ClientInterfaceNotify.class) {
+                if (instance == null) {
                     instance = new ClientInterfaceNotify();
                 }
             }
@@ -62,27 +66,29 @@ public class ClientInterfaceNotify {
     /**
      * private constructor to avoid new a instance from outer environment.
      */
-    private ClientInterfaceNotify() {}
+    private ClientInterfaceNotify() {
+    }
 
     /**
-     * This is a blocking method.
-     * When invoked, the caller will be blocked until the local is connected to the service.
+     * This is a blocking method. When invoked, the caller will be blocked until
+     * the local is connected to the service.
      */
     public void waitConnected() {
         try {
-            synchronized(this) {
+            synchronized (this) {
                 wait();
             }
-        } catch(java.lang.InterruptedException e) {
+        } catch (java.lang.InterruptedException e) {
 
         }
     }
 
     /**
-     * when invoked, wakes up the caller which invoked the method <code>waitConnected()</code> before.
+     * when invoked, wakes up the caller which invoked the method
+     * <code>waitConnected()</code> before.
      */
     public void notifyConnected() {
-        synchronized(this) {
+        synchronized (this) {
             notifyAll();
         }
     }

@@ -79,7 +79,7 @@ public class MediaArticle implements Parcelable {
     // private String viewType;
 
     /** The major article. */
-//    private int majorArticle;
+    // private int majorArticle;
 
     /** The child articles. */
     // private List<MediaArticle> childArticles;
@@ -132,7 +132,7 @@ public class MediaArticle implements Parcelable {
         // dest.writeString( mediaType );
         dest.writeString(digest);
         // dest.writeString( viewType );
-//        dest.writeInt(majorArticle);
+        // dest.writeInt(majorArticle);
         // dest.writeList( childArticles );
         dest.writeString(bodyLink);
     }
@@ -156,7 +156,7 @@ public class MediaArticle implements Parcelable {
         // mediaType = source.readString();
         digest = source.readString();
         // viewType = source.readString();
-//        majorArticle = source.readInt();
+        // majorArticle = source.readInt();
         // childArticles = new LinkedList<MediaArticle>();
         // source.readList( childArticles, this.getClass().getClassLoader() );
         bodyLink = source.readString();
@@ -384,18 +384,18 @@ public class MediaArticle implements Parcelable {
      * 
      * @return the major article
      */
-//    public int getMajorArticle() {
-//        return majorArticle;
-//    }
+    // public int getMajorArticle() {
+    // return majorArticle;
+    // }
 
     /**
      * Sets the major article.
      * 
      * @param majorArticle the new major article
      */
-//    public void setMajorArticle(int majorArticle) {
-//        this.majorArticle = majorArticle;
-//    }
+    // public void setMajorArticle(int majorArticle) {
+    // this.majorArticle = majorArticle;
+    // }
 
     /**
      * Gets the child articles.
@@ -452,7 +452,7 @@ public class MediaArticle implements Parcelable {
         if (null != this.bodyLink) {
             sbuffer.append(",bodyLink=").append(this.bodyLink);
         }
-//        sbuffer.append(",majorArticle=").append(this.majorArticle);
+        // sbuffer.append(",majorArticle=").append(this.majorArticle);
 
         if (sbuffer.length() > 1) {
             return sbuffer.substring(1).toString();

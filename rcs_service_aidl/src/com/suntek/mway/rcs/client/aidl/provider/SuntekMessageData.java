@@ -20,17 +20,20 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider;
 
 import android.net.Uri;
 
 /**
- * <p>Title: SuntekMessageData class</p>
  * <p>
- * Description: The class <code>SuntekMessageData</code> represents a rich message data database
- * definition used by RCS.
- * The constants definition include the access database URI, some column names, chat types,
- * message status and so on.
+ * Title: SuntekMessageData class
+ * </p>
+ * <p>
+ * Description: The class <code>SuntekMessageData</code> represents a rich
+ * message data database definition used by RCS. The constants definition
+ * include the access database URI, some column names, chat types, message
+ * status and so on.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -38,9 +41,9 @@ import android.net.Uri;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class SuntekMessageData {
 
@@ -59,33 +62,52 @@ public class SuntekMessageData {
     public static final String TABLE_RICH_MESSAGE_BACKUP = "stkMessageBak";
 
     /** Table name of group */
-    public static final String TABLE_CHAT_GROUP= "chatGroup";
-    
+    public static final String TABLE_CHAT_GROUP = "chatGroup";
+
+    /**
+     * Table name of capabilities
+     */
+    public static final String TABLE_CAPABILITIES = "capabilities";
+
     public static final String TABLE_DIVICE_API_CHAT_GROUP = "group_chat_device_api";
+
     public static final String TABLE_DIVICE_API_CHAT_GROUP_USER = "group_chat_user_device_api";
+
     public static final String TABLE_DIVICE_API_MESSAGE = "message_device_api";
+
     public static final String TABLE_DIVICE_API_FAVOR_MESSAGE = "favor_message_device_api";
 
     /** The Constant SUNTEK_MESSAGE_CONTENT_URI. */
-    public static final Uri SUNTEK_MESSAGE_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY + "/" + TABLE_RICH_MESSAGE);
+    public static final Uri SUNTEK_MESSAGE_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY
+            + "/" + TABLE_RICH_MESSAGE);
 
     /** The Constant CHAT_GROUP_CONTENT_URI. */
-    public static final Uri CHAT_GROUP_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY + "/" + TABLE_CHAT_GROUP);
-    
+    public static final Uri CHAT_GROUP_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY
+            + "/" + TABLE_CHAT_GROUP);
+
     /** The Constant CHAT_THREAD_CONTENT_URI. */
-    public static final Uri CHAT_THREAD_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY + "/" + TABLE_MESSAGE_THREAD);
-    
+    public static final Uri CHAT_THREAD_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY
+            + "/" + TABLE_MESSAGE_THREAD);
+
+    /** The Constant CHAT_THREAD_CONTENT_URI. */
+    public static final Uri CAPABILITIES_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY
+            + "/" + TABLE_CAPABILITIES);
+
     /** The Constant GROUP_CHAT_DIVICE_API_CONTENT_URI. */
-    public static final Uri GROUP_CHAT_DIVICE_API_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY + "/" + TABLE_DIVICE_API_CHAT_GROUP);
-    
+    public static final Uri GROUP_CHAT_DIVICE_API_CONTENT_URI = Uri.parse("content://"
+            + MESSAGE_AUTHORITY + "/" + TABLE_DIVICE_API_CHAT_GROUP);
+
     /** The Constant GROUP_CHAT_USER_DIVICE_API_CONTENT_URI. */
-    public static final Uri GROUP_CHAT_USER_DIVICE_API_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY + "/" + TABLE_DIVICE_API_CHAT_GROUP_USER);
-    
+    public static final Uri GROUP_CHAT_USER_DIVICE_API_CONTENT_URI = Uri.parse("content://"
+            + MESSAGE_AUTHORITY + "/" + TABLE_DIVICE_API_CHAT_GROUP_USER);
+
     /** The Constant MESSAGE_DIVICE_API_CONTENT_URI. */
-    public static final Uri MESSAGE_DIVICE_API_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY + "/" + TABLE_DIVICE_API_MESSAGE);
-    
+    public static final Uri MESSAGE_DIVICE_API_CONTENT_URI = Uri.parse("content://"
+            + MESSAGE_AUTHORITY + "/" + TABLE_DIVICE_API_MESSAGE);
+
     /** The Constant FAVOR_MESSAGE_DIVICE_API_CONTENT_URI. */
-    public static final Uri FAVOR_MESSAGE_DIVICE_API_CONTENT_URI = Uri.parse("content://" + MESSAGE_AUTHORITY + "/" + TABLE_DIVICE_API_FAVOR_MESSAGE);
+    public static final Uri FAVOR_MESSAGE_DIVICE_API_CONTENT_URI = Uri.parse("content://"
+            + MESSAGE_AUTHORITY + "/" + TABLE_DIVICE_API_FAVOR_MESSAGE);
 
     /**
      * Chat type about one to one.
@@ -93,15 +115,14 @@ public class SuntekMessageData {
     public static final int CHAT_TYPE_ONE2ONE = 1;
 
     /**
-     *  Chat type about group chat.
+     * Chat type about group chat.
      */
     public static final int CHAT_TYPE_ONE2GROUP = 2;
 
     /**
-     *  Chat type about group chat.
+     * Chat type about group chat.
      */
     public static final int CHAT_TYPE_GROUP = 3;
-
 
     /**
      * Chat type about group-sent message.
@@ -112,34 +133,42 @@ public class SuntekMessageData {
      * Message type about text message.
      */
     public static final int MSG_TYPE_TEXT = 0;
+
     /**
      * Message type about image message.
      */
     public static final int MSG_TYPE_IMAGE = 1;
+
     /**
      * Message type about audio message.
      */
     public static final int MSG_TYPE_AUDIO = 2;
+
     /**
      * Message type about video message.
      */
     public static final int MSG_TYPE_VIDEO = 3;
+
     /**
      * Message type about map message.
      */
     public static final int MSG_TYPE_MAP = 4;
+
     /**
      * Message type about contact message.
      */
     public static final int MSG_TYPE_CONTACT = 5;
+
     /**
      * Message type about gif message.
      */
     public static final int MSG_TYPE_GIF = 6;
+
     /**
      * Message type about group message.
      */
     public static final int MSG_TYPE_GROUP_INFO = 7;
+
     /**
      * Message type about public account message.
      */
@@ -175,7 +204,8 @@ public class SuntekMessageData {
     public static final int MSG_STATE_SEND_REC = -1;
 
     /**
-     * Message status about message is sent out but not received by the other side.
+     * Message status about message is sent out but not received by the other
+     * side.
      */
     public static final int MSG_STATE_SENDED = 32;
 
@@ -188,6 +218,11 @@ public class SuntekMessageData {
      * Message status about message is sent failure.
      */
     public static final int MSG_STATE_SEND_FAIL = 128;
+
+    /**
+     * Message status about message is order send.
+     */
+    public static final int MSG_STATE_ORDER_SEND = -2;
 
     /**
      * Message status about video download failure.
@@ -205,14 +240,12 @@ public class SuntekMessageData {
     public static final int MSG_UNREAD = 0;
 
     /**
-     * Message status about send.
-     * Ue send message to another
+     * Message status about send. Ue send message to another
      */
     public static final int MSG_SEND = 2;
 
     /**
-     * Message status about receive.
-     * Ue received message from another
+     * Message status about receive. Ue received message from another
      */
     public static final int MSG_RECEIVE = 1;
 
@@ -221,6 +254,9 @@ public class SuntekMessageData {
 
     /** The message which is burn message. */
     public static final int MSG_BURN_AFTER_READ_FLAG = 1;
+
+    /** The message has been locked. */
+    public static final int MSG_LOCKED = 3;
 
     /** The Constant MSG_BAR_CYCLE_NONE. */
     public static final int MSG_BAR_CYCLE_NONE = 0;
@@ -258,6 +294,7 @@ public class SuntekMessageData {
      * Column name about contact of message.
      */
     public static final String KEY_CONTACT = "_contact";
+
     /**
      * Column name about message id of message.
      */
@@ -267,26 +304,32 @@ public class SuntekMessageData {
      * Column name about data of message.
      */
     public static final String KEY_DATA = "_data";
+
     /**
      * Column name about time of message.
      */
     public static final String KEY_TIME = "_time";
+
     /**
      * Column name about file name of message.
      */
     public static final String KEY_FILENAME = "_filename";
+
     /**
      * Column name about file size of message.
      */
     public static final String KEY_FILESIZE = "_filesize";
+
     /**
      * Column name about mine type of message.
      */
     public static final String KEY_MIME_TYPE = "_mime_type";
+
     /**
      * Column name about type of message.
      */
     public static final String KEY_MSG_TYPE = "_msg_type";
+
     /**
      * Column name about send and receive of message.
      */
@@ -301,18 +344,20 @@ public class SuntekMessageData {
      * Column name about status of message.
      */
     public static final String KEY_MSG_STATE = "_msg_state";
+
     /**
      * Column name about thread id of message.
      */
     public static final String KEY_THREAD_ID = "_thread_id";
+
     /**
      * Column name about chat type of message.
      */
     public static final String KEY_CHAT_TYPE = "_chat_type";
 
     /**
-    * Column name about contribution id of chat message.
-    */
+     * Column name about contribution id of chat message.
+     */
     public static final String KEY_CONTRIBUTION_ID = "_contribution_id";
 
     /**
@@ -421,4 +466,9 @@ public class SuntekMessageData {
      * Column name about new message of store type.
      */
     public static final int STORE_TYPE_NEW_MSG = 3;
+
+    /**
+     * Column name about order time expire interval second.
+     */
+    public static final int ORDER_TIME_EXPIRE_INTERVAL_SECOND = 2;
 }

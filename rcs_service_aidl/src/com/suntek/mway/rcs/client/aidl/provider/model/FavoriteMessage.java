@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
 
 import android.os.Parcel;
@@ -290,14 +291,12 @@ public class FavoriteMessage implements Parcelable {
 
     @Override
     public String toString() {
-        return "FavoriteMessage [id=" + id + ", contact=" + contact
-                + ", messageId=" + messageId + ", data=" + data + ", time="
-                + time + ", fileName=" + fileName + ", fileSize=" + fileSize
-                + ", mimeType=" + mimeType + ", msgType=" + msgType
-                + ", sendReceive=" + sendReceive + ", chatType=" + chatType
-                + ", fileIcon=" + fileIcon + ", favoriteTime=" + favoriteTime
-                + ", mmsSub=" + mmsSub + ", type=" + type + ", mmsBody="
-                + mmsBody + ", smsPerson=" + smsPerson + ", smsProtocol="
+        return "FavoriteMessage [id=" + id + ", contact=" + contact + ", messageId=" + messageId
+                + ", data=" + data + ", time=" + time + ", fileName=" + fileName + ", fileSize="
+                + fileSize + ", mimeType=" + mimeType + ", msgType=" + msgType + ", sendReceive="
+                + sendReceive + ", chatType=" + chatType + ", fileIcon=" + fileIcon
+                + ", favoriteTime=" + favoriteTime + ", mmsSub=" + mmsSub + ", type=" + type
+                + ", mmsBody=" + mmsBody + ", smsPerson=" + smsPerson + ", smsProtocol="
                 + smsProtocol + ", smsServiceCenter=" + smsServiceCenter + "]";
     }
 

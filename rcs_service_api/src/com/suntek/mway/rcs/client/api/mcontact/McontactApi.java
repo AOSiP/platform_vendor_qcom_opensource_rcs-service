@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.mcontact;
 
 import java.util.Locale;
@@ -39,6 +40,7 @@ import com.suntek.mway.rcs.client.aidl.mcontact.IMcontactApi;
 
 public class McontactApi extends ClientApi {
     private static String serviceName = "com.suntek.mway.rcs.app.service.api.impl.mcontact.McontactApiService";
+
     IMcontactApi myApi;
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -54,8 +56,7 @@ public class McontactApi extends ClientApi {
                 myApi = null;
                 notifyServiceDisconnected();
             } else {
-                LogHelper.d("illegal call client api disconnect service :"
-                        + reconnectionTimes);
+                LogHelper.d("illegal call client api disconnect service :" + reconnectionTimes);
                 init(context, rcsListener);
                 if (!isBinded()) {
                     // app is uninstalled
@@ -74,8 +75,7 @@ public class McontactApi extends ClientApi {
 
     public void cancelIntervalSync() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:downloadFileFromUrl. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:downloadFileFromUrl. "));
         try {
             myApi.cancelIntervalSync();
         } catch (Exception ex) {
@@ -85,8 +85,7 @@ public class McontactApi extends ClientApi {
 
     public boolean getEnableAutoSync() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getEnableAutoSync. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getEnableAutoSync. "));
         try {
             return myApi.getEnableAutoSync();
         } catch (Exception ex) {
@@ -97,8 +96,7 @@ public class McontactApi extends ClientApi {
 
     public int getLocalContactCounts() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getLocalContactCounts. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getLocalContactCounts. "));
         try {
             return myApi.getLocalContactCounts();
         } catch (Exception ex) {
@@ -107,11 +105,9 @@ public class McontactApi extends ClientApi {
         return 0;
     }
 
-    public boolean getOnlySyncEnableViaWifi()
-            throws ServiceDisconnectedException {
+    public boolean getOnlySyncEnableViaWifi() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getOnlySyncEnableViaWifi. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getOnlySyncEnableViaWifi. "));
         try {
             return myApi.getOnlySyncEnableViaWifi();
         } catch (Exception ex) {
@@ -122,8 +118,7 @@ public class McontactApi extends ClientApi {
 
     public int getRemoteContactCounts() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getRemoteContactCounts. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getRemoteContactCounts. "));
         try {
             return myApi.getRemoteContactCounts();
         } catch (Exception ex) {
@@ -132,8 +127,7 @@ public class McontactApi extends ClientApi {
         return 0;
     }
 
-    public void setOnlySyncEnableViaWifi(boolean status)
-            throws ServiceDisconnectedException {
+    public void setOnlySyncEnableViaWifi(boolean status) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
                 "enter method:setOnlySyncEnableViaWifi. [status]=%b", status));
@@ -147,8 +141,8 @@ public class McontactApi extends ClientApi {
     public void doSync(SyncAction action, IMContactSyncListener listener)
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:doSync. [action]=%d", action.ordinal()));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:doSync. [action]=%d",
+                action.ordinal()));
         try {
             myApi.doSync(action.ordinal(), listener);
         } catch (Exception ex) {
@@ -158,8 +152,7 @@ public class McontactApi extends ClientApi {
 
     public SyncAction getAutoSync() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getAutoSync. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getAutoSync. "));
         try {
             return SyncAction.valueOf(myApi.getAutoSync());
         } catch (Exception ex) {
@@ -172,8 +165,8 @@ public class McontactApi extends ClientApi {
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:setEnableAutoSync. [status, syncAction]=%b,%d",
-                status, syncAction.ordinal()));
+                "enter method:setEnableAutoSync. [status, syncAction]=%b,%d", status,
+                syncAction.ordinal()));
         try {
             myApi.setEnableAutoSync(status, syncAction.ordinal());
         } catch (Exception ex) {
@@ -181,18 +174,14 @@ public class McontactApi extends ClientApi {
         }
     }
 
-    public void startIntervalSync(SyncAction syncAction,
-            IntervalAction intervalAction, long time)
+    public void startIntervalSync(SyncAction syncAction, IntervalAction intervalAction, long time)
             throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper
-                .i(String.format(
-                        Locale.getDefault(),
-                        "enter method:startIntervalSync. [syncAction, intervalAction, time]=%d,%d,%d",
-                        syncAction.ordinal(), intervalAction.ordinal(), time));
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method:startIntervalSync. [syncAction, intervalAction, time]=%d,%d,%d",
+                syncAction.ordinal(), intervalAction.ordinal(), time));
         try {
-            myApi.startIntervalSync(syncAction.ordinal(),
-                    intervalAction.ordinal(), time);
+            myApi.startIntervalSync(syncAction.ordinal(), intervalAction.ordinal(), time);
         } catch (Exception ex) {
             LogHelper.e(ex.getMessage(), ex);
         }
@@ -200,8 +189,7 @@ public class McontactApi extends ClientApi {
 
     public IntervalAction getIntervalSyncMode() throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
-        LogHelper.i(String.format(Locale.getDefault(),
-                "enter method:getIntervalSyncMode. "));
+        LogHelper.i(String.format(Locale.getDefault(), "enter method:getIntervalSyncMode. "));
         try {
             return IntervalAction.valueOf(myApi.getIntervalSyncMode());
         } catch (Exception ex) {

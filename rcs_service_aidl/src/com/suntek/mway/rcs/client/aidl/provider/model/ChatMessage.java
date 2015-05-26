@@ -26,16 +26,21 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 package com.suntek.mway.rcs.client.aidl.provider.model;
+
+import com.suntek.mway.rcs.client.aidl.provider.SuntekMessageData;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * <p>Title: ChatMessage class</p>
  * <p>
- * Description: The class <code>ChatMessage</code> represents a chat message information
- * which is indicated by the field definition in this class.
+ * Title: ChatMessage class
+ * </p>
+ * <p>
+ * Description: The class <code>ChatMessage</code> represents a chat message
+ * information which is indicated by the field definition in this class.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -43,9 +48,9 @@ import android.os.Parcelable;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
     /**
@@ -67,6 +72,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
      * The chat message data.
      */
     private String data;
+
     /**
      * The chat message time.
      */
@@ -76,6 +82,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
      * The filename of chat message.
      */
     private String filename;
+
     /**
      * The file size of file name.
      */
@@ -90,6 +97,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
      * The chat message type.
      */
     private int msgType;
+
     /**
      * Whether send or receive of chat message.
      */
@@ -151,7 +159,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
     private String header;
 
     /** Body of message, when receive message then set the body. */
-    private String body ;
+    private String body;
 
     /** public account message. */
     private PublicMessage publicMessage;
@@ -175,29 +183,30 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
     /**
      * Instantiates a new Chat Messages.
      */
-    public ChatMessage()
-    {
+    public ChatMessage() {
     }
 
     /**
      * Instantiates a new Chat Messages.
-     *
-     * @param source
-     *            the source
+     * 
+     * @param source the source
      */
-    public ChatMessage( Parcel source )
-    {
-        readFromParcel( source );
+    public ChatMessage(Parcel source) {
+        readFromParcel(source);
     }
+
     /**
      * Get the record id.
+     * 
      * @return the record id
      */
     public int getId() {
         return id;
     }
+
     /**
      * set the record id.
+     * 
      * @param id the record id
      */
     public void setId(int id) {
@@ -206,7 +215,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get contact.
-     *
+     * 
      * @return contact
      */
     public String getContact() {
@@ -215,14 +224,16 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set contact.
-     *
+     * 
      * @param contact contact
      */
     public void setContact(String contact) {
         this.contact = contact;
     }
+
     /**
      * Get message id.
+     * 
      * @return message id
      */
     public String getMessageId() {
@@ -231,17 +242,22 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set message id.
-     *
+     * 
      * @param messageId the new message id
      */
     public void setMessageId(String messageId) {
         this.messageId = messageId;
     }
+
     /**
      * Get message content.
-     * @return If message type is RichMessageData.MSG_TYPE_FILE, then return file path;
-     * If message type is RichMessageData.MSG_TYPE_LOCATION, then return a formatted string in the form of "longitude,latitude,information of geographical location";
-     * If message type is RichMessageData.MSG_TYPE_CONTACT, the return data of Vcard.
+     * 
+     * @return If message type is RichMessageData.MSG_TYPE_FILE, then return
+     *         file path; If message type is RichMessageData.MSG_TYPE_LOCATION,
+     *         then return a formatted string in the form of
+     *         "longitude,latitude,information of geographical location"; If
+     *         message type is RichMessageData.MSG_TYPE_CONTACT, the return data
+     *         of Vcard.
      */
     public String getData() {
         return data;
@@ -249,7 +265,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set the message content.
-     *
+     * 
      * @param data the new data
      */
     public void setData(String data) {
@@ -258,7 +274,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get message time.
-     *
+     * 
      * @return the time
      */
     public long getTime() {
@@ -267,7 +283,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set message time.
-     *
+     * 
      * @param time the new time
      */
     public void setTime(long time) {
@@ -276,7 +292,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get file name.
-     *
+     * 
      * @return the filename
      */
     public String getFilename() {
@@ -285,7 +301,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set file name.
-     *
+     * 
      * @param filename the new filename
      */
     public void setFilename(String filename) {
@@ -294,7 +310,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get file size.
-     *
+     * 
      * @return the filesize
      */
     public long getFilesize() {
@@ -303,7 +319,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set file size.
-     *
+     * 
      * @param filesize the new filesize
      */
     public void setFilesize(long filesize) {
@@ -312,7 +328,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get mine type.
-     *
+     * 
      * @return the mime type
      */
     public String getMimeType() {
@@ -321,32 +337,36 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set mini type.
-     *
+     * 
      * @param mimeType the new mime type
      */
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
     }
+
     /**
      * Get the message type.
+     * 
      * @return The possible value can be<br/>
-     * RichMessageData.MSG_TYPE_TEXT,<br/>
-     * RichMessageData.MSG_TYPE_FILE,<br/>
-     * RichMessageData.MSG_TYPE_LOCATION,<br/>
-     * RichMessageData.MSG_TYPE_CONTACT,<br/>
-     * RichMessageData.MSG_TYPE_GROUP_INFO
+     *         RichMessageData.MSG_TYPE_TEXT,<br/>
+     *         RichMessageData.MSG_TYPE_FILE,<br/>
+     *         RichMessageData.MSG_TYPE_LOCATION,<br/>
+     *         RichMessageData.MSG_TYPE_CONTACT,<br/>
+     *         RichMessageData.MSG_TYPE_GROUP_INFO
      */
     public int getMsgType() {
         return msgType;
     }
+
     /**
      * Set the message type.
-     * @param msgType  The possible value can be<br/>
-     * RichMessageData.MSG_TYPE_TEXT,<br/>
-     * RichMessageData.MSG_TYPE_FILE,<br/>
-     * RichMessageData.MSG_TYPE_LOCATION,<br/>
-     * RichMessageData.MSG_TYPE_CONTACT,<br/>
-     * RichMessageData.MSG_TYPE_GROUP_INFO
+     * 
+     * @param msgType The possible value can be<br/>
+     *            RichMessageData.MSG_TYPE_TEXT,<br/>
+     *            RichMessageData.MSG_TYPE_FILE,<br/>
+     *            RichMessageData.MSG_TYPE_LOCATION,<br/>
+     *            RichMessageData.MSG_TYPE_CONTACT,<br/>
+     *            RichMessageData.MSG_TYPE_GROUP_INFO
      */
     public void setMsgType(int msgType) {
         this.msgType = msgType;
@@ -354,10 +374,10 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get whether send or receive.
-     *
-     * @return  The possible value can be<br/>
-     * RichMessageData.MSG_SEND,<br/>
-     * RichMessageData.MSG_RECEIVE
+     * 
+     * @return The possible value can be<br/>
+     *         RichMessageData.MSG_SEND,<br/>
+     *         RichMessageData.MSG_RECEIVE
      */
     public int getSendReceive() {
         return sendReceive;
@@ -365,10 +385,10 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set send or receive.
-     *
-     * @param sendReceive  The possible value can be<br/>
-     * RichMessageData.MSG_SEND,<br/>
-     * RichMessageData.MSG_RECEIVE
+     * 
+     * @param sendReceive The possible value can be<br/>
+     *            RichMessageData.MSG_SEND,<br/>
+     *            RichMessageData.MSG_RECEIVE
      */
     public void setSendReceive(int sendReceive) {
         this.sendReceive = sendReceive;
@@ -376,7 +396,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get whether the message id read or not.
-     *
+     * 
      * @return the checks if is read
      */
     public int getIsRead() {
@@ -385,20 +405,22 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set whether the message id read or not.
-     *
+     * 
      * @param isRead the new checks if is read
      */
     public void setIsRead(int isRead) {
         this.isRead = isRead;
     }
+
     /**
      * Get status of message.
-     * @return  The possible value can be<br/>
-     * RichMessageData.MSG_STATE_SEND_OK,<br/>
-     * RichMessageData.MSG_STATE_SEND_REC,<br/>
-     * RichMessageData.MSG_STATE_SENDED,<br/>
-     * RichMessageData.MSG_STATE_SEND_ING,<br/>
-     * RichMessageData.MSG_STATE_SEND_FAIL
+     * 
+     * @return The possible value can be<br/>
+     *         RichMessageData.MSG_STATE_SEND_OK,<br/>
+     *         RichMessageData.MSG_STATE_SEND_REC,<br/>
+     *         RichMessageData.MSG_STATE_SENDED,<br/>
+     *         RichMessageData.MSG_STATE_SEND_ING,<br/>
+     *         RichMessageData.MSG_STATE_SEND_FAIL
      */
     public int getMsgState() {
         return msgState;
@@ -406,7 +428,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set status of message.
-     *
+     * 
      * @param msgState the new msg state
      */
     public void setMsgState(int msgState) {
@@ -415,7 +437,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get the thread id.
-     *
+     * 
      * @return the thread id
      */
     public long getThreadId() {
@@ -424,18 +446,20 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set the thread id.
-     *
+     * 
      * @param threadId the thread id
      */
     public void setThreadId(long threadId) {
         this.threadId = threadId;
     }
+
     /**
      * Get the chat type.
-     * @return  The possible value can be<br/>
-     * SuntekMessageData.CHAT_TYPE_ONE2ONE,<br/>
-     * SuntekMessageData.CHAT_TYPE_GROUPCHAT,<br/>
-     * SuntekMessageData.CHAT_TYPE_MULTICHAT
+     * 
+     * @return The possible value can be<br/>
+     *         SuntekMessageData.CHAT_TYPE_ONE2ONE,<br/>
+     *         SuntekMessageData.CHAT_TYPE_GROUPCHAT,<br/>
+     *         SuntekMessageData.CHAT_TYPE_MULTICHAT
      */
     public int getChatType() {
         return chatType;
@@ -443,7 +467,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set the chat type.
-     *
+     * 
      * @param chatType the new chat type
      */
     public void setChatType(int chatType) {
@@ -452,7 +476,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get message conversation id.
-     *
+     * 
      * @return chat message conversation id
      */
     public String getConversationId() {
@@ -461,7 +485,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set message conversation id.
-     *
+     * 
      * @param conversationId the new conversation id
      * @return conversationId
      */
@@ -471,7 +495,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get message contribution id.
-     *
+     * 
      * @return chat message contribution id
      */
     public String getContributionId() {
@@ -480,7 +504,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set message contribution id.
-     *
+     * 
      * @param contributionId the new contribution id
      * @return contributionId
      */
@@ -490,7 +514,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get file selector.
-     *
+     * 
      * @return the file selector
      */
     public String getFileSelector() {
@@ -499,7 +523,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set file selector .
-     *
+     * 
      * @param fileSelector the new file selector
      */
     public void setFileSelector(String fileSelector) {
@@ -508,7 +532,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get file transfer extend info.
-     *
+     * 
      * @return the file transfer ext
      */
     public String getFileTransferExt() {
@@ -517,7 +541,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set file transfer extend info.
-     *
+     * 
      * @param fileTransferExt the new file transfer ext
      */
     public void setFileTransferExt(String fileTransferExt) {
@@ -526,7 +550,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get file transfer extend info id.
-     *
+     * 
      * @return the file transfer id
      */
     public String getFileTransferId() {
@@ -535,7 +559,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set file transfer extend info id.
-     *
+     * 
      * @param fileTransferId the new file transfer id
      */
     public void setFileTransferId(String fileTransferId) {
@@ -544,7 +568,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get transfer file icon.
-     *
+     * 
      * @return the file icon
      */
     public String getFileIcon() {
@@ -553,7 +577,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set transfer file icon.
-     *
+     * 
      * @param fileIcon the new file icon
      */
     public void setFileIcon(String fileIcon) {
@@ -562,7 +586,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get message burn after reading flag.
-     *
+     * 
      * @return the msg burn after read flag
      */
     public int getMsgBurnAfterReadFlag() {
@@ -571,7 +595,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set message burn after reading flag.
-     *
+     * 
      * @param msgBurnAfterReadFlag the new msg burn after read flag
      */
     public void setMsgBurnAfterReadFlag(int msgBurnAfterReadFlag) {
@@ -580,7 +604,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get barCycle of burn after reading message.
-     *
+     * 
      * @return the bar cycle
      */
     public int getBarCycle() {
@@ -589,7 +613,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set barCycle of burn after reading message.
-     *
+     * 
      * @param barCycle the new bar cycle
      */
     public void setBarCycle(int barCycle) {
@@ -598,7 +622,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Gets the public message.
-     *
+     * 
      * @return the public message
      */
     public PublicMessage getPublicMessage() {
@@ -607,7 +631,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Sets the public message.
-     *
+     * 
      * @param publicMessage the new public message
      */
     public void setPublicMessage(PublicMessage publicMessage) {
@@ -616,7 +640,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Gets the cloud file message.
-     *
+     * 
      * @return the cloud file message
      */
     public CloudFileMessage getCloudFileMessage() {
@@ -625,7 +649,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Sets the cloud file message.
-     *
+     * 
      * @param cloudFileMessage the new cloud file message
      */
     public void setCloudFileMessage(CloudFileMessage cloudFileMessage) {
@@ -634,7 +658,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get the message body.
-     *
+     * 
      * @return the body
      */
     public String getBody() {
@@ -643,7 +667,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set the message body.
-     *
+     * 
      * @param body the new body
      */
     public void setBody(String body) {
@@ -652,7 +676,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get the message header.
-     *
+     * 
      * @return the header
      */
     public String getHeader() {
@@ -661,7 +685,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set the message header.
-     *
+     * 
      * @param header the new header
      */
     public void setHeader(String header) {
@@ -670,7 +694,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Gets the msg black flag.
-     *
+     * 
      * @return the msg black flag
      */
     public int getMsgBlackFlag() {
@@ -679,7 +703,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Sets the msg black flag.
-     *
+     * 
      * @param msgBlackFlag the new msg black flag
      */
     public void setMsgBlackFlag(int msgBlackFlag) {
@@ -688,7 +712,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Get the continue flag.
-     *
+     * 
      * @return the continue flag
      */
     public int getContinueFlag() {
@@ -697,7 +721,7 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Set the continue flag.
-     *
+     * 
      * @param continueFlag
      */
     public void setContinueFlag(int continueFlag) {
@@ -705,6 +729,25 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
     }
 
     public int getDuration() {
+        if (duration != 0) {
+            return duration;
+        } else {
+            try {
+                switch (msgType) {
+                    case SuntekMessageData.MSG_TYPE_AUDIO:
+                        duration = Integer
+                                .parseInt(data.substring("[audio]".length()).split("-")[0]);
+                        break;
+                    case SuntekMessageData.MSG_TYPE_VIDEO:
+                        duration = Integer
+                                .parseInt(data.substring("[video]".length()).split("-")[0]);
+                        break;
+                }
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+
+            }
+        }
         return duration;
     }
 
@@ -728,7 +771,8 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
         this.thumbpath = thumbpath;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see android.os.Parcelable#describeContents()
      */
     @Override
@@ -737,41 +781,42 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
         return 0;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see android.os.Parcelable#writeToParcel(android.os.Parcel, int)
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         // TODO Auto-generated method stub
-        dest.writeInt( id );
-        dest.writeString( contact );
-        dest.writeString( messageId );
-        dest.writeString( data );
-        dest.writeLong( time );
-        dest.writeString( filename );
-        dest.writeLong( filesize );
-        dest.writeString( mimeType );
-        dest.writeInt( msgType );
-        dest.writeInt( sendReceive );
-        dest.writeInt( isRead );
-        dest.writeInt( msgState );
-        dest.writeInt( chatType );
-        dest.writeLong( threadId );
-        dest.writeString( conversationId );
-        dest.writeString( contributionId );
-        dest.writeString( fileSelector );
+        dest.writeInt(id);
+        dest.writeString(contact);
+        dest.writeString(messageId);
+        dest.writeString(data);
+        dest.writeLong(time);
+        dest.writeString(filename);
+        dest.writeLong(filesize);
+        dest.writeString(mimeType);
+        dest.writeInt(msgType);
+        dest.writeInt(sendReceive);
+        dest.writeInt(isRead);
+        dest.writeInt(msgState);
+        dest.writeInt(chatType);
+        dest.writeLong(threadId);
+        dest.writeString(conversationId);
+        dest.writeString(contributionId);
+        dest.writeString(fileSelector);
 
-        dest.writeString( fileTransferExt );
-        dest.writeString( fileTransferId );
-        dest.writeString( fileIcon );
-        dest.writeInt( msgBurnAfterReadFlag );
-        dest.writeInt( barCycle );
-        dest.writeString( header );
-        dest.writeString( body );
-        dest.writeValue( publicMessage );
-        dest.writeInt( msgBlackFlag );
-        dest.writeInt( continueFlag );
-        dest.writeValue( cloudFileMessage );
+        dest.writeString(fileTransferExt);
+        dest.writeString(fileTransferId);
+        dest.writeString(fileIcon);
+        dest.writeInt(msgBurnAfterReadFlag);
+        dest.writeInt(barCycle);
+        dest.writeString(header);
+        dest.writeString(body);
+        dest.writeValue(publicMessage);
+        dest.writeInt(msgBlackFlag);
+        dest.writeInt(continueFlag);
+        dest.writeValue(cloudFileMessage);
 
         dest.writeInt(duration);
         dest.writeString(filepath);
@@ -781,11 +826,10 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
     /**
      * Read from parcel.
-     *
+     * 
      * @param source the source
      */
-    public void readFromParcel( Parcel source )
-    {
+    public void readFromParcel(Parcel source) {
         id = source.readInt();
         contact = source.readString();
         messageId = source.readString();
@@ -814,10 +858,11 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
 
         header = source.readString();
         body = source.readString();
-        publicMessage = (PublicMessage) source.readValue(PublicMessage.class.getClassLoader());
+        publicMessage = (PublicMessage)source.readValue(PublicMessage.class.getClassLoader());
         msgBlackFlag = source.readInt();
         continueFlag = source.readInt();
-        cloudFileMessage = (CloudFileMessage) source.readValue(CloudFileMessage.class.getClassLoader());
+        cloudFileMessage = (CloudFileMessage)source.readValue(CloudFileMessage.class
+                .getClassLoader());
 
         duration = source.readInt();
         filepath = source.readString();
@@ -833,41 +878,39 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
         @Override
         public ChatMessage[] newArray(int size) {
             // TODO Auto-generated method stub
-            return new ChatMessage[ size ];
+            return new ChatMessage[size];
         }
 
     };
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         StringBuffer buf = new StringBuffer();
-        buf.append("ChatMessage [id=").append(id).append(", contact=")
-            .append(contact).append(", messageId=").append(messageId)
-            .append(", data=").append(data).append(", time=").append(time)
-            .append(", filename=").append(filename).append(", filesize=").append(filesize)
-            .append(", mimeType=").append(mimeType).append(", msgType=").append(msgType)
-            .append(", sendReceive=").append(sendReceive).append(", isRead=").append(isRead)
-            .append(", msgState=").append(msgState).append(", chatType=").append(chatType)
-            .append(", threadId=").append(threadId)
-            .append(", conversationId=").append(conversationId)
-            .append(", contributionId=").append(contributionId)
-            .append(", fileSelector=").append(fileSelector)
-            .append(", fileTransferExt=").append(fileTransferExt)
-            .append(", fileTransferId=").append(fileTransferId)
-            .append(", fileIcon=").append(fileIcon)
-            .append(", msgBurnAfterReadFlag=").append(msgBurnAfterReadFlag)
-            .append(", barCycle=").append(barCycle
-//                + ", header=" + header + ", body=" + body
-                    )
-            .append(", publicMessage=").append(publicMessage)
-            .append("], msgBlackFlag = ").append(msgBlackFlag)
-            .append(", continueFlag = ").append(continueFlag)
-            .append(", duration=").append(duration)
-            .append(", filepath=").append(filepath)
-            .append(", thumbpath=").append(thumbpath);
+        buf.append("ChatMessage [id=").append(id).append(", contact=").append(contact)
+                .append(", messageId=").append(messageId).append(", data=").append(data)
+                .append(", time=").append(time).append(", filename=").append(filename)
+                .append(", filesize=").append(filesize).append(", mimeType=").append(mimeType)
+                .append(", msgType=").append(msgType).append(", sendReceive=").append(sendReceive)
+                .append(", isRead=").append(isRead).append(", msgState=").append(msgState)
+                .append(", chatType=").append(chatType).append(", threadId=").append(threadId)
+                .append(", conversationId=").append(conversationId).append(", contributionId=")
+                .append(contributionId).append(", fileSelector=").append(fileSelector)
+                .append(", fileTransferExt=").append(fileTransferExt).append(", fileTransferId=")
+                .append(fileTransferId).append(", fileIcon=")
+                .append(fileIcon)
+                .append(", msgBurnAfterReadFlag=")
+                .append(msgBurnAfterReadFlag)
+                .append(", barCycle=")
+                .append(barCycle
+                // + ", header=" + header + ", body=" + body
+                ).append(", publicMessage=").append(publicMessage).append("], msgBlackFlag = ")
+                .append(msgBlackFlag).append(", continueFlag = ").append(continueFlag)
+                .append(", duration=").append(duration).append(", filepath=").append(filepath)
+                .append(", thumbpath=").append(thumbpath);
 
         return buf.toString();
     }
@@ -879,14 +922,14 @@ public class ChatMessage implements Parcelable, Comparable<ChatMessage> {
     @Override
     public int compareTo(ChatMessage message) {
         // TODO Auto-generated method stub
-        if (time - message.getTime()>0) {
+        if (time - message.getTime() > 0) {
             return 1;
-        }else if (time - message.getTime()==0) {
+        } else if (time - message.getTime() == 0) {
             return 0;
         } else {
             return -1;
         }
-//        return (int) (time - message.getTime());
+        // return (int) (time - message.getTime());
     }
 
 }

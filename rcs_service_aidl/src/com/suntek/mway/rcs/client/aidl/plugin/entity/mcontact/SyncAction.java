@@ -20,27 +20,23 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.mcontact;
 
 public enum SyncAction {
-    CONTACT_DOWNLOAD,
-    CONTACT_DOWNLOAD_APPEND,
-    CONTACT_UPLOAD,
-    CONTACT_UPLOAD_APPEND;
+    CONTACT_DOWNLOAD, CONTACT_DOWNLOAD_APPEND, CONTACT_UPLOAD, CONTACT_UPLOAD_APPEND;
 
     /**
      * Value of.
-     *
+     * 
      * @param ordinal the ordinal
      * @return the event
      */
-    public static SyncAction valueOf( int ordinal )
-    {
-        if( ordinal < 0 || ordinal >= values().length )
-        {
-            throw new IndexOutOfBoundsException( "Invalid ordinal" );
+    public static SyncAction valueOf(int ordinal) {
+        if (ordinal < 0 || ordinal >= values().length) {
+            throw new IndexOutOfBoundsException("Invalid ordinal");
         }
 
-        return values()[ ordinal ];
+        return values()[ordinal];
     }
 }

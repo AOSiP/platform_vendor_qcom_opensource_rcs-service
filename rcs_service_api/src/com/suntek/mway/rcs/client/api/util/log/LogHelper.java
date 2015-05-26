@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.api.util.log;
 
 import java.io.BufferedWriter;
@@ -32,11 +33,19 @@ import android.os.Environment;
 import android.util.Log;
 
 /**
- * <p>Title: LogHelper.java</p>
- * <p>Description: The Class LogHelper.</p>
- * <p>Copyright: Copyright (c) 2010</p>
- * <p>Company: pci-suntek</p>
- *
+ * <p>
+ * Title: LogHelper.java
+ * </p>
+ * <p>
+ * Description: The Class LogHelper.
+ * </p>
+ * <p>
+ * Copyright: Copyright (c) 2010
+ * </p>
+ * <p>
+ * Company: pci-suntek
+ * </p>
+ * 
  * @author hhao
  * @version 1.0
  */
@@ -58,7 +67,8 @@ public final class LogHelper {
     private static final String CLASS_METHOD_LINE_FORMAT = "%s.%s()  Line:%d  (%s)";
 
     /** The logfile dir path in sdcard. */
-    public static String MYLOG_PATH_SDCARD_DIR = Environment.getExternalStorageDirectory().getPath() + "/Android/data/com.suntek.mway.rcs.service.api/logs";
+    public static String MYLOG_PATH_SDCARD_DIR = Environment.getExternalStorageDirectory()
+            .getPath() + "/Android/data/com.suntek.mway.rcs.service.api/logs";
 
     /** The log file's name. */
     private static String MYLOGFILEName = "rcs_service_api_log";
@@ -76,7 +86,7 @@ public final class LogHelper {
 
     /**
      * Log.
-     *
+     * 
      * @param str the str
      * @param level the level
      */
@@ -86,7 +96,7 @@ public final class LogHelper {
 
     /**
      * Log.
-     *
+     * 
      * @param str the str
      * @param level the level
      * @param throwable the throwable
@@ -94,14 +104,13 @@ public final class LogHelper {
     private static void log(String str, int level, Throwable throwable) {
         if (mIsDebugMode) {
             if (logLevel <= level) {
-                //Get the method name from the stackTrace.
+                // Get the method name from the stackTrace.
                 StackTraceElement[] array = Thread.currentThread().getStackTrace();
-                StackTraceElement traceElement = (array!=null && array.length > 5 ? array[5]: array[array.length-1]);
+                StackTraceElement traceElement = (array != null && array.length > 5 ? array[5]
+                        : array[array.length - 1]);
                 String logText = String.format(CLASS_METHOD_LINE_FORMAT,
-                        traceElement.getClassName(),
-                        traceElement.getMethodName(),
-                        traceElement.getLineNumber(),
-                        traceElement.getFileName());
+                        traceElement.getClassName(), traceElement.getMethodName(),
+                        traceElement.getLineNumber(), traceElement.getFileName());
                 // ERROR, WARN, INFO, DEBUG, VERBOSE
                 String logTag = "";
                 if (level == Log.VERBOSE) {
@@ -125,13 +134,12 @@ public final class LogHelper {
                     logTag = "[ERROR]";
                 }
                 if (MYLOG_WRITE_TO_FILE
-                        && android.os.Environment.getExternalStorageState()
-                                .equals(android.os.Environment.MEDIA_MOUNTED)) {
+                        && android.os.Environment.getExternalStorageState().equals(
+                                android.os.Environment.MEDIA_MOUNTED)) {
                     if (throwable != null) {
                         str += "\n" + Log.getStackTraceString(throwable);
                     }
-                    writeLogtoFile(MYLOGFILEName, TAG + " " + logTag, logText
-                            + "->" + str);
+                    writeLogtoFile(MYLOGFILEName, TAG + " " + logTag, logText + "->" + str);
                 }
             }
 
@@ -140,7 +148,7 @@ public final class LogHelper {
 
     /**
      * Trace.
-     *
+     * 
      * @param str the str
      */
     public static void trace(String str) {
@@ -149,7 +157,7 @@ public final class LogHelper {
 
     /**
      * VERBOSE.
-     *
+     * 
      * @param str the str
      */
     public static void v(String str) {
@@ -158,7 +166,7 @@ public final class LogHelper {
 
     /**
      * DEBUG.
-     *
+     * 
      * @param str the str
      */
     public static void d(String str) {
@@ -167,7 +175,7 @@ public final class LogHelper {
 
     /**
      * WARN.
-     *
+     * 
      * @param str the str
      */
     public static void w(String str) {
@@ -176,7 +184,7 @@ public final class LogHelper {
 
     /**
      * INFO.
-     *
+     * 
      * @param str the str
      */
     public static void i(String str) {
@@ -185,7 +193,7 @@ public final class LogHelper {
 
     /**
      * ERROR.
-     *
+     * 
      * @param str the str
      */
     public static void e(String str) {
@@ -194,7 +202,7 @@ public final class LogHelper {
 
     /**
      * ERROR.
-     *
+     * 
      * @param str the str
      * @param throwable the throwable
      */
@@ -212,46 +220,48 @@ public final class LogHelper {
 
     /**
      * Open and write the logfile
+     * 
      * @param filename the filename
      * @param tag the tag
      * @param text the text
      * @return *
      */
-    private synchronized static void writeLogtoFile(String filename,
-            String tag, String text) {
+    private synchronized static void writeLogtoFile(String filename, String tag, String text) {
         File filePath = new File(MYLOG_PATH_SDCARD_DIR);
         if (!filePath.exists()) {
             filePath.mkdirs();
         }
         Date nowtime = new Date();
         String needWriteFiel = logfile.format(nowtime);
-        String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag
-                + "    " + text;
-        File file = new File(MYLOG_PATH_SDCARD_DIR, filename + "_"
-                + needWriteFiel + ".log");
+        String needWriteMessage = myLogSdf.format(nowtime) + "    " + tag + "    " + text;
+        File file = new File(MYLOG_PATH_SDCARD_DIR, filename + "_" + needWriteFiel + ".log");
         FileWriter filerWriter = null;
         BufferedWriter bufWriter = null;
         try {
-            //Append the content to the file.
+            // Append the content to the file.
             filerWriter = new FileWriter(file, true);
             bufWriter = new BufferedWriter(filerWriter);
             bufWriter.write(needWriteMessage);
             bufWriter.newLine();
         } catch (Exception e) {
             printStackTrace(e);
-        }finally {
+        } finally {
             try {
-                if(bufWriter!=null) bufWriter.close();
-            }catch(Exception ex) {}
+                if (bufWriter != null)
+                    bufWriter.close();
+            } catch (Exception ex) {
+            }
             try {
-                if(filerWriter!=null) filerWriter.close();
-            }catch(Exception ex) {}
+                if (filerWriter != null)
+                    filerWriter.close();
+            } catch (Exception ex) {
+            }
         }
     }
 
     /**
      * Prints the stack trace.
-     *
+     * 
      * @param throwable the throwable
      */
     public static void printStackTrace(Throwable throwable) {

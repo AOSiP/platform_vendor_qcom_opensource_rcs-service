@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.plugin.entity.richscrn;
 
 import java.util.ArrayList;
@@ -40,17 +41,14 @@ import android.os.Parcelable;
  * <p>
  * Company: pci-suntek
  * </p>
- *
+ * 
  * @author zrq
  * @version 1.0
- *
  */
-public class PhoneList implements Parcelable
-{
-
+public class PhoneList implements Parcelable {
 
     /** The phone list . */
-    private ArrayList<String>    phoneList;
+    private ArrayList<String> phoneList;
 
     public ArrayList<String> getPhoneList() {
         return phoneList;
@@ -63,28 +61,25 @@ public class PhoneList implements Parcelable
     /**
      * Instantiates a new phone list.
      */
-    public PhoneList()
-    {}
+    public PhoneList() {
+    }
 
     /**
      * Instantiates a new phone list.
-     *
-     * @param source
-     *            the source
+     * 
+     * @param source the source
      */
-    public PhoneList( Parcel source )
-    {
-        readFromParcel( source );
+    public PhoneList(Parcel source) {
+        readFromParcel(source);
     }
 
     /**
      * The parcel describe contents, defaul is 0.
-     *
+     * 
      * @return the int
      */
     @Override
-    public int describeContents()
-    {
+    public int describeContents() {
         return 0;
     }
 
@@ -92,15 +87,12 @@ public class PhoneList implements Parcelable
      * Write the result entity to parcel stream. Pay attention to read and write
      * variables variables sequence should be consistent or not the correct
      * results
-     *
-     * @param dest
-     *            the dest parcel stream
-     * @param flags
-     *            the flags
+     * 
+     * @param dest the dest parcel stream
+     * @param flags the flags
      */
     @Override
-    public void writeToParcel( Parcel dest, int flags )
-    {
+    public void writeToParcel(Parcel dest, int flags) {
         dest.writeStringList(phoneList);
     }
 
@@ -108,31 +100,24 @@ public class PhoneList implements Parcelable
      * Create the result entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     *
-     * @param source
-     *            The parcel stream
+     * 
+     * @param source The parcel stream
      */
-    public void readFromParcel( Parcel source )
-    {
+    public void readFromParcel(Parcel source) {
         phoneList = source.createStringArrayList();
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<PhoneList>    CREATOR    = new Parcelable.Creator<PhoneList>() {
+    public static final Parcelable.Creator<PhoneList> CREATOR = new Parcelable.Creator<PhoneList>() {
         @Override
-        public PhoneList createFromParcel( Parcel source )
-        {
-            return new PhoneList( source );
+        public PhoneList createFromParcel(Parcel source) {
+            return new PhoneList(source);
         }
 
         @Override
-        public PhoneList[] newArray( int size )
-        {
-            return new PhoneList[ size ];
+        public PhoneList[] newArray(int size) {
+            return new PhoneList[size];
         }
     };
-
-
-
 
 }

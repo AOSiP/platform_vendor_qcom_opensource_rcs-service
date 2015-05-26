@@ -20,28 +20,28 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl;
 
 import android.app.Application;
 import android.content.Context;
 
 /**
- * <p>Title: RCSApplication class</p>
  * <p>
- * Description: The class <code>RCSApplication</code>
- * is the root of the class hierarchy in UI project. The UI application
- * must extends <code>com.suntek.mway.rcs.api.client.RCSApplication</code>
- * and override the method onCreate() to initialize various APIs
- * (
- * such as {@link com.suntek.mway.rcs.client.api.capability.CapabilityApi},
+ * Title: RCSApplication class
+ * </p>
+ * <p>
+ * Description: The class <code>RCSApplication</code> is the root of the class
+ * hierarchy in UI project. The UI application must extends
+ * <code>com.suntek.mway.rcs.api.client.RCSApplication</code> and override the
+ * method onCreate() to initialize various APIs ( such as
+ * {@link com.suntek.mway.rcs.client.api.capability.CapabilityApi},
  * {@link com.suntek.mway.rcs.client.api.contacts.ContactApi},
  * {@link com.suntek.mway.rcs.client.api.im.MessageApi},
  * {@link com.suntek.mway.rcs.client.api.log.LogAPI},
  * {@link com.suntek.mway.rcs.client.api.registration.RegistrationApi},
  * {@link com.suntek.mway.rcs.client.api.setting.SettingApi},
- * {@link com.suntek.mway.rcs.client.api.voip.VoIpApi}
- * )
- * provided by RCS
+ * {@link com.suntek.mway.rcs.client.api.voip.VoIpApi} ) provided by RCS
  * according to business needs.
  * </p>
  * <p>
@@ -50,9 +50,9 @@ import android.content.Context;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class RCSApplication extends Application {
 
@@ -74,28 +74,32 @@ public class RCSApplication extends Application {
     }
 
     /**
-     * init context with the specified subclass of android.content.Context
-     * here is the instance of RCSApplication.
-     * @param context subclass of android.content.Context, here is the instance of RCSApplication.
+     * init context with the specified subclass of android.content.Context here
+     * is the instance of RCSApplication.
+     * 
+     * @param context subclass of android.content.Context, here is the instance
+     *            of RCSApplication.
      */
     public static void initContext(Context context) {
         ctx = context;
     }
 
     /**
-     * returns subclass of android.content.Context, here is the instance of RCSApplication
+     * returns subclass of android.content.Context, here is the instance of
+     * RCSApplication
+     * 
      * @return the instance of RCSApplication
      */
     public static Context getContext() {
-        if(ctx == null) {
+        if (ctx == null) {
             ctx = RCSApplication.rcsApp;
         }
         return ctx;
     }
 
     /**
-     * override the method to initialize various API provided by RCS
-     * according to business needs.
+     * override the method to initialize various API provided by RCS according
+     * to business needs.
      */
     @Override
     public void onCreate() {
@@ -103,6 +107,5 @@ public class RCSApplication extends Application {
         initContext(this);
         ServiceInterface.init(this);
     }
-
 
 }

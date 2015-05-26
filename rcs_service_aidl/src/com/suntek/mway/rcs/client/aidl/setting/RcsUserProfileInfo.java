@@ -20,6 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 package com.suntek.mway.rcs.client.aidl.setting;
 
 import com.suntek.mway.rcs.client.aidl.constant.APIConstant;
@@ -28,10 +29,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * <p>Title: RcsUserProfileInfo class</p>
  * <p>
- * Description: The class <code>RcsUserProfileInfo</code> represents a information of
- * RCS user profile, which is indicated by the field definition in this class.
+ * Title: RcsUserProfileInfo class
+ * </p>
+ * <p>
+ * Description: The class <code>RcsUserProfileInfo</code> represents a
+ * information of RCS user profile, which is indicated by the field definition
+ * in this class.
  * </p>
  * <p>
  * Copyright: Copyright (c) 2014
@@ -39,9 +43,9 @@ import android.os.Parcelable;
  * <p>
  * Company: pci-suntek
  * </p>
+ * 
  * @author YE JIE MING
  * @version 1.0
- *
  */
 public class RcsUserProfileInfo implements Parcelable {
 
@@ -54,12 +58,19 @@ public class RcsUserProfileInfo implements Parcelable {
      * only telephone number
      */
     private String userName;
+
     private int imStatus;
+
     private boolean isLocalUser;
+
     private int terminalType;
+
     private String IMSI;
+
     private String MCC;
+
     private String MNC;
+
     private String version;
 
     /**
@@ -71,6 +82,7 @@ public class RcsUserProfileInfo implements Parcelable {
 
     /**
      * Create a new instance of UserProfileInfo with another Parcelable object.
+     * 
      * @param source Parcelable source
      */
     public RcsUserProfileInfo(Parcel source) {
@@ -79,9 +91,9 @@ public class RcsUserProfileInfo implements Parcelable {
         userName = source.readString();
         imStatus = source.readInt();
 
-        boolean[] value = new boolean[ 1 ];
-        source.readBooleanArray( value );
-        isLocalUser = value[ 0 ];
+        boolean[] value = new boolean[1];
+        source.readBooleanArray(value);
+        isLocalUser = value[0];
 
         terminalType = source.readInt();
         IMSI = source.readString();
@@ -92,6 +104,7 @@ public class RcsUserProfileInfo implements Parcelable {
 
     /**
      * Get SIP private uri
+     * 
      * @return SIP private uri
      */
     public String getSipPrivateUri() {
@@ -100,6 +113,7 @@ public class RcsUserProfileInfo implements Parcelable {
 
     /**
      * Set SIP private uri
+     * 
      * @param sipPrivateUri SIP private uri
      */
     public void setSipPrivateUri(String sipPrivateUri) {
@@ -173,7 +187,7 @@ public class RcsUserProfileInfo implements Parcelable {
     /**
      * Describe the kinds of special objects contained in this Parcelable's
      * marshalled representation
-     *
+     * 
      * @return Integer
      */
     @Override
@@ -183,7 +197,7 @@ public class RcsUserProfileInfo implements Parcelable {
 
     /**
      * Write parcelable object
-     *
+     * 
      * @param dest The Parcel in which the object should be written
      * @param flags Additional flags about how the object should be written
      */
@@ -194,7 +208,9 @@ public class RcsUserProfileInfo implements Parcelable {
         dest.writeString(userName);
         dest.writeInt(imStatus);
 
-        dest.writeBooleanArray( new boolean[] { isLocalUser } );
+        dest.writeBooleanArray(new boolean[] {
+            isLocalUser
+        });
 
         dest.writeInt(terminalType);
 
@@ -219,10 +235,9 @@ public class RcsUserProfileInfo implements Parcelable {
 
     @Override
     public String toString() {
-        return "RcsUserProfileInfo [sipPrivateUri=" + sipPrivateUri
-                + ", userName=" + userName + ", imStatus=" + imStatus
-                + ", isLocalUser=" + isLocalUser + ", terminalType="
-                + terminalType + ", IMSI=" + IMSI + ", MCC=" + MCC + ", MNC="
-                + MNC + ", version=" + version + "]";
+        return "RcsUserProfileInfo [sipPrivateUri=" + sipPrivateUri + ", userName=" + userName
+                + ", imStatus=" + imStatus + ", isLocalUser=" + isLocalUser + ", terminalType="
+                + terminalType + ", IMSI=" + IMSI + ", MCC=" + MCC + ", MNC=" + MNC + ", version="
+                + version + "]";
     }
 }
