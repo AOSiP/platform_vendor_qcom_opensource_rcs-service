@@ -1608,7 +1608,7 @@ public class MessageApi extends ClientApi {
         }
         return null;
     }
-    
+
     public void cancelBackup() throws ServiceDisconnectedException {
         LogHelper.i("enter method:cancelBackup.");
         VerificationUtil.ApiIsNull(myApi);
@@ -1618,7 +1618,7 @@ public class MessageApi extends ClientApi {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
-    
+
     public void forwardImageFile(long thread_id, long sms_id, String number, String id,
             int burnFlag, int barCycle) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
@@ -1632,7 +1632,7 @@ public class MessageApi extends ClientApi {
             LogHelper.i("id field value error");
             return;
         }
-        
+
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return;
@@ -1653,7 +1653,7 @@ public class MessageApi extends ClientApi {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
-    
+
     public void forwardVideoFile(long thread_id, long sms_id, String number, String id,
             int length, int burnFlag, int barCycle, boolean isRecord)
             throws ServiceDisconnectedException {
@@ -1668,7 +1668,7 @@ public class MessageApi extends ClientApi {
             LogHelper.i("id field value error");
             return;
         }
-        
+
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return;
@@ -1698,12 +1698,12 @@ public class MessageApi extends ClientApi {
                         Locale.getDefault(),
                         "enter method forwardOne2ManyImageFile. [thread_id,sms_id,numbers,id,burnFlag,barCycle]=%d,%d,%s,%s,%d,%d",
                         thread_id, sms_id, numbers.toString(), id, burnFlag, barCycle));
-        
+
         if(TextUtils.isEmpty(id)){
             LogHelper.i("id field value error");
             return;
         }
-        
+
         if (!VerificationUtil.isAllNumber(numbers)) {
             LogHelper.i("number field value error");
             return;
@@ -1716,7 +1716,7 @@ public class MessageApi extends ClientApi {
             LogHelper.i("barCycle field must be a positive int");
             return;
         }
-        
+
         try {
             myApi.forwardOne2ManyImageFile(thread_id, sms_id, VerificationUtil.formatNumbers(numbers),
                     id, burnFlag, barCycle);
@@ -1724,7 +1724,7 @@ public class MessageApi extends ClientApi {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
-    
+
     public void forwardOne2ManyVideoFile(long thread_id, long sms_id, List<String> numbers,
             String id, int length, int burnFlag, int barCycle, boolean isRecord)
             throws ServiceDisconnectedException {
@@ -1735,12 +1735,12 @@ public class MessageApi extends ClientApi {
                         "enter method forwardOne2ManyVideoFile. [thread_id,sms_id,numbers,id,length,burnFlag,barCycle,isRecord]=%d,%d,%s,%s,%d,%d,%d,%b",
                         thread_id, sms_id, numbers.toString(), id, length, burnFlag,
                         barCycle, isRecord));
-        
+
         if(TextUtils.isEmpty(id)){
             LogHelper.i("id field value error");
             return;
         }
-        
+
         if (!VerificationUtil.isAllNumber(numbers)) {
             LogHelper.i("number field value error");
             return;
@@ -1760,7 +1760,7 @@ public class MessageApi extends ClientApi {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
-    
+
     public void forwardGroupImageFile(long thread_id, String conversationId, long sms_id,
             String id, String groupId) throws ServiceDisconnectedException {
         VerificationUtil.ApiIsNull(myApi);
@@ -1769,7 +1769,7 @@ public class MessageApi extends ClientApi {
                         Locale.getDefault(),
                         "enter method forwardGroupImageFile. [thread_id,conversationId,sms_id,id,groupId]=%d,%s,%d,%s,%s",
                         thread_id, conversationId, sms_id, id, groupId));
-        
+
         if(TextUtils.isEmpty(id)){
             LogHelper.i("id field value error");
             return;
@@ -1781,7 +1781,7 @@ public class MessageApi extends ClientApi {
             LogHelper.e(ex.getMessage(), ex);
         }
     }
-    
+
     public void forwardGroupVideoFile(long thread_id, String conversationId, long sms_id,
             String id, int length, String groupId, boolean isRecord)
             throws ServiceDisconnectedException {
@@ -1791,12 +1791,12 @@ public class MessageApi extends ClientApi {
                         Locale.getDefault(),
                         "enter method forwardGroupVideoFile. [thread_id,conversationId,sms_id,id,length,groupId,isRecord]=%d,%s,%d,%s,%d,%s,%b",
                         thread_id, conversationId, sms_id, id, length, groupId, isRecord));
-        
+
         if(TextUtils.isEmpty(id)){
             LogHelper.i("id field value error");
             return;
         }
-        
+
         try {
             myApi.forwardGroupVideoFile(thread_id, conversationId, sms_id, id, length, groupId);
         } catch (Exception ex) {
