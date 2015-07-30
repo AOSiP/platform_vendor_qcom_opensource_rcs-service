@@ -73,6 +73,9 @@ public class Actions {
         public static final String ACTION_DMS_VERSION_REFRESH =
                 "com.suntek.mway.rcs.ACTION_UI_RCS_DM_VERSION_REFRESH";
 
+        public static final String ACTION_UI_SIM_NOT_BELONG_CMCC = Main.PACKAGE_NAME
+                + ".ACTION_UI_SIM_NOT_BELONG_CMCC";
+
         /** The Constant ACTION_RCS_ENABLE_CHANGED. */
         public static final String ACTION_RCS_ENABLE_CHANGED =
                 "com.suntek.mway.rcs.ACTION_RCS_ENABLE_CHANGED";
