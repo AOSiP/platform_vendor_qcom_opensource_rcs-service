@@ -26,24 +26,6 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.emoticon;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <p>
- * Title: The emoticon entity class
- * </p>
- * <p>
- * Description: The emoticon entity save some emoticon info, such as emoticon
- * id, name and so on
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
 public class EmoticonBO implements Parcelable {
     /** The emoticon id. */
     private String emoticonId;
@@ -74,7 +56,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -86,7 +68,7 @@ public class EmoticonBO implements Parcelable {
      * Write the emoticon entity to parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param dest the dest
      * @param flags the flags
      */
@@ -109,7 +91,7 @@ public class EmoticonBO implements Parcelable {
      * Create the emoticon entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -127,7 +109,8 @@ public class EmoticonBO implements Parcelable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<EmoticonBO> CREATOR = new Parcelable.Creator<EmoticonBO>() {
+    public static final Parcelable.Creator<EmoticonBO> CREATOR =
+            new Parcelable.Creator<EmoticonBO>() {
         @Override
         public EmoticonBO createFromParcel(Parcel source) {
             return new EmoticonBO(source);
@@ -147,7 +130,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Instantiates a new emoticon entity.
-     * 
+     *
      * @param source the source parcel
      */
     public EmoticonBO(Parcel source) {
@@ -156,7 +139,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Gets the emoticon id.
-     * 
+     *
      * @return the emoticon id
      */
     public String getEmoticonId() {
@@ -165,7 +148,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Sets the emoticon id.
-     * 
+     *
      * @param emoticonId the new emoticon id
      */
     public void setEmoticonId(String emoticonId) {
@@ -174,7 +157,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Gets the emoticon name.
-     * 
+     *
      * @return the emoticon name
      */
     public String getEmoticonName() {
@@ -183,7 +166,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Sets the emoticon name.
-     * 
+     *
      * @param emoticonName the new emoticon name
      */
     public void setEmoticonName(String emoticonName) {
@@ -192,7 +175,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Gets the emoticon static url.
-     * 
+     *
      * @return the emoticon static url
      */
     public String getEmoticonStatic() {
@@ -201,7 +184,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Sets the emoticon static url.
-     * 
+     *
      * @param emoticonStatic the new emoticon static url
      */
     public void setEmoticonStatic(String emoticonStatic) {
@@ -210,7 +193,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Gets the emoticon dynamic url.
-     * 
+     *
      * @return the emoticon dynamic url
      */
     public String getEmoticonDynamic() {
@@ -219,7 +202,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Sets the emoticon dynamic url.
-     * 
+     *
      * @param emoticonDynamic the new emoticon dynamic url
      */
     public void setEmoticonDynamic(String emoticonDynamic) {
@@ -228,7 +211,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Gets the package id.
-     * 
+     *
      * @return the package id
      */
     public String getPackageId() {
@@ -237,7 +220,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Sets the package id.
-     * 
+     *
      * @param packageId the new package id
      */
     public void setPackageId(String packageId) {
@@ -246,7 +229,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Gets the static emoticon bytes.
-     * 
+     *
      * @return the static emoticon bytes
      */
     public byte[] getEmoticonStaticByte() {
@@ -255,7 +238,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Sets the static emoticon bytes.
-     * 
+     *
      * @param emoticonStaticByte the new static emoticon bytes
      */
     public void setEmoticonStaticByte(byte[] emoticonStaticByte) {
@@ -264,7 +247,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Gets the dynamic emoticon bytes.
-     * 
+     *
      * @return the dynamic emoticon bytes
      */
     public byte[] getEmoticonDynamicByte() {
@@ -273,7 +256,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Sets the dynamic emoticon bytes.
-     * 
+     *
      * @param emoticonDynamicByte the new dynamic emoticon bytes
      */
     public void setEmoticonDynamicByte(byte[] emoticonDynamicByte) {
@@ -282,7 +265,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Gets the user phone number.
-     * 
+     *
      * @return the user phone number
      */
     public String getUserPhone() {
@@ -291,7 +274,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Sets the user phone number.
-     * 
+     *
      * @param userPhone the new user phone number
      */
     public void setUserPhone(String userPhone) {
@@ -300,7 +283,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Checks if is only browse.
-     * 
+     *
      * @return true, if is only browse
      */
     public boolean isOnlyBrowse() {
@@ -309,7 +292,7 @@ public class EmoticonBO implements Parcelable {
 
     /**
      * Sets the only browse.
-     * 
+     *
      * @param isOnlyBrowse the new only browse
      */
     public void setOnlyBrowse(boolean isOnlyBrowse) {

@@ -26,23 +26,6 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.richscrn;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <p>
- * Title: The result entity
- * </p>
- * <p>
- * Description: the result info entity
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
 public class ResultInfo implements Parcelable {
 
     /** The is success flag. */
@@ -59,7 +42,7 @@ public class ResultInfo implements Parcelable {
 
     /**
      * Instantiates a new result info.
-     * 
+     *
      * @param source the source
      */
     public ResultInfo(Parcel source) {
@@ -68,7 +51,7 @@ public class ResultInfo implements Parcelable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -80,7 +63,7 @@ public class ResultInfo implements Parcelable {
      * Write the result entity to parcel stream. Pay attention to read and write
      * variables variables sequence should be consistent or not the correct
      * results
-     * 
+     *
      * @param dest the dest parcel stream
      * @param flags the flags
      */
@@ -96,7 +79,7 @@ public class ResultInfo implements Parcelable {
      * Create the result entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -108,7 +91,8 @@ public class ResultInfo implements Parcelable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<ResultInfo> CREATOR = new Parcelable.Creator<ResultInfo>() {
+    public static final Parcelable.Creator<ResultInfo> CREATOR =
+            new Parcelable.Creator<ResultInfo>() {
         @Override
         public ResultInfo createFromParcel(Parcel source) {
             return new ResultInfo(source);
@@ -122,7 +106,7 @@ public class ResultInfo implements Parcelable {
 
     /**
      * Checks if is success flag.
-     * 
+     *
      * @return true, if is success flag
      */
     public boolean isSuccess() {
@@ -131,7 +115,7 @@ public class ResultInfo implements Parcelable {
 
     /**
      * Sets the success flag.
-     * 
+     *
      * @param isSuccess the new success flag
      */
     public void setSuccess(boolean isSuccess) {
@@ -140,7 +124,7 @@ public class ResultInfo implements Parcelable {
 
     /**
      * Gets the result message.
-     * 
+     *
      * @return the result message
      */
     public String getResultMsg() {
@@ -149,7 +133,7 @@ public class ResultInfo implements Parcelable {
 
     /**
      * Sets the result message.
-     * 
+     *
      * @param resultMsg the new result message
      */
     public void setResultMsg(String resultMsg) {

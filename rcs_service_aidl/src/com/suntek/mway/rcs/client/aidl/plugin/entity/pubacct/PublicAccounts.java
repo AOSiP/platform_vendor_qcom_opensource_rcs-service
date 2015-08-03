@@ -28,23 +28,6 @@ import android.os.Parcelable;
 
 import java.io.UnsupportedEncodingException;
 
-/**
- * <p>
- * Title: The public account entity
- * </p>
- * <p>
- * Description: The public account entity
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
 public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
     /** The logo url. */
     private String logo;
@@ -72,7 +55,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Instantiates a new public accounts.
-     * 
+     *
      * @param source the source
      */
     public PublicAccounts(Parcel source) {
@@ -81,7 +64,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -93,7 +76,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
      * write the public account entity to parcel stream. Pay attention to read
      * and write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param dest the dest
      * @param flags the flags
      */
@@ -111,7 +94,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
      * Create the public account entity from parcel stream. Pay attention to
      * read and write variables variables sequence should be consistent or not
      * the correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -124,7 +107,8 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<PublicAccounts> CREATOR = new Parcelable.Creator<PublicAccounts>() {
+    public static final Parcelable.Creator<PublicAccounts> CREATOR =
+            new Parcelable.Creator<PublicAccounts>() {
         @Override
         public PublicAccounts createFromParcel(Parcel source) {
             return new PublicAccounts(source);
@@ -138,7 +122,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Gets the logo url.
-     * 
+     *
      * @return the logo url
      */
     public String getLogo() {
@@ -147,7 +131,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Sets the logo url.
-     * 
+     *
      * @param logo the new logo url
      */
     public void setLogo(String logo) {
@@ -156,7 +140,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Gets the name.
-     * 
+     *
      * @return the name
      */
     public String getName() {
@@ -165,7 +149,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Sets the name.
-     * 
+     *
      * @param name the new name
      */
     public void setName(String name) {
@@ -174,7 +158,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Gets the public account uuid.
-     * 
+     *
      * @return the public account uuid
      */
     public String getPaUuid() {
@@ -183,7 +167,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Sets the public account uuid.
-     * 
+     *
      * @param paUuid the new public account uuid
      */
     public void setPaUuid(String paUuid) {
@@ -192,7 +176,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Gets the recommend level.
-     * 
+     *
      * @return the recommend level
      */
     public int getRecommendLevel() {
@@ -201,7 +185,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Sets the recommend level.
-     * 
+     *
      * @param recommendLevel the new recommend level
      */
     public void setRecommendLevel(int recommendLevel) {
@@ -210,7 +194,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Gets the sip uri.
-     * 
+     *
      * @return the sip uri
      */
     public String getSipUri() {
@@ -219,7 +203,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Sets the sip uri.
-     * 
+     *
      * @param sipUri the new sip uri
      */
     public void setSipUri(String sipUri) {
@@ -228,7 +212,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Gets the subscribestatus.
-     * 
+     *
      * @return the subscribestatus
      */
     public int getSubscribestatus() {
@@ -237,7 +221,7 @@ public class PublicAccounts implements Parcelable, Comparable<PublicAccounts> {
 
     /**
      * Sets the subscribestatus.
-     * 
+     *
      * @param subscribestatus the new subscribestatus
      */
     public void setSubscribestatus(int subscribestatus) {

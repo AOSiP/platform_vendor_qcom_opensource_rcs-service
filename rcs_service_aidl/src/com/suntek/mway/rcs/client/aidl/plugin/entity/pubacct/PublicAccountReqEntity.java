@@ -26,24 +26,6 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <p>
- * Title: The public account request entity
- * </p>
- * <p>
- * Description: The public account request entity
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * .
- * 
- * @author zrq
- * @version 1.0
- */
 public class PublicAccountReqEntity implements Parcelable {
     /** the public account uuid. */
     private String paUuid;
@@ -68,7 +50,7 @@ public class PublicAccountReqEntity implements Parcelable {
 
     /**
      * Instantiates a new public account request entity.
-     * 
+     *
      * @param source the parcel source
      */
     public PublicAccountReqEntity(Parcel source) {
@@ -77,7 +59,7 @@ public class PublicAccountReqEntity implements Parcelable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -90,7 +72,7 @@ public class PublicAccountReqEntity implements Parcelable {
      * write the public account request entity to parcel stream. Pay attention
      * to read and write variables variables sequence should be consistent or
      * not the correct results
-     * 
+     *
      * @param dest the dest
      * @param flags the flags
      */
@@ -106,7 +88,7 @@ public class PublicAccountReqEntity implements Parcelable {
      * Create the public account request entity from parcel stream. Pay
      * attention to read and write variables variables sequence should be
      * consistent or not the correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -117,7 +99,8 @@ public class PublicAccountReqEntity implements Parcelable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<PublicAccountReqEntity> CREATOR = new Parcelable.Creator<PublicAccountReqEntity>() {
+    public static final Parcelable.Creator<PublicAccountReqEntity> CREATOR =
+            new Parcelable.Creator<PublicAccountReqEntity>() {
         @Override
         public PublicAccountReqEntity createFromParcel(Parcel source) {
             return new PublicAccountReqEntity(source);
@@ -131,7 +114,7 @@ public class PublicAccountReqEntity implements Parcelable {
 
     /**
      * Gets the public account uuid.
-     * 
+     *
      * @return the public account uuid
      */
     public String getPaUuid() {
@@ -140,7 +123,7 @@ public class PublicAccountReqEntity implements Parcelable {
 
     /**
      * Sets the public account uuid.
-     * 
+     *
      * @param paUuid the new public account uuid
      */
     public void setPaUuid(String paUuid) {
@@ -149,7 +132,7 @@ public class PublicAccountReqEntity implements Parcelable {
 
     /**
      * Gets the public account name.
-     * 
+     *
      * @return the public account name
      */
     public String getName() {
@@ -158,7 +141,7 @@ public class PublicAccountReqEntity implements Parcelable {
 
     /**
      * Sets the public account name.
-     * 
+     *
      * @param name the new public account name
      */
     public void setName(String name) {
@@ -167,7 +150,7 @@ public class PublicAccountReqEntity implements Parcelable {
 
     /**
      * Gets the recommend level.
-     * 
+     *
      * @return the recommend level
      */
     public int getRecommendLevel() {
@@ -176,7 +159,7 @@ public class PublicAccountReqEntity implements Parcelable {
 
     /**
      * Sets the recommend level.
-     * 
+     *
      * @param recommendLevel the new recommend level
      */
     public void setRecommendLevel(int recommendLevel) {
@@ -185,7 +168,7 @@ public class PublicAccountReqEntity implements Parcelable {
 
     /**
      * Gets the logo url.
-     * 
+     *
      * @return the logo url
      */
     public String getLogo() {
@@ -194,7 +177,7 @@ public class PublicAccountReqEntity implements Parcelable {
 
     /**
      * Sets the logo url.
-     * 
+     *
      * @param logo the new logo url
      */
     public void setLogo(String logo) {

@@ -23,12 +23,12 @@
 
 package com.suntek.mway.rcs.client.aidl.plugin.entity.profile;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import android.os.Parcel;
-import android.os.Parcelable;
 
 public class TelephoneModel implements Parcelable, Serializable {
 
@@ -83,7 +83,8 @@ public class TelephoneModel implements Parcelable, Serializable {
         dest.writeString(this.telephone);
     }
 
-    public static final Parcelable.Creator<TelephoneModel> CREATOR = new Parcelable.Creator<TelephoneModel>() {
+    public static final Parcelable.Creator<TelephoneModel> CREATOR =
+            new Parcelable.Creator<TelephoneModel>() {
         @Override
         public TelephoneModel createFromParcel(Parcel source) {
             return new TelephoneModel(source);

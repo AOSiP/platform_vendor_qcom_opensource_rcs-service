@@ -26,23 +26,6 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <p>
- * Title: The media basic entity
- * </p>
- * <p>
- * Description: The media basic entity
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
 public class MediaBasic implements Parcelable {
     /** The thumb picture link. */
     private String thumbLink;
@@ -79,7 +62,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Instantiates a new media basic.
-     * 
+     *
      * @param source the source
      */
     public MediaBasic(Parcel source) {
@@ -88,7 +71,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -100,7 +83,7 @@ public class MediaBasic implements Parcelable {
      * Write the media basic entity to parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param dest the dest parcel stream
      * @param flags the flags
      */
@@ -121,7 +104,7 @@ public class MediaBasic implements Parcelable {
      * Create the media basic entity from parcel stream. Pay attention to read
      * and write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -137,7 +120,8 @@ public class MediaBasic implements Parcelable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<MediaBasic> CREATOR = new Parcelable.Creator<MediaBasic>() {
+    public static final Parcelable.Creator<MediaBasic> CREATOR =
+            new Parcelable.Creator<MediaBasic>() {
         @Override
         public MediaBasic createFromParcel(Parcel source) {
             return new MediaBasic(source);
@@ -151,7 +135,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Gets the thumb picture link.
-     * 
+     *
      * @return the thumb picture link
      */
     public String getThumbLink() {
@@ -160,7 +144,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Sets the thumb picture link.
-     * 
+     *
      * @param thumbLink the new thumb picture link
      */
     public void setThumbLink(String thumbLink) {
@@ -169,7 +153,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Gets the original link.
-     * 
+     *
      * @return the original link
      */
     public String getOriginalLink() {
@@ -178,7 +162,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Sets the original link.
-     * 
+     *
      * @param originalLink the new original link
      */
     public void setOriginalLink(String originalLink) {
@@ -187,7 +171,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Gets the title.
-     * 
+     *
      * @return the title
      */
     public String getTitle() {
@@ -196,7 +180,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Sets the title.
-     * 
+     *
      * @param title the new title
      */
     public void setTitle(String title) {
@@ -205,7 +189,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Gets the file size.
-     * 
+     *
      * @return the file size
      */
     public String getFileSize() {
@@ -214,7 +198,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Sets the file size.
-     * 
+     *
      * @param fileSize the new file size
      */
     public void setFileSize(String fileSize) {
@@ -223,7 +207,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Gets the duration.
-     * 
+     *
      * @return the duration
      */
     public String getDuration() {
@@ -232,7 +216,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Sets the duration.
-     * 
+     *
      * @param duration the new duration
      */
     public void setDuration(String duration) {
@@ -241,7 +225,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Gets the file type.
-     * 
+     *
      * @return the file type
      */
     public String getFileType() {
@@ -250,7 +234,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Sets the file type.
-     * 
+     *
      * @param fileType the new file type
      */
     public void setFileType(String fileType) {
@@ -259,7 +243,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Gets the creates the time.
-     * 
+     *
      * @return the creates the time
      */
     public String getCreateTime() {
@@ -268,7 +252,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Sets the creates the time.
-     * 
+     *
      * @param createTime the new creates the time
      */
     public void setCreateTime(String createTime) {
@@ -277,7 +261,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Gets the media uuid.
-     * 
+     *
      * @return the media uuid
      */
     public String getMediaUuid() {
@@ -286,7 +270,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Sets the media uuid.
-     * 
+     *
      * @param mediaUuid the new media uuid
      */
     public void setMediaUuid(String mediaUuid) {
@@ -295,7 +279,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Gets the pa uuid.
-     * 
+     *
      * @return the pa uuid
      */
     public String getPaUuid() {
@@ -304,7 +288,7 @@ public class MediaBasic implements Parcelable {
 
     /**
      * Sets the pa uuid.
-     * 
+     *
      * @param paUuid the new pa uuid
      */
     public void setPaUuid(String paUuid) {

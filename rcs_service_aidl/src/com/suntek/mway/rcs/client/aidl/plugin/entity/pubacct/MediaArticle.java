@@ -26,23 +26,6 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <p>
- * Title: The media article entity
- * </p>
- * <p>
- * Description: The media article entity
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
 public class MediaArticle implements Parcelable {
 
     /** The title. */
@@ -94,7 +77,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Instantiates a new media article.
-     * 
+     *
      * @param source the source
      */
     public MediaArticle(Parcel source) {
@@ -103,7 +86,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -115,7 +98,7 @@ public class MediaArticle implements Parcelable {
      * Write the media article entity to parcel stream. Pay attention to read
      * and write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param dest the dest parcel stream
      * @param flags the flags
      */
@@ -141,7 +124,7 @@ public class MediaArticle implements Parcelable {
      * Create the media article entity from parcel stream. Pay attention to read
      * and write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -163,7 +146,8 @@ public class MediaArticle implements Parcelable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<MediaArticle> CREATOR = new Parcelable.Creator<MediaArticle>() {
+    public static final Parcelable.Creator<MediaArticle> CREATOR =
+            new Parcelable.Creator<MediaArticle>() {
         @Override
         public MediaArticle createFromParcel(Parcel source) {
             return new MediaArticle(source);
@@ -177,7 +161,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the title.
-     * 
+     *
      * @return the title
      */
     public String getTitle() {
@@ -186,7 +170,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the title.
-     * 
+     *
      * @param title the new title
      */
     public void setTitle(String title) {
@@ -195,7 +179,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the author.
-     * 
+     *
      * @return the author
      */
     public String getAuthor() {
@@ -204,7 +188,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the author.
-     * 
+     *
      * @param author the new author
      */
     public void setAuthor(String author) {
@@ -213,7 +197,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the thumb picture link.
-     * 
+     *
      * @return the thumb picture link
      */
     public String getThumbLink() {
@@ -222,7 +206,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the thumb picture link.
-     * 
+     *
      * @param thumbLink the new thumb picture link
      */
     public void setThumbLink(String thumbLink) {
@@ -231,7 +215,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the original picture link.
-     * 
+     *
      * @return the original picture link
      */
     public String getOriginalLink() {
@@ -240,7 +224,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the original picture link.
-     * 
+     *
      * @param originalLink the new original picture link
      */
     public void setOriginalLink(String originalLink) {
@@ -249,7 +233,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the source link.
-     * 
+     *
      * @return the source link
      */
     public String getSourceLink() {
@@ -258,7 +242,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the source link.
-     * 
+     *
      * @param sourceLink the new source link
      */
     public void setSourceLink(String sourceLink) {
@@ -267,7 +251,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the main text.
-     * 
+     *
      * @return the main text
      */
     public String getMainText() {
@@ -276,7 +260,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the main text.
-     * 
+     *
      * @param mainText the new main text
      */
     public void setMainText(String mainText) {
@@ -285,7 +269,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the media uuid.
-     * 
+     *
      * @return the media uuid
      */
     public String getMediaUuid() {
@@ -294,7 +278,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the media uuid.
-     * 
+     *
      * @param mediaUuid the new media uuid
      */
     public void setMediaUuid(String mediaUuid) {
@@ -303,7 +287,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the middle link.
-     * 
+     *
      * @return the middle link
      */
     // public String getMiddleLink()
@@ -313,7 +297,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the middle link.
-     * 
+     *
      * @param middleLink the new middle link
      */
     // public void setMiddleLink( String middleLink )
@@ -323,7 +307,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the media type.
-     * 
+     *
      * @return the media type
      */
     // public String getMediaType()
@@ -333,7 +317,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the media type.
-     * 
+     *
      * @param mediaType the new media type
      */
     // public void setMediaType( String mediaType )
@@ -343,7 +327,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the digest.
-     * 
+     *
      * @return the digest
      */
     public String getDigest() {
@@ -352,7 +336,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the digest.
-     * 
+     *
      * @param digest the new digest
      */
     public void setDigest(String digest) {
@@ -361,7 +345,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the view type.
-     * 
+     *
      * @return the view type
      */
     // public String getViewType()
@@ -371,7 +355,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the view type.
-     * 
+     *
      * @param viewType the new view type
      */
     // public void setViewType( String viewType )
@@ -381,7 +365,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the major article.
-     * 
+     *
      * @return the major article
      */
     // public int getMajorArticle() {
@@ -390,7 +374,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the major article.
-     * 
+     *
      * @param majorArticle the new major article
      */
     // public void setMajorArticle(int majorArticle) {
@@ -399,7 +383,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Gets the child articles.
-     * 
+     *
      * @return the child articles
      */
     // public List<MediaArticle> getChildArticles()
@@ -417,7 +401,7 @@ public class MediaArticle implements Parcelable {
 
     /**
      * Sets the child articles.
-     * 
+     *
      * @return the string
      */
     // public void setChildArticles( List<MediaArticle> childArticles )

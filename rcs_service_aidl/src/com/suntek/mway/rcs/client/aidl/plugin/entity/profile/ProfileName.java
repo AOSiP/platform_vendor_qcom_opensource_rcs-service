@@ -23,11 +23,11 @@
 
 package com.suntek.mway.rcs.client.aidl.plugin.entity.profile;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileName implements Parcelable {
     private String displayName = null;
@@ -55,7 +55,7 @@ public class ProfileName implements Parcelable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -67,7 +67,7 @@ public class ProfileName implements Parcelable {
      * Write the avatar entity to parcel stream. Pay attention to read and write
      * variables variables sequence should be consistent or not the correct
      * results
-     * 
+     *
      * @param dest the dest
      * @param flags the flags
      */
@@ -87,7 +87,7 @@ public class ProfileName implements Parcelable {
      * Create the avatar entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -102,7 +102,8 @@ public class ProfileName implements Parcelable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<ProfileName> CREATOR = new Parcelable.Creator<ProfileName>() {
+    public static final Parcelable.Creator<ProfileName> CREATOR =
+            new Parcelable.Creator<ProfileName>() {
         @Override
         public ProfileName createFromParcel(Parcel source) {
             return new ProfileName(source);

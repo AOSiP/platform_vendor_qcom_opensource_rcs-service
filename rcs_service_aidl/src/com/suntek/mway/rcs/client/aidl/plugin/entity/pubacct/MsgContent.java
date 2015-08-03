@@ -23,29 +23,12 @@
 
 package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <p>
- * Title: The message content entity
- * </p>
- * <p>
- * Description: The message content entity
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
+import java.util.LinkedList;
+import java.util.List;
+
 public class MsgContent implements Parcelable {
     /** The media type. */
     private String mediaType;
@@ -79,7 +62,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Instantiates a new message content.
-     * 
+     *
      * @param source the source parcel stream
      */
     public MsgContent(Parcel source) {
@@ -88,7 +71,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -100,7 +83,7 @@ public class MsgContent implements Parcelable {
      * Write the message content entity to parcel stream. Pay attention to read
      * and write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param dest the dest parcel stream
      * @param flags the flags
      */
@@ -120,7 +103,7 @@ public class MsgContent implements Parcelable {
      * Create the message content entity from parcel stream. Pay attention to
      * read and write variables variables sequence should be consistent or not
      * the correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -136,7 +119,8 @@ public class MsgContent implements Parcelable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<MsgContent> CREATOR = new Parcelable.Creator<MsgContent>() {
+    public static final Parcelable.Creator<MsgContent> CREATOR =
+            new Parcelable.Creator<MsgContent>() {
         @Override
         public MsgContent createFromParcel(Parcel source) {
             return new MsgContent(source);
@@ -150,7 +134,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Gets the media type.
-     * 
+     *
      * @return the media type
      */
     public String getMediaType() {
@@ -159,7 +143,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Sets the media type.
-     * 
+     *
      * @param mediaType the new media type
      */
     public void setMediaType(String mediaType) {
@@ -168,7 +152,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Gets the creates time.
-     * 
+     *
      * @return the creates time
      */
     public String getCreateTime() {
@@ -177,7 +161,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Sets the creates time.
-     * 
+     *
      * @param createTime the new creates time
      */
     public void setCreateTime(String createTime) {
@@ -186,7 +170,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Gets the msg_ uuid.
-     * 
+     *
      * @return the message uuid
      */
     public String getMsgUuid() {
@@ -195,7 +179,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Sets the message uuid.
-     * 
+     *
      * @param msg_Uuid the new message uuid
      */
     public void setMsgUuid(String msgUuid) {
@@ -204,7 +188,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Gets the sms digest.
-     * 
+     *
      * @return the sms digest
      */
     public String getSmsDigest() {
@@ -213,7 +197,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Sets the sms digest.
-     * 
+     *
      * @param smsDigest the new sms digest
      */
     public void setSmsDigest(String smsDigest) {
@@ -222,7 +206,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Gets the text.
-     * 
+     *
      * @return the text
      */
     public String getText() {
@@ -231,7 +215,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Sets the text.
-     * 
+     *
      * @param text the new text
      */
     public void setText(String text) {
@@ -240,7 +224,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Gets the public account uuid.
-     * 
+     *
      * @return the public account uuid
      */
     public String getPaUuid() {
@@ -249,7 +233,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Sets the public account uuid.
-     * 
+     *
      * @param paUuid the new public account uuid
      */
     public void setPaUuid(String paUuid) {
@@ -258,7 +242,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Gets the basic.
-     * 
+     *
      * @return the basic
      */
     public MediaBasic getBasic() {
@@ -267,7 +251,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Sets the basic.
-     * 
+     *
      * @param basic the new basic
      */
     public void setBasic(MediaBasic basic) {
@@ -276,7 +260,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Gets the article list.
-     * 
+     *
      * @return the article list
      */
     public List<MediaArticle> getArticleList() {
@@ -285,7 +269,7 @@ public class MsgContent implements Parcelable {
 
     /**
      * Sets the article list.
-     * 
+     *
      * @param articleList the new article list
      */
     public void setArticleList(List<MediaArticle> articleList) {

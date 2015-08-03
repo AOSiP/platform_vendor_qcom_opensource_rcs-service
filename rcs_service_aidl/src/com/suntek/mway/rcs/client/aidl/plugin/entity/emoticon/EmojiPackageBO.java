@@ -26,24 +26,6 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.emoticon;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <p>
- * Title: The emoticon package entity class
- * </p>
- * <p>
- * Description: The emoticon package entity save some package info, such as
- * package id, package name and so on
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
 public class EmojiPackageBO implements Parcelable {
 
     /** The package id. */
@@ -87,7 +69,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -99,7 +81,7 @@ public class EmojiPackageBO implements Parcelable {
      * Write the emoticon package entity to parcel stream. Pay attention to read
      * and write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param dest the dest
      * @param flags the flags
      */
@@ -124,7 +106,7 @@ public class EmojiPackageBO implements Parcelable {
      * Create the emoticon package entity from parcel stream. Pay attention to
      * read and write variables variables sequence should be consistent or not
      * the correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -144,7 +126,8 @@ public class EmojiPackageBO implements Parcelable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<EmojiPackageBO> CREATOR = new Parcelable.Creator<EmojiPackageBO>() {
+    public static final Parcelable.Creator<EmojiPackageBO> CREATOR =
+            new Parcelable.Creator<EmojiPackageBO>() {
         @Override
         public EmojiPackageBO createFromParcel(Parcel source) {
             return new EmojiPackageBO(source);
@@ -164,7 +147,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Instantiates a new emoji package bo.
-     * 
+     *
      * @param source the source
      */
     public EmojiPackageBO(Parcel source) {
@@ -173,7 +156,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package id.
-     * 
+     *
      * @return the package id
      */
     public String getPackageId() {
@@ -182,7 +165,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package id.
-     * 
+     *
      * @param packageId the new package id
      */
     public void setPackageId(String packageId) {
@@ -191,7 +174,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package name.
-     * 
+     *
      * @return the package name
      */
     public String getPackageName() {
@@ -200,7 +183,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package name.
-     * 
+     *
      * @param packageName the new package name
      */
     public void setPackageName(String packageName) {
@@ -209,7 +192,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package icon.
-     * 
+     *
      * @return the package icon
      */
     public String getPackageIcon() {
@@ -218,7 +201,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package icon.
-     * 
+     *
      * @param packageIcon the new package icon
      */
     public void setPackageIcon(String packageIcon) {
@@ -227,7 +210,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package size.
-     * 
+     *
      * @return the package size
      */
     public String getPackageSize() {
@@ -236,7 +219,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package size.
-     * 
+     *
      * @param packageSize the new package size
      */
     public void setPackageSize(String packageSize) {
@@ -245,7 +228,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package state.
-     * 
+     *
      * @return the package state
      */
     public String getPackageState() {
@@ -254,7 +237,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package state.
-     * 
+     *
      * @param packageState the new package state
      */
     public void setPackageState(String packageState) {
@@ -263,7 +246,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package price.
-     * 
+     *
      * @return the package price
      */
     public String getPackagePrice() {
@@ -272,7 +255,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package price.
-     * 
+     *
      * @param packagePrice the new package price
      */
     public void setPackagePrice(String packagePrice) {
@@ -281,7 +264,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package use limited time.
-     * 
+     *
      * @return the package use limited time
      */
     public String getPackageUseTime() {
@@ -290,7 +273,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package use limited time.
-     * 
+     *
      * @param packageUseTime the new package use limited time
      */
     public void setPackageUseTime(String packageUseTime) {
@@ -299,7 +282,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package cp id.
-     * 
+     *
      * @return the package cp id
      */
     public String getPackageCpId() {
@@ -308,7 +291,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package cp id.
-     * 
+     *
      * @param packageCpId the new package cp id
      */
     public void setPackageCpId(String packageCpId) {
@@ -317,7 +300,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package cp name.
-     * 
+     *
      * @return the package cp name
      */
     public String getPackageCpName() {
@@ -326,7 +309,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package cp name.
-     * 
+     *
      * @param packageCpName the new package cp name
      */
     public void setPackageCpName(String packageCpName) {
@@ -335,7 +318,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package description.
-     * 
+     *
      * @return the package description
      */
     public String getPackageDesc() {
@@ -344,7 +327,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package description.
-     * 
+     *
      * @param packageDesc the new package description
      */
     public void setPackageDesc(String packageDesc) {
@@ -353,7 +336,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package zip icon.
-     * 
+     *
      * @return the package zip icon
      */
     public String getPackageZipIcon() {
@@ -362,7 +345,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package zip icon.
-     * 
+     *
      * @param packageZipIcon the new package zip icon
      */
     public void setPackageZipIcon(String packageZipIcon) {
@@ -371,7 +354,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package zip name.
-     * 
+     *
      * @return the package zip name
      */
     public String getPackageZipName() {
@@ -380,7 +363,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package zip name.
-     * 
+     *
      * @param packageZipName the new package zip name
      */
     public void setPackageZipName(String packageZipName) {
@@ -389,7 +372,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Gets the package zip path.
-     * 
+     *
      * @return the package zip path
      */
     public String getPackageZipPath() {
@@ -398,7 +381,7 @@ public class EmojiPackageBO implements Parcelable {
 
     /**
      * Sets the package zip path.
-     * 
+     *
      * @param packageZipPath the new package zip path
      */
     public void setPackageZipPath(String packageZipPath) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 pci-suntektech Technologies, Inc.  All Rights Reserved.
+ * Copyright (c) 2015 pci-suntektech Technologies, Inc.  All Rights Reserved.
  * pci-suntektech Technologies Proprietary and Confidential.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,20 +23,27 @@
 
 package com.suntek.mway.rcs.client.api.util;
 
+import android.content.Context;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.text.TextUtils;
+
+import com.suntek.mway.rcs.client.aidl.constant.Constants.MessageConstants;
+import com.suntek.mway.rcs.client.api.exception.FileDurationException;
+import com.suntek.mway.rcs.client.api.exception.FileNotExistsException;
+import com.suntek.mway.rcs.client.api.exception.FileSuffixException;
+import com.suntek.mway.rcs.client.api.exception.FileTooLargeException;
+import com.suntek.mway.rcs.client.api.exception.ServiceDisconnectedException;
+import com.suntek.mway.rcs.client.api.log.LogHelper;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import android.content.Context;
-
-import com.suntek.mway.rcs.client.aidl.constant.MediaConstants;
-import com.suntek.mway.rcs.client.aidl.provider.SuntekMessageData;
-import com.suntek.mway.rcs.client.aidl.utils.MediaUtils;
-import com.suntek.mway.rcs.client.aidl.utils.SettingUtils;
-import com.suntek.mway.rcs.client.api.util.log.LogHelper;
+import java.util.Locale;
 
 public class VerificationUtil {
+
     private static final String SIP_PREFIX = "sip:";
 
     private static final String TEL_PREFIX = "tel:";
@@ -51,11 +58,14 @@ public class VerificationUtil {
         if (number == null) {
             return false;
         }
-        return VerificationUtil.formatWithout86(VerificationUtil.getNumberFromUri(number))
-                .replaceAll(" ", "").replaceAll("-", "").matches("\\d+");
+        return formatWith86(number).matches("[+86]\\d+");
     }
 
     public static boolean isAllNumber(List<String> numbers) {
+        if (null == numbers || numbers.size() == 0) {
+            return false;
+        }
+
         boolean sign = true;
         for (String number : numbers) {
             if (!isNumber(number)) {
@@ -66,118 +76,17 @@ public class VerificationUtil {
     }
 
     public static String formatNumber(String number) {
-        return number.replaceAll(" ", "").replaceAll("-", "");
+        return VerificationUtil.formatWith86(VerificationUtil.getNumberFromUri(number))
+                .replaceAll(" ", "").replaceAll("-", "");
     }
 
     public static List<String> formatNumbers(List<String> numbers) {
         List<String> re = new ArrayList<String>();
         for (String number : numbers) {
-            re.add(VerificationUtil.formatWithout86(VerificationUtil.getNumberFromUri(number))
-                    .replaceAll(" ", "").replaceAll("-", ""));
+            re.add(formatNumber(number));
         }
         Collections.sort(re);
         return re;
-    }
-
-    public static boolean isBurnFlagCorrect(int burnFlag) {
-        return burnFlag == SuntekMessageData.MSG_BURN_AFTER_READ_FLAG
-                || burnFlag == SuntekMessageData.MSG_BURN_AFTER_READ_NOT;
-    }
-
-    public static void isImageFile(String filename) throws FileSuffixException {
-        if (!MediaUtils.isImageFile(filename)) {
-            throw new FileSuffixException("File extension is incorrect, the correct extension is '"
-                    + MediaConstants.IMAGE_SUFFIX + "'");
-        }
-    }
-
-    public static void isAudioFile(String filename) throws FileSuffixException {
-        if (!MediaUtils.isAudioFile(filename)) {
-            throw new FileSuffixException("File extension is incorrect, the correct extension is '"
-                    + MediaConstants.AUDIO_SUFFIX + "'");
-        }
-    }
-
-    public static void isVideoFile(String filename) throws FileSuffixException {
-        if (!MediaUtils.isVideoFile(filename)) {
-            throw new FileSuffixException("File extension is incorrect, the correct extension is '"
-                    + MediaConstants.VIDEO_SUFFIX + "'");
-        }
-    }
-
-    public static void isCloudFile(String filename) throws FileSuffixException {
-        if (!MediaUtils.isCloudFileAllowedFile(filename)) {
-            throw new FileSuffixException(
-                    "File extension is incorrect, the incorrect extension is '"
-                            + MediaConstants.CLOUD_FILE_EXCLUDE_SUFFIX + "'");
-        }
-    }
-
-    public static void isFileSizeToLarge(String filename, long maxSize)
-            throws FileTransferException {
-        File file = new File(filename);
-        if (file.exists() && file.isFile() && file.length() > (maxSize * 1024)) {
-            throw new FileTransferException("File too large " + (file.length() / 1024)
-                    + " KB. Max size of file to be transfer is " + maxSize + " KB.");
-        }
-    }
-
-    public static void isAudioDurationToLong(Context context, String filename, long maxDuration,
-            int recordTime) throws FileDurationException {
-        File file = new File(filename);
-        if (file.exists() && file.isFile()) {
-            int duration = MediaUtils.getAmrFileDuration(context, file);
-            if (duration >= (maxDuration + 1) * 1000 || recordTime > maxDuration) {
-                LogHelper.i("throw FileDurationException, duration=" + duration);
-                throw new FileDurationException("File duration too long " + duration
-                        + " s. Max duration is " + maxDuration + " s.");
-            }
-        }
-    }
-
-    public static void isVedioDurationToLong(Context context, String filename, long maxDuration,
-            int recordTime) throws FileDurationException {
-        File file = new File(filename);
-        if (file.exists() && file.isFile()) {
-            int duration = MediaUtils.getVideoFileDuration(context, file);
-            if (duration >= (maxDuration + 1) * 1000 || recordTime > maxDuration) {
-                LogHelper.i("throw FileDurationException, duration=" + duration);
-                throw new FileDurationException("File duration too long " + duration
-                        + " s. Max duration is " + maxDuration + " s.");
-            }
-        }
-    }
-
-    public static final String DMS_FT_MAX_SIZE = "ftMaxSize";
-
-    public static long getFtMaxSize(Context context) {
-        return SettingUtils.getSetting(context, DMS_FT_MAX_SIZE, MediaConstants.FT_MAX_SIZE);
-    }
-
-    public static final String DMS_IMAGE_FT_MAX_SIZE = "imageFtMaxSize";
-
-    public static long getImageFtMaxSize(Context context) {
-        return SettingUtils.getSetting(context, DMS_IMAGE_FT_MAX_SIZE,
-                MediaConstants.IMAGE_FT_MAX_SIZE);
-    }
-
-    public static final String DMS_VIDEO_FT_MAX_SIZE = "videoFtMaxSize";
-
-    public static long getVideoFtMaxSize(Context context) {
-        return SettingUtils.getSetting(context, DMS_VIDEO_FT_MAX_SIZE,
-                MediaConstants.VIDEO_FT_MAX_SIZE);
-    }
-
-    public static final String DMS_VIDEO_MAX_TIME = "videoMaxTime";
-
-    public static long getVideoMaxTime(Context context) {
-        return SettingUtils.getSetting(context, DMS_VIDEO_MAX_TIME, MediaConstants.VIDEO_MAX_TIME);
-    }
-
-    public static final String DMS_AUDIO_MAX_TIME = "audioMaxTime";
-
-    public static long getAudioMaxTime(Context context) {
-        return SettingUtils.getSetting(context, DMS_AUDIO_MAX_TIME, MediaConstants.AUDIO_MAX_TIME);
     }
 
     public static String formatWithout86(String mobile) {
@@ -198,6 +107,11 @@ public class VerificationUtil {
             formatStr = "";
         }
         return formatStr.trim();
+    }
+
+    public static String formatWith86(String number) {
+        number = formatWithout86(number);
+        return "+86" + number;
     }
 
     public static String getNumberFromUri(String uriStr) {
@@ -229,8 +143,282 @@ public class VerificationUtil {
         return uriStr;
     }
 
-    public static boolean isOrderTimeExpired(long orderTime) {
-        return orderTime > System.currentTimeMillis()
-                + SuntekMessageData.ORDER_TIME_EXPIRE_INTERVAL_SECOND * 1000;
+    public static String getNumberListString(List<String> numberList) {
+        if (null == numberList || numberList.size() == 0) {
+            return "";
+        }
+
+        StringBuffer sbBuffer = new StringBuffer();
+        for (String number : numberList) {
+            sbBuffer.append(number).append(",");
+        }
+        sbBuffer.deleteCharAt(sbBuffer.length() - 1);
+        return sbBuffer.toString();
+    }
+
+    public static void isFileExists(String filePath) throws FileNotExistsException {
+        if (!TextUtils.isEmpty(filePath)) {
+            if (new File(filePath).exists()) {
+                return;
+            }
+        }
+
+        throw new FileNotExistsException();
+    }
+
+    public static void isImageFile(String fileName) throws FileSuffixException {
+        boolean flag = false;
+        int suffixIndex = fileName.lastIndexOf(".");
+        if (suffixIndex != -1) {
+            String suffix = fileName.substring(suffixIndex + 1);
+            flag = isImageSuffix(suffix);
+        } else {
+            flag = false;
+        }
+
+        if (!flag) {
+            throw new FileSuffixException("File extension is incorrect, the correct extension is '"
+                    + MessageConstants.CONST_IMAGE_SUFFIX + "'");
+        }
+    }
+
+    public static void isAudioFile(String fileName) throws FileSuffixException {
+        boolean flag = false;
+        if (TextUtils.isEmpty(fileName)) {
+            flag = false;
+        }
+
+        int suffixIndex = fileName.lastIndexOf(".");
+        if (suffixIndex != -1) {
+            String suffix = fileName.substring(suffixIndex + 1);
+            flag = isAudioSuffix(suffix);
+        } else {
+            flag = false;
+        }
+
+        if (!flag) {
+            throw new FileSuffixException("File extension is incorrect, the correct extension is '"
+                    + MessageConstants.CONST_AUDIO_SUFFIX + "'");
+        }
+    }
+
+    public static void isVideoFile(String fileName) throws FileSuffixException {
+        boolean flag = false;
+        if (TextUtils.isEmpty(fileName)) {
+            flag = false;
+        }
+
+        int suffixIndex = fileName.lastIndexOf(".");
+        if (suffixIndex != -1) {
+            String suffix = fileName.substring(suffixIndex + 1);
+            flag = isVideoSuffix(suffix);
+        } else {
+            flag = false;
+        }
+
+        if (!flag) {
+            throw new FileSuffixException("File extension is incorrect, the correct extension is '"
+                    + MessageConstants.CONST_VIDEO_SUFFIX + "'");
+        }
+    }
+
+    public static void isCloudFile(String filename) throws FileSuffixException {
+        if (!isCloudFileAllowedFile(filename)) {
+            throw new FileSuffixException(
+                    "File extension is incorrect, the incorrect extension is '"
+                            + MessageConstants.CONST_CLOUD_FILE_EXCLUDE_SUFFIX + "'");
+        }
+    }
+
+    public static void isFileSizeToLarge(String filename, long maxSize)
+            throws FileTooLargeException {
+        File file = new File(filename);
+        if (file.exists() && file.isFile() && file.length() > (maxSize * 1024)) {
+            throw new FileTooLargeException("File too large " + (file.length() / 1024)
+                    + " KB. Max size of file to be transfer is " + maxSize + " KB.");
+        }
+    }
+
+    public static void isAudioDurationToLong(Context context, String filename, long maxDuration,
+            int recordTime) throws FileDurationException {
+        File file = new File(filename);
+        if (file.exists() && file.isFile()) {
+            int duration = getAmrFileDuration(context, file);
+            if (duration >= (maxDuration + 1) * 1000 || recordTime > maxDuration * 1000) {
+                LogHelper.i("throw FileDurationException, duration=" + duration);
+                throw new FileDurationException("File duration too long " + duration
+                        + " s. Max duration is " + maxDuration + " s.");
+            }
+        }
+    }
+
+    public static void isVideoDurationToLong(Context context, String filename, long maxDuration,
+            int recordTime) throws FileDurationException {
+        File file = new File(filename);
+        if (file.exists() && file.isFile()) {
+            int duration = getVideoFileDuration(context, file);
+            if (duration >= (maxDuration + 1) * 1000 || recordTime > maxDuration * 1000) {
+                LogHelper.i("throw FileDurationException, duration=" + duration);
+                throw new FileDurationException("File duration too long " + duration
+                        + " s. Max duration is " + maxDuration + " s.");
+            }
+        }
+    }
+
+    /**
+     * Checks if is vcard file.
+     *
+     * @param fileName the file name
+     * @return true, if is vcard file
+     */
+    public static void isVcardFile(String fileName) throws FileSuffixException {
+        boolean flag = false;
+        if (TextUtils.isEmpty(fileName)) {
+            flag = false;
+        }
+
+        int suffixIndex = fileName.lastIndexOf(".");
+        if (suffixIndex != -1) {
+            String suffix = fileName.substring(suffixIndex + 1);
+            flag = isVcardSuffix(suffix);
+        } else {
+            flag = false;
+        }
+
+        if (!flag) {
+            throw new FileSuffixException("File extension is incorrect, the correct extension is '"
+                    + MessageConstants.CONST_VCARD_SUFFIX + "'");
+        }
+    }
+
+    /**
+     * Checks if is video file.
+     *
+     * @param fileName the file name
+     * @return true, if is video file
+     */
+    public static boolean isCloudFileAllowedFile(String fileName) {
+        if (TextUtils.isEmpty(fileName)) {
+            return false;
+        }
+
+        int suffixIndex = fileName.lastIndexOf(".");
+        if (suffixIndex != -1) {
+            String suffix = fileName.substring(suffixIndex + 1);
+            return !isCloudFileExcludeSuffix(suffix);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if is image suffix.
+     *
+     * @param suffix the suffix
+     * @return true, if is image suffix
+     */
+    public static boolean isImageSuffix(String suffix) {
+        if (TextUtils.isEmpty(suffix)) {
+            return false;
+        }
+
+        return MessageConstants.CONST_IMAGE_SUFFIX.indexOf(
+                suffix.toUpperCase(Locale.getDefault())) != -1;
+    }
+
+    /**
+     * Checks if is audio suffix.
+     *
+     * @param suffix the suffix
+     * @return true, if is audio suffix
+     */
+    public static boolean isAudioSuffix(String suffix) {
+        if (TextUtils.isEmpty(suffix)) {
+            return false;
+        }
+
+        return MessageConstants.CONST_AUDIO_SUFFIX.indexOf(
+                suffix.toUpperCase(Locale.getDefault())) != -1;
+    }
+
+    /**
+     * Checks if is video suffix.
+     *
+     * @param suffix the suffix
+     * @return true, if is video suffix
+     */
+    public static boolean isVideoSuffix(String suffix) {
+        if (TextUtils.isEmpty(suffix)) {
+            return false;
+        }
+
+        return MessageConstants.CONST_VIDEO_SUFFIX.indexOf(
+                suffix.toUpperCase(Locale.getDefault())) != -1;
+    }
+
+    /**
+     * Checks if is vcard suffix.
+     *
+     * @param suffix the suffix
+     * @return true, if is vcard suffix
+     */
+    public static boolean isVcardSuffix(String suffix) {
+        if (TextUtils.isEmpty(suffix)) {
+            return false;
+        }
+
+        return MessageConstants.CONST_VCARD_SUFFIX.indexOf(
+                suffix.toUpperCase(Locale.getDefault())) != -1;
+    }
+
+    /**
+     * Checks if is cloud file exclude suffix.
+     *
+     * @param suffix the suffix
+     * @return true, if is cloud file exclude suffix
+     */
+    public static boolean isCloudFileExcludeSuffix(String suffix) {
+        if (TextUtils.isEmpty(suffix)) {
+            return false;
+        }
+
+        return MessageConstants.CONST_CLOUD_FILE_EXCLUDE_SUFFIX.indexOf(suffix.toUpperCase(Locale
+                .getDefault())) != -1;
+    }
+
+    /**
+     * Gets the amr file duration.
+     *
+     * @param context the context
+     * @param file the file
+     * @return the amr file duration
+     */
+    public static final int getAmrFileDuration(Context context, File file) {
+        MediaPlayer mp = MediaPlayer.create(context, Uri.fromFile(file));
+        int duration = mp.getDuration();
+        mp.release();
+        return duration;
+    }
+
+    /**
+     * Gets the video file duration.
+     *
+     * @param context the context
+     * @param file the file
+     * @return the video file duration
+     */
+    public static final int getVideoFileDuration(Context context, File file) {
+        try {
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            mediaPlayer.setDataSource(file.getAbsolutePath());
+            mediaPlayer.prepare();
+            mediaPlayer.getDuration();
+            int duration = mediaPlayer.getDuration();
+            mediaPlayer.release();
+            return duration;
+        } catch (Exception e) {
+
+        }
+        return -1;
     }
 }

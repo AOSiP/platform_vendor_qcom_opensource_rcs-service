@@ -23,33 +23,21 @@
 
 package com.suntek.mway.rcs.client.aidl.plugin.entity.profile;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-/**
- * <p>
- * Title: The profile avatar entity class
- * </p>
- * <p>
- * Description: the profile avatar include image encoding type and image base64
- * string
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
 public class Avatar extends BaseModel implements Parcelable, Serializable {
     private static final long serialVersionUID = -47856440160432L;
+
+    public static final String PNG = "PNG";
+
+    public static final String JPG = "JPG";
+
+    public static final String GIF = "GIF";
 
     /** The avatar image type. */
     private IMAGE_TYPE avatarImgType = IMAGE_TYPE.PNG;
@@ -68,7 +56,7 @@ public class Avatar extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Instantiates a new avatar.
-     * 
+     *
      * @param source the source
      */
     public Avatar(Parcel source) {
@@ -77,7 +65,7 @@ public class Avatar extends BaseModel implements Parcelable, Serializable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -89,7 +77,7 @@ public class Avatar extends BaseModel implements Parcelable, Serializable {
      * Write the avatar entity to parcel stream. Pay attention to read and write
      * variables variables sequence should be consistent or not the correct
      * results
-     * 
+     *
      * @param dest the dest
      * @param flags the flags
      */
@@ -105,7 +93,7 @@ public class Avatar extends BaseModel implements Parcelable, Serializable {
      * Create the avatar entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -116,7 +104,8 @@ public class Avatar extends BaseModel implements Parcelable, Serializable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<Avatar> CREATOR = new Parcelable.Creator<Avatar>() {
+    public static final Parcelable.Creator<Avatar> CREATOR =
+            new Parcelable.Creator<Avatar>() {
         @Override
         public Avatar createFromParcel(Parcel source) {
             return new Avatar(source);
@@ -130,7 +119,7 @@ public class Avatar extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the avatar image type.
-     * 
+     *
      * @return the avatar image type
      */
     public IMAGE_TYPE getAvatarImgType() {
@@ -139,7 +128,7 @@ public class Avatar extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the avatar image type.
-     * 
+     *
      * @param avatarImgType the new avatar image type
      */
     public void setAvatarImgType(IMAGE_TYPE avatarImgType) {
@@ -148,7 +137,7 @@ public class Avatar extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the image base64 string.
-     * 
+     *
      * @return the image base64 string
      */
     public String getImgBase64Str() {
@@ -157,7 +146,7 @@ public class Avatar extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the image base64 string.
-     * 
+     *
      * @param imgBase64Str the new image base64 string
      */
     public void setImgBase64Str(String imgBase64Str) {

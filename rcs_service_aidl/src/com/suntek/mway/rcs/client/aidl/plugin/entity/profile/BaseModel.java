@@ -23,30 +23,13 @@
 
 package com.suntek.mway.rcs.client.aidl.plugin.entity.profile;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-/**
- * <p>
- * Title: The profile base model entity class
- * </p>
- * <p>
- * Description: the profile base model include the account and the etag
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
 public class BaseModel implements Parcelable, Serializable {
 
     private static final long serialVersionUID = -1599075631882399753L;
@@ -63,7 +46,7 @@ public class BaseModel implements Parcelable, Serializable {
 
     /**
      * Instantiates a new BaseModel.
-     * 
+     *
      * @param source the source
      */
     public BaseModel(Parcel source) {
@@ -78,7 +61,7 @@ public class BaseModel implements Parcelable, Serializable {
 
     /**
      * Read from parcel.
-     * 
+     *
      * @param source the source parcel
      */
     public void readFromParcel(Parcel source) {
@@ -88,7 +71,7 @@ public class BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the account.
-     * 
+     *
      * @return the account
      */
     public String getAccount() {
@@ -97,7 +80,7 @@ public class BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the account.
-     * 
+     *
      * @param account the new account
      */
     public void setAccount(String account) {
@@ -106,7 +89,7 @@ public class BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the etag.
-     * 
+     *
      * @return the etag
      */
     public String getEtag() {
@@ -115,7 +98,7 @@ public class BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the etag.
-     * 
+     *
      * @param etag the new etag
      */
     public void setEtag(String etag) {
@@ -136,7 +119,8 @@ public class BaseModel implements Parcelable, Serializable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<BaseModel> CREATOR = new Parcelable.Creator<BaseModel>() {
+    public static final Parcelable.Creator<BaseModel> CREATOR =
+            new Parcelable.Creator<BaseModel>() {
         @Override
         public BaseModel createFromParcel(Parcel source) {
             return new BaseModel(source);

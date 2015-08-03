@@ -23,48 +23,6 @@
 
 package com.suntek.mway.rcs.client.aidl.plugin.entity.richscrn;
 
-/**
- * <p>
- * Title: The phone event
- * </p>
- * <p>
- * Description: Coding scheme defined by terminal. The suggestion part coding
- * rules supports the following events and code.
- * </p>
- * <p>
- * PhoneEvent = A B C DE FGHIJ code
- * </p>
- * <p>
- * The A:< event classification >, 1 char , A=1 -- a voice call; 2 -- 9 -- video
- * call, terminal event, other reservations.
- * </p>
- * <p>
- * The B:< participant ID >, 1 char. When the A=1 or 2, B=1 -- 2 -- calling,
- * called, 3 -- 4 -- card terminal.
- * </p>
- * <p>
- * The C:< process description >, 1 char. When the A=1 or 2, C=1- issued a
- * session request, 2- receives the session invitation, 3- session has been
- * established, the 4- session termination.
- * </p>
- * <p>
- * The DE:< extended description >, 2 char. Therefore, the default 0.
- * </p>
- * <p>
- * The FGHIJ:< reference code >, 5 char. Therefore, the default 0. Can carry
- * relevant information, such as the SIP message code and expansion, said 180xx
- * SIP 180 ringing message and other instructions.
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
 public enum PhoneEvent {
 
     /** Non specific events. */
@@ -138,7 +96,7 @@ public enum PhoneEvent {
 
     /**
      * Instantiates a new phone event.
-     * 
+     *
      * @param ctrlString the ctrl string
      */
     private PhoneEvent(String ctrlString) {
@@ -147,7 +105,7 @@ public enum PhoneEvent {
 
     /**
      * Gets the control string.
-     * 
+     *
      * @return the control string
      */
     public String getCtrlStr() {

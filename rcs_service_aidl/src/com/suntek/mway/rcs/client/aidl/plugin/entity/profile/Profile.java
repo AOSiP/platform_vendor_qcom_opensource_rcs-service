@@ -23,32 +23,13 @@
 
 package com.suntek.mway.rcs.client.aidl.plugin.entity.profile;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
-
-/**
- * <p>
- * Title: The profile entity class
- * </p>
- * <p>
- * Description: the profile include the home address, the email and so on
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * .
- * 
- * @author zrq
- * @version 1.0
- */
 public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /** The Constant serialVersionUID. */
@@ -95,7 +76,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Instantiates a new profile.
-     * 
+     *
      * @param source the source
      */
     public Profile(Parcel source) {
@@ -104,7 +85,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -116,7 +97,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
      * Write the profile entity to parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param dest the dest
      * @param flags the flags
      */
@@ -140,7 +121,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
      * Create the profile entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -161,7 +142,8 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<Profile> CREATOR = new Parcelable.Creator<Profile>() {
+    public static final Parcelable.Creator<Profile> CREATOR =
+            new Parcelable.Creator<Profile>() {
         @Override
         public Profile createFromParcel(Parcel source) {
             return new Profile(source);
@@ -175,7 +157,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the home address.
-     * 
+     *
      * @return the home address
      */
     public String getHomeAddress() {
@@ -184,7 +166,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the home address.
-     * 
+     *
      * @param homeAddress the new home address
      */
     public void setHomeAddress(String homeAddress) {
@@ -193,7 +175,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the email.
-     * 
+     *
      * @return the email
      */
     public String getEmail() {
@@ -202,7 +184,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the email.
-     * 
+     *
      * @param email the new email
      */
     public void setEmail(String email) {
@@ -211,7 +193,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the birthday.
-     * 
+     *
      * @return the birthday
      */
     public String getBirthday() {
@@ -220,7 +202,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the birthday.
-     * 
+     *
      * @param birthday the new birthday
      */
     public void setBirthday(String birthday) {
@@ -229,7 +211,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the company name.
-     * 
+     *
      * @return the company name
      */
     public String getCompanyName() {
@@ -238,7 +220,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the company name.
-     * 
+     *
      * @param companyName the new company name
      */
     public void setCompanyName(String companyName) {
@@ -247,7 +229,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the company duty.
-     * 
+     *
      * @return the company duty
      */
     public String getCompanyDuty() {
@@ -256,7 +238,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the company duty.
-     * 
+     *
      * @param companyDuty the new company duty
      */
     public void setCompanyDuty(String companyDuty) {
@@ -265,7 +247,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the company tel.
-     * 
+     *
      * @return the company tel
      */
     public String getCompanyTel() {
@@ -274,7 +256,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the company tel.
-     * 
+     *
      * @param companyTel the new company tel
      */
     public void setCompanyTel(String companyTel) {
@@ -283,7 +265,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the company address.
-     * 
+     *
      * @return the company address
      */
     public String getCompanyAddress() {
@@ -292,7 +274,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the company address.
-     * 
+     *
      * @param companyAddress the new company address
      */
     public void setCompanyAddress(String companyAddress) {
@@ -301,7 +283,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the company fax.
-     * 
+     *
      * @return the company fax
      */
     public String getCompanyFax() {
@@ -310,7 +292,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the company fax.
-     * 
+     *
      * @param companyFax the new company fax
      */
     public void setCompanyFax(String companyFax) {
@@ -319,7 +301,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the first name.
-     * 
+     *
      * @return the first name
      */
     public String getFirstName() {
@@ -328,7 +310,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the first name.
-     * 
+     *
      * @param firstName the new first name
      */
     public void setFirstName(String firstName) {
@@ -337,7 +319,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the last name.
-     * 
+     *
      * @return the last name
      */
     public String getLastName() {
@@ -346,7 +328,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Combine the first name and the last name.
-     * 
+     *
      * @return displayName
      */
     public String getDisplayName() {
@@ -397,7 +379,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the last name.
-     * 
+     *
      * @param lastName the new last name
      */
     public void setLastName(String lastName) {
@@ -406,7 +388,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Gets the other tels.
-     * 
+     *
      * @return the other tels
      */
     public ArrayList<TelephoneModel> getOtherTels() {
@@ -418,7 +400,7 @@ public class Profile extends BaseModel implements Parcelable, Serializable {
 
     /**
      * Sets the other tels.
-     * 
+     *
      * @param otherTels the new other tels
      */
     public void setOtherTels(ArrayList<TelephoneModel> otherTels) {

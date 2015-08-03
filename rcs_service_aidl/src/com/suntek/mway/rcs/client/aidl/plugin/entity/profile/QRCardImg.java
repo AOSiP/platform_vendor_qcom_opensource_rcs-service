@@ -23,12 +23,12 @@
 
 package com.suntek.mway.rcs.client.aidl.plugin.entity.profile;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import android.os.Parcel;
-import android.os.Parcelable;
 
 public class QRCardImg extends BaseModel implements Parcelable, Serializable {
     private static final long serialVersionUID = 4674425471217216710L;
@@ -52,7 +52,7 @@ public class QRCardImg extends BaseModel implements Parcelable, Serializable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -64,7 +64,7 @@ public class QRCardImg extends BaseModel implements Parcelable, Serializable {
      * Write the qr card image entity to parcel stream. Pay attention to read
      * and write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param dest the dest
      * @param flags the flags
      */
@@ -84,7 +84,7 @@ public class QRCardImg extends BaseModel implements Parcelable, Serializable {
      * Create the qr card image entity from parcel stream. Pay attention to read
      * and write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -99,7 +99,8 @@ public class QRCardImg extends BaseModel implements Parcelable, Serializable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<QRCardImg> CREATOR = new Parcelable.Creator<QRCardImg>() {
+    public static final Parcelable.Creator<QRCardImg> CREATOR =
+            new Parcelable.Creator<QRCardImg>() {
         @Override
         public QRCardImg createFromParcel(Parcel source) {
             return new QRCardImg(source);

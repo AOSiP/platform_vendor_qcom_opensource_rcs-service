@@ -26,24 +26,6 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <p>
- * Title: The public account detail entity
- * </p>
- * <p>
- * Description: The public account detail entity
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * .
- * 
- * @author zrq
- * @version 1.0
- */
 public class PublicAccountsDetail implements Parcelable {
     /** The public account uuid. */
     private String paUuid;
@@ -103,10 +85,16 @@ public class PublicAccountsDetail implements Parcelable {
     private String logoUrl;
 
     /** The sip uri. */
-    // private String sipUri;
+    private String sipUri;
 
     /** The number. */
     private String number;
+
+    /** The logoType. */
+    private String logoType;
+
+    /** The menuString. */
+    private String menuString;
 
     /**
      * Instantiates a new public accounts detail.
@@ -116,7 +104,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Instantiates a new public accounts detail.
-     * 
+     *
      * @param source the source
      */
     public PublicAccountsDetail(Parcel source) {
@@ -125,7 +113,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -137,7 +125,7 @@ public class PublicAccountsDetail implements Parcelable {
      * write the public account detail entity to parcel stream. Pay attention to
      * read and write variables variables sequence should be consistent or not
      * the correct results
-     * 
+     *
      * @param dest the dest
      * @param flags the flags
      */
@@ -162,15 +150,17 @@ public class PublicAccountsDetail implements Parcelable {
         dest.writeString(field);
         dest.writeString(qrCode);
         dest.writeString(logoUrl);
-        // dest.writeString( sipUri );
+        dest.writeString(sipUri);
         dest.writeString(number);
+        dest.writeString(logoType);
+        dest.writeString(menuString);
     }
 
     /**
      * Create the public account detail entity from parcel stream. Pay attention
      * to read and write variables variables sequence should be consistent or
      * not the correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -193,12 +183,15 @@ public class PublicAccountsDetail implements Parcelable {
         field = source.readString();
         qrCode = source.readString();
         logoUrl = source.readString();
-        // sipUri = source.readString();
+        sipUri = source.readString();
         number = source.readString();
+        logoType = source.readString();
+        menuString = source.readString();
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<PublicAccountsDetail> CREATOR = new Parcelable.Creator<PublicAccountsDetail>() {
+    public static final Parcelable.Creator<PublicAccountsDetail> CREATOR =
+            new Parcelable.Creator<PublicAccountsDetail>() {
         @Override
         public PublicAccountsDetail createFromParcel(Parcel source) {
             return new PublicAccountsDetail(source);
@@ -212,7 +205,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the public account uuid.
-     * 
+     *
      * @return the public account uuid
      */
     public String getPaUuid() {
@@ -221,7 +214,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the public account uuid.
-     * 
+     *
      * @param paUuid the new public account uuid
      */
     public void setPaUuid(String paUuid) {
@@ -230,7 +223,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the name.
-     * 
+     *
      * @return the name
      */
     public String getName() {
@@ -239,7 +232,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the name.
-     * 
+     *
      * @param name the new name
      */
     public void setName(String name) {
@@ -248,7 +241,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the company.
-     * 
+     *
      * @return the company
      */
     public String getCompany() {
@@ -257,7 +250,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the company.
-     * 
+     *
      * @param company the new company
      */
     public void setCompany(String company) {
@@ -266,7 +259,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the introduce.
-     * 
+     *
      * @return the introduce
      */
     public String getIntro() {
@@ -275,7 +268,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the introduce.
-     * 
+     *
      * @param intro the new introduce
      */
     public void setIntro(String intro) {
@@ -284,7 +277,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the type.
-     * 
+     *
      * @return the type
      */
     public String getType() {
@@ -293,7 +286,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the type.
-     * 
+     *
      * @param type the new type
      */
     public void setType(String type) {
@@ -302,7 +295,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the recommend level.
-     * 
+     *
      * @return the recommend level
      */
     public int getRecommendLevel() {
@@ -311,7 +304,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the recommend level.
-     * 
+     *
      * @param recommendLevel the new recommend level
      */
     public void setRecommendLevel(int recommendLevel) {
@@ -320,7 +313,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the update time.
-     * 
+     *
      * @return the update time
      */
     public String getUpdateTime() {
@@ -329,7 +322,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the update time.
-     * 
+     *
      * @param updateTime the new update time
      */
     public void setUpdateTime(String updateTime) {
@@ -338,7 +331,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the menu type.
-     * 
+     *
      * @return the menu type
      */
     public int getMenuType() {
@@ -347,7 +340,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the menu type.
-     * 
+     *
      * @param menuType the new menu type
      */
     public void setMenuType(int menuType) {
@@ -356,7 +349,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the menu timestamp.
-     * 
+     *
      * @return the menu timestamp
      */
     public String getMenuTimestamp() {
@@ -365,7 +358,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the menu timestamp.
-     * 
+     *
      * @param menuTimestamp the new menu timestamp
      */
     public void setMenuTimestamp(String menuTimestamp) {
@@ -374,7 +367,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the subscribe status.
-     * 
+     *
      * @return the subscribe status
      */
     public int getSubscribeStatus() {
@@ -383,7 +376,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the subscribe status.
-     * 
+     *
      * @param subscribeStatus the new subscribe status
      */
     public void setSubscribeStatus(int subscribeStatus) {
@@ -392,7 +385,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the acceptstatus.
-     * 
+     *
      * @return the acceptstatus
      */
     public int getAcceptstatus() {
@@ -401,7 +394,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the acceptstatus.
-     * 
+     *
      * @param acceptstatus the new acceptstatus
      */
     public void setAcceptstatus(int acceptstatus) {
@@ -410,7 +403,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the active status.
-     * 
+     *
      * @return the active status
      */
     public int getActiveStatus() {
@@ -419,7 +412,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the active status.
-     * 
+     *
      * @param activeStatus the new active status
      */
     public void setActiveStatus(int activeStatus) {
@@ -428,7 +421,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the tel.
-     * 
+     *
      * @return the tel
      */
     public String getTel() {
@@ -437,7 +430,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the tel.
-     * 
+     *
      * @param tel the new tel
      */
     public void setTel(String tel) {
@@ -446,7 +439,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the email.
-     * 
+     *
      * @return the email
      */
     public String getEmail() {
@@ -455,7 +448,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the email.
-     * 
+     *
      * @param email the new email
      */
     public void setEmail(String email) {
@@ -464,7 +457,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the zip.
-     * 
+     *
      * @return the zip
      */
     public String getZip() {
@@ -473,7 +466,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the zip.
-     * 
+     *
      * @param zip the new zip
      */
     public void setZip(String zip) {
@@ -482,7 +475,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the addr.
-     * 
+     *
      * @return the addr
      */
     public String getAddr() {
@@ -491,7 +484,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the addr.
-     * 
+     *
      * @param addr the new addr
      */
     public void setAddr(String addr) {
@@ -500,7 +493,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the field.
-     * 
+     *
      * @return the field
      */
     public String getField() {
@@ -509,7 +502,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the field.
-     * 
+     *
      * @param field the new field
      */
     public void setField(String field) {
@@ -518,7 +511,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the qr code.
-     * 
+     *
      * @return the qr code
      */
     public String getQrCode() {
@@ -527,7 +520,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the qr code.
-     * 
+     *
      * @param qrCode the new qr code
      */
     public void setQrCode(String qrCode) {
@@ -536,7 +529,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the logo url.
-     * 
+     *
      * @return the logo url
      */
     public String getLogoUrl() {
@@ -545,7 +538,7 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Sets the logo url.
-     * 
+     *
      * @param logoUrl the new logo url
      */
     public void setLogoUrl(String logoUrl) {
@@ -554,53 +547,72 @@ public class PublicAccountsDetail implements Parcelable {
 
     /**
      * Gets the sip uri.
-     * 
+     *
      * @return the sip uri
      */
-    // public String getSipUri()
-    // {
-    // return sipUri;
-    // }
+    public String getSipUri() {
+        return sipUri;
+    }
 
     /**
      * Sets the sip uri.
-     * 
+     *
      * @param sipUri the new sip uri
      */
-    // public void setSipUri( String sipUri )
-    // {
-    // this.sipUri = sipUri;
-    // }
+    public void setSipUri(String sipUri) {
+        this.sipUri = sipUri;
+    }
+
+    /**
+     * @return the logoType
+     */
+    public String getLogoType() {
+        return logoType;
+    }
+
+    /**
+     * @param logoType the logoType to set
+     */
+    public void setLogoType(String logoType) {
+        this.logoType = logoType;
+    }
+
+    /**
+     * @return the menuString
+     */
+    public String getMenuString() {
+        return menuString;
+    }
+
+    /**
+     * @param menuString the menuString to set
+     */
+    public void setMenuString(String menuString) {
+        this.menuString = menuString;
+    }
 
     /**
      * toString
-     * 
+     *
      * @return the gson string
      */
     @Override
     public String toString() {
         // return new Gson().toJson( this );
         StringBuffer sbuffer = new StringBuffer();
-        sbuffer.append("paUuid=")
-                .append(this.paUuid)
-                .append(",name=")
-                .append(this.name)
-                .append(",number=")
-                .append(this.number)
-                .append(",logoUrl=")
-                .append(this.logoUrl)
-                .append(",recommendLevel=")
-                .append(this.recommendLevel)
-                // .append(",sipUri=").append(this.sipUri)
-                .append(",company=").append(this.company).append(",intro=").append(this.intro)
-                .append(",type=").append(this.type).append(",updateTime=").append(this.updateTime)
-                .append(",menuType=").append(this.menuType).append(",menuTimestamp=")
-                .append(this.menuTimestamp).append(",subscribeStatus=")
+        sbuffer.append("paUuid=").append(this.paUuid).append(",name=").append(this.name)
+                .append(",number=").append(this.number).append(",logoUrl=").append(this.logoUrl)
+                .append(",recommendLevel=").append(this.recommendLevel).append(",sipUri=")
+                .append(this.sipUri).append(",company=").append(this.company).append(",intro=")
+                .append(this.intro).append(",type=").append(this.type).append(",updateTime=")
+                .append(this.updateTime).append(",menuType=").append(this.menuType)
+                .append(",menuTimestamp=").append(this.menuTimestamp).append(",subscribeStatus=")
                 .append(this.subscribeStatus).append(",acceptstatus=").append(this.acceptstatus)
                 .append(",activeStatus=").append(this.activeStatus).append(",tel=")
                 .append(this.tel).append(",email=").append(this.email).append(",zip=")
                 .append(this.zip).append(",addr=").append(this.addr).append(",field=")
-                .append(this.field).append(",qrCode=").append(this.qrCode);
+                .append(this.field).append(",qrCode=").append(this.qrCode).append(",logoType=")
+                .append(this.logoType).append(",menuString=").append(this.menuString);
 
         return sbuffer.toString();
     }

@@ -26,23 +26,6 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.richscrn;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <p>
- * Title: The rich screen showing entity
- * </p>
- * <p>
- * Description: The rich screen showing entity
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
 public class RichScrnShowing implements Parcelable {
     /** The missdn. */
     private String missdn;
@@ -70,7 +53,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Instantiates a new rich scrn showing.
-     * 
+     *
      * @param source the source
      */
     public RichScrnShowing(Parcel source) {
@@ -79,7 +62,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -91,7 +74,7 @@ public class RichScrnShowing implements Parcelable {
      * Write the rich screen showing entity to parcel stream. Pay attention to
      * read and write variables variables sequence should be consistent or not
      * the correct results
-     * 
+     *
      * @param dest the dest parcel stream
      * @param flags the flags
      */
@@ -109,7 +92,7 @@ public class RichScrnShowing implements Parcelable {
      * Create the rich screen showing entity from parcel stream. Pay attention
      * to read and write variables variables sequence should be consistent or
      * not the correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -122,7 +105,8 @@ public class RichScrnShowing implements Parcelable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<RichScrnShowing> CREATOR = new Parcelable.Creator<RichScrnShowing>() {
+    public static final Parcelable.Creator<RichScrnShowing> CREATOR =
+            new Parcelable.Creator<RichScrnShowing>() {
         @Override
         public RichScrnShowing createFromParcel(Parcel source) {
             return new RichScrnShowing(source);
@@ -136,7 +120,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Gets the missdn.
-     * 
+     *
      * @return the missdn
      */
     public String getMissdn() {
@@ -145,7 +129,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Sets the missdn.
-     * 
+     *
      * @param missdn the new missdn
      */
     public void setMissdn(String missdn) {
@@ -154,7 +138,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Gets the cid.
-     * 
+     *
      * @return the cid
      */
     public String getCid() {
@@ -163,7 +147,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Sets the cid.
-     * 
+     *
      * @param cid the new cid
      */
     public void setCid(String cid) {
@@ -172,7 +156,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Gets the greeting.
-     * 
+     *
      * @return the greeting
      */
     public String getGreeting() {
@@ -181,7 +165,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Sets the greeting.
-     * 
+     *
      * @param greeting the new greeting
      */
     public void setGreeting(String greeting) {
@@ -190,7 +174,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Gets the source type.
-     * 
+     *
      * @return the source type
      */
     public String getSourceType() {
@@ -199,7 +183,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Sets the source type.
-     * 
+     *
      * @param sourceType the new source type
      */
     public void setSourceType(String sourceType) {
@@ -208,7 +192,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Gets the missdn address.
-     * 
+     *
      * @return the missdn address
      */
     public String getMissdnAddress() {
@@ -217,7 +201,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Sets the missdn address.
-     * 
+     *
      * @param missdnAddress the new missdn address
      */
     public void setMissdnAddress(String missdnAddress) {
@@ -226,7 +210,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Gets the local source url.
-     * 
+     *
      * @return the local source url
      */
     public String getLocalSourceUrl() {
@@ -235,7 +219,7 @@ public class RichScrnShowing implements Parcelable {
 
     /**
      * Sets the local source url.
-     * 
+     *
      * @param localSourceUrl the new local source url
      */
     public void setLocalSourceUrl(String localSourceUrl) {

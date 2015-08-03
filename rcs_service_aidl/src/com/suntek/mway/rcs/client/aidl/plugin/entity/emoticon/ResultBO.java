@@ -26,24 +26,6 @@ package com.suntek.mway.rcs.client.aidl.plugin.entity.emoticon;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <p>
- * Title: The emotion result entity class
- * </p>
- * <p>
- * Description: The emotion result entity class, identify the result if succ and
- * result additional object, different conditions have different result
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
 public class ResultBO implements Parcelable {
     /** The result succ flag, true is succ, otherwise it is fail. */
     private boolean resultFlag;
@@ -60,7 +42,8 @@ public class ResultBO implements Parcelable {
     /**
      * The parcel creator
      */
-    public static final Parcelable.Creator<ResultBO> CREATOR = new Parcelable.Creator<ResultBO>() {
+    public static final Parcelable.Creator<ResultBO> CREATOR =
+            new Parcelable.Creator<ResultBO>() {
         @Override
         public ResultBO createFromParcel(Parcel source) {
             return new ResultBO(source);
@@ -80,7 +63,7 @@ public class ResultBO implements Parcelable {
 
     /**
      * Instantiates a new result entity from parcel.
-     * 
+     *
      * @param source the parcel source.
      */
     public ResultBO(Parcel source) {
@@ -91,7 +74,7 @@ public class ResultBO implements Parcelable {
      * The result entity write to parcel stream. Pay attention to write
      * variables and read the ordering of the variables should be consistent or
      * not the correct results.
-     * 
+     *
      * @param dest The parcel stream
      * @param flags The write to parcel flag
      */
@@ -108,7 +91,7 @@ public class ResultBO implements Parcelable {
      * Create the result entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -129,7 +112,7 @@ public class ResultBO implements Parcelable {
 
     /**
      * Checks if is result succ
-     * 
+     *
      * @return true, if is result succ
      */
     public boolean isResultFlag() {
@@ -138,7 +121,7 @@ public class ResultBO implements Parcelable {
 
     /**
      * Sets the result flag.
-     * 
+     *
      * @param resultFlag the new result flag
      */
     public void setResultFlag(boolean resultFlag) {
@@ -147,7 +130,7 @@ public class ResultBO implements Parcelable {
 
     /**
      * Gets the result info.
-     * 
+     *
      * @return the result info
      */
     public String getResultMsg() {
@@ -156,7 +139,7 @@ public class ResultBO implements Parcelable {
 
     /**
      * Sets the result info.
-     * 
+     *
      * @param resultMsg the new result info.
      */
     public void setResultMsg(String resultMsg) {
@@ -165,7 +148,7 @@ public class ResultBO implements Parcelable {
 
     /**
      * Gets the result object.
-     * 
+     *
      * @return the result object
      */
     public Object getResultObj() {
@@ -174,7 +157,7 @@ public class ResultBO implements Parcelable {
 
     /**
      * Sets the result object.
-     * 
+     *
      * @param resultObj the new result object
      */
     public void setResultObj(Object resultObj) {

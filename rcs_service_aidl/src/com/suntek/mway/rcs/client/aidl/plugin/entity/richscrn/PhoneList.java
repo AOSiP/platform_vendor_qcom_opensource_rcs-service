@@ -23,28 +23,11 @@
 
 package com.suntek.mway.rcs.client.aidl.plugin.entity.richscrn;
 
-import java.util.ArrayList;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <p>
- * Title: The PhoneList entity
- * </p>
- * <p>
- * Description: the Phone List entity
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * 
- * @author zrq
- * @version 1.0
- */
+import java.util.ArrayList;
+
 public class PhoneList implements Parcelable {
 
     /** The phone list . */
@@ -66,7 +49,7 @@ public class PhoneList implements Parcelable {
 
     /**
      * Instantiates a new phone list.
-     * 
+     *
      * @param source the source
      */
     public PhoneList(Parcel source) {
@@ -75,7 +58,7 @@ public class PhoneList implements Parcelable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -87,7 +70,7 @@ public class PhoneList implements Parcelable {
      * Write the result entity to parcel stream. Pay attention to read and write
      * variables variables sequence should be consistent or not the correct
      * results
-     * 
+     *
      * @param dest the dest parcel stream
      * @param flags the flags
      */
@@ -100,7 +83,7 @@ public class PhoneList implements Parcelable {
      * Create the result entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -108,7 +91,8 @@ public class PhoneList implements Parcelable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<PhoneList> CREATOR = new Parcelable.Creator<PhoneList>() {
+    public static final Parcelable.Creator<PhoneList> CREATOR =
+            new Parcelable.Creator<PhoneList>() {
         @Override
         public PhoneList createFromParcel(Parcel source) {
             return new PhoneList(source);

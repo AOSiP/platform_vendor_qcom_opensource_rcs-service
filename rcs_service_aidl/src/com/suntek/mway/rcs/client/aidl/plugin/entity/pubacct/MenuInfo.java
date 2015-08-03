@@ -23,30 +23,12 @@
 
 package com.suntek.mway.rcs.client.aidl.plugin.entity.pubacct;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <p>
- * Title: The menu info entity
- * </p>
- * <p>
- * Description: The menu info entity
- * </p>
- * <p>
- * Copyright: Copyright (c) 2014
- * </p>
- * <p>
- * Company: pci-suntek
- * </p>
- * .
- * 
- * @author zrq
- * @version 1.0
- */
+import java.util.LinkedList;
+import java.util.List;
+
 public class MenuInfo implements Parcelable {
 
     /** The command id. */
@@ -72,7 +54,7 @@ public class MenuInfo implements Parcelable {
 
     /**
      * Instantiates a new menu info.
-     * 
+     *
      * @param source the source
      */
     public MenuInfo(Parcel source) {
@@ -81,7 +63,7 @@ public class MenuInfo implements Parcelable {
 
     /**
      * The parcel describe contents, defaul is 0.
-     * 
+     *
      * @return the int
      */
     @Override
@@ -93,7 +75,7 @@ public class MenuInfo implements Parcelable {
      * Write the menu entity to parcel stream. Pay attention to read and write
      * variables variables sequence should be consistent or not the correct
      * results
-     * 
+     *
      * @param dest the dest parcel stream
      * @param flags the flags
      */
@@ -110,7 +92,7 @@ public class MenuInfo implements Parcelable {
      * Create the menu entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -123,7 +105,8 @@ public class MenuInfo implements Parcelable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<MenuInfo> CREATOR = new Parcelable.Creator<MenuInfo>() {
+    public static final Parcelable.Creator<MenuInfo> CREATOR =
+            new Parcelable.Creator<MenuInfo>() {
         @Override
         public MenuInfo createFromParcel(Parcel source) {
             return new MenuInfo(source);
@@ -137,7 +120,7 @@ public class MenuInfo implements Parcelable {
 
     /**
      * Gets the command id.
-     * 
+     *
      * @return the command id
      */
     public String getCommandId() {
@@ -146,7 +129,7 @@ public class MenuInfo implements Parcelable {
 
     /**
      * Sets the command id.
-     * 
+     *
      * @param commandId the new command id
      */
     public void setCommandId(String commandId) {
@@ -155,7 +138,7 @@ public class MenuInfo implements Parcelable {
 
     /**
      * Gets the title.
-     * 
+     *
      * @return the title
      */
     public String getTitle() {
@@ -164,7 +147,7 @@ public class MenuInfo implements Parcelable {
 
     /**
      * Sets the title.
-     * 
+     *
      * @param title the new title
      */
     public void setTitle(String title) {
@@ -173,7 +156,7 @@ public class MenuInfo implements Parcelable {
 
     /**
      * Gets the type.
-     * 
+     *
      * @return the type
      */
     public int getType() {
@@ -182,7 +165,7 @@ public class MenuInfo implements Parcelable {
 
     /**
      * Sets the type.
-     * 
+     *
      * @param type the new type
      */
     public void setType(int type) {
@@ -191,7 +174,7 @@ public class MenuInfo implements Parcelable {
 
     /**
      * Gets the priority.
-     * 
+     *
      * @return the priority
      */
     public int getPriority() {
@@ -200,7 +183,7 @@ public class MenuInfo implements Parcelable {
 
     /**
      * Sets the priority.
-     * 
+     *
      * @param priority the new priority
      */
     public void setPriority(int priority) {
@@ -209,7 +192,7 @@ public class MenuInfo implements Parcelable {
 
     /**
      * Gets the sub menu list.
-     * 
+     *
      * @return the sub menu list
      */
     public List<MenuInfo> getSubMenuList() {
@@ -218,7 +201,7 @@ public class MenuInfo implements Parcelable {
 
     /**
      * Sets the sub menu list.
-     * 
+     *
      * @param subMenuList the new sub menu list
      */
     public void setSubMenuList(List<MenuInfo> subMenuList) {

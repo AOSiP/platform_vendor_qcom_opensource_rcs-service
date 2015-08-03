@@ -52,7 +52,7 @@ public class MenuInfoMode implements Parcelable {
 
     /**
      * Instantiates a new menu info mode.
-     * 
+     *
      * @param source the source
      */
     public MenuInfoMode(Parcel source) {
@@ -72,7 +72,7 @@ public class MenuInfoMode implements Parcelable {
      * Write the menu entity to parcel stream. Pay attention to read and write
      * variables variables sequence should be consistent or not the correct
      * results
-     * 
+     *
      * @param dest the dest parcel stream
      * @param flags the flags
      */
@@ -87,7 +87,7 @@ public class MenuInfoMode implements Parcelable {
      * Create the menu entity from parcel stream. Pay attention to read and
      * write variables variables sequence should be consistent or not the
      * correct results
-     * 
+     *
      * @param source The parcel stream
      */
     public void readFromParcel(Parcel source) {
@@ -98,7 +98,8 @@ public class MenuInfoMode implements Parcelable {
     }
 
     /** The parcel creator. */
-    public static final Parcelable.Creator<MenuInfoMode> CREATOR = new Parcelable.Creator<MenuInfoMode>() {
+    public static final Parcelable.Creator<MenuInfoMode> CREATOR =
+            new Parcelable.Creator<MenuInfoMode>() {
         @Override
         public MenuInfoMode createFromParcel(Parcel source) {
             return new MenuInfoMode(source);
@@ -112,7 +113,7 @@ public class MenuInfoMode implements Parcelable {
 
     /**
      * Gets the pa uuid.
-     * 
+     *
      * @return the pa uuid
      */
     public String getPaUuid() {
@@ -121,7 +122,7 @@ public class MenuInfoMode implements Parcelable {
 
     /**
      * Sets the pa uuid.
-     * 
+     *
      * @param paUuid the new pa uuid
      */
     public void setPaUuid(String paUuid) {
@@ -130,7 +131,7 @@ public class MenuInfoMode implements Parcelable {
 
     /**
      * Gets the menutimestamp.
-     * 
+     *
      * @return the menutimestamp
      */
     public String getMenutimestamp() {
@@ -139,7 +140,7 @@ public class MenuInfoMode implements Parcelable {
 
     /**
      * Sets the menutimestamp.
-     * 
+     *
      * @param menutimestamp the new menutimestamp
      */
     public void setMenutimestamp(String menutimestamp) {
@@ -148,7 +149,7 @@ public class MenuInfoMode implements Parcelable {
 
     /**
      * Gets the menu info list.
-     * 
+     *
      * @return the menu info list
      */
     public List<MenuInfo> getMenuInfoList() {
@@ -157,7 +158,7 @@ public class MenuInfoMode implements Parcelable {
 
     /**
      * Sets the menu info list.
-     * 
+     *
      * @param menuInfoList the new menu info list
      */
     public void setMenuInfoList(List<MenuInfo> menuInfoList) {
