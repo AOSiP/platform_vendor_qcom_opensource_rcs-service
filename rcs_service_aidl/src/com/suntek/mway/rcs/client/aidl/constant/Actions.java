@@ -31,6 +31,9 @@ public class Actions {
         // status changed broadcast
         public final static String ACTION_REGISTER_STATUS_CHANGED = Main.PACKAGE_NAME
                 + ".ACTION_REGISTER_STATUS_CHANGED";
+        // unRegister finished broadcast
+        public final static String ACTION_UNREGISTER_FINISHED = Main.PACKAGE_NAME
+                + ".ACTION_UNREGISTER_FINISHED";
 
     }
 
@@ -135,6 +138,9 @@ public class Actions {
 
         public static final String ACTION_MESSAGE_FIREWALL_BLOCK_RECORD = Main.PACKAGE_NAME
                 + ".ACTION_MESSAGE_FIREWALL_BLOCK_RECORD";
+
+        public static final String ACTION_MESSAGE_SMS_POLICY_NOT_SET = Main.PACKAGE_NAME
+                + ".ACTION_MESSAGE_SMS_POLICY_NOT_SET";
     }
 
     public static class PluginAction {
@@ -149,7 +155,7 @@ public class Actions {
                 + ".ACTION_PLUGIN_INIT_SUCCESS";
 
         public static final String ACTION_PLUGIN_INIT_FAILED = Main.PACKAGE_NAME
-                + ".ACTION_PLUGIN_INIT_SUCCESS";
+                + ".ACTION_PLUGIN_INIT_FAILED";
 
         // profile
         public static final String ACTION_PROFILE_UPDATE_CONTACT = Main.PACKAGE_NAME
@@ -175,4 +181,15 @@ public class Actions {
                 + ".ACTION_MCLOUD_SHARE_FILE";
     }
 
+    public static class PermissionAction {
+
+        public static final String ACTION_PERMISSION_NO_GRANTED_SERVICE = Main.PACKAGE_NAME
+                + ".ACTION_PERMISSION_NO_GRANTED";
+
+        public static final String ACTION_PERMISSION_NO_GRANTED_PLUGIN
+                = "com.suntek.mway.rcs.app.plugin.ACTION_PERMISSION_NO_GRANTED";
+
+        public static final String ACTION_PERMISSION_NO_GRANTED_GBA
+                = "com.cmcc.proxy.ACTION_PERMISSION_NO_GRANTED";
+    }
 }

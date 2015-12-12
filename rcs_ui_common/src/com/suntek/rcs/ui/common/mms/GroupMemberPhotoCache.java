@@ -48,7 +48,6 @@ public class GroupMemberPhotoCache {
     private LinkedBlockingQueue<LoaderImageTask> mTaskQueue;
     private boolean mIsRuning = false;
     private static GroupMemberPhotoCache sInstance = new GroupMemberPhotoCache();
-    private static Drawable mDefaultContectImage = null;
 
     private GroupMemberPhotoCache() {
         mImageCache = new HashMap<String, SoftReference<Bitmap>>();
@@ -58,11 +57,8 @@ public class GroupMemberPhotoCache {
     }
 
     public void loadGroupMemberPhoto(long rcsGroupId, String addr,
-            final ImageView mAvatar,final Drawable defaultContactImage) {
-        if (mDefaultContectImage == null) {
-            mDefaultContectImage = defaultContactImage;
-        }
-        if(mAvatar == null){
+            final ImageView mAvatar, final Drawable defaultContactImage) {
+        if (mAvatar == null) {
             return;
         }
         mAvatar.setTag(addr);
@@ -102,12 +98,10 @@ public class GroupMemberPhotoCache {
         }
     }
 
-    private Bitmap getbitmap(String number, long groupId) {
-        Bitmap bitmap = null;
+    private void getbitmap(final LoaderImageTask task) {
         try {
-            GroupChatApi.getInstance().getMemberAvatar(groupId, number, IMAGE_PIXEL,
-                    new GroupChatCallback() {
-
+            GroupChatApi.getInstance().getMemberAvatar(task.mGroupId, task.number,
+                    IMAGE_PIXEL, new GroupChatCallback() {
                         @Override
                         public void onUpdateAvatar(Avatar avatar, int resultCode,
                                 String resultDesc) throws RemoteException {
@@ -117,6 +111,13 @@ public class GroupMemberPhotoCache {
                                     byte[] imageByte = Base64.decode(str, Base64.DEFAULT);
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte, 0,
                                             imageByte.length);
+                                    addBitmapCache(task.number, bitmap);
+                                    task.bitmap = bitmap;
+                                    if (mHandler != null) {
+                                        Message msg = mHandler.obtainMessage();
+                                        msg.obj = task;
+                                        mHandler.sendMessage(msg);
+                                    }
                                 }
                             }
                         }
@@ -126,10 +127,6 @@ public class GroupMemberPhotoCache {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        if (bitmap != null) {
-            mImageCache.put(number, new SoftReference<Bitmap>(bitmap));
-        }
-        return bitmap;
     }
 
     private Runnable runnable = new Runnable() {
@@ -138,14 +135,9 @@ public class GroupMemberPhotoCache {
             while (mIsRuning) {
                 try {
                     LoaderImageTask task = mTaskQueue.take();
-                    String imageId = (String) task.imageView.getTag();
-                    if (!TextUtils.isEmpty(imageId) && imageId.equals(task.number)) {
-                        task.bitmap = getbitmap(task.number, task.mGroupId);
-                        if (mHandler != null) {
-                            Message msg = mHandler.obtainMessage();
-                            msg.obj = task;
-                            mHandler.sendMessage(msg);
-                        }
+                    String number = (String) task.imageView.getTag();
+                    if (!TextUtils.isEmpty(number) && number.equals(task.number)) {
+                        getbitmap(task);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -166,4 +158,24 @@ public class GroupMemberPhotoCache {
             }
         }
     };
+
+    public void removeCache(String number){
+        mImageCache.remove(number);
+    }
+
+    public void addBitmapCache(String number, Bitmap bitmap) {
+        if (bitmap != null) {
+            mImageCache.put(number, new SoftReference<Bitmap>(bitmap));
+        }
+    }
+
+    public Bitmap getBitmapByNumber(String number) {
+        if (mImageCache != null && mImageCache.containsKey(number)) {
+            SoftReference<Bitmap> rf = mImageCache.get(number);
+            Bitmap bitmap = rf.get();
+            return bitmap;
+        }
+        return null;
+    }
+
 }

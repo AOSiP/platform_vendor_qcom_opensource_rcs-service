@@ -83,6 +83,8 @@ public class RcsColumns {
         public final static String RCS_FILE_RECORD = "rcs_file_record";
 
         public final static String PHONE_ID = "phone_id";
+
+        public final static String SUB_ID = "sub_id";
     }
 
     /**
@@ -101,6 +103,8 @@ public class RcsColumns {
         public final static String RCS_CHAT_TYPE = "msg_chat_type";
 
         public final static String RCS_MSG_TYPE = "last_msg_type";
+
+        public final static String RCS_UNREAD_COUNT = "rcs_unread_count";
     }
 
     /**

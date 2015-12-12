@@ -144,6 +144,12 @@ public class Constants {
 
         public static final int CONST_MESSAGE_OTHER_FILE = 10;
 
+        public static final int CONST_MESSAGE_PUBLIC_ACCOUNT_SYNC_SUBSCRIBE = 11;
+
+        public static final int CONST_MESSAGE_PUBLIC_ACCOUNT_SYNC_DETAIL = 12;
+
+        public static final int CONST_DIRECTION_SEND_FAILED = 5;
+
         public static final int CONST_DIRECTION_SEND = 2;
 
         public static final int CONST_DIRECTION_RECEIVE = 1;
@@ -189,6 +195,8 @@ public class Constants {
         public static final int CONST_SEND_POLICY_FORWARD_SMS = 1;
 
         public static final int CONST_SEND_POLICY_NOT_FORWARD_SMS = 2;
+
+        public static final int CONST_SEND_POLICY_DEFAULT_NOT_SET = -1;
     }
 
     public static class GroupChatConstants {
@@ -233,6 +241,12 @@ public class Constants {
 
         public static final String CONST_NOTIFY_SET_POLICY = "setpolicy";
 
+        public static final String CONST_NOTIFY_FAILED = "failed";
+
+        public static final String CONST_NOTIFY_GROUP_FULL = "groupfull";
+
+        public static final String CONST_NOTIFY_INVITE_EXPIRED = "inviteExpired";
+
         /**
          * Group chat manager broadcast parameter type definition
          */
@@ -259,6 +273,10 @@ public class Constants {
         public static final int CONST_SET_MAX_COUNT = 11;
 
         public static final int CONST_REACHED_MAX_COUNT = 12;
+
+        public static final int CONST_GROUP_FULL = 13;
+
+        public static final int CONST_INVITE_EXPIRED = 14;
 
         /**
          * Group chat operation definition
@@ -658,6 +676,12 @@ public class Constants {
         public static Uri CONST_THREAD_ID_URI = Uri
                 .parse("content://com.suntek.mway.rcs.app.service.threads/id");
 
+        public static Uri CONST_THREAD_UPDATE_TOP_URI = Uri
+                .parse("content://com.suntek.mway.rcs.app.service.threads/update-top");
+
+        public static Uri CONST_THREAD_DELETE_URI = Uri
+                .parse("content://com.suntek.mway.rcs.app.service.threads/delete");
+
         public static interface Thread extends BaseColumns {
             public static final String NUMBER = "rcs_number";
 
@@ -756,6 +780,10 @@ public class Constants {
             public static final String FAVOURITE = "favourite";
 
             public static final String PHONE_ID = "phone_id";
+
+            public static final String SUB_ID = "sub_id";
+
+            public static final String DOWN_LOAD_OK = "rcs_is_download";
         }
     }
 

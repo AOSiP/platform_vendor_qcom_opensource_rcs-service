@@ -44,10 +44,9 @@ public class GroupChat implements Parcelable {
 
     public static final int STATUS_REJECT = 14;
 
-    /**
-     * for dual sim card
-     */
     public static final int STATUS_PAUSE = 15;
+
+    public static final int STATUS_GROUP_FULL = 16;
 
     public static final int INCOMING = 1;
 
@@ -258,6 +257,16 @@ public class GroupChat implements Parcelable {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public boolean isGroupChatValid() {
+        if (status == GroupChat.STATUS_INITIATED ||
+                status == GroupChat.STATUS_INVITED ||
+                status == GroupChat.STATUS_STARTED) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

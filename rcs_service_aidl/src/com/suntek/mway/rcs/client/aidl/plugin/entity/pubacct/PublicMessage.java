@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 pci-suntektech Technologies, Inc.  All Rights Reserved.
+ * Copyright (c) 2014-2015 pci-suntektech Technologies, Inc.  All Rights Reserved.
  * pci-suntektech Technologies Proprietary and Confidential.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -57,6 +57,12 @@ public class PublicMessage implements Parcelable {
 
     /** The Constant VCARD. */
     public static final String VCARD = "18";
+
+    /** The Constant SYNC_SUBSCRIBE. */
+    public static final String SYNC_SUBSCRIBE = "71";
+
+    /** The Constant SYNC_DETAIL. */
+    public static final String SYNC_DETAIL = "72";
 
     /** The createtime. */
     protected String createtime;

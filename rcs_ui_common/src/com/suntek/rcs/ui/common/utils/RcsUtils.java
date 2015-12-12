@@ -23,6 +23,10 @@
 package com.suntek.rcs.ui.common.utils;
 
 import com.suntek.rcs.ui.common.RcsEmojiGifView;
+import com.suntek.rcs.ui.common.RcsLog;
+
+import java.io.Closeable;
+import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Context;
@@ -39,6 +43,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 public class RcsUtils {
+
     public static int dip2px(Context context, float dipValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int)(dipValue * scale + 0.5f);
@@ -87,5 +92,15 @@ public class RcsUtils {
         popupWindow.setContentView(relativeLayout);
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
         popupWindow.update();
+    }
+
+    public static void closeSilently(Closeable c) {
+        try {
+            if (c != null) {
+                c.close();
+            }
+        } catch(IOException e) {
+            RcsLog.e(e);
+        }
     }
 }

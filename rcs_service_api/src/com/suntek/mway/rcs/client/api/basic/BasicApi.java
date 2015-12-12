@@ -63,6 +63,10 @@ public class BasicApi {
         ServiceApi.getServiceApi().rejectOpenAccount();
     }
 
+    public void getConfiguration() throws RemoteException, ServiceDisconnectedException {
+        ServiceApi.getServiceApi().getConfiguration();
+    }
+
     public void getConfigurationWithOtp(String otpCode) throws RemoteException,
             ServiceDisconnectedException {
         ServiceApi.getServiceApi().getConfigurationWithOtp(otpCode);

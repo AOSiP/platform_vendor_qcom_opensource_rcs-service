@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 pci-suntektech Technologies, Inc.  All Rights Reserved.
+ * Copyright (c) 2014-2015 pci-suntektech Technologies, Inc.  All Rights Reserved.
  * pci-suntektech Technologies Proprietary and Confidential.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -156,22 +156,6 @@ public class SupportApi {
 
     public void initApi(Context context) {
         mIsRcsServiceInstalled = isServiceInstalled(context);
-
-        if (mIsRcsServiceInstalled) {
-            init();
-        }
-    }
-
-    private void init() {
-        new Thread() {
-            @Override
-            public void run() {
-                long t0, t1;
-                t0 = System.currentTimeMillis();
-                t1 = System.currentTimeMillis();
-                Log.d(TAG, "initRcsAccountApi cost " + (t1 - t0) + " ms");
-            }
-        }.start();
     }
 
     /**

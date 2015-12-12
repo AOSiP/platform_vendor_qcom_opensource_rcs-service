@@ -75,6 +75,10 @@ public class MessageApi {
         ServiceApi.getServiceApi().backupAll();
     }
 
+    public void backUpFavouriteAll() throws RemoteException, ServiceDisconnectedException {
+        ServiceApi.getServiceApi().backUpFavouriteAll();
+    }
+
     public void backup(List<SimpleMessage> simpleMessageList) throws RemoteException,
             ServiceDisconnectedException {
         ServiceApi.getServiceApi().backup(simpleMessageList);
@@ -251,6 +255,10 @@ public class MessageApi {
         ServiceApi.getServiceApi().restoreAll();
     }
 
+    public void restoreAllFavourite() throws RemoteException, ServiceDisconnectedException {
+        ServiceApi.getServiceApi().restoreAllFavourite();
+    }
+
     public void startComposing(long threadId, String number, String contentType, int seconds)
             throws RemoteException, ServiceDisconnectedException {
         ServiceApi.getServiceApi().startComposing(threadId, number, contentType, seconds);
@@ -313,10 +321,18 @@ public class MessageApi {
     public long sendImage(String number, long threadId, String filepath, int quality,
             boolean isRecord, int barCycle) throws RemoteException, ServiceDisconnectedException,
             FileSuffixException, FileNotExistsException, FileTooLargeException {
+        return sendImage(number, threadId, filepath, quality,
+                isRecord, barCycle, null);
+    }
+
+    public long sendImage(String number, long threadId, String filepath, int quality,
+            boolean isRecord, int barCycle, String thumbnailPath) throws RemoteException,
+            ServiceDisconnectedException, FileSuffixException, FileNotExistsException,
+            FileTooLargeException {
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method sendImage. [number,threadId,filepath,quality,isRecord,barCycle]="
-                        +"%s,%d,%s,%d,%b,%d",
-                        number, threadId, filepath, quality, isRecord, barCycle));
+                "enter method sendImage. [number,threadId,filepath,quality,isRecord,barCycle" +
+                ",thumbnailPath]=%s,%d,%s,%d,%b,%d,%s",
+                        number, threadId, filepath, quality, isRecord, barCycle, thumbnailPath));
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return 0L;
@@ -332,6 +348,10 @@ public class MessageApi {
 
         VerificationUtil.isImageFile(filepath);
         VerificationUtil.isFileExists(filepath);
+        if (thumbnailPath != null) {
+            VerificationUtil.isImageFile(thumbnailPath);
+            VerificationUtil.isFileExists(thumbnailPath);
+        }
 
         if (quality == 100) {
             VerificationUtil.isFileSizeToLarge(filepath, this.getImageMaxSize());
@@ -341,17 +361,25 @@ public class MessageApi {
         List<String> numberList = new ArrayList<String>();
         numberList.add(number);
         return ServiceApi.getServiceApi().sendImage(numberList, threadId, filepath, quality,
-                isRecord, barCycle);
+                isRecord, barCycle, thumbnailPath);
     }
 
     public long sendImage(List<String> numberList, long threadId, String filepath, int quality,
             boolean isRecord, int barCycle) throws RemoteException, ServiceDisconnectedException,
             FileSuffixException, FileNotExistsException, FileTooLargeException {
+        return sendImage(numberList, threadId, filepath, quality,
+                isRecord, barCycle, null);
+    }
+
+    public long sendImage(List<String> numberList, long threadId, String filepath, int quality,
+            boolean isRecord, int barCycle, String thumbnailPath) throws RemoteException,
+            ServiceDisconnectedException, FileSuffixException,
+            FileNotExistsException, FileTooLargeException {
         LogHelper.i(String.format(Locale.getDefault(),
-            "enter method sendImage. [numberList,threadId,filepath,quality,isRecord,barCycle]="
-                    + "%s,%d,%s,%d,%b,%d",
-                    VerificationUtil.getNumberListString(numberList), threadId, filepath,
-                    quality, isRecord, barCycle));
+                "enter method sendImage. [numberList,threadId,filepath,quality,isRecord,barCycle" +
+                ",thumbnailPath]=%s,%d,%s,%d,%b,%d,%s",
+                        VerificationUtil.getNumberListString(numberList), threadId, filepath,
+                        quality, isRecord, barCycle, thumbnailPath));
         if (!VerificationUtil.isAllNumber(numberList)) {
             LogHelper.i("number field value error");
             return 0L;
@@ -367,13 +395,17 @@ public class MessageApi {
 
         VerificationUtil.isImageFile(filepath);
         VerificationUtil.isFileExists(filepath);
+        if (thumbnailPath != null) {
+            VerificationUtil.isImageFile(thumbnailPath);
+            VerificationUtil.isFileExists(thumbnailPath);
+        }
         if (quality == 100) {
             VerificationUtil.isFileSizeToLarge(filepath, this.getImageMaxSize());
         }
 
         numberList = VerificationUtil.formatNumbers(numberList);
         return ServiceApi.getServiceApi().sendImage(numberList, threadId, filepath, quality,
-                isRecord, barCycle);
+                isRecord, barCycle, thumbnailPath);
     }
 
     public long sendAudio(String number, long threadId, String filepath, int duration,
@@ -443,10 +475,18 @@ public class MessageApi {
             boolean isRecord, int barCycle) throws RemoteException, ServiceDisconnectedException,
             FileSuffixException, FileNotExistsException, FileTooLargeException,
             FileDurationException {
+        return sendVideo(number, threadId, filepath, duration,
+                isRecord, barCycle, null);
+    }
+
+    public long sendVideo(String number, long threadId, String filepath, int duration,
+            boolean isRecord, int barCycle, String thumbnailPath) throws RemoteException,
+            ServiceDisconnectedException, FileSuffixException, FileNotExistsException,
+            FileTooLargeException, FileDurationException {
         LogHelper.i(String.format(Locale.getDefault(),
-                "enter method sendVideo. [number,threadId,filepath,duration,isRecord,barCycle]="
-                        + "%s,%d,%s,%d,%b,%d",
-                        number, threadId, filepath, duration, isRecord, barCycle));
+                "enter method sendVideo. [number,threadId,filepath,duration,isRecord,barCycle" +
+                ",thumbnailPath]=%s,%d,%s,%d,%b,%d,%s",
+                        number, threadId, filepath, duration, isRecord, barCycle, thumbnailPath));
         if (!VerificationUtil.isNumber(number)) {
             LogHelper.i("number field value error");
             return 0L;
@@ -458,6 +498,10 @@ public class MessageApi {
 
         VerificationUtil.isVideoFile(filepath);
         VerificationUtil.isFileExists(filepath);
+        if (thumbnailPath != null) {
+            VerificationUtil.isImageFile(thumbnailPath);
+            VerificationUtil.isFileExists(thumbnailPath);
+        }
         if (isRecord) {
             VerificationUtil.isVideoDurationToLong(ServiceApi.getInstance().getContext(),
                     filepath,this.getVideoMaxDuration(), duration);
@@ -468,18 +512,26 @@ public class MessageApi {
         List<String> numberList = new ArrayList<String>();
         numberList.add(number);
         return ServiceApi.getServiceApi().sendVideo(numberList, threadId, filepath, duration,
-                isRecord, barCycle);
+                isRecord, barCycle, thumbnailPath);
     }
 
     public long sendVideo(List<String> numberList, long threadId, String filepath, int duration,
             boolean isRecord, int barCycle) throws RemoteException, ServiceDisconnectedException,
             FileSuffixException, FileNotExistsException, FileTooLargeException,
             FileDurationException {
+        return sendVideo(numberList, threadId, filepath, duration,
+                isRecord, barCycle, null);
+    }
+
+    public long sendVideo(List<String> numberList, long threadId, String filepath, int duration,
+            boolean isRecord, int barCycle, String thumbnailPath) throws RemoteException,
+            ServiceDisconnectedException, FileSuffixException, FileNotExistsException,
+            FileTooLargeException, FileDurationException {
         LogHelper.i(String.format(Locale.getDefault(),
-            "enter method sendVideo. [numberList,threadId,filepath,duration,isRecord,barCycle]"
-             + "=%s,%d,%s,%d,%b,%d",
-                  VerificationUtil.getNumberListString(numberList), threadId, filepath,
-                  duration, isRecord, barCycle));
+                "enter method sendVideo. [numberList,threadId,filepath,duration,isRecord,barCycle" +
+                ",thumbnailPath]=%s,%d,%s,%d,%b,%d,%s",
+                        VerificationUtil.getNumberListString(numberList), threadId, filepath,
+                        duration, isRecord, barCycle, thumbnailPath));
         if (!VerificationUtil.isAllNumber(numberList)) {
             LogHelper.i("number field value error");
             return 0L;
@@ -491,6 +543,10 @@ public class MessageApi {
 
         VerificationUtil.isVideoFile(filepath);
         VerificationUtil.isFileExists(filepath);
+        if (thumbnailPath != null) {
+            VerificationUtil.isImageFile(thumbnailPath);
+            VerificationUtil.isFileExists(thumbnailPath);
+        }
         if (isRecord) {
             VerificationUtil.isVideoDurationToLong(ServiceApi.getInstance().getContext(), filepath,
                     this.getVideoMaxDuration(), duration);
@@ -499,7 +555,7 @@ public class MessageApi {
 
         numberList = VerificationUtil.formatNumbers(numberList);
         return ServiceApi.getServiceApi().sendVideo(numberList, threadId, filepath, duration,
-                isRecord, barCycle);
+                isRecord, barCycle, thumbnailPath);
     }
 
     public long sendLocation(String number, long threadId, double lat, double lng, String label,
@@ -609,10 +665,18 @@ public class MessageApi {
     public long sendImageToGroupChat(long groupId, long threadId, String filepath, int quality,
             boolean isRecord) throws RemoteException, ServiceDisconnectedException,
             FileSuffixException, FileNotExistsException, FileTooLargeException {
+        return sendImageToGroupChat(groupId, threadId, filepath,
+                quality, isRecord, null);
+    }
+
+    public long sendImageToGroupChat(long groupId, long threadId, String filepath, int quality,
+            boolean isRecord, String thumbnailPath) throws RemoteException,
+            ServiceDisconnectedException, FileSuffixException, FileNotExistsException,
+            FileTooLargeException {
         LogHelper.i(String.format(Locale.getDefault(),
-               "enter method sendImageToGroupChat. [groupId,threadId,filepath,quality,isRecord]="
-                        + "%d,%d,%s,%d,%b",
-                        groupId, threadId, filepath, quality, isRecord));
+                "enter method sendImageToGroupChat. [groupId,threadId,filepath,quality,isRecord" +
+                ",thumbnailPath]=%d,%d,%s,%d,%b,%s",
+                        groupId, threadId, filepath, quality, isRecord, thumbnailPath));
         if (quality < 0 || quality > 100) {
             LogHelper.i("quality field value must be between 0 to 100");
             return 0L;
@@ -620,13 +684,16 @@ public class MessageApi {
 
         VerificationUtil.isImageFile(filepath);
         VerificationUtil.isFileExists(filepath);
-
+        if (thumbnailPath != null) {
+            VerificationUtil.isImageFile(thumbnailPath);
+            VerificationUtil.isFileExists(thumbnailPath);
+        }
         if (quality == 100) {
             VerificationUtil.isFileSizeToLarge(filepath, this.getImageMaxSize());
         }
 
         return ServiceApi.getServiceApi().sendImageToGroupChat(groupId, threadId, filepath,
-                quality, isRecord);
+                quality, isRecord, thumbnailPath);
     }
 
     public long sendAudioToGroupChat(long groupId, long threadId, String filepath, int duration,
@@ -653,12 +720,24 @@ public class MessageApi {
             boolean isRecord) throws RemoteException, ServiceDisconnectedException,
             FileSuffixException, FileNotExistsException, FileTooLargeException,
             FileDurationException {
+        return sendVideoToGroupChat(groupId, threadId, filepath,
+                duration, isRecord, null);
+    }
+
+    public long sendVideoToGroupChat(long groupId, long threadId, String filepath, int duration,
+            boolean isRecord, String thumbnailPath) throws RemoteException,
+            ServiceDisconnectedException, FileSuffixException, FileNotExistsException,
+            FileTooLargeException, FileDurationException {
         LogHelper.i(String.format(Locale.getDefault(),
-            "enter method sendVideoToGroupChat. [groupId,threadId,filepath,duration,isRecord]="
-                    + "%d,%d,%s,%d,%b",
-                        groupId, threadId, filepath, duration, isRecord));
+                "enter method sendVideoToGroupChat. [groupId,threadId,filepath,duration,isRecord" +
+                ",thumbnailPath]=%d,%d,%s,%d,%b,%s",
+                        groupId, threadId, filepath, duration, isRecord, thumbnailPath));
         VerificationUtil.isVideoFile(filepath);
         VerificationUtil.isFileExists(filepath);
+        if (thumbnailPath != null) {
+            VerificationUtil.isImageFile(thumbnailPath);
+            VerificationUtil.isFileExists(thumbnailPath);
+        }
         if (isRecord) {
             VerificationUtil.isVideoDurationToLong(ServiceApi.getInstance().getContext(),
                     filepath, this.getVideoMaxDuration(), duration);
@@ -666,7 +745,7 @@ public class MessageApi {
         VerificationUtil.isFileSizeToLarge(filepath, this.getVideoMaxSize());
 
         return ServiceApi.getServiceApi().sendVideoToGroupChat(groupId, threadId, filepath,
-                duration, isRecord);
+                duration, isRecord, thumbnailPath);
     }
 
     public long sendLocationToGroupChat(long groupId, long threadId, double lat, double lng,
@@ -861,12 +940,20 @@ public class MessageApi {
     public long sendImageToPublicAccount(String publicAccountId, long threadId, String filepath,
             int quality, boolean isRecord) throws RemoteException, ServiceDisconnectedException,
             FileSuffixException, FileNotExistsException, FileTooLargeException {
+        return sendImageToPublicAccount(publicAccountId, threadId,
+                filepath, quality, isRecord, null);
+    }
+
+    public long sendImageToPublicAccount(String publicAccountId, long threadId, String filepath,
+            int quality, boolean isRecord, String thumbnailPath) throws RemoteException,
+            ServiceDisconnectedException, FileSuffixException, FileNotExistsException,
+            FileTooLargeException {
         LogHelper
-                .i(String.format(
-                        Locale.getDefault(),
-                        "enter method sendImageToPublicAccount. [publicAccountId,"
-                        + "threadId,filepath,quality,isRecord]=%s,%d,%s,%d,%b",
-                        publicAccountId, threadId, filepath, quality, isRecord));
+        .i(String.format(
+                Locale.getDefault(),
+                "enter method sendImageToPublicAccount. [publicAccountId,"
+                        + "threadId,filepath,quality,isRecord,thumbnailPath]=%s,%d,%s,%d,%b,%s",
+                        publicAccountId, threadId, filepath, quality, isRecord, thumbnailPath));
         if (quality < 0 || quality > 100) {
             LogHelper.i("quality field value must be between 0 to 100");
             return 0L;
@@ -874,12 +961,15 @@ public class MessageApi {
 
         VerificationUtil.isImageFile(filepath);
         VerificationUtil.isFileExists(filepath);
-
+        if (thumbnailPath != null) {
+            VerificationUtil.isImageFile(thumbnailPath);
+            VerificationUtil.isFileExists(thumbnailPath);
+        }
         if (quality == 100) {
             VerificationUtil.isFileSizeToLarge(filepath, this.getImageMaxSize());
         }
         return ServiceApi.getServiceApi().sendImageToPublicAccount(publicAccountId, threadId,
-                filepath, quality, isRecord);
+                filepath, quality, isRecord, thumbnailPath);
     }
 
     public long sendAudioToPublicAccount(String publicAccountId, long threadId, String filepath,
@@ -908,21 +998,33 @@ public class MessageApi {
             int duration, boolean isRecord) throws RemoteException, ServiceDisconnectedException,
             FileSuffixException, FileNotExistsException, FileTooLargeException,
             FileDurationException {
+        return sendVideoToPublicAccount(publicAccountId, threadId,
+                filepath, duration, isRecord, null);
+    }
+
+    public long sendVideoToPublicAccount(String publicAccountId, long threadId, String filepath,
+            int duration, boolean isRecord, String thumbnailPath) throws RemoteException,
+            ServiceDisconnectedException, FileSuffixException, FileNotExistsException,
+            FileTooLargeException, FileDurationException {
         LogHelper
-                .i(String.format(
-                        Locale.getDefault(),
-                        "enter method sendVideoToPublicAccount. [publicAccountId,threadId,"
-                        + "filepath,duration,isRecord]=%s,%d,%s,%d,%b",
-                        publicAccountId, threadId, filepath, duration, isRecord));
+        .i(String.format(
+                Locale.getDefault(),
+                "enter method sendVideoToPublicAccount. [publicAccountId,threadId,"
+                        + "filepath,duration,isRecord,thumbnailPath]=%s,%d,%s,%d,%b,%s",
+                        publicAccountId, threadId, filepath, duration, isRecord, thumbnailPath));
         VerificationUtil.isVideoFile(filepath);
         VerificationUtil.isFileExists(filepath);
+        if (thumbnailPath != null) {
+            VerificationUtil.isImageFile(thumbnailPath);
+            VerificationUtil.isFileExists(thumbnailPath);
+        }
         if (isRecord) {
             VerificationUtil.isVideoDurationToLong(ServiceApi.getInstance().getContext(),
                     filepath, this.getVideoMaxDuration(), duration);
         }
         VerificationUtil.isFileSizeToLarge(filepath, this.getVideoMaxSize());
         return ServiceApi.getServiceApi().sendVideoToPublicAccount(publicAccountId, threadId,
-                filepath, duration, isRecord);
+                filepath, duration, isRecord, thumbnailPath);
     }
 
     public long sendLocationToPublicAccount(String publicAccountId, long threadId, double lat,

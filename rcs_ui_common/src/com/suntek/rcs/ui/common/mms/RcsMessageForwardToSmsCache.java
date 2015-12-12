@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2015 pci-suntektech Technologies, Inc.  All Rights Reserved.
+ * Copyright (c) 2015 pci-suntektech Technologies, Inc.  All Rights Reserved.
  * pci-suntektech Technologies Proprietary and Confidential.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,39 +23,43 @@
 
 package com.suntek.rcs.ui.common.mms;
 
-public class GeoLocation {
-    private double lat;
-    private double lng;
-    private String lable;
+import java.util.HashMap;
+import java.util.Iterator;
 
-    public double getLat() {
-        return lat;
+public class RcsMessageForwardToSmsCache {
+
+    private static RcsMessageForwardToSmsCache sInstance = new RcsMessageForwardToSmsCache();
+
+    private static HashMap<Long[], String[]> mMessageCache;
+
+    private RcsMessageForwardToSmsCache() {
+        mMessageCache = new HashMap<Long[], String[]>();
     }
 
-    public void setLat(double lat) {
-        this.lat = lat;
+    public static RcsMessageForwardToSmsCache getInstance() {
+        if (sInstance == null) {
+            sInstance = new RcsMessageForwardToSmsCache();
+        }
+        return sInstance;
     }
 
-    public double getLng() {
-        return lng;
+    public void addSendMessage(Long[] ids, String[] value) {
+        mMessageCache.put(ids, value);
     }
 
-    public void setLng(double lng) {
-        this.lng = lng;
+    public String[] getCacheVaule(Long[] ids) {
+        return mMessageCache.get(ids);
     }
 
-    public String getLabel() {
-        return lable;
+    public void clearCacheMessage() {
+        mMessageCache.clear();
     }
 
-    public void setLabel(String lable) {
-        this.lable = lable;
+    public Iterator<Long[]> getChachIterator() {
+        return mMessageCache.keySet().iterator();
     }
 
-    @Override
-    public String toString() {
-        return "GeoLocation [lat=" + lat + ", lng=" + lng + ", lable=" + lable + "]";
+    public HashMap<Long[], String[]> getCacheMessage() {
+        return mMessageCache;
     }
-
-
 }

@@ -82,10 +82,12 @@ public class VerificationUtil {
 
     public static List<String> formatNumbers(List<String> numbers) {
         List<String> re = new ArrayList<String>();
-        for (String number : numbers) {
-            re.add(formatNumber(number));
+        if (numbers != null && numbers.size() > 0) {
+            for (String number : numbers) {
+                re.add(formatNumber(number));
+            }
+            Collections.sort(re);
         }
-        Collections.sort(re);
         return re;
     }
 
@@ -244,7 +246,7 @@ public class VerificationUtil {
         File file = new File(filename);
         if (file.exists() && file.isFile()) {
             int duration = getAmrFileDuration(context, file);
-            if (duration >= (maxDuration + 1) * 1000 || recordTime > maxDuration * 1000) {
+            if (duration >= (maxDuration + 1) * 1000 || recordTime >= (maxDuration + 1) * 1000) {
                 LogHelper.i("throw FileDurationException, duration=" + duration);
                 throw new FileDurationException("File duration too long " + duration
                         + " s. Max duration is " + maxDuration + " s.");
@@ -257,7 +259,7 @@ public class VerificationUtil {
         File file = new File(filename);
         if (file.exists() && file.isFile()) {
             int duration = getVideoFileDuration(context, file);
-            if (duration >= (maxDuration + 1) * 1000 || recordTime > maxDuration * 1000) {
+            if (duration >= (maxDuration + 1) * 1000 || recordTime >= (maxDuration + 1) * 1000) {
                 LogHelper.i("throw FileDurationException, duration=" + duration);
                 throw new FileDurationException("File duration too long " + duration
                         + " s. Max duration is " + maxDuration + " s.");

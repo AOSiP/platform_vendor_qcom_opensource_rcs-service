@@ -24,6 +24,8 @@
 package com.suntek.rcs.ui.common.provider;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.database.Cursor;
+import android.net.Uri;
 import android.provider.Telephony;
 import android.provider.Telephony.Mms;
 import android.provider.Telephony.MmsSms;
@@ -183,7 +185,10 @@ public class RcsMessageProviderUtils {
                 " = 1;");
         createRcsOneToManyMesageStatusTable(db);
         createRcsThreadUpdateTriggers(db);
+        createDeviceApiSqlView(db);
+        createRcsDeleteGroupStatesTriggers(db);
     }
+
     /**
      * create a table to save rcs 1-N message status.
      */
@@ -198,9 +203,24 @@ public class RcsMessageProviderUtils {
     }
 
     public static void createRcsThreadUpdateTriggers(SQLiteDatabase db) {
-        db.execSQL("CREATE TRIGGER sms_update_thread_rcs_message_info_on_insert" +
+        db.execSQL("CREATE TRIGGER sms_update_thread_rcs_message_info_on_insert " +
                 " AFTER INSERT ON sms "
                 + RcsMessageProviderConstants.SMS_UPDATE_THREAD_RCS_MESSAGE_INFO_ON_NEW);
+        createSmsDeleteDuplicateRecordBeforeInsertTriggers(db);
+    }
+
+    public static void createRcsDeleteGroupStatesTriggers(SQLiteDatabase db) {
+        db.execSQL("create trigger delete_group_status_after_delete_sms" +
+                " AFTER DELETE ON sms" +
+                " BEGIN" +
+                " delete from group_status where msg_id = old._id;" +
+                " END");
+    }
+
+    public static void createSmsDeleteDuplicateRecordBeforeInsertTriggers(SQLiteDatabase db) {
+        db.execSQL("CREATE TRIGGER sms_delete_duplicate_record_before_insert" +
+                " BEFORE INSERT ON sms "
+                + RcsMessageProviderConstants.SMS_DELETE_DUPLICATE_RECORD_BEFORE_INSERT);
     }
 
     public static void createRcsThreadsTable(SQLiteDatabase db) {
@@ -221,7 +241,7 @@ public class RcsMessageProviderUtils {
                 RcsColumns.ThreadColumns.RCS_NUMBER + " TEXT," +
                 RcsColumns.ThreadColumns.RCS_MSG_ID + " INTEGER  DEFAULT -1," +
                 RcsColumns.ThreadColumns.RCS_MSG_TYPE + " INTEGER  DEFAULT -1," +
-                RcsColumns.ThreadColumns.RCS_CHAT_TYPE + " INTEGER  DEFAULT -1"+
+                RcsColumns.ThreadColumns.RCS_CHAT_TYPE + " INTEGER  DEFAULT -1 " +
                 ");");
     }
 
@@ -319,5 +339,53 @@ public class RcsMessageProviderUtils {
                 " END;");
         db.execSQL("CREATE TRIGGER sms_words_delete AFTER DELETE ON sms BEGIN DELETE FROM " +
                 "  words WHERE source_id = OLD._id AND table_to_use = 1; END;");
+    }
+
+    public static void upgradeDatabaseToVersion66(SQLiteDatabase db) {
+        db.execSQL("DROP TRIGGER IF EXISTS sms_update_thread_rcs_message_info_on_insert");
+        createRcsThreadUpdateTriggers(db);
+        createDeviceApiSqlView(db);
+        createRcsDeleteGroupStatesTriggers(db);
+
+    }
+
+    public static void createDeviceApiSqlView(SQLiteDatabase db) {
+        db.execSQL("create view " + RcsMessageProviderConstants.DeviceApiViews.DEVICE_API_MESSAGES
+                + " as " + RcsMessageProviderConstants.MESSAGES_VIEW_CLOUMN);
+        db.execSQL("create view " + RcsMessageProviderConstants.DeviceApiViews.MESSAGE_CONVERSATION
+                + " as " + RcsMessageProviderConstants.MESSAGE_CONVERSATION_VIEW_CLOUMNS);
+        db.execSQL("create view "
+                + RcsMessageProviderConstants.DeviceApiViews.PUBLIC_ACCOUNT_MESSAGES
+                + " as " + RcsMessageProviderConstants.PUBLIC_ACCOUNT_MESSAGES_VIEW_CLOUMN);
+        db.execSQL("create view "
+                + RcsMessageProviderConstants.DeviceApiViews.FILE_TRANSFER_MESSAGE
+                + " as " + RcsMessageProviderConstants.FILE_TRANSFER_MESSAGE_VIEW_CLOUMN);
+        createDeviceApiIndex(db);
+    }
+
+    public static void createDeviceApiBlockedCallogView(SQLiteDatabase db) {
+        db.execSQL("create view "
+                + RcsMessageProviderConstants.DeviceApiViews.BLOCKED_CALLLOGS
+                + " as " + RcsMessageProviderConstants.BLOCKED_CALLOG_CLOUMNS);
+    }
+
+    public static void createDeviceApiIndex(SQLiteDatabase db) {
+        db.execSQL("create index rcsChatTypeThreadIdIndex on sms ("
+                + RcsColumns.SmsRcsColumns.RCS_CHAT_TYPE + "," + Sms.THREAD_ID + ")");
+        db.execSQL("create index rcsFileTransferIdIndex on sms ("
+                + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID + ")");
+        db.execSQL("create index rcsMessageIdIndex on sms ("
+                + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + ")");
+        db.execSQL("create index threadIdIndex on sms(" + Sms.THREAD_ID + ")");
+    }
+
+    public static Cursor getConvasatonUnreadCount(SQLiteDatabase db, Uri uri) {
+        String threadId = uri.getQueryParameter("threadId");
+        String queryString =
+        "     SELECT COUNT(*) FROM (SELECT read FROM " +
+        "     sms WHERE read = 0 AND thread_id = " + threadId +
+        "     UNION ALL SELECT read FROM pdu WHERE read = 0 " +
+        "     AND thread_id = " + threadId +") ;";
+        return db.rawQuery(queryString, new String[0]);
     }
 }

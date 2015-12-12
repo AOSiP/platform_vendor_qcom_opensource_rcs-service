@@ -35,6 +35,8 @@ import android.provider.Telephony.ThreadsColumns;
 import android.telephony.SubscriptionManager;
 
 import com.suntek.mway.rcs.client.aidl.common.RcsColumns;
+import com.suntek.mway.rcs.client.aidl.common.DeviceApiConstant;
+import com.suntek.mway.rcs.client.aidl.constant.Constants.MessageConstants;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -71,7 +73,7 @@ public class RcsMessageProviderConstants {
         RcsColumns.SmsRcsColumns.RCS_MSG_STATE, RcsColumns.SmsRcsColumns.RCS_BURN,
         RcsColumns.SmsRcsColumns.RCS_IS_DOWNLOAD, RcsColumns.SmsRcsColumns.RCS_FILE_SIZE,
         RcsColumns.SmsRcsColumns.RCS_BURN_BODY, RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID,
-        RcsColumns.SmsRcsColumns.RCS_MEDIA_PLAYED,RcsColumns.SmsRcsColumns.RCS_EXT_CONTACT,
+        RcsColumns.SmsRcsColumns.RCS_MEDIA_PLAYED, RcsColumns.SmsRcsColumns.RCS_EXT_CONTACT,
         RcsColumns.SmsRcsColumns.RCS_FILE_RECORD
 };
 
@@ -87,49 +89,6 @@ public class RcsMessageProviderConstants {
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
 
     private static final String[] SEARCH_STRING = new String[1];
-
-    // search on sms and thread table according  rcs_file_transfer_id and rcs_chat_type.
-
-    public static final String[] DEVICE_API_DEFAULT_PROJECT = {
-        "CHATMESSAGE_MESSAGE_ID",
-        "CHATMESSAGE_CHAT_ID",
-        "CHATMESSAGE_CONTACT_NUMBER",
-        "CHATMESSAGE_BODY",
-        "CHATMESSAGE_TIMESTAMP",
-        "CHATMESSAGE_MIME_TYPE",
-        "CHATMESSAGE_MESSAGE_STATUS",
-        "CHATMESSAGE_DIRECTION",
-        "CHATMESSAGE_TYPE",
-        "CHATMESSAGE_FLAG"
-    };
-
-    public static final String DEVICE_API_TABLE = "SELECT " +
-            "sms._id as CHATMESSAGE_MESSAGE_ID," +
-            "sms.date as CHATMESSAGE_TIMESTAMP," +
-            "sms.rcs_mime_type as CHATMESSAGE_MIME_TYPE," +
-            "sms.rcs_chat_type as CHATMESSAGE_FLAG," +
-            "sms.rcs_file_name as file_name," +
-            "sms.rcs_file_size as file_size," +
-            "sms.rcs_file_transfered as file_transferred," +
-            "sms.rcs_file_icon as file_icon," +
-            "sms.thread_id as CHATMESSAGE_CHAT_ID," +
-            "(CASE WHEN sms.type = 1 then -5 ELSE -6 END) as CHATMESSAGE_DIRECTION," +
-            "(CASE WHEN  rcs_file_transfer_id IS not NULL THEN 4 " +
-            "WHEN sms.rcs_message_id is not null then 3 ELSE 1 END) as CHATMESSAGE_TYPE," +
-            "(CASE sms.type = 1  WHEN sms.read = 0 THEN 1 WHEN sms.read = 1 then 2 " +
-            "ELSE (CASE sms.rcs_message_id is null WHEN sms.status = 32 THEN 3 " +
-            " WHEN sms.status = 0 THEN 4 WHEN sms.status = 64 THEN 5 " +
-            "ELSE (CASE when sms.rcs_msg_state = 64 THEN 3 WHEN sms.rcs_msg_state = 32 THEN 4 " +
-            "WHEN sms.rcs_msg_state = 128 THEN 5 ELSE 6 END)END)END)" +
-            " as CHATMESSAGE_MESSAGE_STATUS," +
-            "(CASE WHEN rcs_file_transfer_id IS not NULL THEN rcs_file_transfer_id " +
-            "ELSE (CASE WHEN rcs_message_id is not null THEN body ELSE NULL END) END)" +
-            " as CHATMESSAGE_BODY,(CASE WHEN (sms.rcs_chat_type = 0 OR sms.rcs_chat_type = 1) " +
-            "THEN threads.rcs_number " +
-            "ELSE (CASE WHEN sms.rcs_chat_type = 2 THEN sms.address " +
-            "ELSE rcs_ext_contact END ) END) as CHATMESSAGE_CONTACT_NUMBER " +
-            "from sms inner join threads on sms.thread_id = threads._id";
-
 
     private static final String RCS_SMS_PROJECTION =
             "rcs_file_path,"
@@ -232,6 +191,16 @@ public class RcsMessageProviderConstants {
             "    WHERE threads . _id = new . thread_id;" +
             " END;";
 
+    public static final String SMS_DELETE_DUPLICATE_RECORD_BEFORE_INSERT =
+            "when new." + Sms.TYPE + "= 1 and new." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID +
+            "!= -1 and new." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " IS NOT NULL " +
+            " BEGIN  select raise(rollback,'') " +
+            " where (select " + Sms._ID + " from sms where " +
+            RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " = new." +
+            RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " and " + Sms.TYPE +  "= 1 and "
+            + Sms.PHONE_ID + " = new." + "phone_id)" +
+            " is not null; END;";
+
     public final static String[] RCS_ICC_COLUMNS = new String[] {
         // N.B.: These columns must appear in the same order as the
         // calls to add appear in convertIccToSms.
@@ -299,4 +268,276 @@ public class RcsMessageProviderConstants {
             UPDATE_THREAD_COUNT_ON_NEW +
             SMS_UPDATE_THREAD_READ_BODY +
             "END;";
+
+    public interface DeviceApiViews {
+        public final String DEVICE_API_MESSAGES = "device_api_messages";
+        public final String MESSAGE_CONVERSATION = "message_conversation";
+        public final String PUBLIC_ACCOUNT_MESSAGES = "public_account_messages";
+        public final String FILE_TRANSFER_MESSAGE = "file_transfer_message";
+        public final String BLOCKED_CALLLOGS = "blocked_callog_view";
+    }
+
+    private final static String TABLE_SMS = "sms";
+
+    private final static String TABLE_THREADS = "threads";
+
+    private final static String TABLE_PDU = "pdu";
+
+    private final static String FILE_TRANSFER_STATE =
+            "(CASE WHEN " + Sms.TYPE + " = 2 AND " + RcsColumns.SmsRcsColumns.RCS_MSG_STATE
+            + " = " + MessageConstants.CONST_STATUS_SENDING + " THEN "
+            + DeviceApiConstant.FileTransferProvider.STARTED + " WHEN "
+            + Sms.TYPE + " = 2 AND " + RcsColumns.SmsRcsColumns.RCS_MSG_STATE
+            + " = " + MessageConstants.CONST_STATUS_SENDED
+            + " OR " + RcsColumns.SmsRcsColumns.RCS_MSG_STATE
+            + " = " + MessageConstants.CONST_STATUS_SEND_RECEIVED + " THEN "
+            + DeviceApiConstant.FileTransferProvider.TRANSFERRED + " WHEN ("
+            + Sms.TYPE + " = 2 OR " + Sms.TYPE + " = 5) AND "
+            + RcsColumns.SmsRcsColumns.RCS_MSG_STATE
+            + " = " + MessageConstants.CONST_STATUS_SEND_FAIL + " THEN "
+            + DeviceApiConstant.FileTransferProvider.FAILED + " WHEN "
+            + Sms.TYPE + " = 1 AND (" + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE + " = "
+            + MessageConstants.CONST_MESSAGE_IMAGE + " OR " + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE
+            + " = " + MessageConstants.CONST_MESSAGE_VIDEO + " ) AND "
+            + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFERED + " = 0 " + " THEN "
+            + DeviceApiConstant.FileTransferProvider.INVITED + " WHEN "
+            + Sms.TYPE + " = 1 AND (" + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE + " = "
+            + MessageConstants.CONST_MESSAGE_IMAGE + " OR " + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE
+            + " = " + MessageConstants.CONST_MESSAGE_VIDEO + " ) AND "
+            + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFERED + " = "
+            + RcsColumns.SmsRcsColumns.RCS_FILE_SIZE + " THEN "
+            + DeviceApiConstant.FileTransferProvider.TRANSFERRED + " WHEN "
+            + Sms.TYPE + " = 1 AND (" + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE + " = "
+            + MessageConstants.CONST_MESSAGE_IMAGE + " OR " + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE
+            + " = " + MessageConstants.CONST_MESSAGE_VIDEO + " ) AND ("
+            + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFERED + " < "
+            + RcsColumns.SmsRcsColumns.RCS_FILE_SIZE + " AND "
+            + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFERED + " > 0 ) THEN "
+            + DeviceApiConstant.FileTransferProvider.STARTED + " WHEN "
+            + Sms.TYPE + " = 1 AND (" + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE + " <> "
+            + MessageConstants.CONST_MESSAGE_IMAGE + " AND " + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE
+            + " <> " + MessageConstants.CONST_MESSAGE_VIDEO + " ) THEN "
+            + DeviceApiConstant.FileTransferProvider.TRANSFERRED + " ELSE 0 END)";
+
+    public static final String MESSAGE_CONVERSATION_VIEW_CLOUMNS =
+            "select "
+            + TABLE_THREADS + "." + Threads.SNIPPET
+            + " as " + DeviceApiConstant.ChatProvider.BODY + ","
+            + TABLE_THREADS + "." + Threads.DATE
+            + " as " + DeviceApiConstant.ChatProvider.TIMESTAMP + ","
+            + TABLE_THREADS + "." + Threads.MESSAGE_COUNT
+            + " as " + DeviceApiConstant.ChatProvider.MESSAGE_COUNT + ","
+            + "(select COUNT(*) FROM (select " + TABLE_SMS + "." + Sms.READ + " FROM "
+            + TABLE_SMS + " inner join " + TABLE_THREADS + " on " + TABLE_SMS + "." + Sms.THREAD_ID
+            + " = " + TABLE_THREADS + "." + Threads._ID + " WHERE " + TABLE_SMS + "." + Sms.READ
+            + " = 0 " + " UNION ALL SELECT " + TABLE_PDU + "." + Mms.READ + " FROM " + TABLE_PDU
+            + " inner join " + TABLE_THREADS + " on " + TABLE_PDU + "." + Mms.THREAD_ID + " = "
+            + TABLE_THREADS + "." + Threads._ID +" WHERE " + TABLE_PDU + "." + Mms.READ + " = 0))"
+            + " as " + DeviceApiConstant.ChatProvider.UNREAD_COUNT + ","
+            + TABLE_THREADS + "." + RcsColumns.ThreadColumns.RCS_CHAT_TYPE
+            + " as " + DeviceApiConstant.ChatProvider.FLAG + ","
+            + "(CASE WHEN " + TABLE_THREADS + "." + RcsColumns.ThreadColumns.RCS_CHAT_TYPE + " = "
+            + DeviceApiConstant.ChatProvider.OFFICIAL
+            + " then NULL ELSE " + TABLE_THREADS + "." + Threads._ID + " END )"
+            + " as " + DeviceApiConstant.ChatProvider.CONVERSATION_ID + ","
+            + "(CASE WHEN " + TABLE_THREADS + "." + RcsColumns.ThreadColumns.RCS_CHAT_TYPE + " = "
+            + DeviceApiConstant.ChatProvider.MTM
+            + " THEN (select " + TABLE_SMS + "." + Sms.ADDRESS + " from " + TABLE_SMS
+            + " where " + TABLE_THREADS + "." + Threads._ID + " = " + TABLE_SMS + "."
+            + Sms.THREAD_ID + " AND " + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_CHAT_TYPE
+            + " = " + DeviceApiConstant.ChatProvider.MTM + " AND "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE + " = 7" + ") ELSE "
+            + TABLE_SMS + "." + Sms.ADDRESS + " END)"
+            + " as " + DeviceApiConstant.ChatProvider.RECIPIENTS + ","
+            + "(CASE WHEN " + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID
+            + " >= 0 AND " + TABLE_THREADS + "." + RcsColumns.ThreadColumns.RCS_MSG_ID
+            + "=" + TABLE_SMS + "." + Sms._ID + " THEN " + DeviceApiConstant.ChatProvider.FT
+            +" ELSE (CASE WHEN "
+            + TABLE_THREADS + "." + RcsColumns.ThreadColumns.RCS_CHAT_TYPE
+            + " = " + DeviceApiConstant.ChatProvider.OFFICIAL + " THEN "
+            + DeviceApiConstant.ChatProvider.XML + " ELSE (CASE WHEN "
+            + TABLE_THREADS + "." + RcsColumns.ThreadColumns.RCS_CHAT_TYPE + " = "
+            + DeviceApiConstant.ChatProvider.OTO + " OR "
+            + TABLE_THREADS + "." + RcsColumns.ThreadColumns.RCS_CHAT_TYPE + " = "
+            + DeviceApiConstant.ChatProvider.OTM + " OR "
+            + TABLE_THREADS + "." + RcsColumns.ThreadColumns.RCS_CHAT_TYPE + " = "
+            + DeviceApiConstant.ChatProvider.MTM
+            + " THEN " + DeviceApiConstant.ChatProvider.IM + " ELSE "
+            + DeviceApiConstant.ChatProvider.SMSMMS + " END)END)END)"
+            + " as " + DeviceApiConstant.ChatProvider.TYPE + ","
+            + "(CASE WHEN " + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID
+            + " >= 0 AND " + TABLE_THREADS + "." + RcsColumns.ThreadColumns.RCS_MSG_ID
+            + "=" + TABLE_SMS + "." + Sms._ID + " THEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MIME_TYPE + " ELSE NULL END)"
+            + " as " + DeviceApiConstant.ChatProvider.MIME_TYPE
+            + " from " + TABLE_THREADS + " inner join " + TABLE_SMS + " on "
+            + TABLE_THREADS + "." + RcsColumns.ThreadColumns.RCS_MSG_ID
+            + " = " + TABLE_SMS + "." + Sms._ID + " and " + TABLE_SMS + "."
+            + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE + " <> 7";
+
+    public static final String MESSAGES_VIEW_CLOUMN =
+            "select "
+            + TABLE_SMS + "." + Sms._ID + " as " + DeviceApiConstant.ChatProvider.MESSAGE_ID + ","
+            + "(CASE WHEN " + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_CHAT_TYPE + " = "
+            + DeviceApiConstant.ChatProvider.MTM + " THEN (select " + "a." + Sms.ADDRESS
+            + " from " + TABLE_SMS + " a where " + "a." + Sms.THREAD_ID
+            + " = " + TABLE_SMS + "." + Sms.THREAD_ID + " AND "
+            + "a." + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE + " = 7" + ") ELSE NULL END) "
+            + " as " + DeviceApiConstant.ChatProvider.CHAT_ID + ","
+            + TABLE_SMS + "." + Sms.DATE
+            + " as " + DeviceApiConstant.ChatProvider.TIMESTAMP + ","
+            + TABLE_SMS + "." + Sms.THREAD_ID
+            + " as " + DeviceApiConstant.ChatProvider.CONVERSATION + ","
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_CHAT_TYPE
+            + " as " + DeviceApiConstant.ChatProvider.FLAG + ","
+            + " 0 " + " as " + DeviceApiConstant.ChatProvider.ISBLOCKED + ","
+            + "(CASE WHEN " + TABLE_SMS + "." + Sms.TYPE + " = 1 THEN "
+            + DeviceApiConstant.ChatProvider.INCOMING + " ELSE "
+            + DeviceApiConstant.ChatProvider.OUTGOING
+            + " END) as " + DeviceApiConstant.ChatProvider.DIRECTION + ","
+            + "(CASE WHEN " + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_CHAT_TYPE + " = "
+            + DeviceApiConstant.ChatProvider.MTM + " THEN "
+            + " (select a." + Sms.ADDRESS + " from sms a where a." + Sms._ID + " = "
+            + TABLE_SMS + "." + Sms._ID + " AND a." + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE
+            + " <> 7 ) " + " ELSE " + TABLE_SMS + "." + Sms.ADDRESS + " END) "
+            + " as " + DeviceApiConstant.ChatProvider.CONTACT_NUMBER + ","
+            + "(CASE WHEN " + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID
+            + " >= 0 THEN " + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID
+            + " ELSE (CASE WHEN " + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID
+            + "  is not null THEN " + TABLE_SMS + "." + Sms.BODY + " ELSE NULL END)END)"
+            + " as " + DeviceApiConstant.ChatProvider.BODY + ","
+            + "(CASE WHEN " + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID
+            + " >= 0 THEN "+ DeviceApiConstant.ChatProvider.FT + " ELSE "
+            + DeviceApiConstant.ChatProvider.IM + " END)"
+            + " as " + DeviceApiConstant.ChatProvider.TYPE + ","
+            + " (CASE WHEN " + TABLE_SMS + "." + Sms.TYPE + " = 1 AND "
+            + TABLE_SMS + "." + Sms.READ + " = 0 THEN "
+            + DeviceApiConstant.ChatProvider.UNREAD + " ELSE (CASE WHEN "
+            + TABLE_SMS + "." + Sms.TYPE + " = 1 AND "
+            + TABLE_SMS + "." + Sms.READ + " = 1 THEN " + DeviceApiConstant.ChatProvider.READ
+            + " ELSE (CASE WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is null AND "
+            + TABLE_SMS + "." + Sms.TYPE + " = "+ Sms.MESSAGE_TYPE_QUEUED + " THEN "
+            + DeviceApiConstant.ChatProvider.SENDING + " WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is null AND "
+            + TABLE_SMS + "." + Sms.TYPE + " = "+ Sms.MESSAGE_TYPE_SENT + " THEN "
+            + DeviceApiConstant.ChatProvider.SENT + " WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is null AND "
+            + TABLE_SMS + "." + Sms.TYPE + " = "+ Sms.MESSAGE_TYPE_FAILED + " THEN "
+            + DeviceApiConstant.ChatProvider.FAILED + " ELSE (CASE WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is not null AND "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MSG_STATE + " = "
+            + MessageConstants.CONST_STATUS_SENDING + " THEN "
+            + DeviceApiConstant.ChatProvider.SENDING + " WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is not null AND "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MSG_STATE + " = "
+            + MessageConstants.CONST_STATUS_SENDED + " THEN "
+            + DeviceApiConstant.ChatProvider.SENT + " WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is not null AND "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MSG_STATE + " = "
+            + MessageConstants.CONST_STATUS_SEND_FAIL + " THEN "
+            + DeviceApiConstant.ChatProvider.FAILED + " WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is not null AND "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MSG_STATE + " = "
+            + MessageConstants.CONST_STATUS_SEND_RECEIVED + " THEN "
+            + DeviceApiConstant.ChatProvider.DELIVERED + " ELSE "
+            + DeviceApiConstant.ChatProvider.TO_SEND + " END)END)END)END)"
+            + " as " + DeviceApiConstant.ChatProvider.MESSAGE_STATUS
+            + " from " + TABLE_SMS + " WHERE " + TABLE_SMS + "."
+            + RcsColumns.SmsRcsColumns.RCS_CHAT_TYPE + " in (1,2,3) and "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE + " <> 7";
+
+    public static final String PUBLIC_ACCOUNT_MESSAGES_VIEW_CLOUMN =
+            "select "
+            + TABLE_SMS + "." + Sms.ADDRESS
+            + " as " + DeviceApiConstant.PublicAccountProvider.ACCOUNT + ","
+            + TABLE_SMS + "." + Sms.BODY
+            + " as " + DeviceApiConstant.PublicAccountProvider.BODY + ","
+            + TABLE_SMS + "." + Sms.DATE
+            + " as " + DeviceApiConstant.PublicAccountProvider.TIMESTAMP + ","
+            + "(CASE WHEN " + TABLE_SMS + "." + Sms.TYPE + " = 1 THEN "
+            + DeviceApiConstant.PublicAccountProvider.INCOMING + " ELSE "
+            + DeviceApiConstant.PublicAccountProvider.OUTGOING
+            + " END) as " + DeviceApiConstant.PublicAccountProvider.DIRECTION + ","
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MIME_TYPE
+            + " as " + DeviceApiConstant.PublicAccountProvider.MIME_TYPE + ","
+            + "(CASE WHEN " + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID
+            + " >= 0 THEN "+ DeviceApiConstant.PublicAccountProvider.FT + " ELSE "
+            + DeviceApiConstant.PublicAccountProvider.XML+ " END)"
+            + " as " + DeviceApiConstant.PublicAccountProvider.TYPE + ","
+            + " (CASE WHEN " + TABLE_SMS + "." + Sms.TYPE + " = 1 AND "
+            + TABLE_SMS + "." + Sms.READ + " = 0 THEN "
+            + DeviceApiConstant.PublicAccountProvider.UNREAD + " ELSE (CASE WHEN "
+            + TABLE_SMS + "." + Sms.TYPE + " = 1 AND "
+            + TABLE_SMS + "." + Sms.READ + " = 1 THEN "
+            + DeviceApiConstant.PublicAccountProvider.READ + " ELSE (CASE WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is null AND "
+            + TABLE_SMS + "." + Sms.TYPE + " = "+ Sms.MESSAGE_TYPE_QUEUED + " THEN "
+            + DeviceApiConstant.PublicAccountProvider.SENDING + " WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is null AND "
+            + TABLE_SMS + "." + Sms.TYPE + " = "+ Sms.MESSAGE_TYPE_SENT + " THEN "
+            + DeviceApiConstant.PublicAccountProvider.SENT + " WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is null AND "
+            + TABLE_SMS + "." + Sms.TYPE + " = "+ Sms.MESSAGE_TYPE_FAILED + " THEN "
+            + DeviceApiConstant.PublicAccountProvider.FAILED + " ELSE (CASE WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is not null AND "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MSG_STATE + " = "
+            + MessageConstants.CONST_STATUS_SENDING + " THEN "
+            + DeviceApiConstant.PublicAccountProvider.SENDING + " WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is not null AND "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MSG_STATE + " = "
+            + MessageConstants.CONST_STATUS_SENDED + " THEN "
+            + DeviceApiConstant.PublicAccountProvider.SENT + " WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is not null AND "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MSG_STATE + " = "
+            + MessageConstants.CONST_STATUS_SEND_FAIL + " THEN "
+            + DeviceApiConstant.PublicAccountProvider.FAILED + " WHEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " is not null AND "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MSG_STATE + " = "
+            + MessageConstants.CONST_STATUS_SEND_RECEIVED + " THEN "
+            + DeviceApiConstant.PublicAccountProvider.DELIVERED + " ELSE "
+            + DeviceApiConstant.PublicAccountProvider.TO_SEND + " END)END)END)END)"
+            + " as " + DeviceApiConstant.PublicAccountProvider.MESSAGE_STATUS + ","
+            + "(CASE WHEN " + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID
+            + " >= 0 THEN "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID + " ELSE "
+            + TABLE_SMS + "." + Sms._ID + " END)"
+            + " as " + DeviceApiConstant.PublicAccountProvider.MESSAGE_ID
+            + " from " + TABLE_SMS + " WHERE "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_CHAT_TYPE
+            + " = " + DeviceApiConstant.ChatProvider.OFFICIAL;
+
+    public static final String FILE_TRANSFER_MESSAGE_VIEW_CLOUMN =
+            "select "
+            + TABLE_SMS + "." + Sms.DATE
+            + " as " + DeviceApiConstant.FileTransferProvider.TIMESTAMP + ","
+            + TABLE_SMS + "." + Sms.ADDRESS
+            + " as " + DeviceApiConstant.FileTransferProvider.CONTACT_NUMBER + ","
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID
+            + " as " + DeviceApiConstant.FileTransferProvider.FT_ID + ","
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILENAME
+            + " as " + DeviceApiConstant.FileTransferProvider.FILENAME + ","
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_THUMB_PATH
+            + " as " + DeviceApiConstant.FileTransferProvider.FILEICON + ","
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILE_SIZE
+            + " as " + DeviceApiConstant.FileTransferProvider.FILE_SIZE + ","
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFERED
+            + " as " + DeviceApiConstant.FileTransferProvider.TRANSFERRED_SIZE + ","
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_MIME_TYPE
+            + " as " + DeviceApiConstant.FileTransferProvider.TYPE + ","
+            + "(CASE WHEN " + TABLE_SMS + "." + Sms.TYPE + " = 1 THEN "
+            + DeviceApiConstant.ChatProvider.INCOMING + " ELSE "
+            + DeviceApiConstant.ChatProvider.OUTGOING
+            + " END) as " + DeviceApiConstant.FileTransferProvider.DIRECTION + ","
+            + FILE_TRANSFER_STATE
+            + " as " + DeviceApiConstant.FileTransferProvider.STATE
+            + " from " + TABLE_SMS + " WHERE "
+            + TABLE_SMS + "." + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID + " >= 0 ";
+
+    public static final String BLOCKED_CALLOG_CLOUMNS =
+            "select "
+            + " _id as " + DeviceApiConstant.BlacklistProvider.CALL_ID + ","
+            + " contact as " + DeviceApiConstant.BlacklistProvider.PHONE_NUMBER + ","
+            + " null as " + DeviceApiConstant.BlacklistProvider.NAME
+            + " from blockrecorditems where block_type = 0";
 }

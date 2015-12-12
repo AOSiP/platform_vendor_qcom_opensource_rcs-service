@@ -40,6 +40,7 @@ interface IServiceApi {
 
     void openAccount();
     void rejectOpenAccount();
+    void getConfiguration();
     void getConfigurationWithOtp(String otpCode);
     String getAccount();
     boolean isOnline();
@@ -49,6 +50,7 @@ interface IServiceApi {
     void download(long id);
     void complain(long id);
     void backupAll();
+    void backUpFavouriteAll();
     void backup(in List<SimpleMessage> simpleMessageList);
     void burnAll();
     //void burn(long id);
@@ -74,19 +76,20 @@ interface IServiceApi {
     int deleteMessageByThreadId(long threadId);
     int deleteMessage(long id);
     void restoreAll();
+    void restoreAllFavourite();
     void startComposing(long threadId, String number, String contentType, int seconds);
     void stopComposing(long threadId, String number, String contentType, long lastActive);
     void resend(long id);
     long sendText(in List<String> numberList, long threadId, String text, int barCycle);
-    long sendImage(in List<String> numberList, long threadId, String filepath, int quality, boolean isRecord, int barCycle);
+    long sendImage(in List<String> numberList, long threadId, String filepath, int quality, boolean isRecord, int barCycle, String thumbnailPath);
     long sendAudio(in List<String> numberList, long threadId, String filepath, int duration, boolean isRecord, int barCycle);
-    long sendVideo(in List<String> numberList, long threadId, String filepath, int duration, boolean isRecord, int barCycle);
+    long sendVideo(in List<String> numberList, long threadId, String filepath, int duration, boolean isRecord, int barCycle, String thumbnailPath);
     long sendLocation(in List<String> numberList, long threadId, double lat, double lng, String label, int barCycle);
     long sendVcard(in List<String> numberList, long threadId, String filepath, int barCycle);
     long sendTextToGroupChat(long groupId, long threadId, String text);
-    long sendImageToGroupChat(long groupId, long threadId, String filepath, int quality, boolean isRecord);
+    long sendImageToGroupChat(long groupId, long threadId, String filepath, int quality, boolean isRecord, String thumbnailPath);
     long sendAudioToGroupChat(long groupId, long threadId, String filepath, int duration, boolean isRecord);
-    long sendVideoToGroupChat(long groupId, long threadId, String filepath, int duration, boolean isRecord);
+    long sendVideoToGroupChat(long groupId, long threadId, String filepath, int duration, boolean isRecord, String thumbnailPath);
     long sendLocationToGroupChat(long groupId, long threadId, double lat, double lng, String label);
     long sendVcardToGroupChat(long groupId, long threadId, String filepath);
     void setRemindPolicy(int policy);
@@ -97,7 +100,7 @@ interface IServiceApi {
     // specialServiceNumApi
     boolean addSsn(String number);
     boolean disableSsn();
-    boolean deleteSsnPrefix(String number);
+    String deleteSsnPrefix(String number);
     List<String> getSsnList();
     boolean enableSsn();
     boolean deleteSsn(String number);
@@ -124,8 +127,8 @@ interface IServiceApi {
     void getMemberAvatarFromServer(long groupChatId, String number, int pixel, in IGroupChatCallback callback);
     void getMemberAvatar(long groupChatId, String number, int pixel, in IGroupChatCallback callback);
     long create(String subject, in List<String> users);
-    int acceptToJoin(long groupChatId);
-    int rejectToJoin(long groupChatId);
+    int acceptToJoin(long groupChatId, String inviteNumber);
+    int rejectToJoin(long groupChatId, String inviteNumber);
     int assignChairman(long groupChatId, String number);
     int disband(long groupChatId);
     int invite(long groupChatId, in List<String> numberList);
@@ -137,6 +140,9 @@ interface IServiceApi {
     void setGroupChatRemindPolicy(long groupChatId, int policy);
     int deleteGroupChat(in long[] threadIds);
     int deleteAllGroupChat();
+    int getMyGroupChat();
+    int rejoin(long groupChatId);
+    int getMaxAdhocGroupSize();
 
     // send message of plugin
     // emoticon
@@ -147,9 +153,9 @@ interface IServiceApi {
     long sendCloudToGroupChat(long groupId, long threadId, String fileName, long fileSize, String shareUrl);
     // public account
     long sendTextToPublicAccount(String publicAccountId, long threadId, String text);
-    long sendImageToPublicAccount(String publicAccountId, long threadId, String filepath, int quality, boolean isRecord);
+    long sendImageToPublicAccount(String publicAccountId, long threadId, String filepath, int quality, boolean isRecord, String thumbnailPath);
     long sendAudioToPublicAccount(String publicAccountId, long threadId, String filepath, int duration, boolean isRecord);
-    long sendVideoToPublicAccount(String publicAccountId, long threadId, String filepath, int duration, boolean isRecord);
+    long sendVideoToPublicAccount(String publicAccountId, long threadId, String filepath, int duration, boolean isRecord, String thumbnailPath);
     long sendLocationToPublicAccount(String publicAccountId, long threadId, double lat, double lng, String label);
     long sendVcardToPublicAccount(String publicAccountId, long threadId, String filepath);
     long sendCommandToPublicAccount(String publicAccountId, long threadId, String text);

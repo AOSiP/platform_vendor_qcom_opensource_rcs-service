@@ -53,7 +53,7 @@ public class SpecialServiceNumApi {
         return ServiceApi.getServiceApi().disableSsn();
     }
 
-    public boolean deleteSsnPrefix(String number) throws RemoteException,
+    public String deleteSsnPrefix(String number) throws RemoteException,
             ServiceDisconnectedException {
         return ServiceApi.getServiceApi().deleteSsnPrefix(number);
     }

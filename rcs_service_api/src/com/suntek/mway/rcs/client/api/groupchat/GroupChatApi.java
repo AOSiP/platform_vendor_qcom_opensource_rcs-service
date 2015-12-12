@@ -25,10 +25,14 @@ package com.suntek.mway.rcs.client.api.groupchat;
 
 import android.os.RemoteException;
 
+import com.suntek.mway.rcs.client.aidl.constant.Constants.GroupChatConstants;
 import com.suntek.mway.rcs.client.aidl.service.entity.GroupChat;
 import com.suntek.mway.rcs.client.aidl.service.entity.GroupChatMember;
 import com.suntek.mway.rcs.client.api.ServiceApi;
+import com.suntek.mway.rcs.client.api.exception.InviteTooManyUserException;
 import com.suntek.mway.rcs.client.api.exception.ServiceDisconnectedException;
+import com.suntek.mway.rcs.client.api.log.LogHelper;
+import com.suntek.mway.rcs.client.api.util.VerificationUtil;
 
 import java.util.List;
 
@@ -86,7 +90,8 @@ public class GroupChatApi {
         ServiceApi.getServiceApi().getMemberAvatar(groupChatId, number, pixel, callback);
     }
 
-    public int deleteGroupChat(long[] threadIds) throws RemoteException, ServiceDisconnectedException {
+    public int deleteGroupChat(long[] threadIds) throws RemoteException
+        , ServiceDisconnectedException {
         return ServiceApi.getServiceApi().deleteGroupChat(threadIds);
     }
 
@@ -95,18 +100,39 @@ public class GroupChatApi {
     }
 
     public long create(String subject, List<String> users) throws RemoteException,
-            ServiceDisconnectedException {
+            ServiceDisconnectedException, InviteTooManyUserException {
+        if (!VerificationUtil.isAllNumber(users)) {
+            LogHelper.i("number field value error");
+            return GroupChatConstants.CONST_OTHRE_ERROR;
+        }
+
+        int maxSize = getMaxAdhocGroupSize();
+        if (users.size() > maxSize) {
+            throw new InviteTooManyUserException(String.valueOf(maxSize));
+        }
+
+        users = VerificationUtil.formatNumbers(users);
         return ServiceApi.getServiceApi().create(subject, users);
     }
 
     public int acceptToJoin(long groupChatId)
             throws RemoteException, ServiceDisconnectedException {
-        return ServiceApi.getServiceApi().acceptToJoin(groupChatId);
+        return acceptToJoin(groupChatId, "");
+    }
+
+    public int acceptToJoin(long groupChatId, String inviteNumber)
+            throws RemoteException, ServiceDisconnectedException {
+        return ServiceApi.getServiceApi().acceptToJoin(groupChatId, inviteNumber);
     }
 
     public int rejectToJoin(long groupChatId)
             throws RemoteException, ServiceDisconnectedException {
-        return ServiceApi.getServiceApi().rejectToJoin(groupChatId);
+        return rejectToJoin(groupChatId, "");
+    }
+
+    public int rejectToJoin(long groupChatId, String inviteNumber)
+            throws RemoteException, ServiceDisconnectedException {
+        return ServiceApi.getServiceApi().rejectToJoin(groupChatId, inviteNumber);
     }
 
     public int assignChairman(long groupChatId, String number) throws RemoteException,
@@ -120,6 +146,12 @@ public class GroupChatApi {
 
     public int invite(long groupChatId, List<String> numberList) throws RemoteException,
             ServiceDisconnectedException {
+        if (!VerificationUtil.isAllNumber(numberList)) {
+            LogHelper.i("number field value error");
+            return GroupChatConstants.CONST_OTHRE_ERROR;
+        }
+
+        numberList = VerificationUtil.formatNumbers(numberList);
         return ServiceApi.getServiceApi().invite(groupChatId, numberList);
     }
 
@@ -150,5 +182,17 @@ public class GroupChatApi {
     public void setGroupChatRemindPolicy(long groupChatId, int policy) throws RemoteException,
             ServiceDisconnectedException {
         ServiceApi.getServiceApi().setGroupChatRemindPolicy(groupChatId, policy);
+    }
+
+    public int getMyGroupChat() throws RemoteException, ServiceDisconnectedException{
+        return ServiceApi.getServiceApi().getMyGroupChat();
+    }
+
+    public int rejoin(long groupChatId) throws RemoteException, ServiceDisconnectedException {
+        return ServiceApi.getServiceApi().rejoin(groupChatId);
+    }
+
+    public int getMaxAdhocGroupSize() throws RemoteException, ServiceDisconnectedException {
+        return ServiceApi.getServiceApi().getMaxAdhocGroupSize();
     }
 }

@@ -55,6 +55,8 @@ public class Parameter {
 
     public static final String EXTRA_TRANSFER_TOTAL_SIZE = "totalSize";
 
+    public static final String EXTRA_PHONE_ID = "phoneId";
+
     // Group chat
     public static final String EXTRA_INVITE_NUMBER = "inviteNumber";
 
@@ -131,4 +133,6 @@ public class Parameter {
 
     public static final String EXTRA_ERROR_PHRASE = "errorPhrase";
 
+    //permission
+    public static final String EXTRA_DENY_PERMISSIONS = "denyPermission";
 }
