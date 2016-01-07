@@ -84,10 +84,6 @@ public class SupportApi {
 
     private static final int DMS_VERSION_UNKNOWN = -999;
 
-    private static final int RCS_DISABLED = 0;
-
-    private static final int RCS_ENABLED = 1;
-
     private static final String PROPERTY_NAME_RCS_ENABLED = "persist.sys.rcs.enabled";
 
     private static final String PROPERTY_NAME_DM_VERSION = "persist.sys.rcs.dm.version";
@@ -248,9 +244,8 @@ public class SupportApi {
     }
 
     private boolean isRcsEnabled() {
-        int rcsEnabled = SystemProperties.getInt(PROPERTY_NAME_RCS_ENABLED, RCS_ENABLED);
-        boolean isRcsEnabled = RCS_ENABLED == rcsEnabled;
-        Log.d(TAG, "isRcsEnabled(): " + isRcsEnabled + ", rcsEnabled: " + rcsEnabled);
+        boolean isRcsEnabled = SystemProperties.getBoolean(PROPERTY_NAME_RCS_ENABLED, false);
+        Log.d(TAG, "isRcsEnabled(): " + isRcsEnabled);
         return isRcsEnabled;
     }
 }
