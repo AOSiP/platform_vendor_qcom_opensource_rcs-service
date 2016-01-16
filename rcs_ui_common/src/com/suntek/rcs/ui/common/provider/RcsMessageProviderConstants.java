@@ -277,9 +277,9 @@ public class RcsMessageProviderConstants {
         public final String BLOCKED_CALLLOGS = "blocked_callog_view";
     }
 
-    private final static String TABLE_SMS = "sms";
+    public final static String TABLE_SMS = "sms";
 
-    private final static String TABLE_THREADS = "threads";
+    public final static String TABLE_THREADS = "threads";
 
     private final static String TABLE_PDU = "pdu";
 

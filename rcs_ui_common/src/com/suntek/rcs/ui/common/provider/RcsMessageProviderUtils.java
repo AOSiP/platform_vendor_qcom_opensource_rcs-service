@@ -24,6 +24,7 @@
 package com.suntek.rcs.ui.common.provider;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.Telephony;
@@ -35,11 +36,17 @@ import android.provider.Telephony.Sms.Conversations;
 import android.provider.Telephony.Threads;
 import android.provider.Telephony.ThreadsColumns;
 import android.telephony.SubscriptionManager;
+import android.util.Log;
 
 import com.suntek.mway.rcs.client.aidl.common.RcsColumns;
+import com.suntek.rcs.ui.common.provider.RcsMessageProviderConstants;
 
 public class RcsMessageProviderUtils {
 
+    private static final String TAG = "RcsMessageProviderUtils";
+
+    private static final String NO_SUCH_COLUMN_EXCEPTION_MESSAGE = "no such column";
+    private static final String NO_SUCH_TABLE_EXCEPTION_MESSAGE = "no such table";
     // add rcs rebuild columns.
     public static void upgradeDatabaseToVersion65(SQLiteDatabase db) {
         // backup the old table
@@ -387,5 +394,130 @@ public class RcsMessageProviderUtils {
         "     UNION ALL SELECT read FROM pdu WHERE read = 0 " +
         "     AND thread_id = " + threadId +") ;";
         return db.rawQuery(queryString, new String[0]);
+    }
+
+    public static void checkAndUpdateThreadTable(SQLiteDatabase db) {
+        try {
+            db.query(RcsMessageProviderConstants.TABLE_THREADS, null, null, null, null, null, null);
+            RcsMessageProviderUtils.checkAndUpdateRcsThreadTable(db);
+        } catch (SQLiteException e) {
+            Log.e(TAG, "onOpen: ex. ", e);
+            if (e.getMessage().startsWith(NO_SUCH_TABLE_EXCEPTION_MESSAGE)) {
+                RcsMessageProviderUtils.createRcsThreadsTable(db);
+            }
+        }
+    }
+
+    public static void checkAndUpdateRcsThreadTable(SQLiteDatabase db) {
+        try {
+            db.query(RcsMessageProviderConstants.TABLE_THREADS, new String[] {
+                    RcsColumns.ThreadColumns.RCS_TOP ,
+                    RcsColumns.ThreadColumns.RCS_TOP_TIME ,
+                    RcsColumns.ThreadColumns.RCS_NUMBER ,
+                    RcsColumns.ThreadColumns.RCS_MSG_ID ,
+                    RcsColumns.ThreadColumns.RCS_MSG_TYPE ,
+                    RcsColumns.ThreadColumns.RCS_CHAT_TYPE
+                    },
+                    null, null, null, null,
+                    null);
+        } catch (SQLiteException e) {
+            Log.e(TAG, "checkAndUpgradeSmsTable: ex. ", e);
+            if (e.getMessage().startsWith(NO_SUCH_COLUMN_EXCEPTION_MESSAGE)) {
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_THREADS + " ADD COLUMN "
+                        + RcsColumns.ThreadColumns.RCS_TOP + " INTEGER DEFAULT 0 " ) ;
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_THREADS + " ADD COLUMN "
+                        + RcsColumns.ThreadColumns.RCS_TOP_TIME + " INTEGER DEFAULT 0 ") ;
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_THREADS + " ADD COLUMN "
+                        + RcsColumns.ThreadColumns.RCS_NUMBER + " TEXT"   );
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_THREADS + " ADD COLUMN "
+                        + RcsColumns.ThreadColumns.RCS_MSG_ID + " INTEGER  DEFAULT -1 " ) ;
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_THREADS + " ADD COLUMN "
+                        + RcsColumns.ThreadColumns.RCS_MSG_TYPE + " INTEGER  DEFAULT -1" );
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_THREADS + " ADD COLUMN "
+                        + RcsColumns.ThreadColumns.RCS_CHAT_TYPE + " INTEGER  DEFAULT -1 ");
+            }
+        }
+    }
+
+    public static void checkAndUpdateRcsSmsTable(SQLiteDatabase db) {
+        try {
+            db.query(RcsMessageProviderConstants.TABLE_SMS, new String[] {
+                            RcsColumns.SmsRcsColumns.RCS_FAVOURITE ,
+                            RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID ,
+                            RcsColumns.SmsRcsColumns.RCS_FILENAME ,
+                            RcsColumns.SmsRcsColumns.RCS_MIME_TYPE ,
+                            RcsColumns.SmsRcsColumns.RCS_MSG_TYPE ,
+                            RcsColumns.SmsRcsColumns.RCS_MSG_STATE ,
+                            RcsColumns.SmsRcsColumns.RCS_CHAT_TYPE,
+                            RcsColumns.SmsRcsColumns.RCS_CONVERSATION_ID ,
+                            RcsColumns.SmsRcsColumns.RCS_CONTRIBUTION_ID ,
+                            RcsColumns.SmsRcsColumns.RCS_FILE_SELECTOR ,
+                            RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFERED,
+                            RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID,
+                            RcsColumns.SmsRcsColumns.RCS_FILE_ICON ,
+                            RcsColumns.SmsRcsColumns.RCS_BURN ,
+                            RcsColumns.SmsRcsColumns.RCS_HEADER ,
+                            RcsColumns.SmsRcsColumns.RCS_PATH ,
+                            RcsColumns.SmsRcsColumns.RCS_IS_DOWNLOAD ,
+                            RcsColumns.SmsRcsColumns.RCS_FILE_SIZE ,
+                            RcsColumns.SmsRcsColumns.RCS_THUMB_PATH ,
+                            RcsColumns.SmsRcsColumns.RCS_BURN_BODY ,
+                            RcsColumns.SmsRcsColumns.RCS_MEDIA_PLAYED ,
+                            RcsColumns.SmsRcsColumns.RCS_EXT_CONTACT ,
+                            RcsColumns.SmsRcsColumns.RCS_FILE_RECORD
+                    },
+                    null, null, null, null,
+                    null);
+        } catch (SQLiteException e) {
+            Log.e(TAG, "checkAndUpgradeSmsTable: ex. ", e);
+            if (e.getMessage().startsWith(NO_SUCH_COLUMN_EXCEPTION_MESSAGE)) {
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_FAVOURITE + " INTEGER DEFAULT 0");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_FILENAME + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_MIME_TYPE + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_MSG_TYPE + " INTEGER DEFAULT -1");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_MSG_STATE + " INTEGER");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_CHAT_TYPE + " INTEGER DEFAULT -1");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_CONVERSATION_ID + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_CONTRIBUTION_ID + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_FILE_SELECTOR + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFERED + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_FILE_TRANSFER_ID + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_FILE_ICON + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_BURN + " INTEGER  DEFAULT -1");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_HEADER + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_PATH + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_IS_DOWNLOAD + " INTEGER DEFAULT 0");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_FILE_SIZE + " INTEGER DEFAULT 0");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_THUMB_PATH + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_BURN_BODY + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_MEDIA_PLAYED + " INTEGER DEFAULT 0");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_EXT_CONTACT + " TEXT");
+                db.execSQL("ALTER TABLE " + RcsMessageProviderConstants.TABLE_SMS + " ADD COLUMN "
+                        + RcsColumns.SmsRcsColumns.RCS_FILE_RECORD + " INTEGER");
+            }
+        }
     }
 }
