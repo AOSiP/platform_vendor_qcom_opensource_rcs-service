@@ -217,7 +217,7 @@ public class RcsMessageProviderConstants {
         "locked",                       // Always 0 (false).
         "error_code",                   // Always 0
         "_id",
-        "phone_id",
+        "sub_id",
         //RCS column
         RcsColumns.SmsRcsColumns.RCS_FILENAME,
         RcsColumns.SmsRcsColumns.RCS_THUMB_PATH,
