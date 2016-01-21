@@ -100,7 +100,7 @@ public class Actions {
         public static final String ACTION_MESSAGE_BACKUP = Main.PACKAGE_NAME
                 + ".ACTION_MESSAGE_BACKUP";
 
-        public static final String ACTION_MESSAGE_FILE_TRANSFER_PROGRESS = Main.PACKAGE_NAME
+        public static final String ACTION_MESSAGE_FILE_TRANSFER_PROGRESS = Main.ACTION_NAME
                 + ".ACTION_MESSAGE_FILE_TRANSFER_PROGRESS";
 
         public static final String ACTION_MESSAGE_RESTORE = Main.PACKAGE_NAME
@@ -112,7 +112,7 @@ public class Actions {
         public static final String ACTION_MESSAGE_EMOTICON_DOWNLOAD_RESULT = Main.PACKAGE_NAME
                 + ".ACTION_MESSAGE_EMOTICON_DOWNLOAD_RESULT";
 
-        public static final String ACTION_MESSAGE_STATUS_CHANGED = Main.PACKAGE_NAME
+        public static final String ACTION_MESSAGE_STATUS_CHANGED = Main.ACTION_NAME
                 + ".ACTION_MESSAGE_STATUS_CHANGED";
 
         public static final String ACTION_O2M_DETAIL_MESSAGE_STATUS_CHANGED = Main.PACKAGE_NAME
@@ -124,7 +124,7 @@ public class Actions {
         public static final String ACTION_MESSAGE_SHOW_COMPOSING = Main.PACKAGE_NAME
                 + ".ACTION_MESSAGE_SHOW_COMPOSING";
 
-        public static final String ACTION_MESSAGE_NOTIFY = Main.PACKAGE_NAME
+        public static final String ACTION_MESSAGE_NOTIFY = Main.ACTION_NAME
                 + ".ACTION_MESSAGE_NOTIFY";
 
         public static final String ACTION_MESSAGE_GROUP_CHAT_NOTIFY = Main.PACKAGE_NAME
@@ -139,7 +139,7 @@ public class Actions {
         public static final String ACTION_MESSAGE_FIREWALL_BLOCK_RECORD = Main.PACKAGE_NAME
                 + ".ACTION_MESSAGE_FIREWALL_BLOCK_RECORD";
 
-        public static final String ACTION_MESSAGE_SMS_POLICY_NOT_SET = Main.PACKAGE_NAME
+        public static final String ACTION_MESSAGE_SMS_POLICY_NOT_SET = Main.ACTION_NAME
                 + ".ACTION_MESSAGE_SMS_POLICY_NOT_SET";
     }
 

@@ -198,7 +198,7 @@ public class RcsMessageProviderConstants {
             " where (select " + Sms._ID + " from sms where " +
             RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " = new." +
             RcsColumns.SmsRcsColumns.RCS_MESSAGE_ID + " and " + Sms.TYPE +  "= 1 and "
-            + Sms.PHONE_ID + " = new." + "phone_id)" +
+            + Sms.SUBSCRIPTION_ID + " = new." + "sub_id)" +
             " is not null; END;";
 
     public final static String[] RCS_ICC_COLUMNS = new String[] {
@@ -538,6 +538,6 @@ public class RcsMessageProviderConstants {
             "select "
             + " _id as " + DeviceApiConstant.BlacklistProvider.CALL_ID + ","
             + " contact as " + DeviceApiConstant.BlacklistProvider.PHONE_NUMBER + ","
-            + " null as " + DeviceApiConstant.BlacklistProvider.NAME
+            + " name as " + DeviceApiConstant.BlacklistProvider.NAME
             + " from blockrecorditems where block_type = 0";
 }
