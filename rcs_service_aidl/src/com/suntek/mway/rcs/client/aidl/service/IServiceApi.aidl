@@ -92,6 +92,12 @@ interface IServiceApi {
     long sendVideoToGroupChat(long groupId, long threadId, String filepath, int duration, boolean isRecord, String thumbnailPath);
     long sendLocationToGroupChat(long groupId, long threadId, double lat, double lng, String label);
     long sendVcardToGroupChat(long groupId, long threadId, String filepath);
+    long sendTextToPc(long threadId, String text, int barCycle);
+    long sendImageToPc(long threadId, String filepath, int quality, boolean isRecord, int barCycle, String thumbnailPath);
+    long sendAudioToPc(long threadId, String filepath, int duration, boolean isRecord, int barCycle);
+    long sendVideoToPc(long threadId, String filepath, int duration, boolean isRecord, int barCycle, String thumbnailPath);
+    long sendLocationToPc(long threadId, double lat, double lng, String label, int barCycle);
+    long sendVcardToPc(long threadId, String filepath, int barCycle);
     void setRemindPolicy(int policy);
     void setSendPolicy(int policy);
     int topConversation(long threadId);
@@ -148,9 +154,11 @@ interface IServiceApi {
     // emoticon
     long sendEmoticon(in List<String> numberList, long threadId, String emoticonId, String emoticonName, int barCycle);
     long sendEmoticonToGroupChat(long groupId, long threadId, String emoticonId, String emoticonName);
+    long sendEmoticonToPc(long threadId, String emoticonId, String emoticonName, int barCycle);
     // cloud
     long sendCloud(in List<String> numberList, long threadId, String fileName, long fileSize, String shareUrl, String smsContent, int barCycle);
     long sendCloudToGroupChat(long groupId, long threadId, String fileName, long fileSize, String shareUrl);
+    long sendCloudToPc(long threadId, String fileName, long fileSize, String shareUrl, String smsContent, int barCycle);
     // public account
     long sendTextToPublicAccount(String publicAccountId, long threadId, String text);
     long sendImageToPublicAccount(String publicAccountId, long threadId, String filepath, int quality, boolean isRecord, String thumbnailPath);

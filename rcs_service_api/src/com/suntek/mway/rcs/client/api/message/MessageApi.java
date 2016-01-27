@@ -341,8 +341,10 @@ public class MessageApi {
             LogHelper.i("barCycle field must be greater than -1");
             return 0L;
         }
-        if (quality < 0 || quality > 100) {
-            LogHelper.i("quality field value must be between 0 to 100");
+        if (quality < MessageConstants.CONST_MIN_QUALITY
+                || quality > MessageConstants.CONST_MAX_QUALITY) {
+            LogHelper.i("quality field value must be between " + MessageConstants.CONST_MIN_QUALITY
+                    + " to " + MessageConstants.CONST_MAX_QUALITY);
             return 0L;
         }
 
@@ -353,7 +355,7 @@ public class MessageApi {
             VerificationUtil.isFileExists(thumbnailPath);
         }
 
-        if (quality == 100) {
+        if (quality == MessageConstants.CONST_MAX_QUALITY) {
             VerificationUtil.isFileSizeToLarge(filepath, this.getImageMaxSize());
         }
 
@@ -388,8 +390,10 @@ public class MessageApi {
             LogHelper.i("barCycle field must be greater than -1");
             return 0L;
         }
-        if (quality < 0 || quality > 100) {
-            LogHelper.i("quality field value must be between 0 to 100");
+        if (quality < MessageConstants.CONST_MIN_QUALITY
+                || quality > MessageConstants.CONST_MAX_QUALITY) {
+            LogHelper.i("quality field value must be between " + MessageConstants.CONST_MIN_QUALITY
+                    + " to " + MessageConstants.CONST_MAX_QUALITY);
             return 0L;
         }
 
@@ -399,7 +403,7 @@ public class MessageApi {
             VerificationUtil.isImageFile(thumbnailPath);
             VerificationUtil.isFileExists(thumbnailPath);
         }
-        if (quality == 100) {
+        if (quality == MessageConstants.CONST_MAX_QUALITY) {
             VerificationUtil.isFileSizeToLarge(filepath, this.getImageMaxSize());
         }
 
@@ -677,8 +681,10 @@ public class MessageApi {
                 "enter method sendImageToGroupChat. [groupId,threadId,filepath,quality,isRecord" +
                 ",thumbnailPath]=%d,%d,%s,%d,%b,%s",
                         groupId, threadId, filepath, quality, isRecord, thumbnailPath));
-        if (quality < 0 || quality > 100) {
-            LogHelper.i("quality field value must be between 0 to 100");
+        if (quality < MessageConstants.CONST_MIN_QUALITY
+                || quality > MessageConstants.CONST_MAX_QUALITY) {
+            LogHelper.i("quality field value must be between " + MessageConstants.CONST_MIN_QUALITY
+                    + " to " + MessageConstants.CONST_MAX_QUALITY);
             return 0L;
         }
 
@@ -688,7 +694,7 @@ public class MessageApi {
             VerificationUtil.isImageFile(thumbnailPath);
             VerificationUtil.isFileExists(thumbnailPath);
         }
-        if (quality == 100) {
+        if (quality == MessageConstants.CONST_MAX_QUALITY) {
             VerificationUtil.isFileSizeToLarge(filepath, this.getImageMaxSize());
         }
 
@@ -768,6 +774,157 @@ public class MessageApi {
         VerificationUtil.isFileExists(filepath);
 
         return ServiceApi.getServiceApi().sendVcardToGroupChat(groupId, threadId, filepath);
+    }
+
+    public long sendTextToPc(long threadId, String text, int barCycle)
+            throws RemoteException, ServiceDisconnectedException {
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method sendTextToPc. [threadId,text,barCycle]=%d,%s,%d",
+                threadId, text, barCycle));
+        if ("".equals(text.trim())) {
+            LogHelper.i("text value is null/Space");
+            return 0L;
+        }
+        if (barCycle < -1) {
+            LogHelper.i("barCycle field must be greater than -1");
+            return 0L;
+        }
+        return ServiceApi.getServiceApi().sendTextToPc(threadId, text, barCycle);
+    }
+
+    public long sendImageToPc(long threadId, String filepath, int quality,
+            boolean isRecord, int barCycle) throws RemoteException, ServiceDisconnectedException,
+            FileSuffixException, FileNotExistsException, FileTooLargeException {
+        return sendImageToPc(threadId, filepath, quality,
+                isRecord, barCycle, null);
+    }
+
+    public long sendImageToPc(long threadId, String filepath, int quality,
+            boolean isRecord, int barCycle, String thumbnailPath) throws RemoteException,
+            ServiceDisconnectedException, FileSuffixException, FileNotExistsException,
+            FileTooLargeException {
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method sendImageToPc. [threadId,filepath,quality,isRecord,barCycle" +
+                ",thumbnailPath]=%d,%s,%d,%b,%d,%s",
+                        threadId, filepath, quality, isRecord, barCycle, thumbnailPath));
+        if (barCycle < -1) {
+            LogHelper.i("barCycle field must be greater than -1");
+            return 0L;
+        }
+        if (quality < MessageConstants.CONST_MIN_QUALITY
+                || quality > MessageConstants.CONST_MAX_QUALITY) {
+            LogHelper.i("quality field value must be between " + MessageConstants.CONST_MIN_QUALITY
+                    + " to " + MessageConstants.CONST_MAX_QUALITY);
+            return 0L;
+        }
+
+        VerificationUtil.isImageFile(filepath);
+        VerificationUtil.isFileExists(filepath);
+        if (thumbnailPath != null) {
+            VerificationUtil.isImageFile(thumbnailPath);
+            VerificationUtil.isFileExists(thumbnailPath);
+        }
+
+        if (quality == MessageConstants.CONST_MAX_QUALITY) {
+            VerificationUtil.isFileSizeToLarge(filepath, this.getImageMaxSize());
+        }
+
+        return ServiceApi.getServiceApi().sendImageToPc(threadId, filepath, quality,
+                isRecord, barCycle, thumbnailPath);
+    }
+
+    public long sendAudioToPc(long threadId, String filepath, int duration,
+            boolean isRecord, int barCycle) throws RemoteException, ServiceDisconnectedException,
+            FileSuffixException, FileNotExistsException, FileTooLargeException,
+            FileDurationException {
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method sendAudioToPc. [threadId,filepath,duration,isRecord,barCycle]"
+                        + "=%d,%s,%d,%b,%d",
+                 threadId, filepath, duration, isRecord, barCycle));
+        if (barCycle < -1) {
+            LogHelper.i("barCycle field must be greater than -1");
+            return 0L;
+        }
+
+        VerificationUtil.isAudioFile(filepath);
+        VerificationUtil.isFileExists(filepath);
+        if (isRecord) {
+            VerificationUtil.isAudioDurationToLong(ServiceApi.getInstance().getContext(),
+                    filepath, this.getAudioMaxDuration(), duration);
+        }
+        VerificationUtil.isFileSizeToLarge(filepath, this.getVideoMaxSize());
+
+        return ServiceApi.getServiceApi().sendAudioToPc(threadId, filepath, duration,
+                isRecord, barCycle);
+    }
+
+    public long sendVideoToPc(long threadId, String filepath, int duration,
+            boolean isRecord, int barCycle) throws RemoteException, ServiceDisconnectedException,
+            FileSuffixException, FileNotExistsException, FileTooLargeException,
+            FileDurationException {
+        return sendVideoToPc(threadId, filepath, duration,
+                isRecord, barCycle, null);
+    }
+
+    public long sendVideoToPc(long threadId, String filepath, int duration,
+            boolean isRecord, int barCycle, String thumbnailPath) throws RemoteException,
+            ServiceDisconnectedException, FileSuffixException, FileNotExistsException,
+            FileTooLargeException, FileDurationException {
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method sendVideoToPc. [threadId,filepath,duration,isRecord,barCycle" +
+                ",thumbnailPath]=%d,%s,%d,%b,%d,%s",
+                        threadId, filepath, duration, isRecord, barCycle, thumbnailPath));
+        if (barCycle < -1) {
+            LogHelper.i("barCycle field must be greater than -1");
+            return 0L;
+        }
+
+        VerificationUtil.isVideoFile(filepath);
+        VerificationUtil.isFileExists(filepath);
+        if (thumbnailPath != null) {
+            VerificationUtil.isImageFile(thumbnailPath);
+            VerificationUtil.isFileExists(thumbnailPath);
+        }
+        if (isRecord) {
+            VerificationUtil.isVideoDurationToLong(ServiceApi.getInstance().getContext(),
+                    filepath,this.getVideoMaxDuration(), duration);
+        }
+        VerificationUtil.isFileSizeToLarge(filepath, this.getVideoMaxSize());
+
+        return ServiceApi.getServiceApi().sendVideoToPc(threadId, filepath, duration,
+                isRecord, barCycle, thumbnailPath);
+    }
+
+    public long sendLocationToPc(long threadId, double lat, double lng, String label,
+            int barCycle) throws RemoteException, ServiceDisconnectedException {
+        LogHelper
+                .i(String.format(
+                        Locale.getDefault(),
+                        "enter method sendLocationToPc. [threadId,lat,lng,text,barCycle]="
+                        + "%d,%f,%f,%s,%d",
+                        threadId, lat, lng, label, barCycle));
+        if (barCycle < -1) {
+            LogHelper.i("barCycle field must be greater than -1");
+            return 0L;
+        }
+
+        return ServiceApi.getServiceApi().sendLocationToPc(threadId, lat, lng, label, barCycle);
+    }
+
+    public long sendVcardToPc(long threadId, String filepath, int barCycle)
+            throws RemoteException, ServiceDisconnectedException, FileSuffixException,
+            FileNotExistsException {
+        LogHelper.i(String.format(Locale.getDefault(),
+                "enter method sendVcardToPc. [threadId,filepath,barCycle]=%d,%s,%d",
+                threadId, filepath, barCycle));
+        if (barCycle < -1) {
+            LogHelper.i("barCycle field must be greater than -1");
+            return 0L;
+        }
+        VerificationUtil.isVcardFile(filepath);
+        VerificationUtil.isFileExists(filepath);
+
+        return ServiceApi.getServiceApi().sendVcardToPc(threadId, filepath, barCycle);
     }
 
     public void setRemindPolicy(int policy) throws RemoteException, ServiceDisconnectedException {
@@ -852,6 +1009,25 @@ public class MessageApi {
                 emoticonName);
     }
 
+    public long sendEmoticonToPc(long threadId, String emoticonId, String emoticonName,
+            int barCycle) throws RemoteException, ServiceDisconnectedException {
+        LogHelper.i(String.format(Locale.getDefault(),
+            "enter method sendEmoticonToPc. [threadId,emoticonId,emoticonName,barCycle]="
+                    + "%d,%s,%s,%d",
+                        threadId, emoticonId, emoticonName, barCycle));
+        if (barCycle < -1) {
+            LogHelper.i("barCycle field must be greater than -1");
+            return 0L;
+        }
+        if (TextUtils.isEmpty(emoticonId) || TextUtils.isEmpty(emoticonName)) {
+            LogHelper.i("emoticonId or emoticonName is empty");
+            return 0L;
+        }
+
+        return ServiceApi.getServiceApi().sendEmoticonToPc(threadId, emoticonId,
+                emoticonName, barCycle);
+    }
+
     // cloud
     public long sendCloud(String number, long threadId, String fileName, long fileSize,
             String shareUrl, String smsContent, int barCycle) throws RemoteException,
@@ -924,6 +1100,27 @@ public class MessageApi {
                 fileSize, shareUrl);
     }
 
+    public long sendCloudToPc(long threadId, String fileName, long fileSize,
+            String shareUrl, String smsContent, int barCycle) throws RemoteException,
+            ServiceDisconnectedException {
+        LogHelper.i(String.format(Locale.getDefault(),
+            "enter method sendCloudToPc. [threadId,fileName,fileSize,shareUrl,smsContent,"
+                    + "barCycle]=%d,%s,%d,%s,%s,%d",
+                        threadId, fileName, fileSize, shareUrl, smsContent, barCycle));
+        if (barCycle < -1) {
+            LogHelper.i("barCycle field must be greater than -1");
+            return 0L;
+        }
+        if (TextUtils.isEmpty(fileName) || TextUtils.isEmpty(shareUrl)
+                || TextUtils.isEmpty(smsContent)) {
+            LogHelper.i("fileName or shareUrl or smsContent is empty");
+            return 0L;
+        }
+
+        return ServiceApi.getServiceApi().sendCloudToPc(threadId, fileName, fileSize,
+                shareUrl, smsContent, barCycle);
+    }
+
     // public account
     public long sendTextToPublicAccount(String publicAccountId, long threadId, String text)
             throws RemoteException, ServiceDisconnectedException {
@@ -954,8 +1151,10 @@ public class MessageApi {
                 "enter method sendImageToPublicAccount. [publicAccountId,"
                         + "threadId,filepath,quality,isRecord,thumbnailPath]=%s,%d,%s,%d,%b,%s",
                         publicAccountId, threadId, filepath, quality, isRecord, thumbnailPath));
-        if (quality < 0 || quality > 100) {
-            LogHelper.i("quality field value must be between 0 to 100");
+        if (quality < MessageConstants.CONST_MIN_QUALITY
+                || quality > MessageConstants.CONST_MAX_QUALITY) {
+            LogHelper.i("quality field value must be between " + MessageConstants.CONST_MIN_QUALITY
+                    + " to " + MessageConstants.CONST_MAX_QUALITY);
             return 0L;
         }
 
@@ -965,7 +1164,7 @@ public class MessageApi {
             VerificationUtil.isImageFile(thumbnailPath);
             VerificationUtil.isFileExists(thumbnailPath);
         }
-        if (quality == 100) {
+        if (quality == MessageConstants.CONST_MAX_QUALITY) {
             VerificationUtil.isFileSizeToLarge(filepath, this.getImageMaxSize());
         }
         return ServiceApi.getServiceApi().sendImageToPublicAccount(publicAccountId, threadId,

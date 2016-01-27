@@ -25,6 +25,8 @@ package com.suntek.mway.rcs.client.api.parse;
 
 import com.suntek.mway.rcs.client.aidl.plugin.entity.cloudfile.CloudFileMessage;
 
+import java.math.BigDecimal;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -93,7 +95,15 @@ public class CloudFileMessageParser extends DefaultHandler {
             int index = s.indexOf("KB");
             long l = 0L;
             if (index != -1) {
-                l = Long.parseLong(s.substring(0, index));
+                s = s.substring(0, index);
+                l = Long.parseLong(s);
+            } else {
+                try {
+                    l = new BigDecimal(Double.parseDouble(s)/1024)
+                        .setScale(0, BigDecimal.ROUND_HALF_UP).longValue();
+                } catch (Exception e) {
+                    l = 0L;
+                }
             }
             message.setFileSize(l);
         } else if (localName.equals("downloadurl")) {

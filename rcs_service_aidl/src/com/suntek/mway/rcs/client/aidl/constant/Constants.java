@@ -112,6 +112,10 @@ public class Constants {
 
         public static final String CONST_FT_THUMB = "1";
 
+        public static final int CONST_MIN_QUALITY = 0;
+
+        public static final int CONST_MAX_QUALITY = 100;
+
         public static final int CONST_CHAT_O2O = 1;
 
         public static final int CONST_CHAT_O2M = 2;
@@ -119,6 +123,8 @@ public class Constants {
         public static final int CONST_CHAT_GROUP = 3;
 
         public static final int CONST_CHAT_PUBLIC_ACCOUNT = 4;
+
+        public static final int CONST_CHAT_PC = 5;
 
         public static final int CONST_MESSAGE_SMS = -1;
 
@@ -197,6 +203,18 @@ public class Constants {
         public static final int CONST_SEND_POLICY_NOT_FORWARD_SMS = 2;
 
         public static final int CONST_SEND_POLICY_DEFAULT_NOT_SET = -1;
+
+        public static final String CONST_CHAT_PC_NUMBER_PREFIX = "PC_";
+
+        public static final int CONST_NOT_CC = 0;
+
+        public static final int CONST_CC_RECEIVE = 1;
+
+        public static final int CONST_CC_SEND = 2;
+
+        public static final int CONST_NOT_SILENCE = 0;
+
+        public static final int CONST_SILENCE = 1;
     }
 
     public static class GroupChatConstants {
@@ -780,6 +798,8 @@ public class Constants {
             public static final String FAVOURITE = "favourite";
 
             public static final String PHONE_ID = "phone_id";
+
+            public static final String COPY = "rcs_copy";
 
             public static final String SUB_ID = "sub_id";
 
