@@ -231,14 +231,14 @@ public class RcsRichScreen {
             }
         }
         refreshUI(result);
-        if (!TextUtils.isEmpty(result.getGreeting())) {
+        if (result != null && !TextUtils.isEmpty(result.getGreeting())) {
             mGreeting.setVisibility(View.VISIBLE);
             StringBuilder greetingString = new StringBuilder();
             greetingString.append(RCS_GREETING_STRING_EN);
             greetingString.append(result.getGreeting());
             mGreeting.setText(greetingString.toString());
         }
-        if (!TextUtils.isEmpty(result.getMissdnAddress())) {
+        if (result != null && !TextUtils.isEmpty(result.getMissdnAddress())) {
             missdnAddress.setVisibility(View.VISIBLE);
             StringBuilder missdnAddressString = new StringBuilder();
             missdnAddressString.append(RCS_MISSDNADDRESS_STRING_EN);

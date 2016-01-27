@@ -520,4 +520,15 @@ public class RcsMessageProviderUtils {
             }
         }
     }
+
+    public static void createGroupStatusUpdateTriggers(SQLiteDatabase db) {
+        db.execSQL("CREATE TRIGGER sms_update_group_on_delete AFTER DELETE ON "
+                + RcsMessageProviderConstants.TABLE_SMS
+                + " BEGIN"
+                + " DELETE FROM " + RcsMessageProviderConstants.TABLE_GROUP_STATUS
+                + " WHERE "
+                + RcsColumns.GroupStatusColumns.MSG_ID
+                + " = old._id;"
+                + " END");
+    }
 }
