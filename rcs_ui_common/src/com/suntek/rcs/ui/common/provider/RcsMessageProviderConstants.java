@@ -50,7 +50,7 @@ public class RcsMessageProviderConstants {
     // SMS ("sms") message tables.
     private static final String[] MMS_SMS_COLUMNS =
             { BaseColumns._ID, Mms.DATE, Mms.DATE_SENT, Mms.READ, Mms.THREAD_ID, Mms.LOCKED,
-                     Mms.SUBSCRIPTION_ID, Mms.PHONE_ID};
+                     Mms.SUBSCRIPTION_ID};
 
     // These are the columns that appear only in the MMS message
     // table.
