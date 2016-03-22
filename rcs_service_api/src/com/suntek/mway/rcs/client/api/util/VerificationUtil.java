@@ -94,7 +94,7 @@ public class VerificationUtil {
     public static String formatWithout86(String mobile) {
         String formatStr = mobile;
         if (formatStr != null) {
-            formatStr = formatStr.replaceAll(" ", "");
+            formatStr = formatStr.replaceAll(" ", "").replaceAll("-", "");
             if (formatStr.startsWith("+86")) {
                 formatStr = formatStr.substring(3);
             }

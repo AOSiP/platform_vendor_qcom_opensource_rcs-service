@@ -201,19 +201,19 @@ public class MessageApi {
     }
 
     public int getAudioMaxDuration() throws RemoteException, ServiceDisconnectedException {
-        return ServiceApi.getServiceApi().getAudioMaxDuration();
+        return (int)MessageConstants.CONST_AUDIO_MAX_TIME;
     }
 
     public long getImageMaxSize() throws RemoteException, ServiceDisconnectedException {
-        return ServiceApi.getServiceApi().getImageMaxSize();
+        return MessageConstants.CONST_IMAGE_FT_MAX_SIZE;
     }
 
     public int getVideoMaxDuration() throws RemoteException, ServiceDisconnectedException {
-        return ServiceApi.getServiceApi().getVideoMaxDuration();
+        return (int)MessageConstants.CONST_VIDEO_MAX_TIME;
     }
 
     public long getVideoMaxSize() throws RemoteException, ServiceDisconnectedException {
-        return ServiceApi.getServiceApi().getVideoMaxSize();
+        return MessageConstants.CONST_VIDEO_FT_MAX_SIZE;
     }
 
     public int getRemindPolicy() throws RemoteException, ServiceDisconnectedException {
